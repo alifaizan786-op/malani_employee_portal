@@ -9,7 +9,7 @@
     },
       {
         "firstName":"Janki",
-        "lastName":"Janki",
+        "lastName":"Patel",
         "employeeId":"Janki-JP",
         "department":"Sales",
         "level":"1",
@@ -17,7 +17,7 @@
     },
       {
         "firstName":"Mina",
-        "lastName":"Mina",
+        "lastName":"Chauhan",
         "employeeId":"Mina-MC",
         "department":"Sales",
         "level":"1",
@@ -41,7 +41,7 @@
     },
     {
         "firstName":"Sushma",
-        "lastName":"Sushma",
+        "lastName":"Patel",
         "employeeId":"Sushma-SP",
         "department":"Sales",
         "level":"1",
@@ -65,7 +65,7 @@
     },
     {
         "firstName":"Amreen",
-        "lastName":"Amreen",
+        "lastName":"Meghani",
         "employeeId":"Amreen-AM",
         "department":"Tagging",
         "level":"1",
@@ -97,7 +97,7 @@
     },
      {
         "firstName":"Shahmeer",
-        "lastName":"Shahmeer",
+        "lastName":"Delawala",
         "employeeId":"Shahmeer-SD",
         "department":"Internet",
         "level":"1",
