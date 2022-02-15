@@ -21,12 +21,25 @@ connection.once('open', async() => {
     await Task.deleteMany({})
 
     console.log('=========Collections Emptied================');
-    
-    await Task.create(taskSeeds);
+   
+    for (let i = 0;i <taskSeeds.length; i++){
+      ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
+      const UserId = this._User;
 
-    console.table(taskSeeds);
+      const task = {
+        title : taskSeeds[i].title,
+        description: taskSeeds[i].description,
+        user: UserId,
+        dueDate: taskSeeds[i].dueDate
 
-    console.info('================Users Seeded================');
+      };
+      console.log(task);
+
+      let taskCreaton = await Task.create(task);
+
+    }
+
+    console.info('================Task Seeded================');
 
 
     
