@@ -71,6 +71,8 @@ connection.once('open', async() => {
 
     await Quotes.create(quotesSeeds);
 
+    console.table(quotesSeeds);
+
     console.info('================Quotes Seeded================');
 
  }  catch (err) {

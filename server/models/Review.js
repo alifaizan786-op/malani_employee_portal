@@ -4,12 +4,12 @@ const reviewSchema = new Schema({
     managerIdR:{
         type:Schema.Types.ObjectId,
         ref:'User',
-        require:true,
+        require: true
     },
     employeeIdR:{
         type:Schema.Types.ObjectId,
         ref:'User',
-        require:true,
+        require: true
     },
     month:{
         type:Date,

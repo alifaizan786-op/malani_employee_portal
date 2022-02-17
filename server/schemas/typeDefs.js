@@ -18,12 +18,28 @@ const typeDefs = gql`
         description : String
         user : User
         dueDate : String  
+    } 
+
+    type Quotes {
+        _id : ID
+        quotes : String
+    }
+
+    type Review {
+        _id : ID
+        managerIdR : User
+        employeeIdR : User
+        month : String
+        review : String
     }
     
     type Query{
       users : [User]
       tasks : [Task]
+      quotes : [Quotes]
+      reviews : [Review]
       user(serachid: String) : User
+
 
     }`
 
