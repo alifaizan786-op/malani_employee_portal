@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const style = {
-  height: "90%",
-  maxHeight: "34%",
+  height: "85%",
+  maxHeight: "32%",
   bgcolor: "background.paper",
   maxWidth: "1px",
   margin: "6% 49%",
@@ -94,6 +94,10 @@ export default function LoginPage() {
             flexItem
             sx={style}
           />
+          <Typography variant="p" component="div" sx={{color:'primary.light', textAlign: 'center', fontSize:'13px'}}>
+            Iruna Digital Inc 2022 - V1.0
+          </Typography>
+
         </Grid>
 
         {/* Right */}

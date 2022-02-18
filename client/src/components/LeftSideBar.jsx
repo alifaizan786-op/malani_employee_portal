@@ -1,5 +1,6 @@
 //From React
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 //From MUI
 import { makeStyles } from "@material-ui/core";
@@ -82,6 +83,9 @@ export default function LeftSideBar(props) {
     setSelectedIndex(index);
   };
 
+
+  
+
   return (
     <>
       <Drawer
@@ -126,7 +130,7 @@ export default function LeftSideBar(props) {
               </ListItemIcon>
             )}
           </ListItem>
-
+          
           <ListItemButton>
             <ListItemIcon></ListItemIcon>
             <ListItemText
@@ -138,10 +142,12 @@ export default function LeftSideBar(props) {
             />
           </ListItemButton>
 
+          
           <ListItemButton
-            selected={selectedIndex === 0}
+            selected={selectedIndex === 1}
             onClick={(event) => {
-              handleListItemClick(event, 0);
+              handleListItemClick(event, 1);
+              window.location.assign("/ViewAllTasks")
             }}
           >
             <ListItemIcon>
@@ -159,9 +165,10 @@ export default function LeftSideBar(props) {
           </ListItemButton>
 
           <ListItemButton
-            selected={selectedIndex === 1}
+            selected={selectedIndex === 2}
             onClick={(event) => {
-              handleListItemClick(event, 1);
+              handleListItemClick(event, 2);
+              window.location.assign("/ViewAllEmps")
             }}
           >
             <ListItemIcon>
