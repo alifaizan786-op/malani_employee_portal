@@ -1,7 +1,7 @@
 import './App.css';
 
 import LoginPage from './pages/LoginPage';
-import Home from './pages/Home';
+import Main from './pages/Main';
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -32,7 +32,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <Main />
     </ThemeProvider>
   );
 }
