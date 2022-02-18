@@ -24,6 +24,11 @@ const taskSchema = new Schema({
         type:Date,
         require:true,
     },
+    recurring:{
+        type:Boolean,
+        require:true,
+        default:true
+    }
 })
 const Task = model('Task', taskSchema);
 
