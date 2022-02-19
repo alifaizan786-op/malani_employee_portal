@@ -45,18 +45,18 @@ connection.once('open', async() => {
 
     console.log('=========Collections Emptied================');
 
-    for(let r = 0;r <reviewSeeds.length; r++){
-      ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[r].managerIdR}));
-      const ManagerIdR = this._Review;
+    for(let i = 0;i <reviewSeeds.length; i++){
+      ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
+      const manager = this._Review;
 
-       ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[r].employeeIdR}));
-      const EmployeeIdR = this._ReviewE;
+       ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[i].employee}));
+      const employee = this._ReviewE;
 
       const review ={
-        managerIdR : ManagerIdR,
-        employeeIdR : EmployeeIdR,
-        month : reviewSeeds[r].month,
-        review : reviewSeeds[r].review,
+        manager : manager,
+        employee : employee,
+        month : reviewSeeds[i].month,
+        review : reviewSeeds[i].review,
 
       };
       console.log(review);

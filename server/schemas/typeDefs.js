@@ -27,20 +27,20 @@ const typeDefs = gql`
 
     type Review {
         _id : ID
-        managerIdR : User
-        employeeIdR : User
+        manager : User
+        employee : User
         month : String
         review : String
     }
     
     type Query{
-      users : [User]
-      tasks : [Task]
-      quotes : [Quotes]
-      reviews : [Review]
-      user(serachid: String) : User
-
-
+        users : [User]
+        tasks : [Task]
+        quotes : [Quotes]
+        reviews : [Review]
+        userId(userId: ID) : User
+        taskUId(taskUId: ID) : Task  
+        reviewUId(managerUId : ID, employeeUId : ID) : Review
     }`
 
 module.exports = typeDefs;

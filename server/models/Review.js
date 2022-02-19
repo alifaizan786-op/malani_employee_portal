@@ -1,12 +1,12 @@
 const {Schema, model} = require('mongoose');
 
 const reviewSchema = new Schema({
-    managerIdR:{
+    manager:{
         type:Schema.Types.ObjectId,
         ref:'User',
         require: true
     },
-    employeeIdR:{
+    employee:{
         type:Schema.Types.ObjectId,
         ref:'User',
         require: true
