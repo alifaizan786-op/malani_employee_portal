@@ -12,7 +12,11 @@ import {
   Button,
 } from "@mui/material";
 
+import AddIcon from '@mui/icons-material/Add';
+
 const dateFormat = require("../utils/dateFormat");
+
+
 
 const tasks = [
   {
@@ -125,6 +129,7 @@ export default function ViewAllTasks() {
           value={status}
           label="Status"
           onChange={handleChangeStatus}>
+          <MenuItem value={""}>Status</MenuItem>
           <MenuItem value={"pending"}>Pending</MenuItem>
           <MenuItem value={"overdue"}>Overdue</MenuItem>
           <MenuItem value={"submitted"}>Submitted</MenuItem>
@@ -139,6 +144,7 @@ export default function ViewAllTasks() {
           value={employeeId}
           label="Status"
           onChange={handleChangeEmployeeId}>
+          <MenuItem value={""}>Employee</MenuItem>
           <MenuItem value={"Alisha"}>Alisha</MenuItem>
           <MenuItem value={"Janki"}>Janki</MenuItem>
           <MenuItem value={"Mina"}>Mina</MenuItem>
@@ -146,7 +152,7 @@ export default function ViewAllTasks() {
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ m: 1, minWidth: "100px" }}>
+      <FormControl variant="standard" sx={{ m: 1 }}>
         <Button
           type="submit"
           fullWidth
@@ -156,6 +162,9 @@ export default function ViewAllTasks() {
             bgcolor: "primary.main",
             color: "primary.light",
             borderRadius: "10px",
+            minWidth: '175px',
+            maxHeight: '35px',
+            borderRadius: '35px'
           }}
           onClick={() => {
             setStatus("");
@@ -176,6 +185,20 @@ export default function ViewAllTasks() {
           lastName={tasksobj.user.lastName}
         />
       ))}
+      <Button type="submit" fullWidth
+        variant="contained" endIcon={<AddIcon />} sx={{
+            borderRadius: '25px',
+            height: '40px',
+            width: '225px',
+            position: 'fixed',
+            bottom: '10px',
+            right: '20px',
+            fontSize: "20px",
+            bgcolor: "primary.main",
+            color: "primary.light",
+          }}>
+        Create Task
+      </Button>
     </Grid>
   );
 }

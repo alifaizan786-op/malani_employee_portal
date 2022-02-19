@@ -24,7 +24,7 @@ export default function TaskCard(props) {
       return style;
     } else if (props.status.toLowerCase() === "pending") {
       let style = {
-        boxShadow: "0px 0px 10px #010b78",
+        boxShadow: "0px 0px 10px #E8FF00",
         minWidth: "300px",
         maxWidth: "300px",
         margin: "25px",
