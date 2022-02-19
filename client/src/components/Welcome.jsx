@@ -9,32 +9,28 @@ export default function Welcome() {
         variant="h3"
         color={"primary.main"}
         textAlign={"center"}
-        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}
-      >
+        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}>
         Welcome Back !
       </Typography>
       <Typography
         variant="h1"
         color={"primary.main"}
         textAlign={"center"}
-        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}
-      >
+        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}>
         Uzair Malani
       </Typography>
       <Typography
         variant="h4"
         color={"primary.main"}
         textAlign={"center"}
-        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}
-      >
+        sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}>
         Malani Jewelers Inc - Atlanta
       </Typography>
       <Typography
         variant="h4"
         color={"primary.main"}
         textAlign={"center"}
-        sx={{ fontFamily: "Baskervville", marginBottom: "30px" }}
-      >
+        sx={{ fontFamily: "Baskervville", marginBottom: "30px" }}>
         Department : Executive
       </Typography>
     </>

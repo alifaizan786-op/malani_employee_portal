@@ -7,7 +7,7 @@ import LeftSideBar from "../components/LeftSideBar";
 
 import Home from "./Home";
 import ViewAllTasks from "./ViewAllTasks";
-import ViewAllEmps from './ViewAllEmps'
+import ViewAllEmps from "./ViewAllEmps";
 
 //From Material UI
 import { Grid, Divider } from "@mui/material";

@@ -1,6 +1,6 @@
 //From React
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 //From MUI
 import { makeStyles } from "@material-ui/core";
@@ -83,17 +83,13 @@ export default function LeftSideBar(props) {
     setSelectedIndex(index);
   };
 
-
-  
-
   return (
     <>
       <Drawer
         variant="permanent"
         sx={{ border: "none" }}
         open={props.current}
-        className={classes.root}
-      >
+        className={classes.root}>
         <List className={classes.sidebarPadding}>
           <ListItem>
             {props.current ? (
@@ -107,8 +103,7 @@ export default function LeftSideBar(props) {
                   border: "5px solid #D2AB67",
                   fontFamily: "Baskervville",
                   color: "primary.main",
-                }}
-              >
+                }}>
                 UM
               </Avatar>
             ) : (
@@ -123,33 +118,31 @@ export default function LeftSideBar(props) {
                     border: "3px solid #D2AB67",
                     fontFamily: "Baskervville",
                     color: "primary.main",
-                  }}
-                >
+                  }}>
                   UM
                 </Avatar>
               </ListItemIcon>
             )}
           </ListItem>
-          
+
           <ListItemButton>
             <ListItemIcon></ListItemIcon>
             <ListItemText
               primary={
-                <Typography style={{ fontSize: "25px", fontFamily: "Baskervville"}}>
+                <Typography
+                  style={{ fontSize: "25px", fontFamily: "Baskervville" }}>
                   Uzair Malani
                 </Typography>
               }
             />
           </ListItemButton>
 
-          
           <ListItemButton
             selected={selectedIndex === 1}
             onClick={(event) => {
               handleListItemClick(event, 1);
-              window.location.assign("/ViewAllTasks")
-            }}
-          >
+              window.location.assign("/ViewAllTasks");
+            }}>
             <ListItemIcon>
               <AssignmentIcon
                 sx={{ fontSize: "2.5rem", color: "primary.main" }}
@@ -157,7 +150,12 @@ export default function LeftSideBar(props) {
             </ListItemIcon>
             <ListItemText
               primary={
-                <Typography style={{ fontSize: "18px",fontWeight:'bold', fontFamily: "Baskervville"}}>
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
                   View All Tasks
                 </Typography>
               }
@@ -168,15 +166,19 @@ export default function LeftSideBar(props) {
             selected={selectedIndex === 2}
             onClick={(event) => {
               handleListItemClick(event, 2);
-              window.location.assign("/ViewAllEmps")
-            }}
-          >
+              window.location.assign("/ViewAllEmps");
+            }}>
             <ListItemIcon>
               <PeopleIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
             </ListItemIcon>
             <ListItemText
               primary={
-                <Typography style={{ fontSize: "18px",fontWeight:'bold', fontFamily: "Baskervville"}}>
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
                   View All Employees
                 </Typography>
               }
@@ -191,7 +193,12 @@ export default function LeftSideBar(props) {
             </ListItemIcon>
             <ListItemText
               primary={
-                <Typography style={{ fontSize: "18px",fontWeight:'bold', fontFamily: "Baskervville"}}>
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
                   Logout
                 </Typography>
               }

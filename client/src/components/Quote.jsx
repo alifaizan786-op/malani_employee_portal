@@ -9,14 +9,12 @@ export default function Quote() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Typography
         variant="h5"
         color={"primary.main"}
         textAlign={"center"}
-        sx={{ fontFamily: "Baskervville", marginTop: "30px" }}
-      >
+        sx={{ fontFamily: "Baskervville", marginTop: "30px" }}>
         Quote Of The Day
       </Typography>
       <Typography
@@ -27,8 +25,7 @@ export default function Quote() {
           fontFamily: "Baskervville",
           marginTop: "15px",
           marginBottom: "30px",
-        }}
-      >
+        }}>
         May your path be lit by,
         <br />
         the bridges you burned
@@ -43,8 +40,7 @@ export default function Quote() {
           color: "primary.light",
           width: "15%",
           borderRadius: "10px",
-        }}
-      >
+        }}>
         Change Quote
       </Button>
     </div>

@@ -1,6 +1,6 @@
 //From React
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 //From MUI
 import { alpha, makeStyles } from "@material-ui/core";
@@ -100,19 +100,19 @@ export default function Header(props) {
           )}
         </Grid>
         <Grid item xs={4} sm={6} md={6} className={classes.logo}>
-          <Link to={'/Home'}>
+          <Link to={"/Home"}>
             <Typography variant="h4" sx={{ fontFamily: "Baskervville" }}>
               Malani Jewelers Inc
             </Typography>
           </Link>
-          <Link to={'/Home'}>
+          <Link to={"/Home"}>
             <Avatar
               alt="Remy Sharp"
               src={logo}
               sx={{ width: 65, height: 65, margin: "5px 15px 5px 15px" }}
             />
           </Link>
-          <Link to={'/Home'}>
+          <Link to={"/Home"}>
             <Typography variant="h4" sx={{ fontFamily: "Baskervville" }}>
               Employee Portal
             </Typography>

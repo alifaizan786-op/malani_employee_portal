@@ -11,8 +11,16 @@ export default function Home() {
       <Welcome />
       <Divider sx={{ width: "50%", margin: "auto", borderBottomWidth: 3 }} />
       <Quote />
-      <Typography variant="p" component="div" sx={{color:'primary', textAlign: 'center', fontSize:'13px', marginTop:'120px'}}>
-            Iruna Digital Inc 2022 - V1.0
+      <Typography
+        variant="p"
+        component="div"
+        sx={{
+          color: "primary",
+          textAlign: "center",
+          fontSize: "13px",
+          marginTop: "120px",
+        }}>
+        Iruna Digital Inc 2022 - V1.0
       </Typography>
     </Grid>
   );

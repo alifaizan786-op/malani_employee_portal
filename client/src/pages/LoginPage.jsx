@@ -54,15 +54,13 @@ export default function LoginPage() {
         container
         direction="row"
         justifyContent="space-between"
-        alignItems="stretch"
-      >
+        alignItems="stretch">
         {/* Left */}
         <Grid
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenLeft}
-        >
+          className={classes.childrenLeft}>
           <Typography variant="h1" component="div">
             Malani Jewelers Inc
           </Typography>
@@ -76,28 +74,30 @@ export default function LoginPage() {
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenCenter}
-        >
+          className={classes.childrenCenter}>
           <Divider
             orientation="vertical"
             variant="middle"
             flexItem
             sx={style}
           />
-          <Avatar
-            src={logo}
-            sx={{ width: 250, height: 250 }}
-          />
+          <Avatar src={logo} sx={{ width: 250, height: 250 }} />
           <Divider
             orientation="vertical"
             variant="middle"
             flexItem
             sx={style}
           />
-          <Typography variant="p" component="div" sx={{color:'primary.light', textAlign: 'center', fontSize:'13px'}}>
+          <Typography
+            variant="p"
+            component="div"
+            sx={{
+              color: "primary.light",
+              textAlign: "center",
+              fontSize: "13px",
+            }}>
             Iruna Digital Inc 2022 - V1.0
           </Typography>
-
         </Grid>
 
         {/* Right */}
@@ -105,8 +105,7 @@ export default function LoginPage() {
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenLeft}
-        >
+          className={classes.childrenLeft}>
           <Typography variant="h2" component="div">
             Welcome Back !
           </Typography>
