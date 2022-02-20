@@ -3,82 +3,121 @@ import React from "react";
 import TaskCard from "../components/TaskCard";
 
 import {
-  Divider,
+  Box,
+  Typography,
   Grid,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
   Button,
+  Avatar,
+  Divider,
+  Card,
+  Modal,
+  FormControl,
+  Input,
+  InputLabel,
+  FormHelperText,
+  Select,
+  MenuItem,
+  TextField,
+  Switch
+  
 } from "@mui/material";
+
+import {
+  DateTimePicker,
+  LocalizationProvider,
+} from '@mui/lab';
+
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import AddIcon from '@mui/icons-material/Add';
 
 const dateFormat = require("../utils/dateFormat");
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 5,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  minWidth: '50%',
+  minHeight: '80%',
+  borderRadius: '30px'
+};
 
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 const tasks = [
   {
-    _id: "620f39e1b109bd7aa0d1f80e",
-    status: "overdue",
+    _id: "62108a2d712b0c6b48374c38",
+    status: "submitted",
     title: "Deep Cleaning",
     description: "Clean All Shelves in Antiques Section",
-    dueDate: "1408410714000",
     user: {
-      _id: "620f39e0b109bd7aa0d1f7e2",
+      _id: "62108a2d712b0c6b48374c0c",
       firstName: "Alisha",
       lastName: "Alisha",
+      employeeId: "Alisha-AP"
     },
+    dueDate: "1645171914000"
   },
   {
-    _id: "620f39e1b109bd7aa0d1f811",
+    _id: "62108a2d712b0c6b48374c3b",
     status: "overdue",
     title: "Deep Cleaning",
     description: "Clean All Shelves in Diamond Section",
-    dueDate: "1408410714000",
     user: {
-      _id: "620f39e0b109bd7aa0d1f7e3",
+      _id: "62108a2d712b0c6b48374c0d",
       firstName: "Janki",
       lastName: "Patel",
+      employeeId: "Janki-JP"
     },
+    dueDate: "1645171914000"
   },
   {
-    _id: "620f39e1b109bd7aa0d1f814",
+    _id: "62108a2d712b0c6b48374c3e",
     status: "pending",
     title: "Deep Cleaning",
     description: "Clean All Shelves in Kiosk Section",
-    dueDate: "1408410714000",
     user: {
-      _id: "620f39e0b109bd7aa0d1f7e4",
+      _id: "62108a2d712b0c6b48374c0e",
       firstName: "Mina",
       lastName: "Chauhan",
+      employeeId: "Mina-MC"
     },
+    dueDate: "1645171914000"
   },
   {
-    _id: "620f39e1b109bd7aa0d1f817",
+    _id: "62108a2d712b0c6b48374c41",
     status: "submitted",
     title: "Deep Cleaning",
     description: "Clean All Shelves in Gold Section",
-    dueDate: "1408410714000",
     user: {
-      _id: "620f39e0b109bd7aa0d1f7e7",
-      firstName: "Sushma",
-      lastName: "Patel",
+      _id: "62108a2d712b0c6b48374c10",
+      firstName: "Heena",
+      lastName: "Heena",
+      employeeId: "Heena-HD"
     },
+    dueDate: "1645171914000"
   },
   {
-    _id: "620f39e1b109bd7aa0d1f81a",
-    status: "pending",
+    _id: "62108a2d712b0c6b48374c44",
+    status: "overdue",
     title: "Deep Cleaning",
     description: "Clean All Shelves in Diamond Kiosk Section",
-    dueDate: "1408410714000",
     user: {
-      _id: "620f39e0b109bd7aa0d1f7e7",
+      _id: "62108a2d712b0c6b48374c11",
       firstName: "Sushma",
       lastName: "Patel",
+      employeeId: "Sushma-SP"
     },
-  },
+    dueDate: "1645171914000"
+  }
 ];
 
 export default function ViewAllTasks() {
@@ -109,6 +148,19 @@ export default function ViewAllTasks() {
       return tasks;
     }
   }
+
+
+  const [createModal, setCreateModal ] = React.useState(false);
+
+  const handleCreateModalOpen = () => setCreateModal(true)
+
+  const handleCreateModalClose = () => setCreateModal(false)
+
+  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <Grid
@@ -177,15 +229,18 @@ export default function ViewAllTasks() {
       {filters(employeeId, status).map((tasksobj, index) => (
         <TaskCard
           key={tasksobj._id}
+          taskId={tasksobj._id}
           status={tasksobj.status}
-          tilte={tasksobj.title}
+          title={tasksobj.title}
           desc={tasksobj.description}
           dueDate={tasksobj.dueDate}
           firstName={tasksobj.user.firstName}
           lastName={tasksobj.user.lastName}
+          employeeId={tasksobj.user.employeeId}
         />
       ))}
       <Button type="submit" fullWidth
+        onClick={handleCreateModalOpen}
         variant="contained" endIcon={<AddIcon />} sx={{
             borderRadius: '25px',
             height: '40px',
@@ -199,6 +254,107 @@ export default function ViewAllTasks() {
           }}>
         Create Task
       </Button>
+      <Modal
+        open={createModal}
+        onClose={handleCreateModalClose}>
+          <Box sx={style}>
+
+            <Typography variant="h3"
+              sx={{
+                fontFamily: "Baskervville",
+                textAlign: "center",
+                marginY: "5px",
+              }}>
+              Create & Assign Task
+            </Typography>
+
+            <FormControl variant="standard">
+              <TextField
+                label="Employee Id"
+                id="outlined-size-medium"
+                size="medium"
+              />
+              <FormHelperText id="component-helper-text">
+                "Employee First Name" - "Employee Initials"
+              </FormHelperText>
+            </FormControl>
+
+            <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select-size-medium"
+                label="Status"
+                size="medium"
+                //onChange={handleChange}
+              >
+                <MenuItem value={"pending"}>Pending</MenuItem>
+                <MenuItem value={"overdue"}>Overdue</MenuItem>
+                <MenuItem value={"submitted"}>Submitted</MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DateTimePicker
+                  label="Due Date"
+                  id="size-medium"
+                  value={value}
+                  onChange={handleChange}
+                  size="medium"
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              </LocalizationProvider>
+            </FormControl>
+
+            <FormControl variant="standard">
+              <TextField
+                label="Title"
+                id="outlined-size-medium"
+                size="medium"
+              />
+            </FormControl>
+
+            <FormControl>
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Description"
+                multiline
+                minRows={4}
+              />
+            </FormControl>
+
+            <FormControl sx={{display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'space-around',
+                              minWidth: '100%'
+                              }}>
+              <Typography variant="p"
+              sx={{
+                fontFamily: "Baskervville",
+                textAlign: "center",
+                fontSize:'25px'
+              }}>
+              Is This Task Recurring?
+            </Typography>
+              <Switch  size="large" {...label} defaultChecked />
+            </FormControl>
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                fontSize: "20px",
+                bgcolor: "primary.main",
+                color: "primary.light",
+                borderRadius: "10px",
+              }}>
+              Save
+            </Button>
+
+          </Box>
+      </Modal>
     </Grid>
   );
 }
