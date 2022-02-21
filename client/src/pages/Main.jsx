@@ -44,7 +44,7 @@ export default function Main() {
       <Route exact path={"/ViewAllTasks"}>
         <ViewAllTasks />
       </Route>
-      <Route exact path={"/ViewAllTasks"}>
+      <Route exact path={"/ViewAllEmps"}>
         <ViewAllEmps />
       </Route>
     </Router>

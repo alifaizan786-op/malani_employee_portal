@@ -7,19 +7,14 @@ import {
   Typography,
   Grid,
   Button,
-  Avatar,
-  Divider,
-  Card,
   Modal,
   FormControl,
-  Input,
   InputLabel,
   FormHelperText,
   Select,
   MenuItem,
   TextField,
   Switch
-  
 } from "@mui/material";
 
 import {
@@ -31,7 +26,6 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import AddIcon from '@mui/icons-material/Add';
 
-const dateFormat = require("../utils/dateFormat");
 
 const style = {
   position: 'absolute',
@@ -213,7 +207,6 @@ export default function ViewAllTasks() {
             fontSize: "20px",
             bgcolor: "primary.main",
             color: "primary.light",
-            borderRadius: "10px",
             minWidth: '175px',
             maxHeight: '35px',
             borderRadius: '35px'
@@ -355,6 +348,18 @@ export default function ViewAllTasks() {
 
           </Box>
       </Modal>
+      <Typography
+        variant="p"
+        component="div"
+        sx={{
+          textAlign: 'center',
+          fontSize: '13px',
+          width: '80vw',
+          position: 'fixed',
+          bottom: '1px'
+        }}>
+        Iruna Digital Inc 2022 - V1.0
+      </Typography>
     </Grid>
   );
 }
