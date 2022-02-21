@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core";
 
 //From Assets
 import logo from "../assets/logo.png";
-import { display, width } from "@mui/system";
 
 //From Components
 import LoginForm from "../components/LoginForm";
