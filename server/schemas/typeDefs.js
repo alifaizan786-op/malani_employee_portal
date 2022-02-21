@@ -8,7 +8,8 @@ const typeDefs = gql`
         employeeId : String
         department : String
         level : Int
-        password: String
+        password : String 
+        active : String
     }
     
     type Task {
@@ -18,6 +19,8 @@ const typeDefs = gql`
         description : String
         user : User
         dueDate : String  
+        createDate : String
+        recurring : String
     } 
 
     type Quotes {
@@ -41,6 +44,64 @@ const typeDefs = gql`
         userId(userId: ID) : User
         taskUId(taskUId: ID) : Task  
         reviewUId(managerUId : ID, employeeUId : ID) : Review
+    }
+    
+    type Mutation{
+        addTask(
+            title :String, 
+            description :String, 
+            employeeId :ID, 
+            dueDate :String, 
+            recuuring :String  ) : Task
+
+        updateTask( 
+            status :String, 
+            title :String, 
+            description :String, 
+            _id :ID, 
+            dueDate :String, 
+            recuuring :String ) : Task
+
+        deleteTask(
+            _id : ID ) : Task
+
+        addUser (
+            firstName:String,
+            lastName:String,
+            employeeId:String,
+            department:String,
+            level :  Int,
+            password:String,
+            active : String ) : User 
+
+        updateUser (
+            _id:ID, 
+            firstName:String ,
+            lastName:String ,
+            employeeId:String ,
+            department:String ,
+            level :Int,
+            password:String,
+            active : String ) : User
+
+        deleteUser (
+            _id:ID) : User
+
+        updateQuotes (
+            _id:ID,
+            quotes:String): Quotes
+
+        addReview(
+            managner: ID,
+            employee: ID, 
+            month: String,
+            review: String ) : Review
+
+        deleteReview (
+            _id:ID) : Review
+        
+
+
     }`
 
 module.exports = typeDefs;
