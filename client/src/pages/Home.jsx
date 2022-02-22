@@ -18,7 +18,7 @@ export default function Home() {
           color: "primary",
           textAlign: "center",
           fontSize: "13px",
-          marginTop: "80px",
+          marginTop: "120px",
         }}>
         Iruna Digital Inc 2022 - V1.0
       </Typography>

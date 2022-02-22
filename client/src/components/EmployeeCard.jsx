@@ -1,253 +1,103 @@
 import React from "react";
 
 import {
-  Box,
   Typography,
-  Grid,
   Button,
   Avatar,
   Divider,
   Card,
-  Modal,
-  FormControl,
-  Input,
-  InputLabel,
-  FormHelperText,
-  Select,
-  MenuItem,
-  TextField,
-  
 } from "@mui/material";
 
-import {
-  DateTimePicker,
-  LocalizationProvider,
-} from '@mui/lab';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import EmployeeModal from "./EmployeeModal";
 
-const dateFormat = require("../utils/dateFormat");
-
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 5,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  minWidth: '50%',
-  minHeight: '80%',
-  borderRadius: '30px'
+const divStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  margin: "5px 30px",
 };
 
-export default function TaskCard(props) {
+const dividerStyle = {
+  margin: "0px 30px 13px 30px",
+};
 
-  const [editModal, setEditModal ] = React.useState(false);
+export default function EmployeeCard(props) {
+  const [viewModal, setViewModal] = React.useState(false);
 
-  const handleEditModalOpen = () => setEditModal(true)
+  const handleViewModalOpen = () => setViewModal(true);
 
-  const handleEditModalClose = () => setEditModal(false)
-
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
-
-  function borderColorCheck() {
-    if (props.status.toLowerCase() === "submitted") {
-      let style = {
-        boxShadow: "0px 0px 10px #00BC5E",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-      };
-      return style;
-    } else if (props.status.toLowerCase() === "pending") {
-      let style = {
-        boxShadow: "0px 0px 10px #E8FF00",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-      };
-      return style;
-    } else {
-      let style = {
-        boxShadow: "0px 0px 10px #BC0000",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-      };
-      return style;
-    }
-  }
+  const handleViewModalClose = () => setViewModal(false);
 
   return (
     <>
-      <Card sx={borderColorCheck()}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.status}
-        </Typography>
-        <Divider
-          sx={{
-            width: "50%",
-            margin: "auto",
-            borderBottomWidth: 3,
-            marginY: "5px",
-          }}
-        />
-        <Typography
-          variant="h5"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.firstName} {props.lastName}
-        </Typography>
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.title}
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-            
-          {props.dueDate}
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-            marginX: "15px",
-          }}>
-          {props.desc}
-        </Typography>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          onClick={handleEditModalOpen}
-          sx={{
-            fontSize: "20px",
-            bgcolor: "primary.main",
-            color: "primary.light",
-            borderRadius: "10px",
-          }}>
-          Change Status
+      <Card
+        sx={{
+          minHeight: "350px",
+          minWidth: "325px",
+          margin: "25px",
+          boxShadow: "none",
+          borderRight: "1px solid black",
+          borderRight: "1px solid black",
+        }}>
+        <Button onClick={handleViewModalOpen}>
+          <Avatar
+            sx={{
+              width: 50,
+              height: 50,
+              marginLeft: "250px",
+              marginTop: "5px",
+              bgcolor: "#ffffff",
+              border: "3px solid #D2AB67",
+              color: "primary.main",
+            }}>
+            <RemoveRedEyeIcon sx={{ fontSize: "2rem" }} />
+          </Avatar>
         </Button>
+        <Avatar
+          sx={{
+            width: 100,
+            height: 100,
+            fontSize: "45px",
+            bgcolor: "#ffffff",
+            border: "3px solid #D2AB67",
+            fontFamily: "Baskervville",
+            color: "primary.main",
+            margin: "auto",
+          }}>
+          UM
+        </Avatar>
+        <div style={divStyle}>
+          <Typography variant="p">Employee Id</Typography>
+          <Typography variant="p">Faizan-FA</Typography>
+        </div>
+        <Divider sx={dividerStyle} />
+        <div style={divStyle}>
+          <Typography variant="p">Tasks Completed</Typography>
+          <Typography variant="p">10</Typography>
+        </div>
+        <Divider sx={dividerStyle} />
+        <div style={divStyle}>
+          <Typography variant="p">Tasks Pending</Typography>
+          <Typography variant="p">5</Typography>
+        </div>
+        <Divider sx={dividerStyle} />
+        <div style={divStyle}>
+          <Typography variant="p">Tasks Overdue</Typography>
+          <Typography variant="p">3</Typography>
+        </div>
+        <Divider sx={dividerStyle} />
+        <div style={divStyle}>
+          <Typography variant="p">Tasks Completed YTD</Typography>
+          <Typography variant="p">2</Typography>
+        </div>
+        <Divider sx={dividerStyle} />
       </Card>
-      <Modal
-        open={editModal}
-        onClose={handleEditModalClose}>
-          <Box sx={style}>
-
-            <Typography variant="h3"
-              sx={{
-                fontFamily: "Baskervville",
-                textAlign: "center",
-                marginY: "5px",
-              }}>
-              Edit Task
-            </Typography>
-
-            <FormControl variant="standard">
-              <TextField
-                label="Employee Id"
-                id="outlined-size-medium"
-                defaultValue={props.employeeId}
-                size="medium"
-              />
-              <FormHelperText id="component-helper-text">
-                "Employee First Name" - "Employee Initials"
-              </FormHelperText>
-            </FormControl>
-
-            <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select-size-medium"
-                value={props.status}
-                label="Status"
-                size="medium"
-                //onChange={handleChange}
-              >
-                <MenuItem value={"pending"}>Pending</MenuItem>
-                <MenuItem value={"overdue"}>Overdue</MenuItem>
-                <MenuItem value={"submitted"}>Submitted</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateTimePicker
-                  label="Due Date"
-                  id="size-medium"
-                  value={value}
-                  onChange={handleChange}
-                  size="medium"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </FormControl>
-
-            <FormControl variant="standard">
-              <TextField
-                label="Title"
-                id="outlined-size-medium"
-                defaultValue={props.title}
-                size="medium"
-              />
-            </FormControl>
-
-            <FormControl>
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Description"
-                multiline
-                minRows={4}
-                value={props.desc}
-              />
-            </FormControl>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                fontSize: "20px",
-                bgcolor: "primary.main",
-                color: "primary.light",
-                borderRadius: "10px",
-              }}>
-              Save
-            </Button>
-
-          </Box>
-      </Modal>
+      <EmployeeModal
+        open={handleViewModalOpen}
+        close={handleViewModalClose}
+        state={viewModal}
+      />
     </>
   );
 }
