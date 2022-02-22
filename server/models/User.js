@@ -27,6 +27,10 @@ const userSchema = new Schema(
             type:String,
             require: true,
             minlength: 5,
+        },
+        active:{
+            type:Boolean,
+            require: true,
         }
 });
 userSchema.pre('save', async function (next) {

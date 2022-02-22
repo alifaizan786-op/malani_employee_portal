@@ -23,6 +23,10 @@ const taskSchema = new Schema({
     dueDate:{
         type:Date,
         require:true,
+    },  
+    createDate:{
+        type:Date,
+        default:Date.now
     },
     recurring:{
         type:Boolean,

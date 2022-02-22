@@ -5,7 +5,8 @@
         "employeeId":"Alisha-AP",
         "department":"Sales",
         "level":"1",
-        "password":"Alisha-AP"       
+        "password":"Alisha-AP",
+        "active":"true"       
     },
       {
         "firstName":"Janki",
@@ -13,7 +14,8 @@
         "employeeId":"Janki-JP",
         "department":"Sales",
         "level":"1",
-        "password":"Janki-JP"       
+        "password":"Janki-JP",
+        "active":"true"             
     },
       {
         "firstName":"Mina",
@@ -21,7 +23,8 @@
         "employeeId":"Mina-MC",
         "department":"Sales",
         "level":"1",
-        "password":"Mina-MC"       
+        "password":"Mina-MC",
+        "active":"true"              
     },
       {
         "firstName":"Neelima",
@@ -29,7 +32,8 @@
         "employeeId":"Neelima-NK",
         "department":"Sales",
         "level":"1",
-        "password":"Neelima-NK"       
+        "password":"Neelima-NK",
+        "active":"true"              
     },
     {
         "firstName":"Heena",
@@ -37,7 +41,8 @@
         "employeeId":"Heena-HD",
         "department":"Sales",
         "level":"1",
-        "password":"Heena-HD"       
+        "password":"Heena-HD",
+        "active":"true"              
     },
     {
         "firstName":"Sushma",
@@ -45,7 +50,8 @@
         "employeeId":"Sushma-SP",
         "department":"Sales",
         "level":"1",
-        "password":"Sushma-SP"       
+        "password":"Sushma-SP",
+        "active":"true"              
     },
     {
         "firstName":"Shamsha",
@@ -53,7 +59,8 @@
         "employeeId":"Shamsha-SC",
         "department":"Sales",
         "level":"1",
-        "password":"Shamsha-SC"       
+        "password":"Shamsha-SC",
+        "active":"true"              
     },
     {
         "firstName":"Zoya",
@@ -61,7 +68,8 @@
         "employeeId":"Zoya-ZR",
         "department":"Sales",
         "level":"1",
-        "password":"Zoya-ZR"       
+        "password":"Zoya-ZR",
+        "active":"true"              
     },
     {
         "firstName":"Amreen",
@@ -69,7 +77,8 @@
         "employeeId":"Amreen-AM",
         "department":"Tagging",
         "level":"1",
-        "password":"Amreen-AM"       
+        "password":"Amreen-AM",
+        "active":"true"              
     },
     {
         "firstName":"Sara",
@@ -77,7 +86,8 @@
         "employeeId":"Sara-SA",
         "department":"Tagging",
         "level":"1",
-        "password":"Sara-SA"       
+        "password":"Sara-SA",
+        "active":"true"              
     },
     {
         "firstName":"Kinjal",
@@ -85,7 +95,8 @@
         "employeeId":"Kinjal-KB",
         "department":"Tagging",
         "level":"1",
-        "password":"Kinjal-KB"       
+        "password":"Kinjal-KB",
+        "active":"true"              
     },
      {
         "firstName":"Suresh",
@@ -93,7 +104,8 @@
         "employeeId":"Suresh-SU",
         "department":"Tagging",
         "level":"1",
-        "password":"Suresh-SU"       
+        "password":"Suresh-SU",
+        "active":"true"              
     },
      {
         "firstName":"Shahmeer",
@@ -101,7 +113,8 @@
         "employeeId":"Shahmeer-SD",
         "department":"Internet",
         "level":"1",
-        "password":"Shahmeer-SD"       
+        "password":"Shahmeer-SD",
+        "active":"true"              
     },
      {
         "firstName":"Faizan",
@@ -109,7 +122,8 @@
         "employeeId":"Faizan-FA",
         "department":"Internet",
         "level":"1",
-        "password":"Faizan-FA"       
+        "password":"Faizan-FA",
+        "active":"true"              
     },
      {
         "firstName":"Lubna",
@@ -117,7 +131,8 @@
         "employeeId":"Lubna-LU",
         "department":"Internet",
         "level":"1",
-        "password":"Lubna-LU"       
+        "password":"Lubna-LU",
+        "active":"true"              
     }, 
      {
         "firstName":"Aliammar",
@@ -125,7 +140,8 @@
         "employeeId":"Aliammar-AR",
         "department":"Executive",
         "level":"2",
-        "password":"Aliammar-AR"       
+        "password":"Aliammar-AR",
+        "active":"true"              
     }, 
      {
         "firstName":"Uzair",
@@ -133,7 +149,8 @@
         "employeeId":"Uzair-UM",
         "department":"Executive",
         "level":"2",
-        "password":"Uzair-UM"       
+        "password":"Uzair-UM",
+        "active":"true"              
     }, 
      {
         "firstName":"Iqbal",
@@ -141,7 +158,8 @@
         "employeeId":"Iqbal-IK",
         "department":"Executive",
         "level":"2",
-        "password":"Iqbal-IK"       
+        "password":"Iqbal-IK",
+        "active":"true"              
     }, 
      {
         "firstName":"Zanir",
@@ -149,7 +167,8 @@
         "employeeId":"Zanir-ZM",
         "department":"Executive",
         "level":"2",
-        "password":"Zanir"       
+        "password":"Zanir",
+        "active":"true"             
     }, 
      {
         "firstName":"Shermyn",
@@ -157,7 +176,8 @@
         "employeeId":"Shermyn-SM",
         "department":"Executive",
         "level":"2",
-        "password":"Shermyn-SM"       
+        "password":"Shermyn-SM",
+        "active":"true"              
     }, 
      {
         "firstName":"Hiren",
@@ -165,7 +185,8 @@
         "employeeId":"Hiren-HS",
         "department":"Executive",
         "level":"2",
-        "password":"Hiren-HS"       
+        "password":"Hiren-HS",
+        "active":"true"              
     }
   
      

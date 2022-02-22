@@ -32,7 +32,8 @@ connection.once('open', async() => {
         title : taskSeeds[i].title,
         description: taskSeeds[i].description,
         user: UserId,
-        dueDate: taskSeeds[i].dueDate
+        dueDate: taskSeeds[i].dueDate,
+        createDate: taskSeeds[i].createDate,
 
       };
       console.log(task);
