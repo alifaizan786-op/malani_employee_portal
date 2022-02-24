@@ -1,4 +1,6 @@
 import React from "react";
+import { useQuery } from '@apollo/client';
+import { QUERY_QUOTE } from '../utils/queries'
 
 import { 
   Typography, 
@@ -12,6 +14,9 @@ import {
 
 
 const style = {
+
+
+
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -31,6 +36,45 @@ const style = {
 
 
 export default function Quote() {
+
+ const { data } = useQuery(QUERY_QUOTE)
+
+ const quote = data?.quotes || []
+ const user = data?.userId || []
+ 
+
+console.log(user.level);
+
+  function qouteText(){
+    if(quote[0]){
+      return quote[0].quotes
+    }else{
+      return 'Loading'
+    }
+  }
+
+  function checkLevel(){
+    if(user.level === 2){
+     return( 
+       <Button
+        type="submit"
+        fullWidth
+        onClick={setEditTrue}
+        variant="contained"
+        sx={{
+          fontSize: "20px",
+          bgcolor: "primary.main",
+          color: "primary.light",
+          width: "15%",
+          borderRadius: "10px",
+        }}>
+        Change Quote
+      </Button>
+      )
+    }
+  }
+
+
 
   const [edit, setEdit] = React.useState(false);
 
@@ -54,7 +98,7 @@ export default function Quote() {
         color={"primary.main"}
         textAlign={"center"}
         sx={{ fontFamily: "Baskervville", marginTop: "30px" }}>
-        Quote Of The Day
+        Qoute of the Day
       </Typography>
       <Typography
         variant="h3"
@@ -65,24 +109,13 @@ export default function Quote() {
           marginTop: "15px",
           marginBottom: "30px",
         }}>
-        May your path be lit by,
-        <br />
-        the bridges you burned
+        {qouteText()}
       </Typography>
-      <Button
-        type="submit"
-        fullWidth
-        onClick={setEditTrue}
-        variant="contained"
-        sx={{
-          fontSize: "20px",
-          bgcolor: "primary.main",
-          color: "primary.light",
-          width: "15%",
-          borderRadius: "10px",
-        }}>
-        Change Quote
-      </Button>
+      
+
+       {checkLevel()}
+
+
       <Modal open={edit} onClose={setEditFalse}>
         <Box sx={style}>
           <Typography

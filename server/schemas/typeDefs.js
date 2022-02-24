@@ -35,9 +35,9 @@ const typeDefs = gql`
         month : String
         review : String
     }
-    type Auth {
-        token: String
-        user: User
+     type Auth{
+        token : ID
+        user : User
     }
     
     type Query{
@@ -104,7 +104,7 @@ const typeDefs = gql`
         deleteReview (
             _id:ID) : Review
 
-            login(employeeId: String!, password: String!): Auth
+        login( employeeId : String!, password: String!): Auth
         
 
 

@@ -7,8 +7,8 @@ const resolvers = {
         users : async () => {
             return await User.find({});//find all user
         },
-        userId : async (parent, {userId}) =>{
-            return await User.findOne({_id: userId}); //user by id
+        userId : async (parent, args, context) =>{
+            return await User.findOne({_id: context.user._id}); //user by id
         },
         tasks : async () => {
             return await Task.find({}).populate('user');//find all task
