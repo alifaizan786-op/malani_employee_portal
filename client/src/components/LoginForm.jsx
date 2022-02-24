@@ -1,6 +1,11 @@
 //From React
 import * as React from "react";
 
+import {USER_LOGIN} from '../utils/mutation'
+
+import {useMutation} from '@apollo/client';
+import Auth from '../utils/auth';
+
 //From Material UI
 import {
   Avatar,
@@ -14,6 +19,48 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 export default function LoginForm() {
+  const [formState, setFormState] = React.useState({
+    employeeId:'',
+    password:''
+  })
+
+  const[login,{eror,data}] = useMutation(USER_LOGIN)
+
+  const handleChange = (event) =>{
+    const{name,value} = event.target
+
+    setFormState({
+       ...formState,
+       [name]:value,
+    });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    console.log(formState);
+
+    try{
+      const { data } = await login({
+        variables: {...formState},
+      });
+
+      Auth.login(data.login.token);
+
+    }catch(e){
+      console.error(e);
+    }
+    setFormState({
+      employeeId:'',
+      password:''
+    })
+  }
+
+
+  
+
+
+
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -44,8 +91,8 @@ export default function LoginForm() {
             autoComplete="employeeId"
             autoFocus
             sx={{ bgcolor: "primary.light" }}
-            //value={formState.email}
-            //onChange={handleChange}
+            value={formState.employeeId}
+            onChange={handleChange}
           />
           <TextField
             margin="normal"
@@ -58,15 +105,15 @@ export default function LoginForm() {
             id="password"
             autoComplete="current-password"
             sx={{ bgcolor: "primary.light" }}
-            //value={formState.password}
-            //onChange={handleChange}
+            value={formState.password}
+            onChange={handleChange}
           />
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, bgcolor: "secondary.main" }}
-            //onClick={handleFormSubmit}
+            onClick={handleFormSubmit}
           >
             Sign In
           </Button>

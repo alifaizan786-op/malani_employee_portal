@@ -35,6 +35,10 @@ const typeDefs = gql`
         month : String
         review : String
     }
+     type Auth{
+        token : ID
+        user : User
+    }
     
     type Query{
         users : [User]
@@ -45,7 +49,7 @@ const typeDefs = gql`
         taskUId(taskUId: ID) : Task  
         reviewUId(managerUId : ID, employeeUId : ID) : Review
     }
-    
+
     type Mutation{
         addTask(
             title :String, 
@@ -99,6 +103,8 @@ const typeDefs = gql`
 
         deleteReview (
             _id:ID) : Review
+
+        login( employeeId : String!, password: String!): Auth
         
 
 

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "homepage": "/Home",
   "private": true,
+  "proxy": "http://localhost:3001",
   "dependencies": {
     "@apollo/client": "^3.3.5",
     "@date-io/date-fns": "^1.3.13",

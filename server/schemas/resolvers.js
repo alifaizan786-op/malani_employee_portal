@@ -1,4 +1,6 @@
-const { Task, User, Review, Quotes} = require('../models')
+const { Task, User, Review, Quotes} = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query : {
@@ -85,8 +87,34 @@ const resolvers = {
         },
         deleteReview :  async(parent,{_id})=>{
             await Review.findOneAndDelete({_id})
+        },
+        login: async(parent,{employeeId,password})=>{
+            const user = await User.findOne({employeeId})
+            console.log(employeeId);
+            console.log(password);
+
+
+            if(!user){
+                console.log('2');
+                throw new AuthenticationError('fuck');
+            }
+
+            const correctPassword = await user.isCorrectPassword(password)
+            console.log('3');
+
+            if(!correctPassword){
+                console.log('4');
+                throw new AuthenticationError('No password found ')
+            }
+            console.log('5');
+            const token = signToken(user);
+            console.log('6');
+            console.log(user, token);
+
+            return(user, token);
+
         }
     }
-}
+};
 
 module.exports = resolvers
