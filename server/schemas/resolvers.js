@@ -90,29 +90,20 @@ const resolvers = {
         },
         login: async(parent,{employeeId,password})=>{
             const user = await User.findOne({employeeId})
-            console.log(employeeId);
-            console.log(password);
-
 
             if(!user){
-                console.log('2');
                 throw new AuthenticationError('fuck');
             }
 
             const correctPassword = await user.isCorrectPassword(password)
-            console.log('3');
 
             if(!correctPassword){
-                console.log('4');
                 throw new AuthenticationError('No password found ')
             }
-            console.log('5');
+
             const token = signToken(user);
-            console.log('6');
-            console.log(user, token);
 
-            return(user, token);
-
+            return{user, token};
         }
     }
 };

@@ -38,7 +38,7 @@ export default function Main() {
           />
         </Grid>
       </Grid>
-      <Route exact path={"/Home"}>
+      <Route exact path={"/"}>
         <Home />
       </Route>
       <Route exact path={"/ViewAllTasks"}>

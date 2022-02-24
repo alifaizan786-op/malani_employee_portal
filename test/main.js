@@ -16,6 +16,8 @@ connection.once('open', async() => {
       console.log(allTasks[i]);
 
     }
+
+    
   });
 
   

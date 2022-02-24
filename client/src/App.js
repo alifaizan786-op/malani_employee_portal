@@ -67,19 +67,19 @@ const theme = createTheme({
 
 function App() {
   return (
-    <Router>
+
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Route exact path="/">
+
       {Auth.loggedIn() ? (
         <Main/>
       ):(
         <LoginPage/>
       )}
-        </Route>
+
       </ApolloProvider>
     </ThemeProvider>
-    </Router>
+
   );
 }
 
