@@ -10,6 +10,9 @@ const resolvers = {
         userId : async (parent, args, context) =>{
             return await User.findOne({_id: context.user._id}); //user by id
         },
+        userActive : async()=>{
+             return await User.find({active:true})   
+        },
         tasks : async () => {
             return await Task.find({}).populate('user');//find all task
         },

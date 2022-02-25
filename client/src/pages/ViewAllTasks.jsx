@@ -1,7 +1,8 @@
 import React from "react";
 
 import TaskCard from "../components/TaskCard";
-
+import { useQuery } from '@apollo/client';
+import { QUERY_ALLTASKS } from '../utils/queries'
 import {
   Box,
   Typography,
@@ -46,75 +47,22 @@ const style = {
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-const tasks = [
-  {
-    _id: "62108a2d712b0c6b48374c38",
-    status: "submitted",
-    title: "Deep Cleaning",
-    description: "Clean All Shelves in Antiques Section",
-    user: {
-      _id: "62108a2d712b0c6b48374c0c",
-      firstName: "Alisha",
-      lastName: "Alisha",
-      employeeId: "Alisha-AP"
-    },
-    dueDate: "1645171914000"
-  },
-  {
-    _id: "62108a2d712b0c6b48374c3b",
-    status: "overdue",
-    title: "Deep Cleaning",
-    description: "Clean All Shelves in Diamond Section",
-    user: {
-      _id: "62108a2d712b0c6b48374c0d",
-      firstName: "Janki",
-      lastName: "Patel",
-      employeeId: "Janki-JP"
-    },
-    dueDate: "1645171914000"
-  },
-  {
-    _id: "62108a2d712b0c6b48374c3e",
-    status: "pending",
-    title: "Deep Cleaning",
-    description: "Clean All Shelves in Kiosk Section",
-    user: {
-      _id: "62108a2d712b0c6b48374c0e",
-      firstName: "Mina",
-      lastName: "Chauhan",
-      employeeId: "Mina-MC"
-    },
-    dueDate: "1645171914000"
-  },
-  {
-    _id: "62108a2d712b0c6b48374c41",
-    status: "submitted",
-    title: "Deep Cleaning",
-    description: "Clean All Shelves in Gold Section",
-    user: {
-      _id: "62108a2d712b0c6b48374c10",
-      firstName: "Heena",
-      lastName: "Heena",
-      employeeId: "Heena-HD"
-    },
-    dueDate: "1645171914000"
-  },
-  {
-    _id: "62108a2d712b0c6b48374c44",
-    status: "overdue",
-    title: "Deep Cleaning",
-    description: "Clean All Shelves in Diamond Kiosk Section",
-    user: {
-      _id: "62108a2d712b0c6b48374c11",
-      firstName: "Sushma",
-      lastName: "Patel",
-      employeeId: "Sushma-SP"
-    },
-    dueDate: "1645171914000"
-  }
-];
+
+
+
 
 export default function ViewAllTasks() {
+ 
+  const { data } = useQuery(QUERY_ALLTASKS)
+
+  const tasks = data?.tasks || [];
+
+  const user = data?.userActive || [];
+
+
+
+
+
   const [status, setStatus] = React.useState("");
   const [employeeId, setEmployeeId] = React.useState("");
 
@@ -127,7 +75,7 @@ export default function ViewAllTasks() {
 
   function filters(id, status) {
     if (id && status) {
-      const resultbyuid = tasks.filter((task) => task.user.firstName === id);
+      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
       const resultbystatus = resultbyuid.filter(
         (task) => task.status === status
       );
@@ -136,7 +84,7 @@ export default function ViewAllTasks() {
       const resultbystatus = tasks.filter((task) => task.status === status);
       return resultbystatus;
     } else if (id) {
-      const resultbyuid = tasks.filter((task) => task.user.firstName === id);
+      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
       return resultbyuid;
     } else {
       return tasks;
@@ -190,11 +138,9 @@ export default function ViewAllTasks() {
           value={employeeId}
           label="Status"
           onChange={handleChangeEmployeeId}>
-          <MenuItem value={""}>Employee</MenuItem>
-          <MenuItem value={"Alisha"}>Alisha</MenuItem>
-          <MenuItem value={"Janki"}>Janki</MenuItem>
-          <MenuItem value={"Mina"}>Mina</MenuItem>
-          <MenuItem value={"Sushma"}>Sushma</MenuItem>
+          {user.map((employee, index )=>(
+          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          ))}
         </Select>
       </FormControl>
 

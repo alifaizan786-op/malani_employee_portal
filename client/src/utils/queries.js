@@ -18,3 +18,25 @@ query quote{
     level
   }
 }`
+
+export const QUERY_ALLTASKS = gql`
+query alltask {
+  tasks {
+    _id
+    status
+    title
+    description
+    user {
+      _id
+      firstName
+      lastName
+      employeeId      
+    }
+    dueDate
+  }
+  userActive{
+    _id
+    employeeId
+    
+  }
+}`
