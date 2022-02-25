@@ -39,6 +39,19 @@ import CreateTask from "../components/CreateTask";
 
 export default function ViewAllTasks() {
 
+ 
+  const { data } = useQuery(QUERY_ALLTASKS)
+
+  const tasks = data?.tasks || [];
+
+  const user = data?.userActive || [];
+
+
+
+
+
+  const [status, setStatus] = React.useState("");
+  const [employeeId, setEmployeeId] = React.useState("");
 
   const [createModal, setCreateModal ] = React.useState(false);
 
