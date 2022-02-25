@@ -19,6 +19,7 @@ import {
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import PeopleIcon from "@mui/icons-material/People";
 import { Logout } from "@mui/icons-material";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const useStyles = makeStyles((theme) => ({
   sidebarPadding: {
@@ -187,6 +188,30 @@ export default function LeftSideBar(props) {
         </List>
 
         <List>
+        <ListItemButton
+            selected={selectedIndex === 3}
+            onClick={(event) => {
+              handleListItemClick(event, 3);
+              window.location.assign("/Settings");
+            }}>
+            <ListItemIcon>
+              <SettingsIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
+                  Settings
+                </Typography>
+              }
+            />
+          </ListItemButton>
+
+
           <ListItemButton>
             <ListItemIcon>
               <Logout sx={{ fontSize: "2.5rem", color: "primary.main" }} />

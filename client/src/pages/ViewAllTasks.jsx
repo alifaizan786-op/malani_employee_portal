@@ -26,25 +26,11 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import AddIcon from '@mui/icons-material/Add';
 
+import CreateTask from "../components/CreateTask";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  boxShadow: 24,
-  p: 5,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  minWidth: '50%',
-  minHeight: '80%',
-  borderRadius: '30px'
-};
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
 
 const tasks = [
   {
@@ -115,15 +101,16 @@ const tasks = [
 ];
 
 export default function ViewAllTasks() {
-  const [status, setStatus] = React.useState("");
-  const [employeeId, setEmployeeId] = React.useState("");
 
-  const handleChangeStatus = (event) => {
-    setStatus(event.target.value);
-  };
-  const handleChangeEmployeeId = (event) => {
-    setEmployeeId(event.target.value);
-  };
+  const [createModal, setCreateModal ] = React.useState(false);
+
+  const handleCreateModalOpen = () => setCreateModal(true)
+
+  const handleCreateModalClose = () => setCreateModal(false)
+
+  
+
+
 
   function filters(id, status) {
     if (id && status) {
@@ -143,17 +130,14 @@ export default function ViewAllTasks() {
     }
   }
 
+  const [status, setStatus] = React.useState("");
+  const [employeeId, setEmployeeId] = React.useState("");
 
-  const [createModal, setCreateModal ] = React.useState(false);
-
-  const handleCreateModalOpen = () => setCreateModal(true)
-
-  const handleCreateModalClose = () => setCreateModal(false)
-
-  const [value, setValue] = React.useState(new Date('2014-08-18T21:11:54'));
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value);
+  };
+  const handleChangeEmployeeId = (event) => {
+    setEmployeeId(event.target.value);
   };
 
   return (
@@ -167,22 +151,23 @@ export default function ViewAllTasks() {
         display: "flex",
         flexFlow: "wrap",
       }}>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: "600px" }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
         <InputLabel id="demo-simple-select-label">Status</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={status}
           label="Status"
-          onChange={handleChangeStatus}>
-          <MenuItem value={""}>Status</MenuItem>
-          <MenuItem value={"pending"}>Pending</MenuItem>
-          <MenuItem value={"overdue"}>Overdue</MenuItem>
-          <MenuItem value={"submitted"}>Submitted</MenuItem>
+          onChange={handleChangeStatus}
+          >
+          <MenuItem value={''}>Status</MenuItem>
+          <MenuItem value={'pending'}>Pending</MenuItem>
+          <MenuItem value={'overdue'}>Overdue</MenuItem>
+          <MenuItem value={'submitted'}>Submitted</MenuItem>
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ m: 1, minWidth: "600px" }}>
+      <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
         <InputLabel id="demo-simple-select-label">Employee</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -198,7 +183,7 @@ export default function ViewAllTasks() {
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ m: 1 }}>
+      <FormControl variant="standard" sx={{ m: 1, width:'10%' }}>
         <Button
           type="submit"
           fullWidth
@@ -247,116 +232,20 @@ export default function ViewAllTasks() {
           }}>
         Create Task
       </Button>
-      <Modal
-        open={createModal}
-        onClose={handleCreateModalClose}>
-          <Box sx={style}>
 
-            <Typography variant="h3"
-              sx={{
-                fontFamily: "Baskervville",
-                textAlign: "center",
-                marginY: "5px",
-              }}>
-              Create & Assign Task
-            </Typography>
+      <CreateTask modalState={createModal} closeModal={handleCreateModalClose} />
 
-            <FormControl variant="standard">
-              <TextField
-                label="Employee Id"
-                id="outlined-size-medium"
-                size="medium"
-              />
-              <FormHelperText id="component-helper-text">
-                "Employee First Name" - "Employee Initials"
-              </FormHelperText>
-            </FormControl>
 
-            <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select-size-medium"
-                label="Status"
-                size="medium"
-                //onChange={handleChange}
-              >
-                <MenuItem value={"pending"}>Pending</MenuItem>
-                <MenuItem value={"overdue"}>Overdue</MenuItem>
-                <MenuItem value={"submitted"}>Submitted</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateTimePicker
-                  label="Due Date"
-                  id="size-medium"
-                  value={value}
-                  onChange={handleChange}
-                  size="medium"
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
-            </FormControl>
-
-            <FormControl variant="standard">
-              <TextField
-                label="Title"
-                id="outlined-size-medium"
-                size="medium"
-              />
-            </FormControl>
-
-            <FormControl>
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Description"
-                multiline
-                minRows={4}
-              />
-            </FormControl>
-
-            <FormControl sx={{display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'space-around',
-                              minWidth: '100%'
-                              }}>
-              <Typography variant="p"
-              sx={{
-                fontFamily: "Baskervville",
-                textAlign: "center",
-                fontSize:'25px'
-              }}>
-              Is This Task Recurring?
-            </Typography>
-              <Switch  size="large" {...label} defaultChecked />
-            </FormControl>
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                fontSize: "20px",
-                bgcolor: "primary.main",
-                color: "primary.light",
-                borderRadius: "10px",
-              }}>
-              Save
-            </Button>
-
-          </Box>
-      </Modal>
       <Typography
         variant="p"
         component="div"
         sx={{
-          textAlign: 'center',
-          fontSize: '13px',
-          width: '80vw',
-          position: 'fixed',
-          bottom: '1px'
+          color: "primary",
+          textAlign: "center",
+          fontSize: "13px",
+          position: 'absolute',
+          bottom: '5px',
+          width: '80%'
         }}>
         Iruna Digital Inc 2022 - V1.0
       </Typography>

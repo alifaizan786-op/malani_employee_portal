@@ -14,9 +14,6 @@ import {
 
 
 const style = {
-
-
-
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -27,8 +24,7 @@ const style = {
   p: 5,
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: 'center',
+
   minWidth: "50%",
   borderRadius: "30px",
 };
@@ -136,22 +132,24 @@ console.log(user.level);
               minRows={4}
             />
           </FormControl>
-          <Button
-            type="submit"
-            fullWidth
-            onClick={setEditTrue}
-            variant="contained"
-            sx={{
-              fontSize: "20px",
-              bgcolor: "primary.main",
-              color: "primary.light",
-              marginTop:'auto',
-              width: "15%",
-              alignItems:'center',
-              borderRadius: "10px",
-            }}>
-            Save
-          </Button>
+          <FormControl sx={{flexDirection:'row' ,justifyContent:'center', marginTop:'15px'}}>
+            <Button
+              type="submit"
+              fullWidth
+              onClick={setEditTrue}
+              variant="contained"
+              sx={{
+                fontSize: "20px",
+                bgcolor: "primary.main",
+                color: "primary.light",
+                marginTop:'auto',
+                width: "15%",
+                alignItems:'center',
+                borderRadius: "10px",
+              }}>
+              Save
+            </Button>
+          </FormControl>
 
         </Box>
       </Modal>

@@ -8,6 +8,7 @@ import LeftSideBar from "../components/LeftSideBar";
 import Home from "./Home";
 import ViewAllTasks from "./ViewAllTasks";
 import ViewAllEmps from "./ViewAllEmps";
+import SettingsPage from "./SettingsPage";
 
 //From Material UI
 import { Grid, Divider } from "@mui/material";
@@ -46,6 +47,9 @@ export default function Main() {
       </Route>
       <Route exact path={"/ViewAllEmps"}>
         <ViewAllEmps />
+      </Route>
+      <Route exact path={"/Settings"}>
+        <SettingsPage />
       </Route>
     </Router>
   );
