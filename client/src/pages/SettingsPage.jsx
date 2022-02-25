@@ -2,12 +2,8 @@
 import * as React from "react";
 
 import {
-    Avatar,
     Button,
     Typography,
-    Container,
-    CssBaseline,
-    Box,
     TextField,
     InputAdornment,
     IconButton,
@@ -145,6 +141,20 @@ export default function SettingsPage () {
               Save
             </Button>
           </FormControl>
+
+          <Typography
+            variant="p"
+            component="div"
+            sx={{
+              color: "primary",
+              textAlign: "center",
+              fontSize: "13px",
+              position: 'absolute',
+              bottom: '5px',
+              width: '80%'
+            }}>
+            Iruna Digital Inc 2022 - V1.0
+          </Typography>
 
         </Grid>
     )

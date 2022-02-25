@@ -1,11 +1,8 @@
 import React from "react";
 
-import TaskCard from "../components/TaskCard";
-
 import {
   Box,
   Typography,
-  Grid,
   Button,
   Modal,
   FormControl,
@@ -23,8 +20,6 @@ import {
 } from '@mui/lab';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-
-import AddIcon from '@mui/icons-material/Add';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 

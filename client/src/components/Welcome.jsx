@@ -2,8 +2,7 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_WELCOME } from '../utils/queries'
 
-import Auth from '../utils/auth';
-import { Typography, Divider } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Welcome() {
 

@@ -1,6 +1,5 @@
 //From React
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 //From MUI
 import { makeStyles } from "@material-ui/core";

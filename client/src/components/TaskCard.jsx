@@ -80,6 +80,36 @@ export default function TaskCard(props) {
     }
   }
 
+  const [checked, setChecked] = React.useState(true);
+
+    const handleSwitchChange = (event) => {
+      setChecked(event.target.checked);
+      console.log(event.target.checked);
+    };
+
+  function checkChecked(){
+    if(checked){
+        return(
+            <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
+                <InputLabel id="demo-simple-select-label">Renew In</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select-size-medium"
+                    label="Status"
+                    size="medium"
+                    defaultValue = ""
+                    >
+                    <MenuItem value={'1'}>Daily</MenuItem>
+                    <MenuItem value={'7'}>Weekly</MenuItem>
+                    <MenuItem value={'31'}>Monthly</MenuItem>
+                    <MenuItem value={'183'}>Every 6-Months</MenuItem>
+                    <MenuItem value={'365'}>Yearly</MenuItem>
+                </Select>
+            </FormControl>
+        )
+    }
+}
+
   return (
     <>
       <Card sx={borderColorCheck()}>
@@ -229,15 +259,24 @@ export default function TaskCard(props) {
                               minWidth: '100%'
                               }}>
               <Typography variant="p"
-              sx={{
-                fontFamily: "Baskervville",
-                textAlign: "center",
-                fontSize:'25px'
-              }}>
-              Is This Task Recurring?
-            </Typography>
-              <Switch  size="large" {...label} defaultChecked />
+                sx={{
+                  fontFamily: "Baskervville",
+                  textAlign: "center",
+                  fontSize:'25px'
+                }}>
+                Is This Task Recurring?
+              </Typography>
+              <Switch  
+                  size="large" 
+                  defaultChecked
+                  {...label}
+                  onChange={handleSwitchChange} 
+                />
             </FormControl>
+
+            {checkChecked()}
+
+            
 
           <Button
             type="submit"

@@ -11,7 +11,7 @@ import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
 
 //From Material UI
-import { Grid, Divider } from "@mui/material";
+import { Grid } from "@mui/material";
 
 export default function Main() {
   const [draweropen, setDrawerOpen] = React.useState(false);
