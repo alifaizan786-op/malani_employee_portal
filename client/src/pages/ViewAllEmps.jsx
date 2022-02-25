@@ -1,6 +1,7 @@
 import React from "react";
 
 import EmployeeCard from "../components/EmployeeCard";
+import CreateEmployee from "../components/CreateEmployee";
 
 import {
   Typography,
@@ -30,18 +31,14 @@ const style = {
 
 
 
-export default function ViewAllEmps() {
-  const [createModal, setCreateModal] = React.useState(false);
+export default function ViewAllEmps() {;
 
-  const handleCreateModalOpen = () => setCreateModal(true);
+  const [createEmp, setCreateEmp] = React.useState(false);
 
-  const handleCreateModalClose = () => setCreateModal(false);
+  const handlecreateEmpOpen = () => setCreateEmp(true);
 
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const handlecreateEmpClose = () => setCreateEmp(false);
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
 
   return (
     <Grid
@@ -66,7 +63,7 @@ export default function ViewAllEmps() {
       <Button
         type="submit"
         fullWidth
-        onClick={handleCreateModalOpen}
+        onClick={handlecreateEmpOpen}
         variant="contained"
         endIcon={<AddIcon />}
         sx={{
@@ -83,15 +80,19 @@ export default function ViewAllEmps() {
         }}>
         Create Employee
       </Button>
+
+      <CreateEmployee  modalState={createEmp} modalClose={handlecreateEmpClose}/>
+
       <Typography
         variant="p"
         component="div"
         sx={{
+          color: "primary",
           textAlign: "center",
           fontSize: "13px",
-          width: "80vw",
-          position: "fixed",
-          bottom: "1px",
+          position: 'absolute',
+          bottom: '5px',
+          width: '80%'
         }}>
         Iruna Digital Inc 2022 - V1.0
       </Typography>

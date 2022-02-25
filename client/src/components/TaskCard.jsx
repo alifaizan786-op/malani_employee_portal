@@ -13,6 +13,7 @@ import {
   Select,
   MenuItem,
   TextField,
+  Switch
 } from "@mui/material";
 
 import { DateTimePicker, LocalizationProvider } from "@mui/lab";
@@ -35,6 +36,8 @@ const style = {
   minHeight: "80%",
   borderRadius: "30px",
 };
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 export default function TaskCard(props) {
   const [editModal, setEditModal] = React.useState(false);
@@ -219,6 +222,22 @@ export default function TaskCard(props) {
               value={props.desc}
             />
           </FormControl>
+
+          <FormControl sx={{display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'space-around',
+                              minWidth: '100%'
+                              }}>
+              <Typography variant="p"
+              sx={{
+                fontFamily: "Baskervville",
+                textAlign: "center",
+                fontSize:'25px'
+              }}>
+              Is This Task Recurring?
+            </Typography>
+              <Switch  size="large" {...label} defaultChecked />
+            </FormControl>
 
           <Button
             type="submit"

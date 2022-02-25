@@ -20,13 +20,22 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     background: "#008080",
   },
-  logo: {
+  logoLg: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     fontFamily: "Baskervville",
-    [theme.breakpoints.down("xs")]: {
-      justifyContent: "left",
+    [theme.breakpoints.down("md")]: {
+      display:'none'
+    },
+  },
+  logoSm: {
+    display: "none",
+    justifyContent: "center",
+    alignItems: "center",
+    fontFamily: "Baskervville",
+    [theme.breakpoints.down("md")]: {
+      display:'flex'
     },
   },
   search: {
@@ -58,27 +67,6 @@ const useStyles = makeStyles((theme) => ({
     margin: 15,
     color: "#ffffff",
   },
-  logoLg: {
-    display: "flex",
-    justifyContent: "center",
-    margin: 5,
-    fontWeight: "bolder",
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
-  },
-  logoSm: {
-    alignitems: "center",
-    justifyContent: "center",
-    margin: "5px 5px 0px 0px",
-    marginbottom: 0,
-    fontWeight: "bolder",
-    display: "block",
-    [theme.breakpoints.up("sm")]: {
-      display: "none",
-    },
-  },
 }));
 
 export default function Header(props) {
@@ -99,26 +87,51 @@ export default function Header(props) {
             </Button>
           )}
         </Grid>
-        <Grid item xs={4} sm={6} md={6} className={classes.logo}>
-          <Link to={"/Home"}>
+
+        <Grid item xs={4} sm={6} md={6} className={classes.logoLg}>
+          <Link to={"/"}>
             <Typography variant="h4" sx={{ fontFamily: "Baskervville" }}>
               Malani Jewelers Inc
             </Typography>
           </Link>
-          <Link to={"/Home"}>
+          <Link to={"/"}>
             <Avatar
               alt="Remy Sharp"
               src={logo}
               sx={{ width: 65, height: 65, margin: "5px 15px 5px 15px" }}
             />
           </Link>
-          <Link to={"/Home"}>
+          <Link to={"/"}>
             <Typography variant="h4" sx={{ fontFamily: "Baskervville" }}>
               Employee Portal
             </Typography>
           </Link>
         </Grid>
-        <Grid item xs={5.9} sm={3} md={3}></Grid>
+
+        <Grid item xs={4} sm={6} md={6} className={classes.logoSm}>
+          <Link to={"/"}>
+            <Typography variant="h6" sx={{ fontFamily: "Baskervville" }}>
+              Malani Jewelers Inc
+            </Typography>
+          </Link>
+          <Link to={"/"}>
+            <Avatar
+              alt="Remy Sharp"
+              src={logo}
+              sx={{ width: 45, height: 45, margin: "5px 15px 5px 15px" }}
+            />
+          </Link>
+          <Link to={"/"}>
+            <Typography variant="h6" sx={{ fontFamily: "Baskervville" }}>
+              Employee Portal
+            </Typography>
+          </Link>
+        </Grid>
+
+
+
+
+        <Grid item xs={0} sm={0} md={0} lg={0}></Grid>
       </Grid>
     </AppBar>
   );

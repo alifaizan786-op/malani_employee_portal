@@ -15,8 +15,13 @@ import {
   CssBaseline,
   Box,
   TextField,
+  InputAdornment,
+  IconButton
 } from "@mui/material";
+
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function LoginForm() {
   const [formState, setFormState] = React.useState({
@@ -54,6 +59,16 @@ export default function LoginForm() {
       password:''
     })
   }
+
+  const [showPassword, setShowPassword] = React.useState(false)
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
 
   
@@ -101,13 +116,25 @@ export default function LoginForm() {
             variant="filled"
             name="password"
             label="Password"
-            type="password"
+            value={formState.password}
+            onChange={handleChange}
+            type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
             sx={{ bgcolor: "primary.light" }}
-            value={formState.password}
-            onChange={handleChange}
-          />
+            InputProps={{
+            endAdornment:(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}/>
           <Button
             type="submit"
             fullWidth
