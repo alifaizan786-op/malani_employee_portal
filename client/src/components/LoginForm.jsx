@@ -29,7 +29,7 @@ export default function LoginForm() {
     password:''
   })
 
-  const[login,{eror,data}] = useMutation(USER_LOGIN)
+  const[login,{error,data}] = useMutation(USER_LOGIN)
 
   const handleChange = (event) =>{
     const{name,value} = event.target
@@ -42,7 +42,7 @@ export default function LoginForm() {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    console.log(formState);
+   
 
     try{
       const { data } = await login({

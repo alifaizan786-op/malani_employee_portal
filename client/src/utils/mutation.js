@@ -20,3 +20,24 @@ mutation login($employeeId:String!, $password:String!){
 }
 
 `
+
+export const CREATE_TASK = gql`
+mutation createTask(
+  $title: String,
+  $description: String,
+  $employeeObjId: ID,
+  $dueDate: String,
+  $reccuring: Boolean,
+  $renewIn: Int,
+) {
+  addTask(
+    title: $title
+    description: $description
+    employeeObjId: $employeeObjId
+    dueDate: $dueDate
+    reccuring: $reccuring
+    renewIn: $renewIn
+  ) {
+    title
+  }
+}`

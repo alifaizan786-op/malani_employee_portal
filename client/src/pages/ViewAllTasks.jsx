@@ -15,7 +15,8 @@ import {
   Select,
   MenuItem,
   TextField,
-  Switch
+  Switch,
+  useForkRef
 } from "@mui/material";
 
 import {
@@ -28,13 +29,6 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import AddIcon from '@mui/icons-material/Add';
 
 import CreateTask from "../components/CreateTask";
-
-
-
-
-
-
-
 
 
 export default function ViewAllTasks() {

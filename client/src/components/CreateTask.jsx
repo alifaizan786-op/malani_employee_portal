@@ -1,5 +1,8 @@
 import React from "react";
+import {CREATE_TASK} from '../utils/mutation'
 
+import {useMutation} from '@apollo/client';
+import Auth from '../utils/auth';
 import TaskCard from "../components/TaskCard";
 
 import {
@@ -47,20 +50,63 @@ const style = {
   };
 
 export default function CreateTask (props){
+  const [dateValue, setDateValue] = React.useState(new Date());
 
-    const [dateValue, setDateValue] = React.useState(new Date());
+  const [checked, setChecked] = React.useState(true);
 
-    const [checked, setChecked] = React.useState(true);
+  const handleSwitchChange = (event) => {
+    setChecked(event.target.checked);
+    console.log(event.target.checked);
+  };
 
-    const handleSwitchChange = (event) => {
-      setChecked(event.target.checked);
-      console.log(event.target.checked);
+
+  const handleDateChange = (newValue) => {
+      setDateValue(newValue);
+  };
+
+    const [formState, setFormState] = React.useState({
+      title:'',
+      description:'',
+      employeeObjId:'',
+      dueDate:dateValue,
+      reccuring:checked,
+      renewIn:'',
+    })
+    
+    const[createTask,{error,data}] = useMutation(CREATE_TASK)
+
+    const handleChange =(event) =>{
+      const{name,value} = event.target
+
+      console.log(event.target.value);
+
+      setFormState({
+        ...formState,
+        [name]:value,
+      });
     };
 
+    const handleFormSubmit = async (event) =>{
+      event.preventDefault();
+   console.log(formState);
+   try {
+     const {data} =await createTask({
+       variable: {...formState},
+     });
 
-    const handleDateChange = (newValue) => {
-        setDateValue(newValue);
-    };
+   }catch(e){
+     console.error(e);
+   }
+   setFormState({
+     title:'',
+      description:'',
+      employeeObjId:'',
+      dueDate:'',
+      reccuring:'',
+      renewIn:'',
+   })
+  }
+    
 
     function checkChecked(){
         if(checked){
@@ -71,8 +117,10 @@ export default function CreateTask (props){
                         labelId="demo-simple-select-label"
                         id="demo-simple-select-size-medium"
                         label="Status"
+                        name="renewIn"
                         size="medium"
-                        defaultValue = ""
+                        value={formState.renewIn}
+                        onChange={handleChange}
                         >
                         <MenuItem value={'1'}>Daily</MenuItem>
                         <MenuItem value={'7'}>Weekly</MenuItem>
@@ -105,26 +153,17 @@ export default function CreateTask (props){
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          label="Status">
+          label="Status"
+          name="employeeObjId"
+          value={formState.employeeObjId}
+          onChange={handleChange}
+          >
           {props.user.map((employee, index )=>(
-          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          <MenuItem key={employee._id} value={employee._id}>{employee.employeeId}</MenuItem>
           ))}
         </Select>
           </FormControl>
-            <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select-size-medium"
-                label="Status"
-                size="medium"
-                defaultValue = ""
-                >
-                <MenuItem value={'pending'}>Pending</MenuItem>
-                <MenuItem value={'overdue'}>Overdue</MenuItem>
-                <MenuItem value={'submitted'}>Submitted</MenuItem>
-              </Select>
-            </FormControl>
+            
 
             <FormControl>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -144,6 +183,9 @@ export default function CreateTask (props){
                 label="Title"
                 id="outlined-size-medium"
                 size="medium"
+                name="title"
+                value={formState.title}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -151,8 +193,11 @@ export default function CreateTask (props){
               <TextField
                 id="outlined-multiline-flexible"
                 label="Description"
+                name="description"
                 multiline
                 minRows={4}
+                value={formState.description}
+                onChange={handleChange}
               />
             </FormControl>
 
@@ -183,6 +228,7 @@ export default function CreateTask (props){
               type="submit"
               fullWidth
               variant="contained"
+              onClick={handleFormSubmit}
               sx={{
                 fontSize: "20px",
                 bgcolor: "primary.main",
