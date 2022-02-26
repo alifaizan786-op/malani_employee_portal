@@ -100,17 +100,17 @@ export default function CreateTask (props){
               Create & Assign Task
             </Typography>
 
-            <FormControl variant="standard">
-              <TextField
-                label="Employee Id"
-                id="outlined-size-medium"
-                size="medium"
-              />
-              <FormHelperText id="component-helper-text">
-                "Employee First Name" - "Employee Initials"
-              </FormHelperText>
-            </FormControl>
-
+            <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
+        <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Status">
+          {props.user.map((employee, index )=>(
+          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          ))}
+        </Select>
+          </FormControl>
             <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
               <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select

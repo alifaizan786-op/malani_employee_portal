@@ -48,20 +48,11 @@ export default function ViewAllTasks() {
 
 
 
-
-
-  const [status, setStatus] = React.useState("");
-  const [employeeId, setEmployeeId] = React.useState("");
-
   const [createModal, setCreateModal ] = React.useState(false);
 
   const handleCreateModalOpen = () => setCreateModal(true)
 
   const handleCreateModalClose = () => setCreateModal(false)
-
-  
-
-
 
   function filters(id, status) {
     if (id && status) {
@@ -182,7 +173,10 @@ export default function ViewAllTasks() {
         Create Task
       </Button>
 
-      <CreateTask modalState={createModal} closeModal={handleCreateModalClose} />
+      <CreateTask
+       modalState={createModal} 
+       closeModal={handleCreateModalClose} 
+       user={user}/>
 
 
       <Typography

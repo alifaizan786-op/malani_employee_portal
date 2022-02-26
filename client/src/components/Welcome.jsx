@@ -5,16 +5,7 @@ import { QUERY_WELCOME } from '../utils/queries'
 import Auth from '../utils/auth';
 import { Typography, Divider } from "@mui/material";
 
-export default function Welcome() {
-
-  const { data } = useQuery(QUERY_WELCOME)
-
-  const user = data?.userId || [];
-
-  console.log(user);
-
-
-
+export default function Welcome(props) {
   return (
     <>
       <Typography
@@ -29,7 +20,7 @@ export default function Welcome() {
         color={"primary.main"}
         textAlign={"center"}
         sx={{ fontFamily: "Baskervville", marginBottom: "15px" }}>
-        {user.firstName} {user.lastName}
+        {props.firstName} {props.lastName}
       </Typography>
       <Typography
         variant="h4"
@@ -43,7 +34,7 @@ export default function Welcome() {
         color={"primary.main"}
         textAlign={"center"}
         sx={{ fontFamily: "Baskervville", marginBottom: "30px" }}>
-        Department : {user.department}
+        Department : {props.department}
       </Typography>
     </>
   );

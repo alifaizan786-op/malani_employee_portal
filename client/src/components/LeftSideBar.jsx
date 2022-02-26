@@ -1,6 +1,7 @@
 //From React
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Auth from '../utils/auth';
 
 //From MUI
 import { makeStyles } from "@material-ui/core";
@@ -105,7 +106,7 @@ export default function LeftSideBar(props) {
                   fontFamily: "Baskervville",
                   color: "primary.main",
                 }}>
-                UM
+                {props.firstName[0]}{props.lastName[0]}
               </Avatar>
             ) : (
               <ListItemIcon>
@@ -120,7 +121,7 @@ export default function LeftSideBar(props) {
                     fontFamily: "Baskervville",
                     color: "primary.main",
                   }}>
-                  UM
+                  {props.firstName[0]}{props.lastName[0]}
                 </Avatar>
               </ListItemIcon>
             )}
@@ -132,9 +133,9 @@ export default function LeftSideBar(props) {
               primary={
                 <Typography
                   style={{ fontSize: "25px", fontFamily: "Baskervville" }}>
-                  Uzair Malani
+                 {props.firstName} {props.lastName}
                 </Typography>
-              }
+              } 
             />
           </ListItemButton>
 
@@ -212,7 +213,7 @@ export default function LeftSideBar(props) {
           </ListItemButton>
 
 
-          <ListItemButton>
+          <ListItemButton onClick={Auth.logout}>
             <ListItemIcon>
               <Logout sx={{ fontSize: "2.5rem", color: "primary.main" }} />
             </ListItemIcon>
