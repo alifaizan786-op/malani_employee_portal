@@ -31,7 +31,11 @@ const taskSchema = new Schema({
     recurring:{
         type:Boolean,
         require:true,
-        default:true
+        
+    },
+    renewIn:{
+        type:Number,
+        require:false,
     }
 })
 const Task = model('Task', taskSchema);

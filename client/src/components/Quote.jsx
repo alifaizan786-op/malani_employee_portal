@@ -30,15 +30,11 @@ const style = {
 
 
 
-export default function Quote() {
+export default function Quote(props) {
 
  const { data } = useQuery(QUERY_QUOTE)
 
- const quote = data?.quotes || []
- const user = data?.userId || []
- 
-
-console.log(user.level);
+ const quote = data?.quotes || [] 
 
   function qouteText(){
     if(quote[0]){
@@ -49,7 +45,7 @@ console.log(user.level);
   }
 
   function checkLevel(){
-    if(user.level === 2){
+    if(props.level === 2){
      return( 
        <Button
         type="submit"

@@ -5,7 +5,8 @@
         "description": "Clean All Shelves in Antiques Section",
         "user": "Alisha-AP",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)"
+        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
+        "recurring":"true"
     },
     {
         "status" : "",
@@ -13,7 +14,8 @@
         "description": "Clean All Shelves in Diamond Section",
         "user": "Janki-JP",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)"
+        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
+        "recurring":"false"
     },
     {
         "status" : "",
@@ -21,7 +23,8 @@
         "description": "Clean All Shelves in Kiosk Section",
         "user": "Mina-MC",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)"
+        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
+        "recurring":"false"
     },
     {
         "status" : "",
@@ -29,7 +32,8 @@
         "description": "Clean All Shelves in Gold Section",
         "user": "Heena-HD",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)"
+        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
+        "recurring":"false"
     },
     {
         "status" : "",
@@ -37,6 +41,7 @@
         "description": "Clean All Shelves in Diamond Kiosk Section",
         "user": "Sushma-SP",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)"
+        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
+        "recurring":"false"
     }
 ]

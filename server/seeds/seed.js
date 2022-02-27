@@ -34,6 +34,8 @@ connection.once('open', async() => {
         user: UserId,
         dueDate: taskSeeds[i].dueDate,
         createDate: taskSeeds[i].createDate,
+        recurring: taskSeeds[i].recurring,
+
 
       };
       console.log(task);

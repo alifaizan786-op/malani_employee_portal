@@ -10,6 +10,9 @@ const resolvers = {
         userId : async (parent, args, context) =>{
             return await User.findOne({_id: context.user._id}); //user by id
         },
+        userActive : async()=>{
+             return await User.find({active:true})   
+        },
         tasks : async () => {
             return await Task.find({}).populate('user');//find all task
         },
@@ -30,23 +33,23 @@ const resolvers = {
     },
 
     Mutation : {
-        addTask : async(parent,{title,description,employeeId,dueDate,recurring})=>{
+        addTask : async(parent,{title,description,employeeObjId,dueDate,recurring,renewIn})=>{
             // ({_id: this._Userid} = await User.findOne({employeeId:employeeid}));
             // const userId = this._Userid;
-
+            console.log(title,description);
             const newTask = await Task.create({
                 title : title,
                 description : description,
-                user : employeeId,
+                user : employeeObjId,
                 dueDate : dueDate,
-                createDate : createDate,
-                recurring : recurring
+                recurring : recurring,
+                renewIn : renewIn
             })
 
             return newTask
         },
-        updateTask : async(parent,{status,title,description,_id,dueDate,recurring})=>{
-            const editTask = await Task.findOneAndUpdate({_id},{status,title,description,_id,dueDate,recurring},{new:true})
+        updateTask : async(parent,{status,title,description,_id,dueDate,recurring,renewIn})=>{
+            const editTask = await Task.findOneAndUpdate({_id},{status,title,description,_id,dueDate,recurring,renewIn},{new:true})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{

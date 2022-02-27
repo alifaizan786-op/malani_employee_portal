@@ -20,7 +20,8 @@ const typeDefs = gql`
         user : User
         dueDate : String  
         createDate : String
-        recurring : String
+        recurring : Boolean
+        renewIn : Int
     } 
 
     type Quotes {
@@ -48,15 +49,17 @@ const typeDefs = gql`
         userId(userId: ID) : User
         taskUId(taskUId: ID) : Task  
         reviewUId(managerUId : ID, employeeUId : ID) : Review
+        userActive : [User]
     }
 
     type Mutation{
         addTask(
             title :String, 
             description :String, 
-            employeeId :ID, 
+            employeeObjId :ID, 
             dueDate :String, 
-            recuuring :String  ) : Task
+            reccuring : Boolean,
+            renewIn : Int  ) : Task
 
         updateTask( 
             status :String, 
@@ -64,7 +67,8 @@ const typeDefs = gql`
             description :String, 
             _id :ID, 
             dueDate :String, 
-            recuuring :String ) : Task
+            recurring :Boolean,
+            renewIn: Int ) : Task
 
         deleteTask(
             _id : ID ) : Task

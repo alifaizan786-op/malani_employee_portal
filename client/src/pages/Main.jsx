@@ -9,7 +9,8 @@ import Home from "./Home";
 import ViewAllTasks from "./ViewAllTasks";
 import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
-
+import { useQuery } from '@apollo/client';
+import { QUERY_MAIN } from '../utils/queries'
 //From Material UI
 import { Grid } from "@mui/material";
 
@@ -23,6 +24,18 @@ export default function Main() {
   const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
+
+  const { data } = useQuery(QUERY_MAIN)
+
+
+  const user = data?.userId || [];
+  const firstName = user.firstName || ""
+  const lastName = user.lastName || ""
+  const employeeId = user.employeeId || ""
+  const department = user.department || ""
+  const level = user.level || ""
+
+  
   return (
     <Router>
       <Grid container>
@@ -30,17 +43,25 @@ export default function Main() {
           open={handleDrawerOpen}
           close={handleDrawerClose}
           current={draweropen}
+          
         />
         <Grid item sm={2} xs={2}>
           <LeftSideBar
             open={handleDrawerOpen}
             close={handleDrawerClose}
             current={draweropen}
+            firstName={firstName}
+            lastName={lastName}
           />
         </Grid>
       </Grid>
       <Route exact path={"/"}>
-        <Home />
+        <Home 
+          firstName={firstName}
+           lastName={lastName}
+           department={department}
+           level={level}
+           />
       </Route>
       <Route exact path={"/ViewAllTasks"}>
         <ViewAllTasks />
