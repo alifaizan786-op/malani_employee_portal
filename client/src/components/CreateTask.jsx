@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import {CREATE_TASK} from '../utils/mutation'
 
 import {useMutation} from '@apollo/client';
@@ -64,49 +64,49 @@ export default function CreateTask (props){
       setDateValue(newValue);
   };
 
+  const [createTask, {event,data}] = useMutation(CREATE_TASK);
+
     const [formState, setFormState] = React.useState({
-      title:'',
+      title: '',
       description:'',
-      employeeObjId:'',
-      dueDate:dateValue,
-      reccuring:checked,
-      renewIn:'',
-    })
-    
-    const[createTask,{error,data}] = useMutation(CREATE_TASK)
+      user: '',
+      dueDate: `${dateValue}`,
+      recurring: checked,
+      renewIn: ''
 
-    const handleChange =(event) =>{
-      const{name,value} = event.target
+  })
 
-      console.log(event.target.value);
+  const handleChange = (event) => {
+    const { name , value} = event.target
 
-      setFormState({
-        ...formState,
-        [name]:value,
-      });
-    };
+    setFormState({
+      ...formState,
+      [name] : value,
+    });
 
-    const handleFormSubmit = async (event) =>{
-      event.preventDefault();
-   console.log(formState);
-   try {
-     const {data} =await createTask({
-       variable: {...formState},
-     });
-
-   }catch(e){
-     console.error(e);
-   }
-   setFormState({
-     title:'',
-      description:'',
-      employeeObjId:'',
-      dueDate:'',
-      reccuring:'',
-      renewIn:'',
-   })
   }
-    
+
+  const handleFormSubmit = async (event)=>{
+    event.preventDefault()
+
+    try{
+      const{data} = await createTask({
+        variables:{...formState}
+      })
+    } catch(e){
+      console.log(e); 
+
+    }
+    setFormState({
+     title: '',
+      description:'',
+      user: '',
+      dueDate: `${dateValue}`,
+      recurring: checked,
+      renewIn: ''
+    });
+    window.location.assign('/ViewAllTasks');
+  }
 
     function checkChecked(){
         if(checked){
@@ -122,11 +122,11 @@ export default function CreateTask (props){
                         value={formState.renewIn}
                         onChange={handleChange}
                         >
-                        <MenuItem value={'1'}>Daily</MenuItem>
-                        <MenuItem value={'7'}>Weekly</MenuItem>
-                        <MenuItem value={'31'}>Monthly</MenuItem>
-                        <MenuItem value={'183'}>Every 6-Months</MenuItem>
-                        <MenuItem value={'365'}>Yearly</MenuItem>
+                        <MenuItem value={1}>Daily</MenuItem>
+                        <MenuItem value={7}>Weekly</MenuItem>
+                        <MenuItem value={31}>Monthly</MenuItem>
+                        <MenuItem value={183}>Every 6-Months</MenuItem>
+                        <MenuItem value={365}>Yearly</MenuItem>
                     </Select>
                 </FormControl>
             )
@@ -154,12 +154,13 @@ export default function CreateTask (props){
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Status"
-          name="employeeObjId"
-          value={formState.employeeObjId}
+          name="user"
+          value={formState.user}
           onChange={handleChange}
           >
           {props.user.map((employee, index )=>(
-          <MenuItem key={employee._id} value={employee._id}>{employee.employeeId}</MenuItem>
+          <MenuItem key={employee._id} 
+          value={employee._id}>{employee.employeeId}</MenuItem>
           ))}
         </Select>
           </FormControl>

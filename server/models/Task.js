@@ -30,8 +30,7 @@ const taskSchema = new Schema({
     },
     recurring:{
         type:Boolean,
-        require:true,
-        
+        require:true,  
     },
     renewIn:{
         type:Number,

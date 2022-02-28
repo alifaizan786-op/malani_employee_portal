@@ -54,11 +54,11 @@ const typeDefs = gql`
 
     type Mutation{
         addTask(
-            title :String, 
-            description :String, 
-            employeeObjId :ID, 
-            dueDate :String, 
-            reccuring : Boolean,
+            title :String!, 
+            description :String!, 
+            user :ID!, 
+            dueDate :String!, 
+            recurring : Boolean!,
             renewIn : Int  ) : Task
 
         updateTask( 
