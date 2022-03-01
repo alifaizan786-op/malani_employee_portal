@@ -15,8 +15,9 @@ const resolvers = {
         },
         tasks : async () => {
             return await Task.find({}).populate('user');//find all task
-        },
-        //taskUID = Task by User id
+        },//taskUID = Task by User id
+
+        
         taskUId : async (parent, {taskUId}) => {
             return await Task.findOne( {user: taskUId } ).populate('user');
         },
@@ -33,14 +34,13 @@ const resolvers = {
     },
 
     Mutation : {
-        addTask : async(parent,{title,description,employeeObjId,dueDate,recurring,renewIn})=>{
-            // ({_id: this._Userid} = await User.findOne({employeeId:employeeid}));
-            // const userId = this._Userid;
+        addTask : async(parent,{title,description,user,dueDate,recurring,renewIn})=>{
+           
             console.log(title,description);
             const newTask = await Task.create({
                 title : title,
                 description : description,
-                user : employeeObjId,
+                user : user,
                 dueDate : dueDate,
                 recurring : recurring,
                 renewIn : renewIn

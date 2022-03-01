@@ -75,7 +75,7 @@ export default function CreateTask (props){
       renewIn: ''
 
   })
-
+  console.log(useState);
   const handleChange = (event) => {
     const { name , value} = event.target
 
@@ -97,14 +97,7 @@ export default function CreateTask (props){
       console.log(e); 
 
     }
-    setFormState({
-     title: '',
-      description:'',
-      user: '',
-      dueDate: `${dateValue}`,
-      recurring: checked,
-      renewIn: ''
-    });
+  
     window.location.assign('/ViewAllTasks');
   }
 
