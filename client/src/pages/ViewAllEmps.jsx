@@ -73,8 +73,6 @@ export default function ViewAllEmps() {;
       ))}
       
       
-      
-
       <Button
         type="submit"
         fullWidth
@@ -95,7 +93,7 @@ export default function ViewAllEmps() {;
         }}>
         Create Employee
       </Button>
-
+        
       <CreateEmployee  modalState={createEmp} modalClose={handlecreateEmpClose}/>
 
       <Typography

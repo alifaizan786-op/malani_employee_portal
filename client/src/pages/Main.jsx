@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import Header from "../components/Header";
 import LeftSideBar from "../components/LeftSideBar";
-
 import Home from "./Home";
 import ViewAllTasks from "./ViewAllTasks";
 import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
 import { useQuery } from '@apollo/client';
-import { QUERY_MAIN } from '../utils/queries'
+import { QUERY_MAIN } from '../utils/queries';
+
 //From Material UI
 import { Grid } from "@mui/material";
 
@@ -52,6 +52,8 @@ export default function Main() {
             current={draweropen}
             firstName={firstName}
             lastName={lastName}
+            level={level}
+            employeeId ={employeeId}
           />
         </Grid>
       </Grid>
@@ -64,10 +66,12 @@ export default function Main() {
            />
       </Route>
       <Route exact path={"/ViewAllTasks"}>
-        <ViewAllTasks />
+        <ViewAllTasks
+        level={level}
+         />
       </Route>
       <Route exact path={"/ViewAllEmps"}>
-        <ViewAllEmps />
+        <ViewAllEmps/>
       </Route>
       <Route exact path={"/Settings"}>
         <SettingsPage />
