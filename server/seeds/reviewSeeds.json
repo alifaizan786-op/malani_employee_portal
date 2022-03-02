@@ -1,17 +1,17 @@
 [
     {
-        "manager": "Aliammar-AR",
-        "employee": "Janki-JP",
+        "manager": "aliammar-ar",
+        "employee": "janki-jp",
         "month": "Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "review":"Good"
     },{
-        "manager": "Uzair-UM",
-        "employee": "Lubna-LU",
+        "manager": "uzair-um",
+        "employee": "lubna-lu",
         "month": "Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "review":"bad"
     },{
-        "manager": "Iqbal-IK",
-        "employee": "Shahmeer-SD",
+        "manager": "iqbal-ik",
+        "employee": "shahmeer-sd",
         "month": "Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "review":"keep it up"
     }

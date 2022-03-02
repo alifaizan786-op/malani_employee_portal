@@ -28,7 +28,6 @@ query alltask {
   tasks {
     _id
     status
-    title
     description
     user {
       _id

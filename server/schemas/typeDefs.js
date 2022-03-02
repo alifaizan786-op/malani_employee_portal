@@ -15,7 +15,6 @@ const typeDefs = gql`
     type Task {
         _id : ID
         status : String
-        title : String
         description : String
         user : User
         dueDate : String  
@@ -54,7 +53,6 @@ const typeDefs = gql`
 
     type Mutation{
         addTask(
-            title :String!, 
             description :String!, 
             user :ID!, 
             dueDate :String!, 
@@ -62,8 +60,7 @@ const typeDefs = gql`
             renewIn : Int  ) : Task
 
         updateTask( 
-            status :String, 
-            title :String, 
+            status :String,  
             description :String, 
             _id :ID, 
             dueDate :String, 

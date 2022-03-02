@@ -34,11 +34,9 @@ const resolvers = {
     },
 
     Mutation : {
-        addTask : async(parent,{title,description,user,dueDate,recurring,renewIn})=>{
+        addTask : async(parent,{description,user,dueDate,recurring,renewIn})=>{
            
-            console.log(title,description);
             const newTask = await Task.create({
-                title : title,
                 description : description,
                 user : user,
                 dueDate : dueDate,
@@ -48,8 +46,8 @@ const resolvers = {
 
             return newTask
         },
-        updateTask : async(parent,{status,title,description,_id,dueDate,recurring,renewIn})=>{
-            const editTask = await Task.findOneAndUpdate({_id},{status,title,description,_id,dueDate,recurring,renewIn},{new:true})
+        updateTask : async(parent,{status,description,_id,dueDate,recurring,renewIn})=>{
+            const editTask = await Task.findOneAndUpdate({_id},{status,description,_id,dueDate,recurring,renewIn},{new:true})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{

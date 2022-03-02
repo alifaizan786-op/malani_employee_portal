@@ -64,7 +64,6 @@ export default function CreateTask (props){
   const [createTask, {event,data}] = useMutation(CREATE_TASK);
 
     const [formState, setFormState] = React.useState({
-      title: '',
       description:'',
       user: '',
       dueDate: `${dateValue}`,
@@ -167,17 +166,6 @@ export default function CreateTask (props){
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-            </FormControl>
-
-            <FormControl variant="standard">
-              <TextField
-                label="Title"
-                id="outlined-size-medium"
-                size="medium"
-                name="title"
-                value={formState.title}
-                onChange={handleChange}
-              />
             </FormControl>
 
             <FormControl>

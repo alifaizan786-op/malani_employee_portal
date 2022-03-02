@@ -29,7 +29,6 @@ connection.once('open', async() => {
       const UserId = this._User;
 
       const task = {
-        title : taskSeeds[i].title,
         description: taskSeeds[i].description,
         user: UserId,
         dueDate: taskSeeds[i].dueDate,

@@ -7,10 +7,7 @@ const taskSchema = new Schema({
         require:true,
         default:"pending"
     },
-    title:{
-        type:String,
-        require:true,
-    },
+
     description:{
         type:String,
         require:true,

@@ -140,15 +140,6 @@ export default function TaskCard(props) {
           {props.firstName} {props.lastName}
         </Typography>
         <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.title}
-        </Typography>
-        <Typography
           variant="h6"
           sx={{
             fontFamily: "Baskervville",
@@ -232,15 +223,6 @@ export default function TaskCard(props) {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
-          </FormControl>
-
-          <FormControl variant="standard">
-            <TextField
-              label="Title"
-              id="outlined-size-medium"
-              defaultValue={props.title}
-              size="medium"
-            />
           </FormControl>
 
           <FormControl>

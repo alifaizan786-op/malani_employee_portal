@@ -3,9 +3,8 @@
         "status" : "",
         "title" : "Deep Cleaning",
         "description": "Clean All Shelves in Antiques Section",
-        "user": "Alisha-AP",
+        "user": "alisha-ap",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "recurring":"true"
         
     },
@@ -13,36 +12,32 @@
         "status" : "",
         "title" : "Deep Cleaning",
         "description": "Clean All Shelves in Diamond Section",
-        "user": "Janki-JP",
+        "user": "janki-jp",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "recurring":"false"
     },
     {
         "status" : "",
         "title" : "Deep Cleaning",
         "description": "Clean All Shelves in Kiosk Section",
-        "user": "Mina-MC",
+        "user": "mina-mc",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "recurring":"false"
     },
     {
         "status" : "",
         "title" : "Deep Cleaning",
         "description": "Clean All Shelves in Gold Section",
-        "user": "Heena-HD",
+        "user": "heena-hd",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "recurring":"false"
     },
     {
         "status" : "",
         "title" : "Deep Cleaning",
         "description": "Clean All Shelves in Diamond Kiosk Section",
-        "user": "Sushma-SP",
+        "user": "sushma-sp",
         "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "createDate":"Mon Aug 15 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
         "recurring":"false"
     }
 ]

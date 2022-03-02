@@ -23,7 +23,6 @@ mutation login($employeeId:String!, $password:String!){
 
 export const CREATE_TASK = gql`
 mutation createTask(
-  $title: String!,
   $description: String!,
   $user: ID!,
   $dueDate: String!,
@@ -31,14 +30,13 @@ mutation createTask(
   $renewIn: Int,
 ) {
   addTask(
-    title: $title
     description: $description
     user: $user
     dueDate: $dueDate
     recurring: $recurring
     renewIn: $renewIn
   ) {
-    title
+    description
   }
 }`
 export const CHANGE_QUOTE = gql`

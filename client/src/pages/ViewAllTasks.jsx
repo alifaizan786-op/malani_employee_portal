@@ -133,7 +133,6 @@ export default function ViewAllTasks() {
           key={tasksobj._id}
           taskId={tasksobj._id}
           status={tasksobj.status}
-          title={tasksobj.title}
           desc={tasksobj.description}
           dueDate={tasksobj.dueDate}
           firstName={tasksobj.user.firstName}
