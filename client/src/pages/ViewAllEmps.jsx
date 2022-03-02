@@ -9,6 +9,9 @@ import {
   Button,
 } from "@mui/material";
 
+import { useQuery } from '@apollo/client';
+import { QUERY_ALLEMPS } from '../utils/queries'
+
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -39,6 +42,11 @@ export default function ViewAllEmps() {;
 
   const handlecreateEmpClose = () => setCreateEmp(false);
 
+  const {data, loading} = useQuery(QUERY_ALLEMPS)
+
+  const user = data?.users || [];
+
+
 
   return (
     <Grid
@@ -51,14 +59,21 @@ export default function ViewAllEmps() {;
         display: "flex",
         flexFlow: "wrap",
       }}>
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
-      <EmployeeCard />
+
+      {user.map((userobj, index) => (
+          <EmployeeCard 
+          key={userobj._id}
+          _id={userobj._id}
+          department={userobj.department}
+          firstName={userobj.firstName}
+          lastName={userobj.lastName}
+          employeeId={userobj.employeeId}
+          level={userobj.level}
+          />
+      ))}
+      
+      
+      
 
       <Button
         type="submit"

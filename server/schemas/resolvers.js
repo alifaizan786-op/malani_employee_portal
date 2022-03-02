@@ -15,11 +15,9 @@ const resolvers = {
         },
         tasks : async () => {
             return await Task.find({}).populate('user').sort({ status: 1 });//find all task
-        },//taskUID = Task by User id
-
-        
+        },
         taskUId : async (parent, {taskUId}) => {
-            return await Task.findOne( {user: taskUId } ).populate('user');
+            return await Task.find( {user: taskUId } ).populate('user');
         },
         quotes : async () => {
             return await Quotes.find({});// all quotes
@@ -27,10 +25,13 @@ const resolvers = {
         reviews : async () => {
             return await Review.find({}).populate('manager').populate('employee'); // all review
         },
-        //taskUID = Review by User id
         reviewUId : async(parent,{managerUId,employeeUId})=>{
             return await Review.findOne({manager:managerUId,employee:employeeUId}).populate('manager').populate('employee');
-        }      
+        },
+        taskByEmp : async(parent,{emp}) =>{
+            console.log(emp);
+            return await Task.find({user:emp});
+        }
     },
 
     Mutation : {

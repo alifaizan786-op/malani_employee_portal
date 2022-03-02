@@ -49,6 +49,7 @@ const typeDefs = gql`
         taskUId(taskUId: ID) : Task  
         reviewUId(managerUId : ID, employeeUId : ID) : Review
         userActive : [User]
+        taskByEmp(emp:ID) : [Task]
     }
 
     type Mutation{
