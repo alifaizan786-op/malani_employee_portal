@@ -6,7 +6,7 @@
         "department":"Sales",
         "level":"1",
         "password":"alisha-ap",
-        "active":"true"       
+        "active":true       
     },
       {
         "firstName":"Janki",
@@ -15,7 +15,7 @@
         "department":"Sales",
         "level":"1",
         "password":"janki-jp",
-        "active":"true"             
+        "active":true             
     },
       {
         "firstName":"Mina",
@@ -24,7 +24,7 @@
         "department":"Sales",
         "level":"1",
         "password":"mina-mc",
-        "active":"true"              
+        "active":true              
     },
       {
         "firstName":"Neelima",
@@ -33,7 +33,7 @@
         "department":"Sales",
         "level":"1",
         "password":"neelima-nk",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Heena",
@@ -42,7 +42,7 @@
         "department":"Sales",
         "level":"1",
         "password":"heena-hd",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Sushma",
@@ -51,7 +51,7 @@
         "department":"Sales",
         "level":"1",
         "password":"sushma-sp",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Shamsha",
@@ -60,7 +60,16 @@
         "department":"Sales",
         "level":"1",
         "password":"shamsha-sc",
-        "active":"true"              
+        "active":true              
+    },
+    {
+        "firstName":"Brandon",
+        "lastName":"Perry",
+        "employeeId":"brandon-bp",
+        "department":"Internet",
+        "level":"1",
+        "password":"brandon-bp",
+        "active":true              
     },
     {
         "firstName":"Zoya",
@@ -69,7 +78,7 @@
         "department":"Sales",
         "level":"1",
         "password":"zoya-zr",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Amreen",
@@ -78,7 +87,7 @@
         "department":"Tagging",
         "level":"1",
         "password":"amreen-am",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Sara",
@@ -87,7 +96,7 @@
         "department":"Tagging",
         "level":"1",
         "password":"sara-sa",
-        "active":"true"              
+        "active":true              
     },
     {
         "firstName":"Kinjal",
@@ -96,7 +105,7 @@
         "department":"Tagging",
         "level":"1",
         "password":"kinjal-kb",
-        "active":"true"              
+        "active":true              
     },
      {
         "firstName":"Suresh",
@@ -105,7 +114,7 @@
         "department":"Tagging",
         "level":"1",
         "password":"suresh-su",
-        "active":"true"              
+        "active":true              
     },
      {
         "firstName":"Shahmeer",
@@ -114,7 +123,7 @@
         "department":"Internet",
         "level":"1",
         "password":"shahmeer-sd",
-        "active":"true"              
+        "active":true              
     },
      {
         "firstName":"Faizan",
@@ -123,7 +132,7 @@
         "department":"Internet",
         "level":"1",
         "password":"faizan-fa",
-        "active":"true"              
+        "active":true              
     },
      {
         "firstName":"Lubna",
@@ -132,7 +141,7 @@
         "department":"Internet",
         "level":"1",
         "password":"lubna-lu",
-        "active":"true"              
+        "active":true              
     }, 
      {
         "firstName":"Aliammar",
@@ -141,7 +150,7 @@
         "department":"Executive",
         "level":"2",
         "password":"aliammar-ar",
-        "active":"true"              
+        "active":true              
     }, 
      {
         "firstName":"Uzair",
@@ -150,7 +159,7 @@
         "department":"Executive",
         "level":"2",
         "password":"uzair-um",
-        "active":"true"              
+        "active":true              
     }, 
      {
         "firstName":"Iqbal",
@@ -159,7 +168,7 @@
         "department":"Executive",
         "level":"2",
         "password":"iqbal-ik",
-        "active":"true"              
+        "active":true              
     }, 
      {
         "firstName":"Zanir",
@@ -168,7 +177,7 @@
         "department":"Executive",
         "level":"2",
         "password":"zanir-zm",
-        "active":"true"             
+        "active":true             
     }, 
      {
         "firstName":"Shermyn",
@@ -177,7 +186,7 @@
         "department":"Executive",
         "level":"2",
         "password":"shermyn-sm",
-        "active":"true"              
+        "active":true              
     }, 
      {
         "firstName":"Hiren",
@@ -186,7 +195,7 @@
         "department":"Executive",
         "level":"2",
         "password":"hiren-hs",
-        "active":"true"              
+        "active":true              
     }
   
      

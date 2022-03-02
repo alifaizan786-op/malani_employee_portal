@@ -149,7 +149,7 @@ export default function SettingsPage () {
               color: "primary",
               textAlign: "center",
               fontSize: "13px",
-              position: 'absolute',
+              position: 'fixed',
               bottom: '5px',
               width: '80%'
             }}>

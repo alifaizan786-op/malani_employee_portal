@@ -20,6 +20,8 @@ import { DateTimePicker, LocalizationProvider } from "@mui/lab";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
+const dateFormat = require('../utils/dateFormat');
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -39,7 +41,9 @@ const style = {
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
+
 export default function TaskCard(props) {
+
   const [editModal, setEditModal] = React.useState(false);
 
   const handleEditModalOpen = () => setEditModal(true);
@@ -59,6 +63,9 @@ export default function TaskCard(props) {
         minWidth: "300px",
         maxWidth: "300px",
         margin: "25px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
       };
       return style;
     } else if (props.status.toLowerCase() === "pending") {
@@ -67,6 +74,9 @@ export default function TaskCard(props) {
         minWidth: "300px",
         maxWidth: "300px",
         margin: "25px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
       };
       return style;
     } else {
@@ -75,6 +85,9 @@ export default function TaskCard(props) {
         minWidth: "300px",
         maxWidth: "300px",
         margin: "25px",
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
       };
       return style;
     }
@@ -109,6 +122,8 @@ export default function TaskCard(props) {
         )
     }
 }
+ 
+
 
   return (
     <>
@@ -146,7 +161,7 @@ export default function TaskCard(props) {
             textAlign: "center",
             marginY: "5px",
           }}>
-          {props.dueDate}
+          {dateFormat(parseInt(props.dueDate))}
         </Typography>
         <Typography
           variant="h6"

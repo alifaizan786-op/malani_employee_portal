@@ -10,7 +10,9 @@ connection.on('error', (err) => err);
 connection.once('open', async() => {
     console.log('connected');
     try{
-    await User.deleteMany({})//User
+
+    //----------------------Seeding Users----------------------
+    await User.deleteMany({})
 
     console.log('=========Collections Emptied================');
 
@@ -20,7 +22,8 @@ connection.once('open', async() => {
 
     console.info('================Users Seeded================');
 
-    await Task.deleteMany({})//Task
+    //----------------------Seeding Tasks----------------------
+    await Task.deleteMany({})
 
     console.log('=========Collections Emptied================');
    
@@ -28,14 +31,19 @@ connection.once('open', async() => {
       ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
       const UserId = this._User;
 
+      const today = new Date()
+      const todayunix = Date.parse(today)
+      const dueInDays = 86400000 * taskSeeds[i].renewIn
+      const calcDueDate = dueInDays + todayunix
+
+
+
       const task = {
         description: taskSeeds[i].description,
         user: UserId,
-        dueDate: taskSeeds[i].dueDate,
-        createDate: taskSeeds[i].createDate,
+        dueDate: new Date(calcDueDate),
         recurring: taskSeeds[i].recurring,
-
-
+        renewIn:taskSeeds[i].renewIn
       };
       console.log(task);
 
@@ -43,7 +51,8 @@ connection.once('open', async() => {
     }
     console.info('================Task Seeded================');
 
-    await Review.deleteMany({})//Delete
+    //----------------------Seeding Reviews----------------------
+    await Review.deleteMany({})
 
     console.log('=========Collections Emptied================');
 
@@ -67,7 +76,8 @@ connection.once('open', async() => {
     }
     console.info('================Review Seeded================');
     
-    await Quotes.deleteMany({});//Quotes
+    //----------------------Seeding Quotes----------------------
+    await Quotes.deleteMany({});
 
     console.log('=========Collections Emptied================');
 

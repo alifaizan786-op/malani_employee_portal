@@ -1,43 +1,1465 @@
 [
     {
-        "status" : "",
-        "title" : "Deep Cleaning",
-        "description": "Clean All Shelves in Antiques Section",
-        "user": "alisha-ap",
-        "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "recurring":"true"
-        
+      "description": "Checking Of Open Paper Tray And Merchandise Display Trays All Sections Except On Wednesday",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
     },
     {
-        "status" : "",
-        "title" : "Deep Cleaning",
-        "description": "Clean All Shelves in Diamond Section",
-        "user": "janki-jp",
-        "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "recurring":"false"
+      "description": "Checking For Clients Information Cards",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
     },
     {
-        "status" : "",
-        "title" : "Deep Cleaning",
-        "description": "Clean All Shelves in Kiosk Section",
-        "user": "mina-mc",
-        "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "recurring":"false"
+      "description": "Checking Of Gold Section - Missing Stones, Bend Bangles/ Bracelet, Chain Locks, Earring Screw",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
     },
     {
-        "status" : "",
-        "title" : "Deep Cleaning",
-        "description": "Clean All Shelves in Gold Section",
-        "user": "heena-hd",
-        "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "recurring":"false"
+      "description": "Earings Properly Fixed On Display",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
     },
     {
-        "status" : "",
-        "title" : "Deep Cleaning",
-        "description": "Clean All Shelves in Diamond Kiosk Section",
-        "user": "sushma-sp",
-        "dueDate":"Mon Aug 18 2014 21:11:54 GMT+0500 (Pakistan Standard Time)",
-        "recurring":"false"
+      "description": "Counters And Walls Displayed By Size, Pattern And Series",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "In Free Time Help In Tagging Office",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "All Price Tags Kept Unseen On Display",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Monthly Deep Clean Display",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Wednesday Cleaning Of Lunch Room And Restroom",
+      "user": "alisha-ap",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Match The Weight Check Of Each Shippment",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Separate According To Stores",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Distribution Of All Orders Received",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Once A Week Give Refill To The Department Heads",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Bagging All The Distributed Order And Place In Individual Store Box",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Conference Room Clean-Up",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Keeping A Tab Of Online Customer Request",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Checking Emails On Daily Basis",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Daily Vendor Selection",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check The Base Limits For Ordering",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Ensuring The Order Is Received As It Was Placed",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Quality Check Of Jwelery Post The Order Is Received",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Report The Defects For All The Orders",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Stamping All The Orders, Save Screenshots",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Edit Necessary Changes In Orders For All 3 Stores",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Interstore Rotation",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Update Base For Atl & Tampa Every 3 Months",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Help Tagging When Needed",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Clicking Pitures And Transfering Them To Vjs",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Transfer Invertory When Needed",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Check For Short And Over Styles To Rotate Between Stores",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Once A Week Find The Dead Inventory Items And Notify Online Head For Sales",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Once A Week Send Tampa Selection From Atlanta And Ws",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Reordering Best Sellers Based On Sales",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Once A Week Collect The List Of Missing Items From Section Leader",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Special Order Placement And Follow Up With Vendors",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Call Client For Special Order Update, Modification And Pick Up",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Layaway Order Pick-Up",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Check Tampa Shortages And Send Merchandise",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Make Repeat Orders",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Personal Calls To Client'S For New Merchandise",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sales On Weekend",
+      "user": "amreen-am",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Rename Multiple Items",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Setup Jewelry",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Photograph Jewelry",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Photo Stack Photos Intoone Image",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Size Jewelry",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Retieve Jewelry From Showroom/Wholesale",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check Jewelry For Defects Or Needed Repairs",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Send Daily Reports",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Clean Jewelry Of Any Residue From Propping Up For Images",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check New Arrivals For Missing Images",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Clean And Sanatize Work Area",
+      "user": "brandon-bp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Ordering & Managing Jewelry Display",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 365
+    },
+    {
+      "description": "Find New And Better Suppliers And Boxes",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 365
+    },
+    {
+      "description": "Check Website For Missing Styles",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Providing Maketing Material (Markting Kit)",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Website Uploading",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Managing Editing Team",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Managing Photography Team",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Managing Uploading Team",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cordinating With Jharna Regarding Cc Requirments",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Corrections",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Taking Care Of Dal & Tpa Tech Needs",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Taking Care Of Dal & Tpa Supplies Need",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Ordering And Managing Jewelry Boxes",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Organizing And Keeping Track Of Atl Ws (With St And Rafael)",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Website Inv Management (Looking For Missing Styles, Major Codes, Types On The Website / Adding 2Y+ Inv For Deals Sections)",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Website Management",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Creative Set Review",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sales When Needed",
+      "user": "faizan-fa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Gold Jewelry Refill",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Boxes Refill - Yuesday And Friday",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Opening/Closing Gold Section",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Glass Plus",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Checking Trays",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Re-Arange The Display Properly",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cleaning Gold Section",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check Back Screw And Damages Check Missing Stone, Gold Balls Etc",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Sales",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Take Google Reviews",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Assist Internet Department In Packing When Ever Required",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Back Up Sushma For Inventry In Her Absence",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Kitchen Cleaning Every Tuesday",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Clean Displays",
+      "user": "heena-hd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Deep Cleaning Diamond Section",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 60
+    },
+    {
+      "description": "Inventory Refill & Count",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Organizing Displays In The Counter",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Arrange The Trays Under The  Counter",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "After Displaying Jewelry Making Sure Its Presentable",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Refilling Ziplog Bags And Organizing",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Section Display Change",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Solitaire Diamond Rings Arrangement",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Cleaning Trays",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 4
+    },
+    {
+      "description": "Checking For Missing Stones",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Client Follow-Ups",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Dusting Displays In Use",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Check Earnings Screws",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Qc Jewelry",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Checking Tags With Weight",
+      "user": "janki-jp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Clc Items/ Melting Considering The Time Frame",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Tagging Of Jewelry",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Inventory Repricing",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Inter Store Transfers",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Picture Transfers",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Refilling To Section In Charges",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Office Safe Maintainance",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "New Jewelry Arrival Organizing",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Solving Inventory Issues",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Ws Inventory Every Three Months",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 92
+    },
+    {
+      "description": "Area Cleaning",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sales",
+      "user": "kinjal-kb",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Pull Items From Atl",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Shipping",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Packing",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Labeling",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Answering The Calls If Required (Landline)",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Co-Ordinate With India Team Regarding Sales",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Giving Answer To Client Via Whats Up & Text Msgs (By Office Phone) Regarding Sales Or Items Inquiry",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cleaning Internet Area",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Reviewing Our Website",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Taking Videos & Pictures For Client",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Refilling Boxes & Gifts",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Taking Clients (If Required)",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Manage Supply Chain (Office Supplies)",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Order Office Supplies As Per Requirement From Different Website",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Putting Supplies In Correct Place",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sizing Of Jewelry",
+      "user": "lubna-lu",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Tagging",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Taking Pictures For Vjs",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cost Writing",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Pull Up Internet Items",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Update Inventory Sheets For Wholesale Items",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Sales",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sizing For Internet Items",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Follow-Ups On Layawa/Special Order Calls",
+      "user": "sara-sa",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Create Shopping Cart Follow Up List For India Team Twice Monthly",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 14
+    },
+    {
+      "description": "Handle Upset Clients From India Team Or Any Client That Calls The Atl Showroom After Informing Zm",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 4
+    },
+    {
+      "description": "Check Each Category On Website To Find What Types Of Pieces Are Needed (Antique, Yellow, Gem, Diamond)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 4
+    },
+    {
+      "description": "Opening (Pull Carts And Set Display)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Respond To All Emails From Clients And Inquries From Website",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Pull Leads From Inquries Sent To Email",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Distribute Leads Among Vk And Sg",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Provide Pricing And Sale Assistance To India Team",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Provide Pictures, Videos, And Measurmenets Of Pieces To India Team To Be Passed On To Client Or For Client Directly",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Coordinate Various Aspects Of Online Sales With Dal And Tpa Team Not Limited Only To Shipping",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Using Malani Cell Phone To Handle Video Calls (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Pick Up Phone Calls As Required",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Closing (Pull Carts And Go To Wherever Needed)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check Floor Before Closing Safes",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Set Safes (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Close Safes (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Print Orders (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Pulling Items From Showroom To Be Shipped (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Making Shipping Labels (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Packing Orders (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Count Packages And Print Daily Fedex Sheet (When Required)",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Find Inventory That Newly Qualifies For Deals Categories Each Month",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Check Uploads 1 Month After Pics Taken To Make Sure The Needed Pieces Were Uploaded",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 30
+    },
+    {
+      "description": "Handle All Rma Requests While Passing Appropriate Info To Zm",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Get Quotes For Custom Orders From Hs And Deliver To Client Through Email",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Rotate Inventory In Online Deals Category",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Rotate Inventory In Daily Deals Category",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Reduce Prices For Deals Pieces If Not Rotated Out",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Coordinate With Fa To Get Pics Taken Of The Needed Pieces And Uploaded",
+      "user": "shahmeer-sd",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Opening And Closing",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Glass Plus Cleaning",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check The Displays In Atq Section",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check The Trays",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Refill And Display Jewelry In Atq Section",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Taking Google Reviews",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Check The Section Thoroughly After Closing",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Counting Inventory Of The Atq Section",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Put Back The Unused Displays Properly",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cleaning Duty On Thursday",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Cleaning The Trays Once A Week",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Check For Missing Stones And Screws, Bent Posts, Damages, Etc.",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Helping In Tagging Office",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Cleaning The Displays",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Follow Up For Special Orders",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Refilling The Boxes On Tuesday And Friday",
+      "user": "shamsha-sc",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Opening And Closing",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Glass Cleaning",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Tagging",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Photography",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Assembly",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Bagging",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Photo Transfer",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Quality Check",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Missing Stone Check",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Jewelry Backchain Attachment",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Diamond Adding Monogram",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Jewelry Cleaning",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Quick Jewelry Repair",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Jewelry Sales",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Sales Support",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Google Review Request",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Packing Material Support",
+      "user": "suresh-su",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Refill Inventory",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Arrange The Gold Kiosk Section Daily",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Qc Section: Check Locks On Chains, Bends, Damages, Missing Stones, Damaged Earrings, Missing Findings.",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Earring Screws Check",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Counting Inventory",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Glass Plus",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 1
+    },
+    {
+      "description": "Cleaning",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Clean Trays And Displays",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Box Refills",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Cleaning, Sorting, And Re-Arranging Displays",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Tagging Office As Needed",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
+    },
+    {
+      "description": "Special Order Follow-Up",
+      "user": "sushma-sp",
+      "dueDate": "",
+      "recurring": true,
+      "renewIn": 7
     }
-]
+  ]

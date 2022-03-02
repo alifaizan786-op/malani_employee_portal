@@ -71,7 +71,7 @@ export default function CreateTask (props){
       renewIn: ''
 
   })
-  console.log(useState);
+
   const handleChange = (event) => {
     const { name , value} = event.target
 
