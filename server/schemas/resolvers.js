@@ -14,7 +14,7 @@ const resolvers = {
              return await User.find({active:true})   
         },
         tasks : async () => {
-            return await Task.find({}).populate('user');//find all task
+            return await Task.find({}).populate('user').sort({ status: 1 });//find all task
         },//taskUID = Task by User id
 
         
