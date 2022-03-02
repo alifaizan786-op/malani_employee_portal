@@ -18,13 +18,15 @@ import {
 
 import AddIcon from '@mui/icons-material/Add';
 
+import CircularProgress from '@mui/material/CircularProgress';
+
 import CreateTask from "../components/CreateTask";
 
 
 export default function ViewAllTasks() {
 
  
-  const { data } = useQuery(QUERY_ALLTASKS)
+  const { loading , data } = useQuery(QUERY_ALLTASKS)
 
   const tasks = data?.tasks || [];
 
@@ -128,18 +130,23 @@ export default function ViewAllTasks() {
         </Button>
       </FormControl>
 
-      {filters(employeeId, status).map((tasksobj, index) => (
-        <TaskCard
-          key={tasksobj._id}
-          taskId={tasksobj._id}
-          status={tasksobj.status}
-          desc={tasksobj.description}
-          dueDate={tasksobj.dueDate}
-          firstName={tasksobj.user.firstName}
-          lastName={tasksobj.user.lastName}
-          employeeId={tasksobj.user.employeeId}
-        />
-      ))}
+      {loading ? (
+         <CircularProgress />
+      ) : (
+        filters(employeeId, status).map((tasksobj, index) => (
+          <TaskCard
+            key={tasksobj._id}
+            taskId={tasksobj._id}
+            status={tasksobj.status}
+            desc={tasksobj.description}
+            dueDate={tasksobj.dueDate}
+            firstName={tasksobj.user.firstName}
+            lastName={tasksobj.user.lastName}
+            employeeId={tasksobj.user.employeeId}
+          />
+        ))
+      )}
+
       <Button type="submit" fullWidth
         onClick={handleCreateModalOpen}
         variant="contained" endIcon={<AddIcon />} sx={{

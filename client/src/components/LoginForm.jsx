@@ -16,6 +16,7 @@ import {
   Box,
   TextField,
   InputAdornment,
+  FormHelperText,
   IconButton
 } from "@mui/material";
 
@@ -29,7 +30,10 @@ export default function LoginForm() {
     password:''
   })
 
+  const [errorText, setErrorText] = React.useState('')
+
   const[login,{error,data}] = useMutation(USER_LOGIN)
+
 
   const handleChange = (event) =>{
     const{name,value} = event.target
@@ -53,6 +57,7 @@ export default function LoginForm() {
 
     }catch(e){
       console.error(e);
+      setErrorText('Employee Id or password is incorrect')
     }
     setFormState({
       employeeId:'',
@@ -70,11 +75,25 @@ export default function LoginForm() {
     event.preventDefault();
   };
 
-
-  
-
-
-
+  function loginError(){
+    if(errorText){
+      return(
+        <FormHelperText id="component-helper-text" sx={{ 
+          color:'red',   
+          border: 'solid 0.5px',
+          backgroundColor: '#fdbcbc',
+          fontSize:'15px',
+          textAlign: 'center',
+          height: '30px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '14px',}}>
+          {errorText}
+        </FormHelperText>
+      )
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -93,6 +112,7 @@ export default function LoginForm() {
           Sign in
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1, mb: 5 }}>
+          {loginError()}
           <TextField
             margin="normal"
             required

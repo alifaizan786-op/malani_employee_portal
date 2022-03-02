@@ -93,13 +93,13 @@ const resolvers = {
             const user = await User.findOne({employeeId})
 
             if(!user){
-                throw new AuthenticationError('fuck');
+                throw new AuthenticationError('Employee Id is incorrect');
             }
 
             const correctPassword = await user.isCorrectPassword(password)
 
             if(!correctPassword){
-                throw new AuthenticationError('No password found ')
+                throw new AuthenticationError('Password is Incorrect')
             }
 
             const token = signToken(user);
