@@ -12,6 +12,9 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 import EmployeeModal from "./EmployeeModal";
 
+import { useQuery } from '@apollo/client';
+import { QUERY_TASKBYEMP } from '../utils/queries'
+
 const divStyle = {
   display: "flex",
   justifyContent: "space-between",
@@ -28,6 +31,18 @@ export default function EmployeeCard(props) {
   const handleViewModalOpen = () => setViewModal(true);
 
   const handleViewModalClose = () => setViewModal(false);
+
+  const { loading, data } = useQuery(QUERY_TASKBYEMP, {
+    // pass URL parameter
+    variables: { emp: props._id },
+  });
+
+  const tasks = data?.taskByEmp || []
+
+  const pending = tasks.filter((task)=> task.status === 'pending')
+  const submitted = tasks.filter((task)=> task.status === 'submitted')
+  const overdue = tasks.filter((task)=> task.status === 'overdue')  
+
 
   return (
     <>
@@ -65,31 +80,31 @@ export default function EmployeeCard(props) {
             color: "primary.main",
             margin: "auto",
           }}>
-          UM
+          {props.firstName[0]}{props.lastName[0]}
         </Avatar>
         <div style={divStyle}>
           <Typography variant="p">Employee Id</Typography>
-          <Typography variant="p">Faizan-FA</Typography>
+          <Typography variant="p">{props.employeeId}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={divStyle}>
           <Typography variant="p">Tasks Completed</Typography>
-          <Typography variant="p">10</Typography>
+          <Typography variant="p">{submitted.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={divStyle}>
           <Typography variant="p">Tasks Pending</Typography>
-          <Typography variant="p">5</Typography>
+          <Typography variant="p">{pending.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={divStyle}>
           <Typography variant="p">Tasks Overdue</Typography>
-          <Typography variant="p">3</Typography>
+          <Typography variant="p">{overdue.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={divStyle}>
           <Typography variant="p">Tasks Completed YTD</Typography>
-          <Typography variant="p">2</Typography>
+          <Typography variant="p">{tasks.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
       </Card>
@@ -97,6 +112,16 @@ export default function EmployeeCard(props) {
         open={handleViewModalOpen}
         close={handleViewModalClose}
         state={viewModal}
+        fName={props.firstName}
+        lName={props.lastName}
+        empId={props.employeeId}
+        pending={pending.length}
+        overdue={overdue.length}
+        submitted={submitted.length}
+        yTD={tasks.length}
+        _id={props._id}
+        level={props.level}
+
       />
     </>
   );

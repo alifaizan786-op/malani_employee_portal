@@ -75,7 +75,7 @@ export default function EmployeeModal(props) {
                   fontFamily: "Baskervville",
                   color: "primary.main",
                 }}>
-                FA
+                {props.fName[0]}{props.lName[0]}
               </Avatar>
 
               <Typography
@@ -85,7 +85,7 @@ export default function EmployeeModal(props) {
                   textAlign: "center",
                   marginX: "10px",
                 }}>
-                Faizan Ali
+                {props.fName} {props.lName}
               </Typography>
             </Box>
             <Box
@@ -110,7 +110,7 @@ export default function EmployeeModal(props) {
                       size="medium"
                     />
                   ) : (
-                    <Typography variant="p">Faizan-FA</Typography>
+                    <Typography variant="p">{props.empId}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -129,7 +129,7 @@ export default function EmployeeModal(props) {
                       size="medium"
                     />
                   ) : (
-                    <Typography variant="p">Faizan</Typography>
+                    <Typography variant="p">{props.fName}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -148,7 +148,7 @@ export default function EmployeeModal(props) {
                       size="medium"
                     />
                   ) : (
-                    <Typography variant="p">Ali</Typography>
+                    <Typography variant="p">{props.lName}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -165,7 +165,7 @@ export default function EmployeeModal(props) {
                       <MenuItem value={"2"}>2</MenuItem>
                     </Select>
                   ) : (
-                    <Typography variant="p">2</Typography>
+                    <Typography variant="p">{props.level}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -173,22 +173,22 @@ export default function EmployeeModal(props) {
               <Box sx={{ width: "45%" }}>
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Overdue</Typography>
-                  <Typography variant="p">3</Typography>
+                  <Typography variant="p">{props.overdue}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Completed YTD</Typography>
-                  <Typography variant="p">2</Typography>
+                  <Typography variant="p">{props.yTD}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Completed</Typography>
-                  <Typography variant="p">10</Typography>
+                  <Typography variant="p">{props.submitted}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Pending</Typography>
-                  <Typography variant="p">5</Typography>
+                  <Typography variant="p">{props.pending}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
               </Box>

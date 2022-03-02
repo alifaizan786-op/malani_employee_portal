@@ -43,3 +43,28 @@ query alltask {
     
   }
 }`
+
+export const QUERY_ALLEMPS = gql`
+query{
+  users{
+    _id
+    firstName
+    lastName
+    employeeId
+    department
+    level
+  }
+}`
+
+export const QUERY_TASKBYEMP = gql`
+query taskbyuser($emp:ID){
+  taskByEmp(emp:$emp){
+    _id
+    status
+    description
+    dueDate
+    createDate
+    recurring
+    renewIn
+  }
+}`
