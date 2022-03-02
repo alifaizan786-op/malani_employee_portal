@@ -1,6 +1,9 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
-import { QUERY_QUOTE } from '../utils/queries'
+import { QUERY_QUOTE } from '../utils/queries' 
+import {useMutation} from '@apollo/client';
+import {CHANGE_QUOTE} from '../utils/mutation'
+import ChangeQuote from "./changeQuote";
 
 import { 
   Typography, 
@@ -28,13 +31,19 @@ const style = {
   borderRadius: "30px",
 };
 
-
-
 export default function Quote(props) {
 
  const { data } = useQuery(QUERY_QUOTE)
 
  const quote = data?.quotes || [] 
+
+  function getQuoteId(){
+    if(quote[0]){
+      return quote[0]._id
+    }
+  }
+
+
 
   function qouteText(){
     if(quote[0]){
@@ -43,6 +52,19 @@ export default function Quote(props) {
       return 'Loading'
     }
   }
+
+  const [edit, setEdit] = React.useState(false);
+  const [quoteId, setquoteId] = React.useState('');
+
+  const setEditTrue = () => {
+    setEdit(true);
+    setquoteId(getQuoteId())
+  };
+
+  const setEditFalse = () => {
+    setEdit(false);
+  };
+
 
   function checkLevel(){
     if(props.level === 2){
@@ -64,18 +86,6 @@ export default function Quote(props) {
       )
     }
   }
-
-
-
-  const [edit, setEdit] = React.useState(false);
-
-  const setEditTrue = () => {
-    setEdit(true);
-  };
-
-  const setEditFalse = () => {
-    setEdit(false);
-  };
 
   return (
     <div
@@ -103,51 +113,10 @@ export default function Quote(props) {
         {qouteText()}
       </Typography>
       
-
        {checkLevel()}
 
-
-      <Modal open={edit} onClose={setEditFalse}>
-        <Box sx={style}>
-          <Typography
-            variant="h4"
-            sx={{
-              fontFamily: "Baskervville",
-              textAlign: "center",
-              marginY: "5px",
-            }}>
-            Change Quote Of The Day
-          </Typography>
-          <FormControl>
-            <TextField
-              id="outlined-multiline-flexible"
-              sx={{marginTop:'10px', minWidth:'90%'}}
-              label="Description"
-              multiline
-              minRows={4}
-            />
-          </FormControl>
-          <FormControl sx={{flexDirection:'row' ,justifyContent:'center', marginTop:'15px'}}>
-            <Button
-              type="submit"
-              fullWidth
-              onClick={setEditTrue}
-              variant="contained"
-              sx={{
-                fontSize: "20px",
-                bgcolor: "primary.main",
-                color: "primary.light",
-                marginTop:'auto',
-                width: "15%",
-                alignItems:'center',
-                borderRadius: "10px",
-              }}>
-              Save
-            </Button>
-          </FormControl>
-
-        </Box>
-      </Modal>
+        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId}/>
+     
     </div>
   );
 }

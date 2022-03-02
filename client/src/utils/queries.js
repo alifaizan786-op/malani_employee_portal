@@ -18,6 +18,7 @@ query main{
 export const QUERY_QUOTE = gql`
 query quote{
   quotes{
+    _id
     quotes
   }
 }`

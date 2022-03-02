@@ -23,21 +23,32 @@ mutation login($employeeId:String!, $password:String!){
 
 export const CREATE_TASK = gql`
 mutation createTask(
-  $title: String,
-  $description: String,
-  $employeeObjId: ID,
-  $dueDate: String,
-  $reccuring: Boolean,
+  $title: String!,
+  $description: String!,
+  $user: ID!,
+  $dueDate: String!,
+  $recurring: Boolean!,
   $renewIn: Int,
 ) {
   addTask(
     title: $title
     description: $description
-    employeeObjId: $employeeObjId
+    user: $user
     dueDate: $dueDate
-    reccuring: $reccuring
+    recurring: $recurring
     renewIn: $renewIn
   ) {
     title
+  }
+}`
+export const CHANGE_QUOTE = gql`
+mutation changeQuote(
+  $_id:ID, 
+  $quotes:String)
+  {
+  updateQuotes(
+    _id:$_id, 
+    quotes:$quotes){
+    quotes
   }
 }`
