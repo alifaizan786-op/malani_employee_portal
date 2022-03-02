@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/alifaizan786-op/malani_employee_portal/issues"
   },
-  "homepage": "https://github.com/alifaizan786-op/malani_employee_portal#readme",
   "dependencies": {
     "concurrently": "^7.0.0"
   }
