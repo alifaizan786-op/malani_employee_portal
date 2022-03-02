@@ -9,7 +9,7 @@ connection.once('open', async() => {
   console.log('connected');
 
   //await User.deleteMany({})
-  cron.schedule('* * 23 * *', async() => {
+  cron.schedule('* * * 23 * *', async() => {
 
     const today = new Date()
     const todayunix = Date.parse(today)
@@ -28,7 +28,7 @@ connection.once('open', async() => {
   });
 
   //---------------------Set Tasks To Overdue---------------------
-  cron.schedule('* 59 * * *', async() => {
+  cron.schedule('* 59 * * * *', async() => {
 
     const today = new Date()
     const todayunix = Date.parse(today)
