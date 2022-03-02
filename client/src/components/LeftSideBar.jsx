@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Auth from '../utils/auth';
 
 
-
 //From MUI
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
@@ -78,18 +77,52 @@ const closedMixin = (theme) => ({
   },
 });
 
+
+
+
 export default function LeftSideBar(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const classes = useStyles();
-
+  
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
 
+  function checkLevel(){
+    if(props.level === 2){
+     return(
+         <ListItemButton
+            selected={selectedIndex === 2}
+            onClick={(event) => {
+              handleListItemClick(event, 2);
+              window.location.assign("/ViewAllEmps");
+            }}>
+            <ListItemIcon>
+              <PeopleIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
+                  View All Employees
+
+                </Typography>
+              }
+            />
+          </ListItemButton>
+     )
+    }
+  }
+
   return (
     <>
       <Drawer
+      
         variant="permanent"
         sx={{ border: "none" }}
         open={props.current}
@@ -108,7 +141,7 @@ export default function LeftSideBar(props) {
                   fontFamily: "Baskervville",
                   color: "primary.main",
                 }}>
-                {props.firstName[0]}{props.lastName[0]}
+                {props.employeeId.split('-')[1].toUpperCase()}
               </Avatar>
             ) : (
               <ListItemIcon>
@@ -123,7 +156,7 @@ export default function LeftSideBar(props) {
                     fontFamily: "Baskervville",
                     color: "primary.main",
                   }}>
-                  {props.firstName[0]}{props.lastName[0]}
+                  {props.employeeId.split('-')[1].toUpperCase()}
                 </Avatar>
               </ListItemIcon>
             )}
@@ -165,31 +198,10 @@ export default function LeftSideBar(props) {
               }
             />
           </ListItemButton>
-
-          <ListItemButton
-            selected={selectedIndex === 2}
-            onClick={(event) => {
-              handleListItemClick(event, 2);
-              window.location.assign("/ViewAllEmps");
-            }}>
-            <ListItemIcon>
-              <PeopleIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    fontFamily: "Baskervville",
-                  }}>
-                  View All Employees
-                </Typography>
-              }
-            />
-          </ListItemButton>
+              {checkLevel()}  
+        
         </List>
-
+              
         <List>
         <ListItemButton
             selected={selectedIndex === 3}

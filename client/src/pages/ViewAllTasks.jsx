@@ -2,7 +2,7 @@ import React from "react";
 
 import TaskCard from "../components/TaskCard";
 import { useQuery } from '@apollo/client';
-import { QUERY_ALLTASKS } from '../utils/queries'
+import { QUERY_ALLTASKS, QUERY_MAIN } from '../utils/queries'
 import {
   Typography,
   Grid,
@@ -23,10 +23,13 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CreateTask from "../components/CreateTask";
 
 
-export default function ViewAllTasks() {
+export default function ViewAllTasks(props) {
+
 
  
   const { loading , data } = useQuery(QUERY_ALLTASKS)
+
+  console.log(props.level);
 
   const tasks = data?.tasks || [];
 
@@ -41,7 +44,7 @@ export default function ViewAllTasks() {
   const handleCreateModalClose = () => setCreateModal(false)
 
   function filters(id, status) {
-    if (id && status) {
+      if (id && status) {
       const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
       const resultbystatus = resultbyuid.filter(
         (task) => task.status === status
@@ -55,6 +58,28 @@ export default function ViewAllTasks() {
       return resultbyuid;
     } else {
       return tasks;
+    }
+  }
+
+
+
+  function taskButton(){
+    if(props.level === 2){
+        return(<Button type="submit" fullWidth
+        onClick={handleCreateModalOpen}
+        variant="contained" endIcon={<AddIcon />} sx={{
+          	borderRadius: '25px',
+            height: '40px',
+            width: '225px',
+            position: 'fixed',
+            bottom: '10px',
+            right: '20px',
+            fontSize: "20px",
+            bgcolor: "primary.main",
+            color: "primary.light",
+          }}>
+        Create Task
+      </Button>)
     }
   }
 
@@ -147,22 +172,8 @@ export default function ViewAllTasks() {
         ))
       )}
 
-      <Button type="submit" fullWidth
-        onClick={handleCreateModalOpen}
-        variant="contained" endIcon={<AddIcon />} sx={{
-            borderRadius: '25px',
-            height: '40px',
-            width: '225px',
-            position: 'fixed',
-            bottom: '10px',
-            right: '20px',
-            fontSize: "20px",
-            bgcolor: "primary.main",
-            color: "primary.light",
-          }}>
-        Create Task
-      </Button>
-
+    
+          {taskButton()}
       <CreateTask
        modalState={createModal} 
        closeModal={handleCreateModalClose} 
