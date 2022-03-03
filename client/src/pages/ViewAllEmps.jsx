@@ -7,6 +7,10 @@ import {
   Typography,
   Grid,
   Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
 } from "@mui/material";
 
 import { useQuery } from '@apollo/client';
@@ -31,6 +35,26 @@ export default function ViewAllEmps(props) {;
 
   document.title = "View All Employees";
 
+  const [employeeId, setEmployeeId] = React.useState("");
+
+  const handleChangeEmployeeId = (event) => {
+    setEmployeeId(event.target.value);
+  };
+
+  function filters(id) {
+    if(id){
+      const resultByUId = user.filter((oneUser) => oneUser.employeeId === id)
+      return resultByUId
+    }else{
+      return user
+    } 
+  }
+
+  console.log(filters(employeeId));
+
+
+
+
   if(props.level === 2){
   return (
     <Grid
@@ -44,7 +68,41 @@ export default function ViewAllEmps(props) {;
         flexFlow: "wrap",
       }}>
 
-      {user.map((userobj, index) => (
+    <FormControl variant="standard" sx={{ m: 1, minWidth: "80%" }}>
+        <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={employeeId}
+          label="Status"
+          onChange={handleChangeEmployeeId}>
+          {user.map((employee, index )=>(
+          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl variant="standard" sx={{ m: 1, width:'10%' }}>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{
+            fontSize: "20px",
+            bgcolor: "primary.main",
+            color: "primary.light",
+            minWidth: '175px',
+            maxHeight: '35px',
+            borderRadius: '35px'
+          }}
+          onClick={() => {
+            setEmployeeId("");
+          }}>
+          Clear
+        </Button>
+      </FormControl>
+
+      {filters(employeeId).map((userobj, index) => (
           <EmployeeCard 
           key={userobj._id}
           _id={userobj._id}

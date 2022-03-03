@@ -53,16 +53,15 @@ const resolvers = {
         deleteTask : async(parent,{_id})=>{
             await Task.findOneAndDelete({_id})
         },
-        addUser : async(parent,{firstName,lastName,employeeId,department,level,password,active})=>{
+        addUser : async(parent,{firstName,lastName,employeeId,department,level,password})=>{
         const newUser = await User.create({
-            firstName : firstName,
-            lastName : lastName,
-            employeeId : employeeId,
-            department : department,
-            level : level,
-            password : password,
-            active : active,
-        })
+            firstName ,
+            lastName ,
+            employeeId ,
+            department ,
+            level ,
+            password ,
+        },{new:true})
         return newUser
         },
         updateUser : async(parent,{_id,firstName,lastName,employeeId,department,level,active})=>{
