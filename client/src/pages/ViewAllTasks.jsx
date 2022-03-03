@@ -38,8 +38,38 @@ export default function ViewAllTasks(props) {
   const handleCreateModalOpen = () => setCreateModal(true)
 
   const handleCreateModalClose = () => setCreateModal(false)
+  
+  function buttomCheck(){
+     if(props.level === 2){
+         return (<FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
+        <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={employeeId}
+          label="Status"
+          onChange={handleChangeEmployeeId}>
+          {user.map((employee, index )=>(
+          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>)
+        
+      }
+  }
+
+  function check(){
+     if(props.level === 1){
+         return props.employeeId;
+        
+      }else{
+        return employeeId;
+        }
+  }
 
   function filters(id, status) {
+    
+    
       if (id && status) {
       const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
       const resultbystatus = resultbyuid.filter(
@@ -54,6 +84,7 @@ export default function ViewAllTasks(props) {
       return resultbyuid;
     } else {
       return tasks;
+
     }
   }
 
@@ -61,6 +92,7 @@ export default function ViewAllTasks(props) {
 
   function taskButton(){
     if(props.level === 2){
+
         return(<Button type="submit" fullWidth
         onClick={handleCreateModalOpen}
         variant="contained" endIcon={<AddIcon />} sx={{
@@ -87,8 +119,9 @@ export default function ViewAllTasks(props) {
   };
   const handleChangeEmployeeId = (event) => {
     setEmployeeId(event.target.value);
+    
   };
-
+  
   return (
     <Grid
       item
@@ -116,20 +149,8 @@ export default function ViewAllTasks(props) {
         </Select>
       </FormControl>
 
-      <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
-        <InputLabel id="demo-simple-select-label">Employee</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={employeeId}
-          label="Status"
-          onChange={handleChangeEmployeeId}>
-          {user.map((employee, index )=>(
-          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-
+      {buttomCheck()}
+      
       <FormControl variant="standard" sx={{ m: 1, width:'10%' }}>
         <Button
           type="submit"
@@ -150,11 +171,13 @@ export default function ViewAllTasks(props) {
           Clear
         </Button>
       </FormControl>
-
+     
+      
       {loading ? (
          <CircularProgress />
       ) : (
-        filters(employeeId, status).map((tasksobj, index) => (
+        
+        filters(check(), status).map((tasksobj, index) => (
           <TaskCard
             key={tasksobj._id}
             taskId={tasksobj._id}
