@@ -80,3 +80,30 @@ mutation updateUser(
     active
   }
 }`
+
+export const CREATE_USER = gql`
+mutation createUser(
+  $firstName: String
+  $lastName: String
+  $employeeId: String
+  $department: String
+  $level: Int
+  $password: String
+) {
+  addUser(
+    firstName: $firstName
+    lastName: $lastName
+    employeeId: $employeeId
+    department: $department
+    level: $level
+    password: $password
+  ) {
+    firstName
+    lastName
+    employeeId
+    department
+    level
+    password
+    active
+  }
+}`

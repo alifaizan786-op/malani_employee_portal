@@ -77,8 +77,7 @@ const typeDefs = gql`
             employeeId:String,
             department:String,
             level :  Int,
-            password:String,
-            active : String ) : User 
+            password:String) : User 
 
         updateUser (
             _id:ID, 
