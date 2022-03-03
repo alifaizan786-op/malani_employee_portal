@@ -71,7 +71,9 @@ export default function Main() {
          />
       </Route>
       <Route exact path={"/ViewAllEmps"}>
-        <ViewAllEmps/>
+        <ViewAllEmps
+        level={level}
+        />
       </Route>
       <Route exact path={"/Settings"}>
         <SettingsPage />

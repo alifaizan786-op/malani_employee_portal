@@ -1,6 +1,5 @@
 //From React
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import Auth from '../utils/auth';
 
 
@@ -10,7 +9,6 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import {
   List,
-  Divider,
   ListItemButton,
   ListItemIcon,
   ListItemText,

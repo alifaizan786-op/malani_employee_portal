@@ -12,10 +12,13 @@ import {
   TextField,
 } from "@mui/material";
 
-import ReviewCard from "./ReviewCard";
 
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
+
+import {UPDATE_USER} from '../utils/mutation'
+
+import {useMutation} from '@apollo/client';
 
 const style = {
   position: "absolute",
@@ -44,15 +47,76 @@ const dividerStyle = {
 };
 
 export default function EmployeeModal(props) {
+
+
+  const[updateUser,{error,data}] = useMutation(UPDATE_USER)
+
+  const [formState, setFormState] = React.useState({
+    _id: props._id,
+    firstName: props.fName,
+    lastName: props.lName,
+    employeeId: props.empId,
+    department: props.dept,
+    level: props.level,
+    active: props.active
+  })
+
+
+  const handleChange = (event) =>{
+    const{name,value} = event.target
+
+    setFormState({
+       ...formState,
+       [name]:value ,
+    });
+
+    console.log(formState);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+   
+
+    try{
+      const { data } = await updateUser({
+        variables: {...formState},
+      });
+
+    }catch(e){
+      console.error(e);
+    }
+    setFormState({
+      _id: props._id,
+      firstName: '',
+      lastName: '',
+      employeeId: '',
+      department: '',
+      level: '',
+      active: ''
+    })
+    setEdit(false);
+    window.location.assign('/ViewAllEmps');
+    
+  }
   const [edit, setEdit] = React.useState(false);
 
   const setEditTrue = () => {
     setEdit(true);
   };
 
-  const setEditFalse = () => {
-    setEdit(false);
-  };
+  // const setEditFalse = () => {
+  //   setEdit(false);
+  // };
+
+  function initial(){
+    if(props.empId){
+      return  props.empId.split('-')[1].toUpperCase()
+    }
+  }
+ 
+
+
+
 
   return (
     <>
@@ -75,7 +139,7 @@ export default function EmployeeModal(props) {
                   fontFamily: "Baskervville",
                   color: "primary.main",
                 }}>
-                {props.fName[0]}{props.lName[0]}
+                {initial()}
               </Avatar>
 
               <Typography
@@ -105,8 +169,10 @@ export default function EmployeeModal(props) {
                         marginX: "10px",
                         padding: "2.5px 14px",
                       }}
+                      name="employeeId"
+                      onChange={handleChange}
+                      defaultValue={props.empId}
                       id="outlined-size-medium"
-                      defaultValue="Faizan Ali"
                       size="medium"
                     />
                   ) : (
@@ -124,8 +190,10 @@ export default function EmployeeModal(props) {
                         marginX: "10px",
                         padding: "2.5px 14px",
                       }}
+                      name="firstName"
+                      onChange={handleChange}
+                      defaultValue={props.fName}
                       id="outlined-size-medium"
-                      defaultValue="Faizan"
                       size="medium"
                     />
                   ) : (
@@ -143,12 +211,54 @@ export default function EmployeeModal(props) {
                         marginX: "10px",
                         padding: "2.5px 14px",
                       }}
+                      name="lastName"
+                      onChange={handleChange}
+                      defaultValue={props.lName}
                       id="outlined-size-medium"
-                      defaultValue="Ali"
                       size="medium"
                     />
                   ) : (
                     <Typography variant="p">{props.lName}</Typography>
+                  )}
+                </Box>
+                <Divider sx={dividerStyle} />
+                <Box sx={divStyle}>
+                  <Typography variant="p">Department</Typography>
+                  {edit ? (
+                    <TextField
+                      sx={{
+                        fontFamily: "Baskervville",
+                        textAlign: "center",
+                        marginX: "10px",
+                        padding: "2.5px 14px",
+                      }}
+                      name="department"
+                      onChange={handleChange}
+                      defaultValue={props.dept}
+                      id="outlined-size-medium"
+                      size="medium"
+                    />
+                  ) : (
+                    <Typography variant="p">{props.dept}</Typography>
+                  )}
+                </Box>
+                <Divider sx={dividerStyle} />
+                <Box sx={divStyle}>
+                  <Typography variant="p">Active</Typography>
+                  {edit ? (
+                    <Select
+                    sx={{}}
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    onChange={handleChange}
+                    defaultValue={props.active}
+                    name="active"
+                    label="Status">
+                    <MenuItem value={"true"}>Yes</MenuItem>
+                    <MenuItem value={"false"}>No</MenuItem>
+                  </Select>
+                  ) : (
+                    <Typography variant="p">{props.active ? ('Yes'):("No")}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -159,7 +269,9 @@ export default function EmployeeModal(props) {
                       sx={{}}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      value={"2"}
+                      onChange={handleChange}
+                      name="level"
+                      defaultValue={props.level}
                       label="Status">
                       <MenuItem value={"1"}>1</MenuItem>
                       <MenuItem value={"2"}>2</MenuItem>
@@ -201,7 +313,9 @@ export default function EmployeeModal(props) {
                 alignItems: "flex-start",
               }}>
               {edit ? (
-                <Button onClick={setEditFalse} sx={{ display: "contents" }}>
+                <Button 
+                onClick={handleFormSubmit}
+                  sx={{ display: "contents" }}>
                   <Avatar
                     sx={{
                       width: 50,
@@ -230,7 +344,7 @@ export default function EmployeeModal(props) {
             </Box>
           </Box>
           {/* Reviews */}
-          <ReviewCard />
+          {/* <ReviewCard /> */}
         </Box>
       </Modal>
     </>
