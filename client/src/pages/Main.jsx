@@ -68,6 +68,7 @@ export default function Main() {
       <Route exact path={"/ViewAllTasks"}>
         <ViewAllTasks
         level={level}
+        employeeId ={employeeId}
          />
       </Route>
       <Route exact path={"/ViewAllEmps"}>
