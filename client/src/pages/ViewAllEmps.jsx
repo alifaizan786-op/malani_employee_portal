@@ -15,26 +15,8 @@ import { QUERY_ALLEMPS } from '../utils/queries'
 
 import AddIcon from "@mui/icons-material/Add";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 5,
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-around",
-  minWidth: "50%",
-  minHeight: "80%",
-  borderRadius: "30px",
-};
 
-
-
-export default function ViewAllEmps() {;
+export default function ViewAllEmps(props) {;
 
   const [createEmp, setCreateEmp] = React.useState(false);
 
@@ -47,7 +29,9 @@ export default function ViewAllEmps() {;
   const user = data?.users || [];
 
 
+  document.title = "View All Employees";
 
+  if(props.level === 2){
   return (
     <Grid
       item
@@ -68,6 +52,7 @@ export default function ViewAllEmps() {;
           firstName={userobj.firstName}
           lastName={userobj.lastName}
           employeeId={userobj.employeeId}
+          active={userobj.active}
           level={userobj.level}
           />
       ))}
@@ -110,5 +95,43 @@ export default function ViewAllEmps() {;
         Iruna Digital Inc 2022 - V1.0
       </Typography>
     </Grid>
-  );
+  )}else{
+    return(
+      <Grid
+      item
+      sm={10}
+      xs={10}
+      sx={{
+        marginTop: "100px",
+        marginLeft: "250px",
+        display: "flex",
+        flexFlow: "wrap",
+      }}>
+        <Typography
+          variant="h1"
+          component="div"
+          sx={{
+            color: "primary",
+            textAlign: "center",
+            marginLeft:"5vw",
+            width: '80%'
+          }}>
+          Please Login With Credential with Level 2 or Higher
+        </Typography>
+        <Typography
+          variant="p"
+          component="div"
+          sx={{
+            color: "primary",
+            textAlign: "center",
+            fontSize: "13px",
+            position: 'fixed',
+            bottom: '5px',
+            width: '80%'
+          }}>
+          Iruna Digital Inc 2022 - V1.0
+        </Typography>
+      </Grid>
+    )
+  }
 }

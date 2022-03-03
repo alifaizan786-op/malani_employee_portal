@@ -43,6 +43,12 @@ export default function EmployeeCard(props) {
   const submitted = tasks.filter((task)=> task.status === 'submitted')
   const overdue = tasks.filter((task)=> task.status === 'overdue')  
 
+  function initial(){
+    if(props.employeeId){
+      return  props.employeeId.split('-')[1].toUpperCase()
+    }
+  }
+
 
   return (
     <>
@@ -52,7 +58,6 @@ export default function EmployeeCard(props) {
           minWidth: "325px",
           margin: "25px",
           boxShadow: "none",
-          borderRight: "1px solid black",
           borderRight: "1px solid black",
         }}>
         <Button onClick={handleViewModalOpen}>
@@ -80,7 +85,7 @@ export default function EmployeeCard(props) {
             color: "primary.main",
             margin: "auto",
           }}>
-          {props.firstName[0]}{props.lastName[0]}
+          {initial()}
         </Avatar>
         <div style={divStyle}>
           <Typography variant="p">Employee Id</Typography>
@@ -118,6 +123,8 @@ export default function EmployeeCard(props) {
         pending={pending.length}
         overdue={overdue.length}
         submitted={submitted.length}
+        dept={props.department}
+        active={props.active}
         yTD={tasks.length}
         _id={props._id}
         level={props.level}

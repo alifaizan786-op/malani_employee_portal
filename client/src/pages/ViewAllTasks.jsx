@@ -2,7 +2,7 @@ import React from "react";
 
 import TaskCard from "../components/TaskCard";
 import { useQuery } from '@apollo/client';
-import { QUERY_ALLTASKS, QUERY_MAIN } from '../utils/queries'
+import { QUERY_ALLTASKS} from '../utils/queries'
 import {
   Typography,
   Grid,
@@ -11,9 +11,6 @@ import {
   InputLabel,
   Select,
   MenuItem,
-  TextField,
-  Switch,
-  useForkRef
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
@@ -29,12 +26,11 @@ export default function ViewAllTasks(props) {
  
   const { loading , data } = useQuery(QUERY_ALLTASKS)
 
-  console.log(props.level);
 
   const tasks = data?.tasks || [];
 
   const user = data?.userActive || [];
-
+  document.title = "View All Tasks";
 
 
   const [createModal, setCreateModal ] = React.useState(false);

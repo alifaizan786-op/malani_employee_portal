@@ -5,7 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query : {
         users : async () => {
-            return await User.find({});//find all user
+            return await User.find({}).sort({ level: 1 });//find all user
         },
         userId : async (parent, args, context) =>{
             return await User.findOne({_id: context.user._id}); //user by id
@@ -29,7 +29,6 @@ const resolvers = {
             return await Review.findOne({manager:managerUId,employee:employeeUId}).populate('manager').populate('employee');
         },
         taskByEmp : async(parent,{emp}) =>{
-            console.log(emp);
             return await Task.find({user:emp});
         }
     },
@@ -66,8 +65,8 @@ const resolvers = {
         })
         return newUser
         },
-        updateUser : async(parent,{_id,firstName,lastName,employeeId,department,level,password,active})=>{
-        const editUser = await updateUser.findOneAndUpdate({_id},{firstName,lastName,employeeId,department,level,password,active},{new:true})
+        updateUser : async(parent,{_id,firstName,lastName,employeeId,department,level,active})=>{
+        const editUser = await User.findOneAndUpdate({_id},{firstName,lastName,employeeId,department,level,active})
         return editUser
         },
         deleteUser : async(parent,{_id})=>{

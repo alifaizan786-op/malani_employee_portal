@@ -39,6 +39,7 @@ mutation createTask(
     description
   }
 }`
+
 export const CHANGE_QUOTE = gql`
 mutation changeQuote(
   $_id:ID, 
@@ -48,5 +49,34 @@ mutation changeQuote(
     _id:$_id, 
     quotes:$quotes){
     quotes
+  }
+}`
+
+export const UPDATE_USER=gql`
+mutation updateUser(
+  $_id: ID
+  $firstName: String
+  $lastName: String
+  $employeeId: String
+  $department: String
+  $level: Int
+  $active: String
+) {
+  updateUser(
+    _id: $_id
+    firstName: $firstName
+    lastName: $lastName
+    employeeId: $employeeId
+    department: $department
+    level: $level
+    active: $active
+  ) {
+    _id
+    firstName
+    lastName
+    employeeId
+    department
+    level
+    active
   }
 }`

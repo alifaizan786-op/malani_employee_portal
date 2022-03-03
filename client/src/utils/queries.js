@@ -53,6 +53,7 @@ query{
     employeeId
     department
     level
+    active
   }
 }`
 

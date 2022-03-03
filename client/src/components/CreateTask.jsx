@@ -1,9 +1,8 @@
-import React,{useState} from "react";
+import React from "react";
 import {CREATE_TASK} from '../utils/mutation'
 
 import {useMutation} from '@apollo/client';
-import Auth from '../utils/auth';
-import TaskCard from "../components/TaskCard";
+
 
 import {
   Box,
@@ -12,7 +11,6 @@ import {
   Modal,
   FormControl,
   InputLabel,
-  FormHelperText,
   Select,
   MenuItem,
   TextField,
@@ -53,7 +51,6 @@ export default function CreateTask (props){
 
   const handleSwitchChange = (event) => {
     setChecked(event.target.checked);
-    console.log(event.target.checked);
   };
 
 

@@ -97,7 +97,6 @@ export default function TaskCard(props) {
 
     const handleSwitchChange = (event) => {
       setChecked(event.target.checked);
-      console.log(event.target.checked);
     };
 
   function checkChecked(){

@@ -6,6 +6,8 @@ import Quote from "../components/Quote";
 import { Divider, Grid, Typography } from "@mui/material";
 
 export default function Home(props) {
+
+  document.title = "Malani Employee Portal";
   
   return (
     <Grid item sm={10} xs={10} margin={"200px"}>
