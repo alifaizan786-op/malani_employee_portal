@@ -41,7 +41,24 @@ export default function ViewAllTasks(props) {
   
   function buttomCheck(){
      if(props.level === 2){
-         return (<FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
+         return (
+           <>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            label="Status"
+            onChange={handleChangeStatus}
+            >
+            <MenuItem value={''}>Status</MenuItem>
+            <MenuItem value={'pending'}>Pending</MenuItem>
+            <MenuItem value={'overdue'}>Overdue</MenuItem>
+            <MenuItem value={'submitted'}>Submitted</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
         <InputLabel id="demo-simple-select-label">Employee</InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -53,8 +70,27 @@ export default function ViewAllTasks(props) {
           <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
           ))}
         </Select>
-      </FormControl>)
-        
+      </FormControl>
+      </>)
+      }else{
+        return(
+          <FormControl variant="standard" sx={{ m: 1, minWidth: "80%" }}>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            label="Status"
+            onChange={handleChangeStatus}
+            >
+            <MenuItem value={''}>Status</MenuItem>
+            <MenuItem value={'pending'}>Pending</MenuItem>
+            <MenuItem value={'overdue'}>Overdue</MenuItem>
+            <MenuItem value={'submitted'}>Submitted</MenuItem>
+          </Select>
+        </FormControl>
+
+        )
       }
   }
 
@@ -133,21 +169,7 @@ export default function ViewAllTasks(props) {
         display: "flex",
         flexFlow: "wrap",
       }}>
-      <FormControl variant="standard" sx={{ m: 1, minWidth: "40%" }}>
-        <InputLabel id="demo-simple-select-label">Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={status}
-          label="Status"
-          onChange={handleChangeStatus}
-          >
-          <MenuItem value={''}>Status</MenuItem>
-          <MenuItem value={'pending'}>Pending</MenuItem>
-          <MenuItem value={'overdue'}>Overdue</MenuItem>
-          <MenuItem value={'submitted'}>Submitted</MenuItem>
-        </Select>
-      </FormControl>
+     
 
       {buttomCheck()}
       
