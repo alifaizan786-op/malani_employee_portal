@@ -89,6 +89,15 @@ export default function LeftSideBar(props) {
     setSelectedIndex(index);
   };
 
+
+
+  function initial(){
+    if(props.employeeId){
+      return  props.employeeId.split('-')[1].toUpperCase()
+    }
+  }
+
+
   function checkLevel(){
     if(props.level === 2){
      return(
@@ -141,7 +150,7 @@ export default function LeftSideBar(props) {
                   fontFamily: "Baskervville",
                   color: "primary.main",
                 }}>
-                {props.employeeId.split('-')[1].toUpperCase()}
+                {initial()}
               </Avatar>
             ) : (
               <ListItemIcon>
@@ -156,7 +165,7 @@ export default function LeftSideBar(props) {
                     fontFamily: "Baskervville",
                     color: "primary.main",
                   }}>
-                  {props.employeeId.split('-')[1].toUpperCase()}
+                  {initial()}
                 </Avatar>
               </ListItemIcon>
             )}
