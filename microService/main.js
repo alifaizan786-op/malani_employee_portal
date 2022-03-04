@@ -1,5 +1,5 @@
-const connection = require('./config/connection')
-const { Task, User, Review, Quotes } = require('./models')
+const connection = require('../server/config/connection')
+const { Task, User, Review, Quotes } = require('../server/models')
 var cron = require('node-cron');
 const fs = require('fs')
 
@@ -9,10 +9,11 @@ connection.once('open', async() => {
   console.log('connected');
 
   //await User.deleteMany({})
-  cron.schedule('* * * 23 * *', async() => {
+  cron.schedule('* * 23 * * *', async() => {
 
     const today = new Date()
     const todayunix = Date.parse(today)
+    console.log("backup done at " + Date.now());
 
     const allTasks = await Task.find().populate('user')
     const allUsers = await User.find()
@@ -38,6 +39,7 @@ connection.once('open', async() => {
     const allReviews = await Review.find()
 
     const checkStatus = allTasks.filter((task) => task.status === 'pending')
+    console.log("Over due checker done at " + Date.now());
 
     
     for(let i = 0; i < checkStatus.length; i++){
@@ -50,43 +52,53 @@ connection.once('open', async() => {
   });
 
   //------------------------Renew Tasks------------------------
-  cron.schedule('* * 23 * *', async() => {
+  cron.schedule('* * 23 * * 1-7', async() => {
 
     const today = new Date()
     const todayunix = Date.parse(today)
 
-    const allTasks = await Task.find()
-
-    const checkRecurring = allTasks.filter((task) => task.recurring === true)
-
+    const allTasks = await Task.find({recurring: true})
+    console.log("Tasks renewed at " + Date.now());
     
-    for(let i = 0; i < checkRecurring.length; i++){
-      if(checkRecurring[i].dueDate < todayunix){
+    for(let i = 0; i < allTasks.length; i++){
 
-        const dueInDays = 86400000 * checkRecurring[i].renewIn
-        const calcDueDate = dueInDays + todayunix
+      const fDueDate= new Date(allTasks[i].dueDate)
+      const fDueDateUnix = Date.parse(fDueDate)
 
-
-
-        const task = {
-        description: taskSeeds[i].description,
-        user: checkRecurring[i].user,
-        dueDate: new Date(calcDueDate),
-        recurring: taskSeeds[i].recurring,
-        renewIn:taskSeeds[i].renewIn
-        };
+      if(fDueDateUnix < todayunix) {
         
-        const createTask = await Task.create(task)
 
-        const setRecurringFalse = await Task.findOneAndUpdate({_id:checkRecurring[i]._id},{recurring:false})
-      }
-    }
+          const dueInDays = 86400000 * allTasks[i].renewIn
+          const calcDueDate = dueInDays + todayunix
 
-    
+
+
+          const task = {
+          description: allTasks[i].description,
+          user: allTasks[i].user,
+          dueDate: new Date(calcDueDate),
+          recurring: allTasks[i].recurring,
+          renewIn:allTasks[i].renewIn
+          };
+
+          console.log(task);
+
+
+          
+          const createTask = await Task.create(task)
+
+          const setRecurringFalse = await Task.findOneAndUpdate({_id:allTasks[i]._id},{recurring:false})
+        }
+
+
+
+    }    
   });
+
+
 });
 
 
     
 
-    
+          
