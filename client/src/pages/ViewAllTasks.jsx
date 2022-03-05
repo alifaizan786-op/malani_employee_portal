@@ -24,7 +24,7 @@ export default function ViewAllTasks(props) {
 
 
  
-  const { loading , data } = useQuery(QUERY_ALLTASKS)
+  const { loading , data } = useQuery(QUERY_ALLTASKS,{pollInterval: 500,})
 
 
   const tasks = data?.tasks || [];

@@ -126,7 +126,7 @@ export default function LoginForm() {
             autoComplete="employeeId"
             autoFocus
             sx={{ bgcolor: "primary.light" }}
-            value={formState.employeeId}
+            value={formState.employeeId.toLowerCase()}  
             onChange={handleChange}
           />
           <TextField

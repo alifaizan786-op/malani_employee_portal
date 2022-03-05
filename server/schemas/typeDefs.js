@@ -47,7 +47,7 @@ const typeDefs = gql`
         reviews : [Review]
         userId(userId: ID) : User
         taskUId(taskUId: ID) : Task  
-        reviewUId(managerUId : ID, employeeUId : ID) : Review
+        reviewUId(employeeUId : ID) : [Review]
         userActive : [User]
         taskByEmp(emp:ID) :[Task]
     }
@@ -96,7 +96,7 @@ const typeDefs = gql`
             quotes:String): Quotes
 
         addReview(
-            managner: ID,
+            manager: ID,
             employee: ID, 
             month: String,
             review: String ) : Review

@@ -56,6 +56,16 @@ export default function TaskCard(props) {
     setValue(newValue);
   };
 
+  function submitTask(taskobjid){
+    //mutation
+    //for base employee
+  }
+
+  function editTask(taskobjid){
+    //mutation
+    //for base manager
+  }
+
   function borderColorCheck() {
     if (props.status.toLowerCase() === "submitted") {
       let style = {

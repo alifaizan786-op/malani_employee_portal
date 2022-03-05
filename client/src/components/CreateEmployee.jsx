@@ -116,7 +116,7 @@ export default function CreateEmployee(props){
               variant="standard"
               size="medium"
               name="employeeId"
-              value={formState.employeeId}
+              value={formState.employeeId.toLowerCase()}
               onChange={handleChange}
             />
             <FormHelperText id="component-helper-text">

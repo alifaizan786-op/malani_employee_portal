@@ -12,7 +12,7 @@ const reviewSchema = new Schema({
         require: true
     },
     month:{
-        type:Date,
+        type:String,
         require:true,
     },
     review:{

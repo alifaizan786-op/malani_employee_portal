@@ -35,6 +35,7 @@ export default function EmployeeCard(props) {
   const { loading, data } = useQuery(QUERY_TASKBYEMP, {
     // pass URL parameter
     variables: { emp: props._id },
+    pollInterval: 500,
   });
 
   const tasks = data?.taskByEmp || []
@@ -48,6 +49,7 @@ export default function EmployeeCard(props) {
       return  props.employeeId.split('-')[1].toUpperCase()
     }
   }
+
 
 
   return (
@@ -128,6 +130,7 @@ export default function EmployeeCard(props) {
         yTD={tasks.length}
         _id={props._id}
         level={props.level}
+        managerId={props.managerId}
 
       />
     </>

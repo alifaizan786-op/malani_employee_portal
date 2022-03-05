@@ -25,7 +25,7 @@ export default function Main() {
     setDrawerOpen(false);
   };
 
-  const { data } = useQuery(QUERY_MAIN)
+  const { data } = useQuery(QUERY_MAIN,{pollInterval: 500,})
 
 
   const user = data?.userId || [];
@@ -34,6 +34,8 @@ export default function Main() {
   const employeeId = user.employeeId || ""
   const department = user.department || ""
   const level = user.level || ""
+  const _id = user._id || ""
+
 
   
   return (
@@ -74,6 +76,7 @@ export default function Main() {
       <Route exact path={"/ViewAllEmps"}>
         <ViewAllEmps
         level={level}
+        _id={_id}
         />
       </Route>
       <Route exact path={"/Settings"}>

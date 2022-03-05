@@ -33,7 +33,7 @@ const style = {
 
 export default function Quote(props) {
 
- const { data } = useQuery(QUERY_QUOTE)
+ const { data } = useQuery(QUERY_QUOTE,{pollInterval: 1000,})
 
  const quote = data?.quotes || [] 
 
