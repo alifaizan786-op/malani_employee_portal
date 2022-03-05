@@ -25,8 +25,8 @@ const resolvers = {
         reviews : async () => {
             return await Review.find({}).populate('manager').populate('employee'); // all review
         },
-        reviewUId : async(parent,{managerUId,employeeUId})=>{
-            return await Review.findOne({manager:managerUId,employee:employeeUId}).populate('manager').populate('employee');
+        reviewUId : async(parent,{employeeUId})=>{
+            return await Review.find({employee:employeeUId}).populate('manager').populate('employee').sort({_id:-1});
         },
         taskByEmp : async(parent,{emp}) =>{
             return await Task.find({user:emp});
@@ -76,13 +76,13 @@ const resolvers = {
         return editQuotes
 
         },
-        addReview : async(parent,{employeeId,managerId,month,review})=>{
+        addReview : async(parent,{employee,manager,month,review})=>{
             const newReview = await Review.create({
-            managner: managerId,
-            employee: employeeId, 
-            month: month,
-            review: review
-        })
+            manager,
+            employee,  
+            month,
+            review
+        },{new:true})
         return newReview
         },
         deleteReview :  async(parent,{_id})=>{

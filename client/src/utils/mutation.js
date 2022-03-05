@@ -107,3 +107,27 @@ mutation createUser(
     active
   }
 }`
+
+export const ADD_REVIEW = gql`
+mutation addReview(
+  $manager: ID
+  $employee: ID
+  $month: String
+  $review: String
+) {
+  addReview(
+    manager: $manager
+    employee: $employee
+    month: $month
+    review: $review
+  ) {
+    manager {
+      employeeId
+    }
+    employee {
+      employeeId
+    }
+    month
+    review
+  }
+}`

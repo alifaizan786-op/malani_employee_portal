@@ -20,7 +20,9 @@ import { QUERY_ALLEMPS } from '../utils/queries'
 import AddIcon from "@mui/icons-material/Add";
 
 
-export default function ViewAllEmps(props) {;
+export default function ViewAllEmps(props) {
+
+
 
   const [createEmp, setCreateEmp] = React.useState(false);
 
@@ -28,7 +30,7 @@ export default function ViewAllEmps(props) {;
 
   const handlecreateEmpClose = () => setCreateEmp(false);
 
-  const {data, loading} = useQuery(QUERY_ALLEMPS)
+  const {data, loading} = useQuery(QUERY_ALLEMPS,{pollInterval: 500,})
 
   const user = data?.users || [];
 
@@ -50,7 +52,8 @@ export default function ViewAllEmps(props) {;
     } 
   }
 
-  console.log(filters(employeeId));
+
+  
 
 
 
@@ -112,6 +115,7 @@ export default function ViewAllEmps(props) {;
           employeeId={userobj.employeeId}
           active={userobj.active}
           level={userobj.level}
+          managerId={props._id}
           />
       ))}
       

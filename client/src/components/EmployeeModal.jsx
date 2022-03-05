@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@mui/material";
 
+import ReviewCard from "./ReviewCard";
 
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
@@ -113,6 +114,7 @@ export default function EmployeeModal(props) {
       return  props.empId.split('-')[1].toUpperCase()
     }
   }
+
  
 
 
@@ -344,7 +346,7 @@ export default function EmployeeModal(props) {
             </Box>
           </Box>
           {/* Reviews */}
-          {/* <ReviewCard /> */}
+          <ReviewCard  empObjId={props._id} managerId={props.managerId}/>
         </Box>
       </Modal>
     </>

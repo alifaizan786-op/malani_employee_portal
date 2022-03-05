@@ -16,73 +16,33 @@ import SaveIcon from "@mui/icons-material/Save";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
-const reviews = [
-  {
-    manager: {
-      employeeId: "Aliammar-AR",
-    },
-    month: "January 2022",
-    review: "Alway using his phone",
-  },
-  {
-    manager: {
-      employeeId: "Uzair-UM",
-    },
-    month: "January 2022",
-    review: "Coming Late",
-  },
-  {
-    manager: {
-      employeeId: "Zanir-ZM",
-    },
-    month: "January 2022",
-    review: "Need to Talk About Photography",
-  },
-  {
-    manager: {
-      employeeId: "Iqbal-IK",
-    },
-    month: "December 2021",
-    review: "Good job!",
-  },
-  {
-    manager: {
-      employeeId: "Zanir-ZM",
-    },
-    month: "December 2021",
-    review: "Well Done",
-  },
-  {
-    manager: {
-      employeeId: "Aliammar-AR",
-    },
-    month: "December 2021",
-    review: "Coming Late",
-  },
-  {
-    manager: {
-      employeeId: "Shermyn-SM",
-    },
-    month: "November 2021",
-    review: "Takes long Breaks",
-  },
-  {
-    manager: {
-      employeeId: "Zanir-ZM",
-    },
-    month: "November 2021",
-    review: "Talk About Future Plans",
-  },
-  {
-    manager: {
-      employeeId: "Iqbal-IK",
-    },
-    month: "November 2021",
-    review: "Picture Quality is bad",
-  },
-];
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_REVIEWBYUID } from '../utils/queries'
+import { ADD_REVIEW } from "../utils/mutation";
 
-export default function ReviewCard() {
+import CreateReview from "./CreateReview";
+
+
+
+
+
+
+
+
+export default function ReviewCard(props) {
+
+  const { loading, data} = useQuery(QUERY_REVIEWBYUID, {
+    // pass URL parameter
+    variables: { employeeUId: props.empObjId },
+    pollInterval: 500,
+  });
+
+  console.log(data);
+
+  const reviews = data?.reviewUId || []
+  
+
+
   const [cardMonth, setCardMonth] = React.useState("");
 
   const monthsarr = [];
@@ -100,8 +60,16 @@ export default function ReviewCard() {
     return newArr;
   }
 
+  console.log(props.managerId);
+  console.log(props.empObjId);
+
+
+
+  
+
   return (
     <>
+      <CreateReview empObjId={props.empObjId} managerId={props.managerId}/>
       {uniquemonthsarr.map((month, index) => (
         <Box sx={{ marginTop: "10px" }} key={index}>
           <Box
@@ -141,24 +109,9 @@ export default function ReviewCard() {
                 padding: "20px 40px",
                 display: "grid",
               }}>
-              <FormControl variant="standard">
-                <InputLabel htmlFor="standard-adornment-password">
-                  Add Review
-                </InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton aria-label="toggle password visibility">
-                        <SaveIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
               {filter(month).map((reviewChild, index) => (
                 <Typography variant="p" sx={{ paddingTop: "10px" }}>
-                  {`${reviewChild.manager.employeeId}---${reviewChild.review}`}
+                  {`${reviewChild.manager.employeeId.toUpperCase()} : "${reviewChild.review}"`}
                 </Typography>
               ))}
             </Box>

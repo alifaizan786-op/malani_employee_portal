@@ -66,7 +66,6 @@ const [formState, setFormState] = React.useState({
     _id: '',
     quotes:'',
     });
-    window.location.assign('/');
   };
 
 return(

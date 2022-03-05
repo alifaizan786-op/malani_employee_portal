@@ -69,3 +69,18 @@ query taskbyuser($emp:ID){
     renewIn
   }
 }`
+
+export const QUERY_REVIEWBYUID = gql`
+query reviewbyUID($employeeUId:ID) {
+  reviewUId(employeeUId:$employeeUId){
+    _id
+    manager{
+      employeeId
+    }
+    employee{
+      employeeId
+    }
+    month
+    review
+  }
+}`

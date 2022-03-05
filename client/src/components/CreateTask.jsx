@@ -90,8 +90,6 @@ export default function CreateTask (props){
       console.log(e); 
 
     }
-  
-    window.location.assign('/ViewAllTasks');
   }
 
     function checkChecked(){
