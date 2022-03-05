@@ -14,7 +14,44 @@ const resolvers = {
              return await User.find({active:true})   
         },
         tasks : async () => {
-            return await Task.find({}).populate('user').sort({ status: 1 });//find all task
+
+            const today = new Date()
+            const todayunix = Date.parse(today)
+            const allTasks =  await Task.find({}).populate('user').sort({ status: 1 });
+            const recuurringTask = allTasks.filter((task)=> task.recurring === true)
+            const checkStatus = allTasks.filter((task) => task.status === 'pending')
+
+            for(let i = 0; i < checkStatus.length; i++){
+                if(checkStatus[i].dueDate < todayunix){
+                    const overdue = await Task.findByIdAndUpdate({_id : checkStatus[i]._id},{status:'overdue'})
+                }
+            }
+
+            for(let i = 0; i < recuurringTask.length; i++){
+
+                const fDueDate= new Date(recuurringTask[i].dueDate)
+                const fDueDateUnix = Date.parse(fDueDate)
+          
+                if(fDueDateUnix < todayunix) {
+                  
+                  const dueInDays = 86400000 * recuurringTask[i].renewIn
+                  const calcDueDate = dueInDays + todayunix
+          
+                  const task = {
+                  description: recuurringTask[i].description,
+                  user: recuurringTask[i].user,
+                  dueDate: new Date(calcDueDate),
+                  recurring: recuurringTask[i].recurring,
+                  renewIn:recuurringTask[i].renewIn
+                  };
+          
+                  const createTask = await Task.create(task)
+          
+                  const setRecurringFalse = await Task.findOneAndUpdate({_id:recuurringTask[i]._id},{recurring:false})
+                }
+            }
+
+            return allTasks
         },
         taskUId : async (parent, {taskUId}) => {
             return await Task.find( {user: taskUId } ).populate('user');
