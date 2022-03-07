@@ -57,6 +57,9 @@ const [formState, setFormState] = React.useState({
       const { data } = await changeQuote({
         variables: { ...formState },
       });
+      props.modalClose()
+      props.refetch()
+      props.notification()
 
     } catch (e) {
       console.error(e);
