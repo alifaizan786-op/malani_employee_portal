@@ -61,7 +61,7 @@ export default function Main() {
       </Grid>
       <Route exact path={"/"}>
         <Home 
-          firstName={firstName}
+           firstName={firstName}
            lastName={lastName}
            department={department}
            level={level}
@@ -71,6 +71,7 @@ export default function Main() {
         <ViewAllTasks
         level={level}
         employeeId ={employeeId}
+        current={draweropen}
          />
       </Route>
       <Route exact path={"/ViewAllEmps"}>

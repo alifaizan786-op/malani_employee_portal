@@ -11,7 +11,9 @@ import {
   Modal,
   Box,
   FormControl,
-  TextField
+  TextField,
+  Snackbar,
+  Alert
 } from "@mui/material";
 
 
@@ -33,7 +35,7 @@ const style = {
 
 export default function Quote(props) {
 
- const { data } = useQuery(QUERY_QUOTE,{pollInterval: 1000,})
+ const { data, refetch } = useQuery(QUERY_QUOTE)
 
  const quote = data?.quotes || [] 
 
@@ -42,8 +44,6 @@ export default function Quote(props) {
       return quote[0]._id
     }
   }
-
-
 
   function qouteText(){
     if(quote[0]){
@@ -65,6 +65,19 @@ export default function Quote(props) {
     setEdit(false);
   };
 
+  const [notification, setNotification] = React.useState(false);
+
+  const handleClick = () => {
+    setNotification(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setNotification(false);
+  };
 
   function checkLevel(){
     if(props.level === 2){
@@ -94,6 +107,11 @@ export default function Quote(props) {
         flexDirection: "column",
         alignItems: "center",
       }}>
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:'top', horizontal:'left' }}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Quote Of The Day Updated Successfully
+        </Alert>
+      </Snackbar>
       <Typography
         variant="h5"
         color={"primary.main"}
@@ -115,7 +133,7 @@ export default function Quote(props) {
       
        {checkLevel()}
 
-        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId}/>
+        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId} refetch={refetch} notification={handleClick}/>
      
     </div>
   );

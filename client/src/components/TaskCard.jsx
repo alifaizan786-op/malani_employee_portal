@@ -282,8 +282,6 @@ export default function TaskCard(props) {
 
             {checkChecked()}
 
-            
-
           <Button
             type="submit"
             fullWidth

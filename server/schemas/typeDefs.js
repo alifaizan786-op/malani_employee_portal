@@ -35,7 +35,8 @@ const typeDefs = gql`
         month : String
         review : String
     }
-     type Auth{
+    
+    type Auth{
         token : ID
         user : User
     }
