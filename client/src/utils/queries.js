@@ -36,6 +36,8 @@ query alltask {
       employeeId      
     }
     dueDate
+    recurring
+    renewIn
   }
   userActive{
     _id

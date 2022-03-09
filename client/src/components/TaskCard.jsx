@@ -42,13 +42,9 @@ const style = {
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
-export default function TaskCard(props) {
+export default function EditTaskModal(props) {
 
-  const [editModal, setEditModal] = React.useState(false);
 
-  const handleEditModalOpen = () => setEditModal(true);
-
-  const handleEditModalClose = () => setEditModal(false);
 
   const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
 
@@ -56,54 +52,7 @@ export default function TaskCard(props) {
     setValue(newValue);
   };
 
-  function submitTask(taskobjid){
-    //mutation
-    //for base employee
-  }
-
-  function editTask(taskobjid){
-    //mutation
-    //for base manager
-  }
-
-  function borderColorCheck() {
-    if (props.status.toLowerCase() === "submitted") {
-      let style = {
-        boxShadow: "0px 0px 10px #00BC5E",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      };
-      return style;
-    } else if (props.status.toLowerCase() === "pending") {
-      let style = {
-        boxShadow: "0px 0px 10px #E8FF00",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      };
-      return style;
-    } else {
-      let style = {
-        boxShadow: "0px 0px 10px #BC0000",
-        minWidth: "300px",
-        maxWidth: "300px",
-        margin: "25px",
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between'
-      };
-      return style;
-    }
-  }
-
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(props.defData[0]? (props.defData[0].recurring):(true));
 
     const handleSwitchChange = (event) => {
       setChecked(event.target.checked);
@@ -119,7 +68,7 @@ export default function TaskCard(props) {
                     id="demo-simple-select-size-medium"
                     label="Status"
                     size="medium"
-                    defaultValue = ""
+                    defaultValue = {props.defData[0]? (props.defData[0].renewIn):('')}
                     >
                     <MenuItem value={'1'}>Daily</MenuItem>
                     <MenuItem value={'7'}>Weekly</MenuItem>
@@ -130,73 +79,12 @@ export default function TaskCard(props) {
             </FormControl>
         )
     }
-}
- 
+  }
 
 
   return (
     <>
-      <Card sx={borderColorCheck()}>
-        <Typography
-          variant="h4"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.status}
-        </Typography>
-        <Divider
-          sx={{
-            width: "50%",
-            margin: "auto",
-            borderBottomWidth: 3,
-            marginY: "5px",
-          }}
-        />
-        <Typography
-          variant="h5"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {props.firstName} {props.lastName}
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-          }}>
-          {dateFormat(parseInt(props.dueDate))}
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            fontFamily: "Baskervville",
-            textAlign: "center",
-            marginY: "5px",
-            marginX: "15px",
-          }}>
-          {props.desc}
-        </Typography>
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          onClick={handleEditModalOpen}
-          sx={{
-            fontSize: "20px",
-            bgcolor: "primary.main",
-            color: "primary.light",
-            borderRadius: "10px",
-          }}>
-          Change Status
-        </Button>
-      </Card>
-      <Modal open={editModal} onClose={handleEditModalClose}>
+      <Modal open={props.current} onClose={props.close}>
         <Box sx={style}>
           <Typography
             variant="h3"
@@ -212,7 +100,7 @@ export default function TaskCard(props) {
             <TextField
               label="Employee Id"
               id="outlined-size-medium"
-              defaultValue={props.employeeId}
+              defaultValue={props.defData[0]? (props.defData[0].user.employeeId):('')}
               size="medium"
             />
             <FormHelperText id="component-helper-text">
@@ -225,7 +113,7 @@ export default function TaskCard(props) {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select-size-medium"
-              value={props.status}
+              defaultValue={props.defData[0]? (props.defData[0].status):('')}
               label="Status"
               size="medium"
               //onChange={handleChange}
@@ -241,7 +129,7 @@ export default function TaskCard(props) {
               <DateTimePicker
                 label="Due Date"
                 id="size-medium"
-                value={value}
+                defaultValue={props.defData[0]? (new Date(parseInt(props.defData[0].dueDate))):('')}
                 onChange={handleChange}
                 size="medium"
                 renderInput={(params) => <TextField {...params} />}
@@ -255,7 +143,7 @@ export default function TaskCard(props) {
               label="Description"
               multiline
               minRows={4}
-              value={props.desc}
+              defaultValue={props.defData[0]? (props.defData[0].description):('')}
             />
           </FormControl>
 
