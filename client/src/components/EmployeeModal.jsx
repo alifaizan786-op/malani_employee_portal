@@ -17,7 +17,7 @@ import ReviewCard from "./ReviewCard";
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 
-import {UPDATE_USER} from '../utils/mutation'
+import {UPDATE_USER} from '../utils/mutation';
 
 import {useMutation} from '@apollo/client';
 

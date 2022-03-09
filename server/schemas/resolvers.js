@@ -84,7 +84,7 @@ const resolvers = {
             return newTask
         },
         updateTask : async(parent,{status,description,_id,dueDate,recurring,renewIn})=>{
-            const editTask = await Task.findOneAndUpdate({_id},{status,description,_id,dueDate,recurring,renewIn},{new:true})
+            const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn},{new:true})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{
@@ -103,6 +103,7 @@ const resolvers = {
         },
         updateUser : async(parent,{_id,firstName,lastName,employeeId,department,level,active})=>{
         const editUser = await User.findOneAndUpdate({_id},{firstName,lastName,employeeId,department,level,active})
+        
         return editUser
         },
         deleteUser : async(parent,{_id})=>{
@@ -141,6 +142,10 @@ const resolvers = {
             const token = signToken(user);
 
             return{user, token};
+        },
+        updatePassword: async(parent,{_id,password})=>{
+            const editPassword = await User.findOneAndUpdate({_id},{password})
+            return editPassword
         }
     }
 };

@@ -22,8 +22,6 @@ import AddIcon from "@mui/icons-material/Add";
 
 export default function ViewAllEmps(props) {
 
-
-
   const [createEmp, setCreateEmp] = React.useState(false);
 
   const handlecreateEmpOpen = () => setCreateEmp(true);
@@ -33,7 +31,6 @@ export default function ViewAllEmps(props) {
   const {data, loading} = useQuery(QUERY_ALLEMPS,{pollInterval: 500,})
 
   const user = data?.users || [];
-
 
   document.title = "View All Employees";
 
@@ -51,11 +48,6 @@ export default function ViewAllEmps(props) {
       return user
     } 
   }
-
-
-  
-
-
 
 
   if(props.level === 2){
