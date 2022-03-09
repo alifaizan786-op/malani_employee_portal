@@ -32,6 +32,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {UPDATE_TASK} from '../utils/mutation';
 import {useMutation} from '@apollo/client';
 
+import EditTaskModal from "../components/TaskCard";
+
 import {
   DataGrid,
   GridToolbarContainer,
@@ -197,7 +199,7 @@ export default function ViewAllTasks(props) {
           renderCell: (params) => {
               return (
                 <Button type="submit"
-                  //onClick={handleCreateModalOpen}
+                  onClick={() => {handleEditModal(params.row._id)}}
                   variant="text" startIcon={<EditIcon />} sx={{
                       fontSize: "0.8125rem",
                       bgcolor: "#ffffff",
@@ -214,6 +216,19 @@ export default function ViewAllTasks(props) {
     }
   }
 
+  const [editData, setEditData] = React.useState({})
+
+  function handleEditModal(params){
+    const thisTask = tasks.filter(task => task._id === params)
+    setEditData(thisTask)
+    handleEditModalOpen()
+  }
+
+  const [editModal, setEditModal] = React.useState(false);
+
+  const handleEditModalOpen = () => setEditModal(true);
+
+  const handleEditModalClose = () => setEditModal(false);
 
   function gridStyling(){
     if(props.current){
@@ -290,6 +305,8 @@ export default function ViewAllTasks(props) {
        modalState={createModal} 
        closeModal={handleCreateModalClose} 
        user={user}/>
+
+       <EditTaskModal current={editModal} open={handleEditModalOpen} close={handleEditModalClose} defData={editData}/>
 
       <Typography
         variant="p"
