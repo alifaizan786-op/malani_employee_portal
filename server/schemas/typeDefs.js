@@ -106,6 +106,11 @@ const typeDefs = gql`
             _id:ID) : Review
 
         login( employeeId : String!, password: String!): Auth
+
+        updatePassword(
+             _id:ID,
+             password:String) : User
+        
         
 
 

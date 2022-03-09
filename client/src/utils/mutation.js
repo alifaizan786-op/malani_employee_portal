@@ -131,3 +131,27 @@ mutation addReview(
     review
   }
 }`
+
+export const UPDATE_TASK= gql`
+mutation updateTask(
+  $status: String
+	$description: String
+  $_id: ID
+  $dueDate: String
+  $recurring: Boolean
+  $renewIn: Int
+){
+  updateTask(
+    status: $status
+    description: $description
+    _id: $_id
+    dueDate: $dueDate
+    recurring: $recurring
+    renewIn: $renewIn
+  ){
+    _id
+    status
+    description
+    renewIn
+  }
+}`
