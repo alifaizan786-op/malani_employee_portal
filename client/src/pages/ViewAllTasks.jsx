@@ -1,6 +1,5 @@
 import React from "react";
 
-import TaskCard from "../components/TaskCard";
 import { useQuery } from '@apollo/client';
 import { QUERY_ALLTASKS} from '../utils/queries'
 import {
@@ -32,7 +31,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import {UPDATE_TASK} from '../utils/mutation';
 import {useMutation} from '@apollo/client';
 
-import EditTaskModal from "../components/TaskCard";
+import EditTaskModal from "../components/EditTaskModal";
 
 import {
   DataGrid,
@@ -43,7 +42,11 @@ import {
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
 
+import ClearIcon from '@mui/icons-material/Clear';
+
 const dateFormat = require('../utils/dateFormat');
+
+
 
 
 
@@ -84,18 +87,66 @@ export default function ViewAllTasks(props) {
       return style;
     }
   }
+  const [status, setStatus] = React.useState("");
+  const [employeeId, setEmployeeId] = React.useState("");
+
+  const handleChangeStatus = (event) => {
+    setStatus(event.target.value);
+  };
+  const handleChangeEmployeeId = (event) => {
+    setEmployeeId(event.target.value);
+  };
 
 
   const columns = checkLevelColumn();
   
-  const rows = [...checkLevel()];
+ 
   
   function CustomToolbar() {
     if(props.level === 2){
     return (
       <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 10%'}}>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={status}
+            label="Status"
+            onChange={handleChangeStatus}
+            >
+            <MenuItem value={''}>Status</MenuItem>
+            <MenuItem value={'pending'}>Pending</MenuItem>
+            <MenuItem value={'overdue'}>Overdue</MenuItem>
+            <MenuItem value={'submitted'}>Submitted</MenuItem>
+          </Select>
+        </FormControl>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+          <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={employeeId}
+            label="Status"
+            onChange={handleChangeEmployeeId}>
+            {user.map((employee, index )=>(
+            <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Button type="submit"
+            onClick={() => {
+              setStatus("");
+              setEmployeeId("");
+            }}
+            variant="text" startIcon={<ClearIcon />} sx={{
+                fontSize: "0.8125rem",
+                bgcolor: "#ffffff",
+                color: "primary.main",
+              }}>
+          Clear Filters
+        </Button>
         <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
         <GridToolbarDensitySelector />
         <GridToolbarExport />
         <Button type="submit"
@@ -111,12 +162,71 @@ export default function ViewAllTasks(props) {
     )}else{
       return (
         <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 10%'}}>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={status}
+              label="Status"
+              onChange={handleChangeStatus}
+              >
+              <MenuItem value={''}>Status</MenuItem>
+              <MenuItem value={'pending'}>Pending</MenuItem>
+              <MenuItem value={'overdue'}>Overdue</MenuItem>
+              <MenuItem value={'submitted'}>Submitted</MenuItem>
+            </Select>
+          </FormControl>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Employee</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={employeeId}
+              label="Status"
+              onChange={handleChangeEmployeeId}>
+              {user.map((employee, index )=>(
+              <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button type="submit"
+              onClick={() => {
+                setStatus("");
+                setEmployeeId("");
+              }}
+              variant="text" startIcon={<ClearIcon />} sx={{
+                  fontSize: "0.8125rem",
+                  bgcolor: "#ffffff",
+                  color: "primary.main",
+                }}>
+            Clear Filters
+          </Button>
           <GridToolbarColumnsButton />
-          <GridToolbarFilterButton />
           <GridToolbarDensitySelector />
           <GridToolbarExport />
         </GridToolbarContainer>
       )
+    }
+  }
+
+  const rows = [...filters(employeeId, status)];
+
+  function filters(id, status) {
+      if (id && status) {
+      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
+      const resultbystatus = resultbyuid.filter(
+        (task) => task.status === status
+      );
+      return resultbystatus;
+    } else if (status) {
+      const resultbystatus = tasks.filter((task) => task.status === status);
+      return resultbystatus;
+    } else if (id) {
+      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
+      return resultbyuid;
+    } else {
+      return tasks;
     }
   }
 
@@ -141,10 +251,9 @@ export default function ViewAllTasks(props) {
           }, 
           width: 50 
         },
-        { field: '_id', headerName: 'ID', width: 50 },
-        { field: 'status', headerName: 'Status', width: 130 },
+        { field: 'status', type:'singleSelect', valueOptions: ['Submitted', 'Pending', 'Over Due'], headerName: 'Status', width: 130 },
         { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
-        { field: 'dueDate', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
+        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
         { field: 'description', headerName: 'Description', width: 800 },
         {
           field: "Submit",
@@ -189,10 +298,9 @@ export default function ViewAllTasks(props) {
           }, 
           width: 50 
         },
-        { field: '_id', headerName: 'ID', width: 50 },
-        { field: 'status', headerName: 'Status', width: 130 },
+        { field: 'status', type:'singleSelect', valueOptions: ['submitted', 'pending', 'overdue'], headerName: 'Status', width: 130 },
         { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
-        { field: 'dueDate', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
+        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
         { field: 'description', headerName: 'Description', width: 800 },
         {
           field: "Edit",
@@ -298,6 +406,7 @@ export default function ViewAllTasks(props) {
           LoadingOverlay: LinearProgress,
         }}
         loading={loading}
+        disableColumnMenu
         getRowId={row => row._id}
       />
 
