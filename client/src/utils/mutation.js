@@ -132,15 +132,16 @@ mutation addReview(
   }
 }`
 
-export const UPDATE_TASK= gql`
+
+export const UPDATE_TASK = gql`
 mutation updateTask(
-  $status: String
-	$description: String
   $_id: ID
+  $status: String
+  $description: String
   $dueDate: String
   $recurring: Boolean
   $renewIn: Int
-){
+) {
   updateTask(
     status: $status
     description: $description
@@ -148,10 +149,11 @@ mutation updateTask(
     dueDate: $dueDate
     recurring: $recurring
     renewIn: $renewIn
-  ){
-    _id
+  ) {
     status
     description
+    dueDate
+    recurring
     renewIn
   }
 }`

@@ -72,7 +72,7 @@ export default function ViewAllTasks(props) {
 
   const user = data?.userActive || [];
 
-  console.log(tasks);
+
 
 
   document.title = "View All Tasks";
@@ -191,35 +191,23 @@ export default function ViewAllTasks(props) {
       </GridToolbarContainer>
     )}else{
       return (
-        <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 10%'}}>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
-            <InputLabel id="demo-simple-select-label">Status</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={status}
-              label="Status"
-              onChange={handleChangeStatus}
-              >
-              <MenuItem value={''}>Status</MenuItem>
-              <MenuItem value={'pending'}>Pending</MenuItem>
-              <MenuItem value={'overdue'}>Overdue</MenuItem>
-              <MenuItem value={'submitted'}>Submitted</MenuItem>
-            </Select>
-          </FormControl>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
-            <InputLabel id="demo-simple-select-label">Employee</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={employeeId}
-              label="Status"
-              onChange={handleChangeEmployeeId}>
-              {user.map((employee, index )=>(
-              <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+        <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 5%'}}>
+        <FormControl sx={{ m: 1, minWidth: "20%" }}>
+          <InputLabel id="demo-simple-select-label">Status</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            variant="outlined"
+            id="demo-simple-select"
+            value={status}
+            label="Status"
+            onChange={handleChangeStatus}
+            >
+            <MenuItem value={''}>Status</MenuItem>
+            <MenuItem value={'pending'}>Pending</MenuItem>
+            <MenuItem value={'overdue'}>Overdue</MenuItem>
+            <MenuItem value={'submitted'}>Submitted</MenuItem>
+          </Select>
+        </FormControl>
           <LocalizationProvider dateAdapter={AdapterDateFns} sx={{ m: 1, minWidth: "20%" }}>
             <DatePicker
               label="Due Date"
@@ -232,22 +220,23 @@ export default function ViewAllTasks(props) {
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
-          <Button type="submit"
-              onClick={() => {
-                setStatus("");
-                setEmployeeId("");
-              }}
-              variant="text" startIcon={<ClearIcon />} sx={{
-                  fontSize: "0.8125rem",
-                  bgcolor: "#ffffff",
-                  color: "primary.main",
-                }}>
-            Clear Filters
-          </Button>
-          <GridToolbarColumnsButton />
-          <GridToolbarDensitySelector />
-          <GridToolbarExport />
-        </GridToolbarContainer>
+        <Button type="submit"
+            onClick={() => {
+              setStatus("");
+              setEmployeeId("");
+              setDueDate(null);
+            }}
+            variant="text" startIcon={<ClearIcon />} sx={{
+                fontSize: "0.8125rem",
+                bgcolor: "#ffffff",
+                color: "primary.main",
+              }}>
+          Clear Filters
+        </Button>
+        <GridToolbarColumnsButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport />
+      </GridToolbarContainer>
       )
     }
   }
@@ -296,14 +285,14 @@ export default function ViewAllTasks(props) {
       }
     }
 
-  function checkLevel(){
+
+  
+  React.useEffect(() => {
     if(props.level === 1){
-      const userTasks = tasks.filter(task => task.user.employeeId === props.employeeId)
-      return userTasks
-    }else{
-      return tasks
+      setEmployeeId(props.employeeId)
     }
-  }
+  });
+  
 
   function checkLevelColumn(){
     if(props.level === 1){

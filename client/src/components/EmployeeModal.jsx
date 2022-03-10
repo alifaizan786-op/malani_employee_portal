@@ -65,19 +65,14 @@ export default function EmployeeModal(props) {
 
   const handleChange = (event) =>{
     const{name,value} = event.target
-
     setFormState({
        ...formState,
        [name]:value ,
     });
-
-    console.log(formState);
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-   
-
     try{
       const { data } = await updateUser({
         variables: {...formState},
@@ -97,7 +92,6 @@ export default function EmployeeModal(props) {
     })
     setEdit(false);
     window.location.assign('/ViewAllEmps');
-    
   }
   const [edit, setEdit] = React.useState(false);
 

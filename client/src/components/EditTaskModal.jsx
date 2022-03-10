@@ -20,6 +20,10 @@ import { DateTimePicker, LocalizationProvider } from "@mui/lab";
 
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 
+import {UPDATE_TASK} from '../utils/mutation';
+
+import {useMutation} from '@apollo/client';
+
 const dateFormat = require('../utils/dateFormat');
 
 const style = {
@@ -44,25 +48,59 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 export default function EditTaskModal(props) {
 
+  const [formState, setFormState] = React.useState({
+    status: '',
+    description: '',
+    _id: '',
+    dueDate: '',
+    recurring: '',
+    renewIn: '',
+  })
 
+  const [date, setDate] = React.useState(null);
 
-  const [value, setValue] = React.useState(props.defData[0] ? (new Date(parseInt(props.defData[0].dueDate))) : (''));
+  React.useEffect(() => {
+    if(props.defData[0]){
+      setDate((new Date(parseInt(props.defData[0].dueDate))).toISOString())
+    }
+  }, [props.current]);
   
   React.useEffect(() => {
-    setValue(props.defData[0] ? (new Date(parseInt(props.defData[0].dueDate))) : (''))
+    if(props.defData[0]){
+      setFormState({
+        status: props.defData[0].status,
+        description: props.defData[0].description,
+        _id: props.defData[0]._id,
+        dueDate: new Date(parseInt(props.defData[0].dueDate)).toISOString(),
+        recurring: props.defData[0].recurring,
+        renewIn: props.defData[0].renewIn,
+      })
+    }
   }, [props.current]);
 
-  console.log(value);
+  const handleChange = (event) =>{
+    const{name,value} = event.target
+    setFormState({
+      ...formState,
+      dueDate: date,
+      recurring:checked,
+       [name]:value ,
+    });
+  };
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const[updateTask,{error,data}] = useMutation(UPDATE_TASK)
+
+  console.log(formState);
+
+  const handleDateChange = (newValue) => {
+    setDate(newValue);
   };
 
   const [checked, setChecked] = React.useState(props.defData[0]? (props.defData[0].recurring):(true));
 
-    const handleSwitchChange = (event) => {
+  const handleSwitchChange = (event) => {
       setChecked(event.target.checked);
-    };
+  };
 
   function checkChecked(){
     if(checked){
@@ -73,18 +111,41 @@ export default function EditTaskModal(props) {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select-size-medium"
                     label="Status"
+                    name="renewIn"
+                    onChange={handleChange}
                     size="medium"
                     defaultValue = {props.defData[0]? (props.defData[0].renewIn):('')}
                     >
                     <MenuItem value={'1'}>Daily</MenuItem>
                     <MenuItem value={'7'}>Weekly</MenuItem>
-                    <MenuItem value={'31'}>Monthly</MenuItem>
+                    <MenuItem value={'30'}>Monthly</MenuItem>
                     <MenuItem value={'183'}>Every 6-Months</MenuItem>
                     <MenuItem value={'365'}>Yearly</MenuItem>
                 </Select>
             </FormControl>
         )
     }
+  }
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try{
+      const { data } = await updateTask({
+        variables: {...formState},
+      });
+
+    }catch(e){
+      console.error(e);
+    }
+    setFormState({
+      status: '',
+      description: '',
+      _id: '',
+      dueDate: '',
+      recurring: '',
+      renewIn: '',
+    })
+    window.location.assign('/ViewAllTasks');
   }
 
 
@@ -109,6 +170,9 @@ export default function EditTaskModal(props) {
               disabled = {true}
               defaultValue={props.defData[0]? (props.defData[0].user.employeeId):('')}
               size="medium"
+              onChange={handleChange}
+              name="employeeId"
+              disabled
             />
             <FormHelperText id="component-helper-text">
               "Employee First Name" - "Employee Initials"
@@ -123,7 +187,8 @@ export default function EditTaskModal(props) {
               defaultValue={props.defData[0]? (props.defData[0].status):('')}
               label="Status"
               size="medium"
-              //onChange={handleChange}
+              name="status"
+              onChange={handleChange}
             >
               <MenuItem value={"pending"}>Pending</MenuItem>
               <MenuItem value={"overdue"}>Overdue</MenuItem>
@@ -133,15 +198,12 @@ export default function EditTaskModal(props) {
 
           <FormControl>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateTimePicker
-                label="Due Date"
-                id="size-medium"
-                clearable
-                defaultValue={value}
-                onChange={handleChange}
-                size="medium"
-                renderInput={(params) => <TextField {...params} />}
-              />
+            <DateTimePicker
+              label="Due Date"
+              value={date}  
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
             </LocalizationProvider>
           </FormControl>
 
@@ -150,6 +212,8 @@ export default function EditTaskModal(props) {
               id="outlined-multiline-flexible"
               label="Description"
               multiline
+              name="description"
+              onChange={handleChange}
               minRows={4}
               defaultValue={props.defData[0]? (props.defData[0].description):('')}
             />
@@ -170,7 +234,6 @@ export default function EditTaskModal(props) {
               </Typography>
               <Switch  
                   size="large" 
-                  defaultChecked
                   {...label}
                   onChange={handleSwitchChange} 
                 />
@@ -182,6 +245,7 @@ export default function EditTaskModal(props) {
             type="submit"
             fullWidth
             variant="contained"
+            onClick={handleFormSubmit}
             sx={{
               fontSize: "20px",
               bgcolor: "primary.main",
