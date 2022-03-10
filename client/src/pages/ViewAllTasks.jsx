@@ -3,13 +3,20 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ALLTASKS} from '../utils/queries'
 import {
+  Box,
   Typography,
-  Grid,
   Button,
+  Divider,
+  Card,
+  Modal,
   FormControl,
   InputLabel,
+  FormHelperText,
   Select,
   MenuItem,
+  TextField,
+  Switch,
+  Grid
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
@@ -44,6 +51,10 @@ import {
 
 import ClearIcon from '@mui/icons-material/Clear';
 
+import { DatePicker, LocalizationProvider } from "@mui/lab";
+
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+
 const dateFormat = require('../utils/dateFormat');
 
 
@@ -60,6 +71,9 @@ export default function ViewAllTasks(props) {
   const tasks = data?.tasks || [];
 
   const user = data?.userActive || [];
+
+  console.log(tasks);
+
 
   document.title = "View All Tasks";
 
@@ -89,6 +103,7 @@ export default function ViewAllTasks(props) {
   }
   const [status, setStatus] = React.useState("");
   const [employeeId, setEmployeeId] = React.useState("");
+  const [dueDate, setDueDate] = React.useState(null);
 
   const handleChangeStatus = (event) => {
     setStatus(event.target.value);
@@ -96,20 +111,22 @@ export default function ViewAllTasks(props) {
   const handleChangeEmployeeId = (event) => {
     setEmployeeId(event.target.value);
   };
+  const handleChangeDueDate = (event) => {
+    setDueDate(event.target.value);
+  };
 
 
   const columns = checkLevelColumn();
-  
- 
-  
+   
   function CustomToolbar() {
     if(props.level === 2){
     return (
-      <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 10%'}}>
-        <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+      <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 5%'}}>
+        <FormControl sx={{ m: 1, minWidth: "20%" }}>
           <InputLabel id="demo-simple-select-label">Status</InputLabel>
           <Select
             labelId="demo-simple-select-label"
+            variant="outlined"
             id="demo-simple-select"
             value={status}
             label="Status"
@@ -121,7 +138,7 @@ export default function ViewAllTasks(props) {
             <MenuItem value={'submitted'}>Submitted</MenuItem>
           </Select>
         </FormControl>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: "20%" }}>
+          <FormControl sx={{ m: 1, minWidth: "20%" }}>
           <InputLabel id="demo-simple-select-label">Employee</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -134,10 +151,23 @@ export default function ViewAllTasks(props) {
             ))}
           </Select>
         </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDateFns} sx={{ m: 1, minWidth: "20%" }}>
+            <DatePicker
+              label="Due Date"
+              value={dueDate}
+              clearable
+              error={false}
+              onChange={(newValue) => {
+                setDueDate(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         <Button type="submit"
             onClick={() => {
               setStatus("");
               setEmployeeId("");
+              setDueDate(null);
             }}
             variant="text" startIcon={<ClearIcon />} sx={{
                 fontSize: "0.8125rem",
@@ -190,6 +220,18 @@ export default function ViewAllTasks(props) {
               ))}
             </Select>
           </FormControl>
+          <LocalizationProvider dateAdapter={AdapterDateFns} sx={{ m: 1, minWidth: "20%" }}>
+            <DatePicker
+              label="Due Date"
+              value={dueDate}
+              clearable
+              error={false}
+              onChange={(newValue) => {
+                setDueDate(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
           <Button type="submit"
               onClick={() => {
                 setStatus("");
@@ -210,25 +252,49 @@ export default function ViewAllTasks(props) {
     }
   }
 
-  const rows = [...filters(employeeId, status)];
+  const rows = [...filters(employeeId, status, dueDate)];
 
-  function filters(id, status) {
-      if (id && status) {
-      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
-      const resultbystatus = resultbyuid.filter(
-        (task) => task.status === status
-      );
-      return resultbystatus;
-    } else if (status) {
-      const resultbystatus = tasks.filter((task) => task.status === status);
-      return resultbystatus;
-    } else if (id) {
-      const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
-      return resultbyuid;
+
+  function filters(id, status, dueDate) {
+      if (id && status && dueDate) {
+        console.log(id + status + dueDate);
+        const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
+        const resultbystatus = resultbyuid.filter((task) => task.status === status);
+        const resultbyyear = resultbystatus.filter((task) => new Date(parseInt(task.dueDate)).getYear() === dueDate.getYear())
+        const resultbymonth = resultbyyear.filter((task) => new Date(parseInt(task.dueDate)).getMonth() === dueDate.getMonth())
+        const resultbydate = resultbymonth.filter((task) => new Date(parseInt(task.dueDate)).getDate() === dueDate.getDate())
+        return resultbydate;
+    } else if (status && dueDate) {
+        const resultbystatus = tasks.filter((task) => task.status === status);
+        const resultbyyear = resultbystatus.filter((task) => new Date(parseInt(task.dueDate)).getYear() === dueDate.getYear())
+        const resultbymonth = resultbyyear.filter((task) => new Date(parseInt(task.dueDate)).getMonth() === dueDate.getMonth())
+        const resultbydate = resultbymonth.filter((task) => new Date(parseInt(task.dueDate)).getDate() === dueDate.getDate())
+        return resultbydate;
+    } else if (status && id) {
+        const resultbystatus = tasks.filter((task) => task.status === status);
+        const resultbyuid = resultbystatus.filter((task) => task.user.employeeId === id);
+        return resultbyuid;
+    }else if (id && dueDate) {
+        const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
+        const resultbyyear = resultbyuid.filter((task) => new Date(parseInt(task.dueDate)).getYear() === dueDate.getYear())
+        const resultbymonth = resultbyyear.filter((task) => new Date(parseInt(task.dueDate)).getMonth() === dueDate.getMonth())
+        const resultbydate = resultbymonth.filter((task) => new Date(parseInt(task.dueDate)).getDate() === dueDate.getDate())
+        return resultbydate;
+    }else if (id) {
+        const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
+        return resultbyuid;
+    }else if (status) {
+        const rresultbystatus = tasks.filter((task) => task.status === status);
+        return rresultbystatus;
+    }else if (dueDate) {
+        const resultbyyear = tasks.filter((task) => new Date(parseInt(task.dueDate)).getYear() === dueDate.getYear())
+        const resultbymonth = resultbyyear.filter((task) => new Date(parseInt(task.dueDate)).getMonth() === dueDate.getMonth())
+        const resultbydate = resultbymonth.filter((task) => new Date(parseInt(task.dueDate)).getDate() === dueDate.getDate())
+        return resultbydate;
     } else {
-      return tasks;
+        return tasks;
+      }
     }
-  }
 
   function checkLevel(){
     if(props.level === 1){
@@ -371,8 +437,8 @@ export default function ViewAllTasks(props) {
         transition: theme.transitions.create('minWidth', {
           easing: theme.transitions.easing.easeOut,
           duration: theme.transitions.duration.enteringScreen,}),
-          height: '92vh', 
-          minWidth: '85vw'
+          height: '91.5vh', 
+          minWidth: '87vw'
       });
       return style
     } else {
@@ -381,7 +447,7 @@ export default function ViewAllTasks(props) {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        height: '92vh', 
+        height: '91.5vh', 
         minWidth: '95.5vw'
       });
       return style
