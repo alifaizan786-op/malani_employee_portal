@@ -109,7 +109,8 @@ const typeDefs = gql`
 
         updatePassword(
              _id:ID,
-             password:String) : User
+             oldPassword:String
+             newPassword:String) : User
         
         
 

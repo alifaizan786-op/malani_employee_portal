@@ -81,7 +81,7 @@ export default function Main() {
         />
       </Route>
       <Route exact path={"/Settings"}>
-        <SettingsPage />
+        <SettingsPage _id={_id}/>
       </Route>
     </Router>
   );

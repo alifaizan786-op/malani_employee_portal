@@ -1,6 +1,7 @@
 const { Task, User, Review, Quotes} = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
 
 const resolvers = {
     Query : {
@@ -132,7 +133,7 @@ const resolvers = {
             if(!user){
                 throw new AuthenticationError('Employee Id is incorrect');
             }
-
+                
             const correctPassword = await user.isCorrectPassword(password)
 
             if(!correctPassword){
@@ -142,10 +143,22 @@ const resolvers = {
             const token = signToken(user);
 
             return{user, token};
-        },
-        updatePassword: async(parent,{_id,password})=>{
-            const editPassword = await User.findOneAndUpdate({_id},{password})
-            return editPassword
+        }
+        ,
+        updatePassword: async(parent,{_id,oldPassword, newPassword})=>{
+            console.log(newPassword);
+
+
+            const user = await User.findOne({_id})
+            const correctPassword = await user.isCorrectPassword(oldPassword)
+            
+            if(!correctPassword){
+                throw new AuthenticationError('Password is Incorrect')
+            }else{
+            const saltRound = 10
+            const encryptPassword =  await bcrypt.hash(newPassword, saltRound)
+            const changePass = await User.findOneAndUpdate({_id},{password:encryptPassword})
+            }
         }
     }
 };
