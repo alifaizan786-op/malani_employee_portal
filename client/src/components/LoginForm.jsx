@@ -119,13 +119,12 @@ export default function LoginForm() {
             fullWidth
             variant="filled"
             //color='secondary.main'
-            sx={{ backgroundColor: "rgba(255,255,255,0.2)" }}
+            sx={{ backgroundColor: "rgba(255,255,255,0.2)", bgcolor: "primary.light" }}
             id="employeeId"
             label="Employee Id"
             name="employeeId"
             autoComplete="employeeId"
             autoFocus
-            sx={{ bgcolor: "primary.light" }}
             value={formState.employeeId.toLowerCase()}  
             onChange={handleChange}
           />

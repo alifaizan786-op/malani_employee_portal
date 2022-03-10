@@ -155,3 +155,19 @@ mutation updateTask(
     renewIn
   }
 }`
+
+
+export const UPDATE_PASSWORD= gql`
+mutation updatePassword(
+  $_id: ID,
+  $newPassword: String
+	$oldPassword: String) {
+  updatePassword(
+    _id: $_id,
+    newPassword:$newPassword,
+    oldPassword:$oldPassword,
+  	) {
+    password
+    firstName
+  }
+}`

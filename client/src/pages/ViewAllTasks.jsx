@@ -141,7 +141,7 @@ export default function ViewAllTasks(props) {
           }, 
           width: 50 
         },
-        { field: '_id', headerName: 'ID', width: 50 },
+        // { field: '_id', headerName: 'ID', width: 50 },
         { field: 'status', headerName: 'Status', width: 130 },
         { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
         { field: 'dueDate', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
@@ -189,7 +189,7 @@ export default function ViewAllTasks(props) {
           }, 
           width: 50 
         },
-        { field: '_id', headerName: 'ID', width: 50 },
+        // { field: 'user', headerName: 'ID', width: 50 },
         { field: 'status', headerName: 'Status', width: 130 },
         { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
         { field: 'dueDate', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},

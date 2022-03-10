@@ -1,12 +1,16 @@
 //From React
 import * as React from "react";
 
+import {UPDATE_PASSWORD} from '../utils/mutation'
+import {useMutation} from '@apollo/client';
+
 import {
     Button,
     Typography,
     TextField,
     InputAdornment,
     IconButton,
+    FormHelperText,
     Grid,
     FormControl
 } from "@mui/material";
@@ -14,7 +18,77 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function SettingsPage () {
+export default function SettingsPage (props) {
+
+  const [formState, setFormState] = React.useState({
+    oldPassword:'',
+    newPassword:''
+  })
+  
+
+  const [errorText, setErrorText] = React.useState('')
+
+  const[settingsPage,{error,data}] = useMutation(UPDATE_PASSWORD)
+
+  const handleChange = (event)=>{
+    const {name,value} = event.target
+
+    setFormState({
+      ...formState,
+      _id:props._id,
+      [name]:value,
+    });
+
+    console.log(formState);
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+   
+    try{
+      const { data } = await settingsPage({
+        variables: {...formState},
+      });
+      
+      
+
+    }catch(e){
+      console.error(e);
+      setErrorText('password is incorrect')
+    }
+    setFormState({
+      newPassword:'',
+      oldPassword:''
+    })
+    setConfirmPass('')
+  }
+
+  const [confirmPass, setConfirmPass] = React.useState('')
+  
+
+
+  function matchPassword(){
+    if(formState.newPassword && confirmPass){
+      if(formState.newPassword !== confirmPass){
+      return(
+        <FormHelperText id="component-helper-text" sx={{ 
+          color:'red',   
+          border: 'solid 0.5px',
+          backgroundColor: '#fdbcbc',
+          fontSize:'15px',
+          textAlign: 'center',
+          height: '30px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '14px',}}>
+          Password is not matching
+        </FormHelperText>
+      )
+    }}
+  }
+  
+
 
   const [showPassword, setShowPassword] = React.useState(false)
 
@@ -25,6 +99,27 @@ export default function SettingsPage () {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  function loginError(){
+    if(errorText){
+      return(
+        <FormHelperText id="component-helper-text" sx={{ 
+          color:'red',   
+          border: 'solid 0.5px',
+          backgroundColor: '#fdbcbc',
+          fontSize:'15px',
+          textAlign: 'center',
+          height: '30px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '14px',}}>
+          {errorText}
+        </FormHelperText>
+      )
+    }
+  }
+
+
 
     return(
         <Grid
@@ -39,6 +134,8 @@ export default function SettingsPage () {
                 marginTop: '10%',
                 marginLeft: '10%'
             }}>
+            {loginError()}
+            {matchPassword()}
             <Typography
                     variant="h3"
                     sx={{
@@ -53,11 +150,13 @@ export default function SettingsPage () {
                 margin="normal"
                 required
                 variant="standard"
-                name="password"
+                 name="oldPassword"
+                value={formState.oldPassword}
+                onChange={handleChange}
                 label="Current Password"
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                autoComplete="current-password"
+                // autoComplete="current-password"
                 sx={{ maxWidth:'30%', marginX:'40%', marginY:'1%' }}
                 InputProps={{
                 endAdornment:(
@@ -81,9 +180,11 @@ export default function SettingsPage () {
                 variant="standard"
                 name="password"
                 label="New Password"
+                
+                onChange = {(event) => {setConfirmPass(event.target.value)}}
                 type={showPassword ? 'text' : 'password'}
                 id="password"
-                autoComplete="current-password"
+                // autoComplete="current-password"
                 sx={{ maxWidth:'30%', marginX:'40%', marginY:'1%' }}
                 InputProps={{
                 endAdornment:(
@@ -105,11 +206,15 @@ export default function SettingsPage () {
                 margin="normal"
                 required
                 variant="standard"
-                name="password"
+                name="newPassword"
+                value={formState.newPassword}
+                onChange={handleChange}
                 label="Confirm Password"
                 type={showPassword ? 'text' : 'password'}
+                
+                
                 id="password"
-                autoComplete="current-password"
+                // autoComplete="current-password"
                 sx={{ maxWidth:'30%', marginX:'40%', marginY:'1%' }}
                 InputProps={{
                 endAdornment:(
@@ -137,7 +242,9 @@ export default function SettingsPage () {
                     bgcolor: "primary.main",
                     color: "primary.light",
                     borderRadius: "10px",
-                }}>
+                }}
+                onClick={handleFormSubmit}
+                >
               Save
             </Button>
           </FormControl>

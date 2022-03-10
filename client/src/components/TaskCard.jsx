@@ -100,6 +100,7 @@ export default function EditTaskModal(props) {
             <TextField
               label="Employee Id"
               id="outlined-size-medium"
+              disabled = {true}
               defaultValue={props.defData[0]? (props.defData[0].user.employeeId):('')}
               size="medium"
             />
