@@ -46,7 +46,13 @@ export default function EditTaskModal(props) {
 
 
 
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [value, setValue] = React.useState(props.defData[0] ? (new Date(parseInt(props.defData[0].dueDate))) : (''));
+  
+  React.useEffect(() => {
+    setValue(props.defData[0] ? (new Date(parseInt(props.defData[0].dueDate))) : (''))
+  }, [props.current]);
+
+  console.log(value);
 
   const handleChange = (newValue) => {
     setValue(newValue);
@@ -129,7 +135,8 @@ export default function EditTaskModal(props) {
               <DateTimePicker
                 label="Due Date"
                 id="size-medium"
-                defaultValue={props.defData[0]? (new Date(parseInt(props.defData[0].dueDate))):('')}
+                clearable
+                defaultValue={value}
                 onChange={handleChange}
                 size="medium"
                 renderInput={(params) => <TextField {...params} />}
