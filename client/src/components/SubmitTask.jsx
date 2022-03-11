@@ -16,7 +16,9 @@ import {
   MenuItem,
   TextField,
   Switch,
-  Grid
+    Grid,
+    Snackbar,
+  Alert
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
@@ -65,10 +67,13 @@ export default function SubmitTask(props) {
             const { data } = await submitTask({
                 variables: { ...formState },
             });
+            props.open();
+
         } catch (e) {
             console.log(e);
         }
     }
+
     
     
     return (

@@ -107,7 +107,7 @@ export default function Quote(props) {
         flexDirection: "column",
         alignItems: "center",
       }}>
-      <Snackbar open={notification} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:'top', horizontal:'left' }}>
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Quote Of The Day Updated Successfully
         </Alert>

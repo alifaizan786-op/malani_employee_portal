@@ -74,6 +74,7 @@ export default function CreateTask (props){
 
     setFormState({
       ...formState,
+      dueDate: `${dateValue.toISOString()}`,
       [name] : value,
     });
 
@@ -81,14 +82,13 @@ export default function CreateTask (props){
 
   const handleFormSubmit = async (event)=>{
     event.preventDefault()
-
     try{
       const{data} = await createTask({
         variables:{...formState}
       })
+      props.closeModal()
     } catch(e){
       console.log(e); 
-
     }
   }
 
