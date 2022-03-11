@@ -30,4 +30,4 @@ const formattedMonth = (timestamp, {
 };
 
 
-console.log(formattedMonth(new Date));
+console.log(new Date(1646958770000))
