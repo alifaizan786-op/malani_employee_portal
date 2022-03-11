@@ -41,6 +41,8 @@ import {
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
 
+import SubmitTask from "../components/SubmitTask";
+
 import ClearIcon from '@mui/icons-material/Clear';
 
 import { DatePicker, LocalizationProvider } from "@mui/lab";
@@ -61,7 +63,7 @@ export default function ViewAllTasks(props) {
   //     _id:'',
   //     status:'submitted'
   //     })
-  //    const[updateStatus,{error,data}] = useMutation(UPDATE_STATUS)
+  
     
   //   const handleFormSubmit = async (event) => {
   //   event.preventDefault();
@@ -125,6 +127,7 @@ export default function ViewAllTasks(props) {
     setDueDate(event.target.value);
   };
 
+  
 
   const columns = checkLevelColumn();
    
@@ -337,16 +340,7 @@ export default function ViewAllTasks(props) {
               </Button>
             );}else{
               return (
-                <Button type="submite"
-                  //  onClick={handleFormSubmit}
-
-                  variant="text" startIcon={<ArrowUpwardIcon />} sx={{
-                      fontSize: "0.8125rem",
-                      bgcolor: "#ffffff",
-                      color: "primary.main",
-                    }}>
-                Submit
-              </Button>
+                <SubmitTask _id={ params.row._id}/>
             );}
           }, 
           width: 150 

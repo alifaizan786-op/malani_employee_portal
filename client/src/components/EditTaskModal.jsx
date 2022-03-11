@@ -90,7 +90,7 @@ export default function EditTaskModal(props) {
 
   const[updateTask,{error,data}] = useMutation(UPDATE_TASK)
 
-  console.log(formState);
+
 
   const handleDateChange = (newValue) => {
     setDate(newValue);
