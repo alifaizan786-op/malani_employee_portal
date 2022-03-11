@@ -160,6 +160,10 @@ const resolvers = {
             const encryptPassword =  await bcrypt.hash(newPassword, saltRound)
             const changePass = await User.findOneAndUpdate({_id},{password:encryptPassword})
             }
+        },
+        upadateStatus: async(parent,{_id,status})=>{
+            const upadateStatus = await Task.findByIdAndUpdate({_id},{status},{new:true})
+            return upadateStatus
         }
     }
 };

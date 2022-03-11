@@ -112,6 +112,10 @@ const typeDefs = gql`
              oldPassword:String
              newPassword:String) : User
         
+        upadateStatus(
+            _id:ID,
+            status:String
+        )  : Task
         
 
 
