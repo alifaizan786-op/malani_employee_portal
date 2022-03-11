@@ -4,6 +4,7 @@ import * as React from "react";
 import {UPDATE_PASSWORD} from '../utils/mutation'
 import {useMutation} from '@apollo/client';
 
+import Fade from '@mui/material/Fade';
 import {
     Button,
     Typography,
@@ -11,7 +12,8 @@ import {
     InputAdornment,
     IconButton,
     FormHelperText,
-    Grid,
+    Grid,Snackbar,
+    Alert,
     FormControl
 } from "@mui/material";
 
@@ -58,7 +60,7 @@ export default function SettingsPage (props) {
     }
     setFormState({
       newPassword:'',
-      oldPassword:''
+      oldPassword:'',
     })
     setConfirmPass('')
   }
@@ -87,7 +89,7 @@ export default function SettingsPage (props) {
       )
     }}
   }
-  
+    
 
 
   const [showPassword, setShowPassword] = React.useState(false)
@@ -119,6 +121,24 @@ export default function SettingsPage (props) {
     }
   }
 
+ const [state, setState] = React.useState({
+    open: false,
+    Transition: Fade,
+  });
+
+  const handleClick = (Transition) => () => {
+    setState({
+      open: true,
+      Transition,
+    });
+  };
+
+  const handleClose = () => {
+    setState({
+      ...state,
+      open: false,
+    });
+  };
 
 
     return(
@@ -134,8 +154,10 @@ export default function SettingsPage (props) {
                 marginTop: '10%',
                 marginLeft: '10%'
             }}>
+
             {loginError()}
             {matchPassword()}
+
             <Typography
                     variant="h3"
                     sx={{
@@ -244,9 +266,19 @@ export default function SettingsPage (props) {
                     borderRadius: "10px",
                 }}
                 onClick={handleFormSubmit}
+                // onClick={handleClick}
                 >
+                
               Save
             </Button>
+            <Snackbar
+        open={state.open}autoHideDuration={6000} 
+        onClose={handleClose}
+        TransitionComponent={state.Transition}
+        key={state.Transition.name}
+        anchorOrigin={{ vertical:'top', horizontal:'left' }}
+      ><Alert severity="success">This is a success message!</Alert></Snackbar>
+      
           </FormControl>
 
           <Typography

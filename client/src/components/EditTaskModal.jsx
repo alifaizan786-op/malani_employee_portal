@@ -172,7 +172,6 @@ export default function EditTaskModal(props) {
               size="medium"
               onChange={handleChange}
               name="employeeId"
-              disabled
             />
             <FormHelperText id="component-helper-text">
               "Employee First Name" - "Employee Initials"

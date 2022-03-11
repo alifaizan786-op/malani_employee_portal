@@ -159,7 +159,7 @@ mutation updateTask(
 }`
 
 
-export const UPDATE_PASSWORD= gql`
+export const UPDATE_PASSWORD = gql`
 mutation updatePassword(
   $_id: ID,
   $newPassword: String
@@ -171,5 +171,21 @@ mutation updatePassword(
   	) {
     password
     firstName
+  }
+}`
+
+
+export const UPDATE_STATUS = gql`
+mutation upadateStatus(
+  $_id:ID,
+  $status: String
+){
+  upadateStatus(
+    _id:$_id,
+    status: $status
+   
+  ){
+    _id
+    status
   }
 }`

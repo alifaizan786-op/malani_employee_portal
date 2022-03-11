@@ -20,22 +20,14 @@ import {
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
-
 import CircularProgress from '@mui/material/CircularProgress';
-
 import CreateTask from "../components/CreateTask";
-
 import { styled, useTheme } from '@mui/material/styles';
-
 import CircleIcon from '@mui/icons-material/Circle';
-
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
 import EditIcon from '@mui/icons-material/Edit';
-
 import LinearProgress from '@mui/material/LinearProgress';
-
-import {UPDATE_TASK} from '../utils/mutation';
+import {UPDATE_STATUS} from '../utils/mutation';
 import {useMutation} from '@apollo/client';
 
 import EditTaskModal from "../components/EditTaskModal";
@@ -63,17 +55,35 @@ const dateFormat = require('../utils/dateFormat');
 
 export default function ViewAllTasks(props) {
 
-  
+
+ 
+  //   const [formState, setFormState] = React.useState({
+  //     _id:'',
+  //     status:'submitted'
+  //     })
+  //    const[updateStatus,{error,data}] = useMutation(UPDATE_STATUS)
+    
+  //   const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+   
+  //   try{
+  //     const { data } = await updateStatus({
+  //       variables: {...formState},
+
+  //     });
+  //   }catch(e){
+  //     console.error(e);
+  //   }
+    
+  //   console.log(formState);
+  // }
+
 
   const { loading , data } = useQuery(QUERY_ALLTASKS,{pollInterval: 500,})
-
 
   const tasks = data?.tasks || [];
 
   const user = data?.userActive || [];
-
-
-
 
   document.title = "View All Tasks";
 
@@ -83,7 +93,7 @@ export default function ViewAllTasks(props) {
 
   const handleCreateModalClose = () => setCreateModal(false)
 
-  function dotColor(status){
+  function dotColor(status){  //color or statusbar
     if (status.toLowerCase() === "submitted") {
       let style = {
         color : 'green'
@@ -118,7 +128,7 @@ export default function ViewAllTasks(props) {
 
   const columns = checkLevelColumn();
    
-  function CustomToolbar() {
+  function CustomToolbar() { //CustomToolbar for manager & employee
     if(props.level === 2){
     return (
       <GridToolbarContainer sx={{justifyContent: 'space-between',padding: '0% 5%'}}>
@@ -244,7 +254,7 @@ export default function ViewAllTasks(props) {
   const rows = [...filters(employeeId, status, dueDate)];
 
 
-  function filters(id, status, dueDate) {
+  function filters(id, status, dueDate) { //Task Filter bar
       if (id && status && dueDate) {
         console.log(id + status + dueDate);
         const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
@@ -294,7 +304,7 @@ export default function ViewAllTasks(props) {
   });
   
 
-  function checkLevelColumn(){
+  function checkLevelColumn(){// check and show task according to manager & employee
     if(props.level === 1){
       let columns = [
         {
@@ -327,8 +337,9 @@ export default function ViewAllTasks(props) {
               </Button>
             );}else{
               return (
-                <Button type="submit"
-                  //onClick={handleCreateModalOpen}
+                <Button type="submite"
+                  //  onClick={handleFormSubmit}
+
                   variant="text" startIcon={<ArrowUpwardIcon />} sx={{
                       fontSize: "0.8125rem",
                       bgcolor: "#ffffff",
@@ -393,7 +404,7 @@ export default function ViewAllTasks(props) {
 
   const handleEditModalClose = () => setEditModal(false);
 
-  function gridStyling(){
+  function gridStyling(){ //grid Styling
     if(props.current){
       let style=(theme) => ({
         transition: theme.transitions.create('margin', {
@@ -420,7 +431,7 @@ export default function ViewAllTasks(props) {
     }
   }
 
-  function dataGridStyling(){
+  function dataGridStyling(){ //data grid of task
     if(props.current){
       let style=(theme) => ({
         transition: theme.transitions.create('minWidth', {
