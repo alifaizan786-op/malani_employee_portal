@@ -16,7 +16,9 @@ import {
   MenuItem,
   TextField,
   Switch,
-  Grid
+  Grid,
+  Snackbar,
+  Alert
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
@@ -56,29 +58,6 @@ const dateFormat = require('../utils/dateFormat');
 
 
 export default function ViewAllTasks(props) {
-
-
- 
-  //   const [formState, setFormState] = React.useState({
-  //     _id:'',
-  //     status:'submitted'
-  //     })
-  
-    
-  //   const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-   
-  //   try{
-  //     const { data } = await updateStatus({
-  //       variables: {...formState},
-
-  //     });
-  //   }catch(e){
-  //     console.error(e);
-  //   }
-    
-  //   console.log(formState);
-  // }
 
 
   const { loading , data } = useQuery(QUERY_ALLTASKS,{pollInterval: 500,})
@@ -340,7 +319,7 @@ export default function ViewAllTasks(props) {
               </Button>
             );}else{
               return (
-                <SubmitTask _id={ params.row._id}/>
+                <SubmitTask _id={params.row._id} open={handleNotificationClick}/>
             );}
           }, 
           width: 150 
@@ -448,6 +427,22 @@ export default function ViewAllTasks(props) {
     }
   }
 
+  const [notification, setNotification] = React.useState(false);
+
+  const handleNotificationClick = () => {
+      setNotification(true);
+  };
+
+  const handleNotificationClose = (event, reason) => {
+      if (reason === 'clickaway') {
+      return;
+      }
+
+      setNotification(false);
+  };
+
+  const praise = ['Good Job!', 'Great Job!', 'Awesome Job!', 'Excellent Job!', 'Outstanding Job!', 'Keep it up!'];
+
 
   
   return (
@@ -456,6 +451,11 @@ export default function ViewAllTasks(props) {
       sm={10}
       xs={10}
       sx={gridStyling()}>
+      <Snackbar open={notification} autoHideDuration={6000} onClose={handleNotificationClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
+        <Alert onClose={handleNotificationClose} severity="success" sx={{ width: '100%' }}>
+          {praise[Math.floor(Math.random() * praise.length)]}
+        </Alert>
+      </Snackbar>
 
         <DataGrid
         rows={rows}

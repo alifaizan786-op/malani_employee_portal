@@ -71,7 +71,7 @@ export default function EditTaskModal(props) {
         status: props.defData[0].status,
         description: props.defData[0].description,
         _id: props.defData[0]._id,
-        dueDate: new Date(parseInt(props.defData[0].dueDate)).toISOString(),
+        dueDate: date,
         recurring: props.defData[0].recurring,
         renewIn: props.defData[0].renewIn,
       })
@@ -81,10 +81,10 @@ export default function EditTaskModal(props) {
   const handleChange = (event) =>{
     const{name,value} = event.target
     setFormState({
-      ...formState,
-      dueDate: date,
-      recurring:checked,
-       [name]:value ,
+        ...formState,
+        recurring: checked,
+        dueDate: date,
+        [name]:value ,
     });
   };
 
@@ -93,7 +93,7 @@ export default function EditTaskModal(props) {
 
 
   const handleDateChange = (newValue) => {
-    setDate(newValue);
+    setDate(new Date(newValue).toISOString());
   };
 
   const [checked, setChecked] = React.useState(props.defData[0]? (props.defData[0].recurring):(true));
@@ -118,7 +118,7 @@ export default function EditTaskModal(props) {
                     >
                     <MenuItem value={'1'}>Daily</MenuItem>
                     <MenuItem value={'7'}>Weekly</MenuItem>
-                    <MenuItem value={'30'}>Monthly</MenuItem>
+                    <MenuItem value={'31'}>Monthly</MenuItem>
                     <MenuItem value={'183'}>Every 6-Months</MenuItem>
                     <MenuItem value={'365'}>Yearly</MenuItem>
                 </Select>
@@ -126,6 +126,7 @@ export default function EditTaskModal(props) {
         )
     }
   }
+
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -145,7 +146,6 @@ export default function EditTaskModal(props) {
       recurring: '',
       renewIn: '',
     })
-    window.location.assign('/ViewAllTasks');
   }
 
 

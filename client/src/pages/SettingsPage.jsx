@@ -20,7 +20,21 @@ import {
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-export default function SettingsPage (props) {
+export default function SettingsPage(props) {
+  
+  const [notification, setNotification] = React.useState(false);
+
+  const handleNotificationClick = () => {
+    setNotification(true);
+  };
+
+  const handleNotificationClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setNotification(false);
+  };
 
   const [formState, setFormState] = React.useState({
     oldPassword:'',
@@ -51,9 +65,7 @@ export default function SettingsPage (props) {
       const { data } = await settingsPage({
         variables: {...formState},
       });
-      
-      
-
+      handleNotificationClick()
     }catch(e){
       console.error(e);
       setErrorText('password is incorrect')
@@ -63,6 +75,7 @@ export default function SettingsPage (props) {
       oldPassword:'',
     })
     setConfirmPass('')
+    
   }
 
   const [confirmPass, setConfirmPass] = React.useState('')
@@ -121,25 +134,6 @@ export default function SettingsPage (props) {
     }
   }
 
- const [state, setState] = React.useState({
-    open: false,
-    Transition: Fade,
-  });
-
-  const handleClick = (Transition) => () => {
-    setState({
-      open: true,
-      Transition,
-    });
-  };
-
-  const handleClose = () => {
-    setState({
-      ...state,
-      open: false,
-    });
-  };
-
 
     return(
         <Grid
@@ -154,6 +148,12 @@ export default function SettingsPage (props) {
                 marginTop: '10%',
                 marginLeft: '10%'
             }}>
+              
+            <Snackbar open={notification} autoHideDuration={6000} onClose={handleNotificationClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
+              <Alert onClose={handleNotificationClose} severity="success" sx={{ width: '100%' }}>
+                Password Updated Successfully
+              </Alert>
+            </Snackbar>
 
             {loginError()}
             {matchPassword()}
@@ -202,6 +202,7 @@ export default function SettingsPage (props) {
                 variant="standard"
                 name="password"
                 label="New Password"
+                value={confirmPass}
                 
                 onChange = {(event) => {setConfirmPass(event.target.value)}}
                 type={showPassword ? 'text' : 'password'}
@@ -271,13 +272,6 @@ export default function SettingsPage (props) {
                 
               Save
             </Button>
-            <Snackbar
-        open={state.open}autoHideDuration={6000} 
-        onClose={handleClose}
-        TransitionComponent={state.Transition}
-        key={state.Transition.name}
-        anchorOrigin={{ vertical:'top', horizontal:'left' }}
-      ><Alert severity="success">This is a success message!</Alert></Snackbar>
       
           </FormControl>
 
