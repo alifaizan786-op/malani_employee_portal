@@ -87,7 +87,6 @@ const resolvers = {
             return newTask
         },
         updateTask: async (parent, { status, description, _id, dueDate, recurring, renewIn }) => {
-            console.log(_id);
             const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn},{new:true})
             return editTask
         },
@@ -149,7 +148,6 @@ const resolvers = {
         }
         ,
         updatePassword: async(parent,{_id,oldPassword, newPassword})=>{
-            console.log(newPassword);
 
 
             const user = await User.findOne({_id})

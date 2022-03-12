@@ -13,7 +13,8 @@ import { setContext } from '@apollo/client/link/context';
 import Auth from './utils/auth';
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter as Router, Route } from 'react-router-dom'; 
+import { SnackbarProvider } from 'notistack';
+
 
 
 // Construct our main GraphQL API endpoint
@@ -70,13 +71,15 @@ function App() {
 
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
+        <SnackbarProvider anchorOrigin={{vertical:'top', horizontal:'right'}} autoHideDuration={2000}>
 
-      {Auth.loggedIn() ? (
-        <Main/>
-      ):(
-        <LoginPage/>
-      )}
-
+        {Auth.loggedIn() ? (
+          <Main/>
+        ):(
+          <LoginPage/>
+        )}
+        
+        </SnackbarProvider>
       </ApolloProvider>
     </ThemeProvider>
 

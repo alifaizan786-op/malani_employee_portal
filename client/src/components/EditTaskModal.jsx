@@ -4,8 +4,6 @@ import {
   Box,
   Typography,
   Button,
-  Divider,
-  Card,
   Modal,
   FormControl,
   InputLabel,
@@ -24,7 +22,9 @@ import {UPDATE_TASK} from '../utils/mutation';
 
 import {useMutation} from '@apollo/client';
 
-const dateFormat = require('../utils/dateFormat');
+import { useSnackbar } from 'notistack'
+
+
 
 const style = {
   position: "absolute",
@@ -58,6 +58,8 @@ export default function EditTaskModal(props) {
   })
 
   const [date, setDate] = React.useState(null);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   React.useEffect(() => {
     if(props.defData[0]){
@@ -94,6 +96,10 @@ export default function EditTaskModal(props) {
 
   const handleDateChange = (newValue) => {
     setDate(new Date(newValue).toISOString());
+    setFormState({
+      ...formState,
+      dueDate:date
+    })
   };
 
   const [checked, setChecked] = React.useState(props.defData[0]? (props.defData[0].recurring):(true));
@@ -134,6 +140,8 @@ export default function EditTaskModal(props) {
       const { data } = await updateTask({
         variables: {...formState},
       });
+      props.close()
+      enqueueSnackbar('Task Saved Successfully',{variant:'success'});
 
     }catch(e){
       console.error(e);

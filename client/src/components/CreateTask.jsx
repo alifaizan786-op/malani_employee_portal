@@ -55,7 +55,11 @@ export default function CreateTask (props){
 
 
   const handleDateChange = (newValue) => {
-      setDateValue(newValue);
+    setDateValue(new Date(newValue).toISOString());
+    setFormState({
+      ...formState,
+      dueDate:dateValue
+    })
   };
 
   const [createTask, {event,data}] = useMutation(CREATE_TASK);
@@ -74,7 +78,7 @@ export default function CreateTask (props){
 
     setFormState({
       ...formState,
-      dueDate: `${dateValue.toISOString()}`,
+      dueDate: dateValue,
       [name] : value,
     });
 
@@ -90,6 +94,14 @@ export default function CreateTask (props){
     } catch(e){
       console.log(e); 
     }
+    setFormState({
+      description:'',
+      user: '',
+      dueDate: `${dateValue}`,
+      recurring: checked,
+      renewIn: ''
+
+  })
   }
 
     function checkChecked(){

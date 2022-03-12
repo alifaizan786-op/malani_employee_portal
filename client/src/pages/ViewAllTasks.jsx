@@ -3,42 +3,30 @@ import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ALLTASKS} from '../utils/queries'
 import {
-  Box,
   Typography,
   Button,
-  Divider,
-  Card,
-  Modal,
   FormControl,
   InputLabel,
-  FormHelperText,
   Select,
   MenuItem,
   TextField,
-  Switch,
   Grid,
   Snackbar,
   Alert
 } from "@mui/material";
 
 import AddIcon from '@mui/icons-material/Add';
-import CircularProgress from '@mui/material/CircularProgress';
 import CreateTask from "../components/CreateTask";
-import { styled, useTheme } from '@mui/material/styles';
 import CircleIcon from '@mui/icons-material/Circle';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import EditIcon from '@mui/icons-material/Edit';
 import LinearProgress from '@mui/material/LinearProgress';
-import {UPDATE_STATUS} from '../utils/mutation';
-import {useMutation} from '@apollo/client';
-
 import EditTaskModal from "../components/EditTaskModal";
 
 import {
   DataGrid,
   GridToolbarContainer,
   GridToolbarColumnsButton,
-  GridToolbarFilterButton,
   GridToolbarExport,
   GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
@@ -102,9 +90,7 @@ export default function ViewAllTasks(props) {
   const handleChangeEmployeeId = (event) => {
     setEmployeeId(event.target.value);
   };
-  const handleChangeDueDate = (event) => {
-    setDueDate(event.target.value);
-  };
+
 
   
 
@@ -238,7 +224,6 @@ export default function ViewAllTasks(props) {
 
   function filters(id, status, dueDate) { //Task Filter bar
       if (id && status && dueDate) {
-        console.log(id + status + dueDate);
         const resultbyuid = tasks.filter((task) => task.user.employeeId === id);
         const resultbystatus = resultbyuid.filter((task) => task.status === status);
         const resultbyyear = resultbystatus.filter((task) => new Date(parseInt(task.dueDate)).getYear() === dueDate.getYear())
@@ -319,7 +304,7 @@ export default function ViewAllTasks(props) {
               </Button>
             );}else{
               return (
-                <SubmitTask _id={params.row._id} open={handleNotificationClick}/>
+                <SubmitTask _id={params.row._id} />
             );}
           }, 
           width: 150 
@@ -427,21 +412,8 @@ export default function ViewAllTasks(props) {
     }
   }
 
-  const [notification, setNotification] = React.useState(false);
 
-  const handleNotificationClick = () => {
-      setNotification(true);
-  };
-
-  const handleNotificationClose = (event, reason) => {
-      if (reason === 'clickaway') {
-      return;
-      }
-
-      setNotification(false);
-  };
-
-  const praise = ['Good Job!', 'Great Job!', 'Awesome Job!', 'Excellent Job!', 'Outstanding Job!', 'Keep it up!'];
+  
 
 
   
@@ -451,11 +423,6 @@ export default function ViewAllTasks(props) {
       sm={10}
       xs={10}
       sx={gridStyling()}>
-      <Snackbar open={notification} autoHideDuration={6000} onClose={handleNotificationClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
-        <Alert onClose={handleNotificationClose} severity="success" sx={{ width: '100%' }}>
-          {praise[Math.floor(Math.random() * praise.length)]}
-        </Alert>
-      </Snackbar>
 
         <DataGrid
         rows={rows}

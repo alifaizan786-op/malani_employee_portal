@@ -1,37 +1,13 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_QUOTE } from '../utils/queries' 
-import {useMutation} from '@apollo/client';
-import {CHANGE_QUOTE} from '../utils/mutation'
 import ChangeQuote from "./changeQuote";
 
 import { 
   Typography, 
   Button,
-  Modal,
-  Box,
-  FormControl,
-  TextField,
-  Snackbar,
-  Alert
 } from "@mui/material";
 
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "30vw",
-  bgcolor: "background.paper",
-  boxShadow: 24,
-  p: 5,
-  display: "flex",
-  flexDirection: "column",
-
-  minWidth: "50%",
-  borderRadius: "30px",
-};
 
 export default function Quote(props) {
 
@@ -65,20 +41,6 @@ export default function Quote(props) {
     setEdit(false);
   };
 
-  const [notification, setNotification] = React.useState(false);
-
-  const handleClick = () => {
-    setNotification(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setNotification(false);
-  };
-
   function checkLevel(){
     if(props.level === 2){
      return( 
@@ -107,11 +69,6 @@ export default function Quote(props) {
         flexDirection: "column",
         alignItems: "center",
       }}>
-      <Snackbar open={notification} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-          Quote Of The Day Updated Successfully
-        </Alert>
-      </Snackbar>
       <Typography
         variant="h5"
         color={"primary.main"}
@@ -133,7 +90,7 @@ export default function Quote(props) {
       
        {checkLevel()}
 
-        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId} refetch={refetch} notification={handleClick}/>
+        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId} refetch={refetch}/>
      
     </div>
   );
