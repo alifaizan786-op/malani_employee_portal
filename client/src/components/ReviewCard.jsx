@@ -4,21 +4,15 @@ import {
   Box,
   Typography,
   Button,
-  FormControl,
-  Input,
-  InputLabel,
   Collapse,
-  InputAdornment,
-  IconButton,
 } from "@mui/material";
 
-import SaveIcon from "@mui/icons-material/Save";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
-import { useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { QUERY_REVIEWBYUID } from '../utils/queries'
-import { ADD_REVIEW } from "../utils/mutation";
+
 
 import CreateReview from "./CreateReview";
 
@@ -37,7 +31,6 @@ export default function ReviewCard(props) {
     pollInterval: 500,
   });
 
-  console.log(data);
 
   const reviews = data?.reviewUId || []
   
@@ -60,8 +53,6 @@ export default function ReviewCard(props) {
     return newArr;
   }
 
-  console.log(props.managerId);
-  console.log(props.empObjId);
 
 
 

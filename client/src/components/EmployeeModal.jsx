@@ -108,8 +108,6 @@ export default function EmployeeModal(props) {
       return  props.empId.split('-')[1].toUpperCase()
     }
   }
-
-  console.log(props.managerId);
  
 
 

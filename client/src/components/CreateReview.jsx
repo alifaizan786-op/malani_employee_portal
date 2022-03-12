@@ -1,23 +1,17 @@
 import React from "react";
 
 import {
-  Box,
-  Typography,
-  Button,
   FormControl,
   Input,
   InputLabel,
-  Collapse,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 
 import SaveIcon from "@mui/icons-material/Save";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import { useSnackbar } from 'notistack'
 
-import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_REVIEWBYUID } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 import { ADD_REVIEW } from "../utils/mutation";
 
 const formattedMonth = (
@@ -51,7 +45,6 @@ const formattedMonth = (
   return formattedTimeStamp;
 };
 
-console.log(formattedMonth(new Date()));
 
 export default function CreateReview(props) {
 
@@ -74,15 +67,15 @@ export default function CreateReview(props) {
           [name]: value,
         });
     };
+    const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+    
 
     const handleFormSubmit = async (event) => {
         try {
             const { data } = await addReview({
             variables: { ...formState },
             });
-
-            
-
+            enqueueSnackbar('Review Added Successfully',{variant:'success'});
         } catch (e) {
             console.error(e);
         }

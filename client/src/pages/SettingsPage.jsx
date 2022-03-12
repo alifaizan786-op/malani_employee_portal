@@ -4,7 +4,7 @@ import * as React from "react";
 import {UPDATE_PASSWORD} from '../utils/mutation'
 import {useMutation} from '@apollo/client';
 
-import Fade from '@mui/material/Fade';
+import { useSnackbar } from 'notistack';
 import {
     Button,
     Typography,
@@ -22,24 +22,14 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 export default function SettingsPage(props) {
   
-  const [notification, setNotification] = React.useState(false);
 
-  const handleNotificationClick = () => {
-    setNotification(true);
-  };
-
-  const handleNotificationClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setNotification(false);
-  };
 
   const [formState, setFormState] = React.useState({
     oldPassword:'',
     newPassword:''
   })
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   
 
   const [errorText, setErrorText] = React.useState('')
@@ -55,7 +45,6 @@ export default function SettingsPage(props) {
       [name]:value,
     });
 
-    console.log(formState);
   };
 
   const handleFormSubmit = async (event) => {
@@ -65,7 +54,7 @@ export default function SettingsPage(props) {
       const { data } = await settingsPage({
         variables: {...formState},
       });
-      handleNotificationClick()
+      enqueueSnackbar('Password Changed Successfully',{variant:'success'});
     }catch(e){
       console.error(e);
       setErrorText('password is incorrect')
@@ -148,12 +137,6 @@ export default function SettingsPage(props) {
                 marginTop: '10%',
                 marginLeft: '10%'
             }}>
-              
-            <Snackbar open={notification} autoHideDuration={6000} onClose={handleNotificationClose} anchorOrigin={{ vertical:'top', horizontal:'right' }}>
-              <Alert onClose={handleNotificationClose} severity="success" sx={{ width: '100%' }}>
-                Password Updated Successfully
-              </Alert>
-            </Snackbar>
 
             {loginError()}
             {matchPassword()}

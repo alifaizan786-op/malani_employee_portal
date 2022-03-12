@@ -1,6 +1,7 @@
 import React from "react";
 import {useMutation} from '@apollo/client';
 import {CHANGE_QUOTE} from '../utils/mutation';
+import { useSnackbar } from 'notistack';
 
 import { 
   Typography, 
@@ -41,6 +42,8 @@ const [formState, setFormState] = React.useState({
     quotes:'',
   })
 
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
  const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -59,7 +62,7 @@ const [formState, setFormState] = React.useState({
       });
       props.modalClose()
       props.refetch()
-      props.notification()
+      enqueueSnackbar('Quote Update Successfully',{variant:'success'});
 
     } catch (e) {
       console.error(e);
