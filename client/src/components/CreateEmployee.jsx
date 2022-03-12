@@ -4,6 +4,8 @@ import {CREATE_USER} from '../utils/mutation'
 
 import {useMutation} from '@apollo/client';
 
+import { useSnackbar } from 'notistack';
+
 import {
   Box,
   Typography,
@@ -38,6 +40,8 @@ const style = {
 export default function CreateEmployee(props){
   const [createUser, {event,data}] = useMutation(CREATE_USER);
 
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const [formState, setFormState] = React.useState({
     firstName:'',
     lastName:'',
@@ -54,9 +58,6 @@ export default function CreateEmployee(props){
       ...formState,
       [name] : value,
     });
-
-    console.log(formState);
-
   }
 
   const handleFormSubmit = async (event)=>{
@@ -68,8 +69,17 @@ export default function CreateEmployee(props){
       })
     } catch(e){
       console.log(e); 
-
     }
+    props.modalClose()
+    enqueueSnackbar('Employee Created Successfully')
+    setFormState({
+      firstName:'',
+      lastName:'',
+      employeeId:'',
+      department:'',
+      level: '',
+      password:'',
+    })
   
   }
 
@@ -90,6 +100,7 @@ export default function CreateEmployee(props){
 
           <FormControl variant="standard">
             <TextField
+              required
               label="First Name"
               variant="standard"
               size="medium"
@@ -101,6 +112,7 @@ export default function CreateEmployee(props){
 
           <FormControl variant="standard">
             <TextField
+              required
               label="Last Name"
               variant="standard"
               size="medium"
@@ -112,6 +124,7 @@ export default function CreateEmployee(props){
 
           <FormControl variant="standard">
             <TextField
+              required
               label="Employee Id"
               variant="standard"
               size="medium"
@@ -127,6 +140,7 @@ export default function CreateEmployee(props){
           <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
             <InputLabel id="demo-simple-select-label">Department</InputLabel>
             <Select
+              required
               labelId="demo-simple-select-label"
               id="demo-simple-select-size-medium"
               label="Status"
@@ -148,6 +162,7 @@ export default function CreateEmployee(props){
           <FormControl variant="standard" sx={{ m: 1, minWidth:'250px'}}>
               <InputLabel id="demo-simple-select-label">Privilege Level</InputLabel>
               <Select
+                  required
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   defaultValue = ""
@@ -162,6 +177,7 @@ export default function CreateEmployee(props){
 
           <FormControl variant="standard">
             <TextField
+              required
               label="Password"
               variant="standard"
               size="medium"

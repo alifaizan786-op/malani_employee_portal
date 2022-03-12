@@ -38,10 +38,17 @@ export default function LoginForm() {
   const handleChange = (event) =>{
     const{name,value} = event.target
 
-    setFormState({
-       ...formState,
-       [name]:value,
-    });
+    if(name === 'employeeId'){
+      setFormState({
+        ...formState,
+        [name]:value.toLowerCase(),
+     });
+    }else{
+      setFormState({
+        ...formState,
+        [name]:value,
+     });
+    }
   };
 
   const handleFormSubmit = async (event) => {

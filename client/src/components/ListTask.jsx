@@ -38,7 +38,6 @@ export default function ListTask(props) {
   const [rows, setRows] = React.useState(initialRows);
   const [selectedRow, setSelectedRow] = React.useState();
 
-  console.log(props);
 
   const [contextMenu, setContextMenu] = React.useState(null);
 
