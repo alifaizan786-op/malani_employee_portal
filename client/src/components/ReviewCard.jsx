@@ -31,8 +31,11 @@ export default function ReviewCard(props) {
     pollInterval: 500,
   });
 
+  console.log(data);
+
 
   const reviews = data?.reviewUId || []
+
   
 
 
@@ -102,7 +105,7 @@ export default function ReviewCard(props) {
               }}>
               {filter(month).map((reviewChild, index) => (
                 <Typography variant="p" sx={{ paddingTop: "10px" }}>
-                  {`${reviewChild.manager.employeeId.toUpperCase()} : "${reviewChild.review}"`}
+                  {`${reviewChild.createDate}  ${reviewChild.manager.employeeId.toUpperCase()} : "${reviewChild.review}"`}
                 </Typography>
               ))}
             </Box>

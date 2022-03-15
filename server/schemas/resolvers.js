@@ -87,7 +87,7 @@ const resolvers = {
             return newTask
         },
         updateTask: async (parent, { status, description, _id, dueDate, recurring, renewIn }) => {
-            const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn},{new:true})
+            const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{
@@ -101,7 +101,7 @@ const resolvers = {
             department ,
             level ,
             password ,
-        },{new:true})
+        })
         return newUser
         },
         updateUser : async(parent,{_id,firstName,lastName,employeeId,department,level,active})=>{
@@ -113,17 +113,18 @@ const resolvers = {
         await User.findOneAndDelete({_id})
         },
         updateQuotes : async(parent,{_id,quotes})=>{
-            const editQuotes = await Quotes.findOneAndUpdate({_id},{quotes},{new:true})
+            const editQuotes = await Quotes.findOneAndUpdate({_id},{quotes})
         return editQuotes
 
         },
         addReview : async(parent,{employee,manager,month,review})=>{
+            console.log(month);
             const newReview = await Review.create({
             manager,
             employee,  
             month,
             review
-        },{new:true})
+        })
         return newReview
         },
         deleteReview :  async(parent,{_id})=>{
@@ -162,7 +163,7 @@ const resolvers = {
             }
         },
         upadateStatus: async(parent,{_id,status})=>{
-            const upadateStatus = await Task.findByIdAndUpdate({_id},{status},{new:true})
+            const upadateStatus = await Task.findByIdAndUpdate({_id},{status})
             return upadateStatus
         }
     }

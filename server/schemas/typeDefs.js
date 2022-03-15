@@ -34,6 +34,7 @@ const typeDefs = gql`
         employee : User
         month : String
         review : String
+        createDate : String
     }
     
     type Auth{

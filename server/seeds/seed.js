@@ -2,7 +2,7 @@ const connection = require('../config/connection')
 const { Task, User, Review, Quotes } = require('../models')
 const userSeeds =  require('./userSeeds.json')
 const taskSeeds = require('./taskSeeds.json')
-const reviewSeeds = require('./reviewSeeds.json')
+// const reviewSeeds = require('./reviewSeeds.json')
 const quotesSeeds = require('./quotesSeeds.json')
 
 connection.on('error', (err) => err);
@@ -56,25 +56,25 @@ connection.once('open', async() => {
 
     console.log('=========Collections Emptied================');
 
-    for(let i = 0;i <reviewSeeds.length; i++){
-      ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
-      const manager = this._Review;
+    // for(let i = 0;i <reviewSeeds.length; i++){
+    //   ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
+    //   const manager = this._Review;
 
-       ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[i].employee}));
-      const employee = this._ReviewE;
+    //    ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[i].employee}));
+    //   const employee = this._ReviewE;
 
-      const review ={
-        manager : manager,
-        employee : employee,
-        month : reviewSeeds[i].month,
-        review : reviewSeeds[i].review,
+    //   const review ={
+    //     manager : manager,
+    //     employee : employee,
+    //     month : reviewSeeds[i].month,
+    //     review : reviewSeeds[i].review,
 
-      };
-      console.log(review);
+    //   };
+    //   console.log(review);
 
-      let reviewCreation = await Review.create(review);
-    }
-    console.info('================Review Seeded================');
+    //   let reviewCreation = await Review.create(review);
+    // }
+    // console.info('================Review Seeded================');
     
     //----------------------Seeding Quotes----------------------
     await Quotes.deleteMany({});

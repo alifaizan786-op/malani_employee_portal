@@ -28,7 +28,7 @@
     },
       {
         "firstName":"Neelima",
-        "lastName":"Neelima",
+        "lastName":"Kheraj",
         "employeeId":"neelima-nk",
         "department":"Sales",
         "level":"1",
@@ -37,7 +37,7 @@
     },
     {
         "firstName":"Heena",
-        "lastName":"Heena",
+        "lastName":"Darji",
         "employeeId":"heena-hd",
         "department":"Sales",
         "level":"1",
@@ -69,15 +69,6 @@
         "department":"Internet",
         "level":"1",
         "password":"brandon-bp",
-        "active":true              
-    },
-    {
-        "firstName":"Zoya",
-        "lastName":"Zoya",
-        "employeeId":"zoya-zr",
-        "department":"Sales",
-        "level":"1",
-        "password":"zoya-zr",
         "active":true              
     },
     {
@@ -196,7 +187,5 @@
         "level":"2",
         "password":"hiren-hs",
         "active":true              
-    }
-  
-     
+    }   
 ]
