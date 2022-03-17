@@ -189,3 +189,10 @@ mutation upadateStatus(
     status
   }
 }`
+
+export const DELETE_TASK = gql`
+mutation delTask($_id:ID) {
+  deleteTask(_id:$_id){
+    _id
+  }
+}`

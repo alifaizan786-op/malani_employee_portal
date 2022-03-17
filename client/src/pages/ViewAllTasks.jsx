@@ -32,6 +32,7 @@ import {
 } from '@mui/x-data-grid';
 
 import SubmitTask from "../components/SubmitTask";
+import DeleteTask from "../components/DeleteTask";
 
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -339,6 +340,15 @@ export default function ViewAllTasks(props) {
                     }}>
                 Edit
               </Button>
+            );
+          }, 
+          width: 150 
+        },
+        {
+          field: "Delete",
+          renderCell: (params) => {
+              return (
+                <DeleteTask _id={params.row._id}/>
             );
           }, 
           width: 150 
