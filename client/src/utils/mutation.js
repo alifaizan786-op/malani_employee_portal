@@ -137,6 +137,7 @@ export const UPDATE_TASK = gql`
 mutation updateTask(
   $_id: ID
   $status: String
+  $subStatus: String
   $description: String
   $dueDate: String
   $recurring: Boolean
@@ -144,6 +145,7 @@ mutation updateTask(
 ) {
   updateTask(
     status: $status
+    subStatus:$subStatus
     description: $description
     _id: $_id
     dueDate: $dueDate
@@ -179,11 +181,12 @@ export const UPDATE_STATUS = gql`
 mutation upadateStatus(
   $_id:ID,
   $status: String
+  $subStatus: String
 ){
   upadateStatus(
     _id:$_id,
     status: $status
-   
+    subStatus:$subStatus
   ){
     _id
     status
@@ -194,5 +197,36 @@ export const DELETE_TASK = gql`
 mutation delTask($_id:ID) {
   deleteTask(_id:$_id){
     _id
+  }
+}`
+
+export const ADD_BULLETIN = gql`
+mutation createBulletin($user:ID, $title: String, $body:String){
+  addBulletin(user:$user, title:$title, body:$body){
+    title
+    body
+  }
+}`
+
+export const AKNOWLEDGE_BULLETIN = gql`
+mutation acknowledge($_id: ID, $acknowledge: ID){
+  acknowledgeBulletin(_id:$_id, acknowledge:$acknowledge){
+    _id
+    user{
+      employeeId
+    }
+    title
+    body
+    date
+    acknowledge{
+      employeeId
+    }
+  }
+}`
+
+export const DELETE_BULLETIN = gql`
+mutation delBulletin($_id:ID){
+  deleteBulletin(_id:$_id){
+    body
   }
 }`

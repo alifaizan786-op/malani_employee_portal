@@ -28,6 +28,7 @@ query alltask {
   tasks {
     _id
     status
+    subStatus
     description
     user {
       _id
@@ -85,5 +86,24 @@ query reviewbyUID($employeeUId:ID) {
     month
     review
     createDate
+  }
+}`
+
+export const QUERY_ALL_BULLETIN = gql`
+query allBulletins{
+  bulletins{
+    _id
+    user{
+      employeeId
+      firstName
+      lastName
+    }
+    title
+    body
+    date
+    acknowledge{
+      _id
+      employeeId
+    }
   }
 }`

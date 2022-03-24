@@ -22,6 +22,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import EditIcon from '@mui/icons-material/Edit';
 import LinearProgress from '@mui/material/LinearProgress';
 import EditTaskModal from "../components/EditTaskModal";
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 
 import {
   DataGrid,
@@ -33,6 +34,7 @@ import {
 
 import SubmitTask from "../components/SubmitTask";
 import DeleteTask from "../components/DeleteTask";
+import AbsentTask from "../components/AbsentTask";
 
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -74,6 +76,11 @@ export default function ViewAllTasks(props) {
         color : 'yellow'
       }
       return style;
+    }else if (status.toLowerCase() === "absent"){
+      let style = {
+        color : '#ff8f33'
+      }
+      return style
     }else{
       let style = {
         color : 'red'
@@ -285,30 +292,21 @@ export default function ViewAllTasks(props) {
           width: 50 
         },
         { field: 'status', type:'singleSelect', valueOptions: ['Submitted', 'Pending', 'Over Due'], headerName: 'Status', width: 130 },
-        { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
-        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
-        { field: 'description', headerName: 'Description', width: 800 },
+        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 225, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
+        { field: 'description', headerName: 'Description', width: 850 },
+        { field: 'subStatus', headerName: 'Sub Status', width: 150 },
         {
-          field: "Submit",
+          field: "Submit Task",
           renderCell: (params) => {
-            if(params.row.status === "submitted"){
+            if(params.row.status !== "pending" && "overdue"){
             return (
-              <Button type="submit"
-                  disabled
-                  onClick={handleCreateModalOpen}
-                  variant="text" startIcon={<ArrowUpwardIcon />} sx={{
-                      fontSize: "0.8125rem",
-                      bgcolor: "#ffffff",
-                      color: "primary.main",
-                    }}>
-                Submit
-              </Button>
+              <></>
             );}else{
               return (
                 <SubmitTask _id={params.row._id} />
             );}
           }, 
-          width: 150 
+          width: 350 
         },
       ];
       return columns
@@ -325,8 +323,9 @@ export default function ViewAllTasks(props) {
         },
         { field: 'status', type:'singleSelect', valueOptions: ['submitted', 'pending', 'overdue'], headerName: 'Status', width: 130 },
         { field: 'name', headerName: 'Name', width: 150, valueGetter: (params) => `${params.row.user.firstName} ${params.row.user.lastName}`},
-        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 195, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
-        { field: 'description', headerName: 'Description', width: 800 },
+        { field: 'dueDate',tpe:'dateTime', headerName: 'Due Date', width: 225, valueGetter: (params) => `${dateFormat(parseInt(params.row.dueDate))}`},
+        { field: 'description', headerName: 'Description', width: 850 },
+        { field: 'subStatus', headerName: 'Sub Status', width: 150 },
         {
           field: "Edit",
           renderCell: (params) => {

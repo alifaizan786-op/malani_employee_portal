@@ -16,10 +16,11 @@ import {
   Avatar,
   Typography,
 } from "@mui/material";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import TaskIcon from '@mui/icons-material/Task';
 import PeopleIcon from "@mui/icons-material/People";
 import { Logout } from "@mui/icons-material";
 import SettingsIcon from '@mui/icons-material/Settings';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const useStyles = makeStyles((theme) => ({
   sidebarPadding: {
@@ -188,7 +189,7 @@ export default function LeftSideBar(props) {
               window.location.assign("/ViewAllTasks");
             }}>
             <ListItemIcon>
-              <AssignmentIcon
+              <TaskIcon
                 sx={{ fontSize: "2.5rem", color: "primary.main" }}
               />
             </ListItemIcon>
@@ -201,6 +202,31 @@ export default function LeftSideBar(props) {
                     fontFamily: "Baskervville",
                   }}>
                   View All Tasks
+                </Typography>
+              }
+            />
+          </ListItemButton>
+
+          <ListItemButton
+            selected={selectedIndex === 1}
+            onClick={(event) => {
+              handleListItemClick(event, 1);
+              window.location.assign("/Announcement");
+            }}>
+            <ListItemIcon>
+              <NewspaperIcon
+                sx={{ fontSize: "2.5rem", color: "primary.main" }}
+              />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <Typography
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    fontFamily: "Baskervville",
+                  }}>
+                  Announcement
                 </Typography>
               }
             />

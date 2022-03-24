@@ -7,6 +7,10 @@ const taskSchema = new Schema({
         require:true,
         default:"pending"
     },
+    subStatus:{
+        type:String,
+        require:false,
+    },
     description:{
         type:String,
         require:true,

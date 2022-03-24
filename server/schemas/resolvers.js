@@ -89,8 +89,8 @@ const resolvers = {
 
             return newTask
         },
-        updateTask: async (parent, { status, description, _id, dueDate, recurring, renewIn }) => {
-            const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn})
+        updateTask: async (parent, { status, subStatus, description, _id, dueDate, recurring, renewIn }) => {
+            const editTask = await Task.findOneAndUpdate({_id},{status, subStatus,description,dueDate,recurring,renewIn})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{
@@ -165,8 +165,8 @@ const resolvers = {
             const changePass = await User.findOneAndUpdate({_id},{password:encryptPassword})
             }
         },
-        upadateStatus: async(parent,{_id,status})=>{
-            const upadateStatus = await Task.findByIdAndUpdate({_id},{status})
+        upadateStatus: async(parent,{_id,status, subStatus})=>{
+            const upadateStatus = await Task.findByIdAndUpdate({_id},{status, subStatus})
             return upadateStatus
         },
         addBulletin : async(parent, {user, title, body}) => {

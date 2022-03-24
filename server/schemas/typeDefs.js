@@ -15,6 +15,7 @@ const typeDefs = gql`
     type Task {
         _id : ID
         status : String
+        subStatus : String
         description : String
         user : User
         dueDate : String  
@@ -73,7 +74,8 @@ const typeDefs = gql`
             renewIn : Int  ) : Task
 
         updateTask( 
-            status :String,  
+            status :String,
+            subStatus :String,  
             description :String, 
             _id :ID, 
             dueDate :String, 
@@ -126,6 +128,7 @@ const typeDefs = gql`
         upadateStatus(
             _id:ID,
             status:String
+            subStatus:String
         )  : Task
 
         addBulletin(

@@ -45,9 +45,9 @@ const style = {
   };
 
 export default function CreateTask (props){
-  const [dateValue, setDateValue] = React.useState(new Date());
+  const [dateValue, setDateValue] = React.useState(null);
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
 
   const handleSwitchChange = (event) => {
     setChecked(event.target.checked);
@@ -62,6 +62,13 @@ export default function CreateTask (props){
     })
   };
 
+  React.useEffect(()=> {
+    setFormState({
+      ...formState,
+      recurring:checked
+    })
+  },[checked])
+
   const [createTask, {event,data}] = useMutation(CREATE_TASK);
 
     const [formState, setFormState] = React.useState({
@@ -69,7 +76,7 @@ export default function CreateTask (props){
       user: '',
       dueDate: `${dateValue}`,
       recurring: checked,
-      renewIn: ''
+      renewIn: 0
 
   })
 
@@ -99,9 +106,10 @@ export default function CreateTask (props){
       user: '',
       dueDate: `${dateValue}`,
       recurring: checked,
-      renewIn: ''
-
-  })
+      renewIn: 0
+    })
+    setDateValue(null)
+    setChecked(false)
   }
 
     function checkChecked(){
@@ -118,6 +126,7 @@ export default function CreateTask (props){
                         value={formState.renewIn}
                         onChange={handleChange}
                         >
+                        <MenuItem value={0}>Renew In</MenuItem>
                         <MenuItem value={1}>Daily</MenuItem>
                         <MenuItem value={7}>Weekly</MenuItem>
                         <MenuItem value={31}>Monthly</MenuItem>
@@ -148,6 +157,7 @@ export default function CreateTask (props){
         <InputLabel id="demo-simple-select-label">Employee</InputLabel>
         <Select
           labelId="demo-simple-select-label"
+          required
           id="demo-simple-select"
           label="Status"
           name="user"
@@ -166,6 +176,7 @@ export default function CreateTask (props){
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   label="Due Date"
+                  required
                   id="size-medium"
                   value={dateValue}
                   onChange={handleDateChange}
@@ -180,6 +191,7 @@ export default function CreateTask (props){
                 id="outlined-multiline-flexible"
                 label="Description"
                 name="description"
+                required
                 multiline
                 minRows={4}
                 value={formState.description}
@@ -202,8 +214,8 @@ export default function CreateTask (props){
             </Typography>
               <Switch  
                 size="large" 
-                defaultChecked
                 {...label}
+                checked={checked}
                 onChange={handleSwitchChange} 
               />
             </FormControl>
