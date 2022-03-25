@@ -77,9 +77,9 @@ connection.once('open', async() => {
     // console.info('================Review Seeded================');
     
     //----------------------Seeding Quotes----------------------
-    await Quotes.deleteMany({});
+    // await Quotes.deleteMany({});
 
-    console.log('=========Collections Emptied================');
+    // console.log('=========Collections Emptied================');
 
     // await Quotes.create(quotesSeeds);
 

@@ -298,7 +298,7 @@ export default function ViewAllTasks(props) {
         {
           field: "Submit Task",
           renderCell: (params) => {
-            if(params.row.status !== "pending" && "overdue"){
+            if((params.row.status !== "pending")&&(params.row.status !== "overdue")){
             return (
               <></>
             );}else{
