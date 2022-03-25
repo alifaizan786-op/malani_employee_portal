@@ -37,6 +37,7 @@ export default function AddBulletinCard(props) {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log(formState);
         try{
           const { data } = await addBulletin({
             variables: {...formState},

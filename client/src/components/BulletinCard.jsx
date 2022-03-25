@@ -56,7 +56,7 @@ export default function BulletinCard(props) {
       />
 
       <CardContent>
-        <Typography variant="body1" color="text.primary">
+        <Typography variant="body1" color="text.primary" style={{whiteSpace: "pre-line"}}>
           {props.body}
         </Typography>
       </CardContent>
