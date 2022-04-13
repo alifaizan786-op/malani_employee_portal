@@ -1,4 +1,4 @@
-const { Task, User, Review, Quotes} = require('../models');
+const { Task, User, Review, Quotes, Bulletin} = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
@@ -70,6 +70,9 @@ const resolvers = {
         },
         taskByEmp : async(parent,{emp}) =>{
             return await Task.find({user:emp});
+        },
+        bulletins : async() => {
+            return await Bulletin.find({}).populate('user').populate('acknowledge').sort({date:-1});
         }
     },
 
@@ -86,8 +89,8 @@ const resolvers = {
 
             return newTask
         },
-        updateTask: async (parent, { status, description, _id, dueDate, recurring, renewIn }) => {
-            const editTask = await Task.findOneAndUpdate({_id},{status,description,dueDate,recurring,renewIn})
+        updateTask: async (parent, { status, subStatus, description, _id, dueDate, recurring, renewIn }) => {
+            const editTask = await Task.findOneAndUpdate({_id},{status, subStatus,description,dueDate,recurring,renewIn})
             return editTask
         },
         deleteTask : async(parent,{_id})=>{
@@ -162,9 +165,31 @@ const resolvers = {
             const changePass = await User.findOneAndUpdate({_id},{password:encryptPassword})
             }
         },
-        upadateStatus: async(parent,{_id,status})=>{
-            const upadateStatus = await Task.findByIdAndUpdate({_id},{status})
+        upadateStatus: async(parent,{_id,status, subStatus})=>{
+            const upadateStatus = await Task.findByIdAndUpdate({_id},{status, subStatus})
             return upadateStatus
+        },
+        addBulletin : async(parent, {user, title, body}) => {
+            const addBulletin = await Bulletin.create({user, title, body})
+            return addBulletin
+        },
+        acknowledgeBulletin : async(parent, {_id, acknowledge}) => {
+            ({acknowledge : this._acknowledge} = await Bulletin.findOne({_id : _id}))
+            const acknowledgeArr = this._acknowledge 
+            const acknowledgeBulletin = Bulletin.findByIdAndUpdate({_id},{acknowledge:[...acknowledgeArr, acknowledge]})
+            return acknowledgeBulletin
+        },
+        updateBulletin : async(parent, {_id, title, body}) => {
+            const updateBulletin = await Bulletin.findByIdAndUpdate({_id},{
+                title, 
+                body,
+                acknowledge : []
+            })
+            return updateBulletin
+        },
+        deleteBulletin : async(parent, {_id}) => {
+            const delBulletin = await Bulletin.findOneAndDelete({_id : _id})
+            return delBulletin
         }
     }
 };

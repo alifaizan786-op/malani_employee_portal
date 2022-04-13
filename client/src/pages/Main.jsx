@@ -8,6 +8,9 @@ import Home from "./Home";
 import ViewAllTasks from "./ViewAllTasks";
 import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
+import Bulletin from "./Bulletin";
+
+
 import { useQuery } from '@apollo/client';
 import { QUERY_MAIN } from '../utils/queries';
 
@@ -82,6 +85,9 @@ export default function Main() {
       </Route>
       <Route exact path={"/Settings"}>
         <SettingsPage _id={_id}/>
+      </Route>
+      <Route exact path={"/Announcement"}>
+        <Bulletin _id={_id} level={level}/>
       </Route>
     </Router>
   );

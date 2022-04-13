@@ -15,6 +15,7 @@ const typeDefs = gql`
     type Task {
         _id : ID
         status : String
+        subStatus : String
         description : String
         user : User
         dueDate : String  
@@ -36,6 +37,15 @@ const typeDefs = gql`
         review : String
         createDate : String
     }
+
+    type Bulletin {
+        _id : ID
+        user : User
+        title : String
+        body : String
+        date : String
+        acknowledge : [User]
+    }
     
     type Auth{
         token : ID
@@ -51,7 +61,8 @@ const typeDefs = gql`
         taskUId(taskUId: ID) : Task  
         reviewUId(employeeUId : ID) : [Review]
         userActive : [User]
-        taskByEmp(emp:ID) :[Task]
+        taskByEmp(emp:ID) : [Task]
+        bulletins : [Bulletin]
     }
 
     type Mutation{
@@ -63,7 +74,8 @@ const typeDefs = gql`
             renewIn : Int  ) : Task
 
         updateTask( 
-            status :String,  
+            status :String,
+            subStatus :String,  
             description :String, 
             _id :ID, 
             dueDate :String, 
@@ -116,7 +128,29 @@ const typeDefs = gql`
         upadateStatus(
             _id:ID,
             status:String
+            subStatus:String
         )  : Task
+
+        addBulletin(
+            user : ID
+            title : String
+            body : String
+        ) : Bulletin
+
+        acknowledgeBulletin(
+            _id : ID
+            acknowledge:ID
+        ) : Bulletin
+
+        updateBulletin(
+            _id : ID
+            title : String
+            body : String
+        ) : Bulletin
+
+        deleteBulletin(
+            _id : ID
+        ) : Bulletin
         
 
 

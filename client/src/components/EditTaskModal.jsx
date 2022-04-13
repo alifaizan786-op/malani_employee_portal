@@ -66,6 +66,14 @@ export default function EditTaskModal(props) {
       setDate((new Date(parseInt(props.defData[0].dueDate))).toISOString())
     }
   }, [props.current]);
+
+  React.useEffect(() => {
+    setFormState({
+      ...formState,
+      dueDate:date
+    })
+  }, [date]);
+
   
   React.useEffect(() => {
     if(props.defData[0]){
@@ -77,6 +85,7 @@ export default function EditTaskModal(props) {
         recurring: props.defData[0].recurring,
         renewIn: props.defData[0].renewIn,
       })
+      setChecked(props.defData[0].recurring)
     }
   }, [props.current]);
 
@@ -89,6 +98,7 @@ export default function EditTaskModal(props) {
         [name]:value ,
     });
   };
+
 
   const[updateTask,{error,data}] = useMutation(UPDATE_TASK)
 
@@ -108,6 +118,7 @@ export default function EditTaskModal(props) {
       setChecked(event.target.checked);
   };
 
+
   function checkChecked(){
     if(checked){
         return(
@@ -122,17 +133,31 @@ export default function EditTaskModal(props) {
                     size="medium"
                     defaultValue = {props.defData[0]? (props.defData[0].renewIn):('')}
                     >
-                    <MenuItem value={'1'}>Daily</MenuItem>
-                    <MenuItem value={'7'}>Weekly</MenuItem>
-                    <MenuItem value={'31'}>Monthly</MenuItem>
-                    <MenuItem value={'183'}>Every 6-Months</MenuItem>
-                    <MenuItem value={'365'}>Yearly</MenuItem>
+                      <MenuItem value={0}>Renew In</MenuItem>
+                    <MenuItem value={1}>Daily</MenuItem>
+                    <MenuItem value={7}>Weekly</MenuItem>
+                    <MenuItem value={31}>Monthly</MenuItem>
+                    <MenuItem value={183}>Every 6-Months</MenuItem>
+                    <MenuItem value={365}>Yearly</MenuItem>
                 </Select>
             </FormControl>
         )
     }
   }
 
+  React.useEffect(() => {
+    setFormState({
+      ...formState,
+      renewIn:null
+    })
+  }, [!checked]);
+
+  React.useEffect(() => {
+    setFormState({
+      ...formState,
+      recurring:checked
+    })
+  }, [checked]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -152,9 +177,23 @@ export default function EditTaskModal(props) {
       _id: '',
       dueDate: '',
       recurring: '',
-      renewIn: '',
+      renewIn: '0',
     })
   }
+
+
+  function subStatus(){
+    if(props.defData[0]){
+      if(props.defData[0].subStatus == null){
+        return ''
+      }else{
+        return props.defData[0].subStatus
+      }
+    }else{
+      return ''
+    }
+  }
+
 
 
   return (
@@ -203,6 +242,24 @@ export default function EditTaskModal(props) {
             </Select>
           </FormControl>
 
+          <FormControl variant="standard" sx={{ m: 1, minWidth: "250px" }}>
+            <InputLabel id="demo-simple-select-label">Sub Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select-size-medium"
+              defaultValue={subStatus()}
+              label="Sub Status"
+              size="medium"
+              name="subStatus"
+              onChange={handleChange}
+            >
+              <MenuItem value={"absent"}>Absent</MenuItem>
+              <MenuItem value={"partially Complete"}>Partially Complete</MenuItem>
+              <MenuItem value={"complete"}>Complete</MenuItem>
+              <MenuItem value={"not applicable"}>Not Applicable</MenuItem>
+            </Select>
+          </FormControl>
+
           <FormControl>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DateTimePicker
@@ -242,6 +299,7 @@ export default function EditTaskModal(props) {
               <Switch  
                   size="large" 
                   {...label}
+                  checked={checked}
                   onChange={handleSwitchChange} 
                 />
             </FormControl>

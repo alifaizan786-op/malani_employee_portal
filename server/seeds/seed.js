@@ -14,42 +14,42 @@ connection.once('open', async() => {
     //----------------------Seeding Users----------------------
     await User.deleteMany({})
 
-    console.log('=========Collections Emptied================');
+     console.log('=========Collections Emptied================');
 
-    await User.create(userSeeds);
+    // await User.create(userSeeds);
 
-    console.table(userSeeds);
+    // console.table(userSeeds);
 
-    console.info('================Users Seeded================');
+    // console.info('================Users Seeded================');
 
     //----------------------Seeding Tasks----------------------
     await Task.deleteMany({})
 
     console.log('=========Collections Emptied================');
    
-    for (let i = 0;i <taskSeeds.length; i++){
-      ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
-      const UserId = this._User;
+    // for (let i = 0;i <taskSeeds.length; i++){
+    //   ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
+    //   const UserId = this._User;
 
-      const today = new Date()
-      const todayunix = Date.parse(today)
-      const dueInDays = 86400000 * taskSeeds[i].renewIn
-      const calcDueDate = dueInDays + todayunix
+    //   const today = new Date()
+    //   const todayunix = Date.parse(today)
+    //   const dueInDays = 86400000 * taskSeeds[i].renewIn
+    //   const calcDueDate = dueInDays + todayunix
 
 
 
-      const task = {
-        description: taskSeeds[i].description,
-        user: UserId,
-        dueDate: new Date(calcDueDate),
-        recurring: taskSeeds[i].recurring,
-        renewIn:taskSeeds[i].renewIn
-      };
-      console.log(task);
+    //   const task = {
+    //     description: taskSeeds[i].description,
+    //     user: UserId,
+    //     dueDate: new Date(calcDueDate),
+    //     recurring: taskSeeds[i].recurring,
+    //     renewIn:taskSeeds[i].renewIn
+    //   };
+    //   console.log(task);
 
-     let taskCreation = await Task.create(task);
-    }
-    console.info('================Task Seeded================');
+    //  let taskCreation = await Task.create(task);
+    // }
+    // console.info('================Task Seeded================');
 
     //----------------------Seeding Reviews----------------------
     await Review.deleteMany({})
@@ -77,15 +77,15 @@ connection.once('open', async() => {
     // console.info('================Review Seeded================');
     
     //----------------------Seeding Quotes----------------------
-    await Quotes.deleteMany({});
+    // await Quotes.deleteMany({});
 
-    console.log('=========Collections Emptied================');
+    // console.log('=========Collections Emptied================');
 
-    await Quotes.create(quotesSeeds);
+    // await Quotes.create(quotesSeeds);
 
-    console.table(quotesSeeds);
+    // console.table(quotesSeeds);
 
-    console.info('================Quotes Seeded================');
+    // console.info('================Quotes Seeded================');
 
  }  catch (err) {
     console.error(err);

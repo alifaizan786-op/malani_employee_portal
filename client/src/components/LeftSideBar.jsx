@@ -7,6 +7,7 @@ import Auth from '../utils/auth';
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 import {
   List,
   ListItemButton,
@@ -16,10 +17,11 @@ import {
   Avatar,
   Typography,
 } from "@mui/material";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import TaskIcon from '@mui/icons-material/Task';
 import PeopleIcon from "@mui/icons-material/People";
 import { Logout } from "@mui/icons-material";
 import SettingsIcon from '@mui/icons-material/Settings';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const useStyles = makeStyles((theme) => ({
   sidebarPadding: {
@@ -31,6 +33,18 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "rgba(255,255,255,0.7)",
       justifyContent: "space-between",
     },
+  },
+}));
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dadde9',
   },
 }));
 
@@ -99,6 +113,14 @@ export default function LeftSideBar(props) {
   function checkLevel(){
     if(props.level === 2){
      return(
+      <HtmlTooltip
+      placement="right"
+      title={
+        <React.Fragment>
+          <Typography color="inherit">View All Employees</Typography>
+        </React.Fragment>
+      }
+    >
          <ListItemButton
             selected={selectedIndex === 2}
             onClick={(event) => {
@@ -122,6 +144,7 @@ export default function LeftSideBar(props) {
               }
             />
           </ListItemButton>
+          </HtmlTooltip>
      )
     }
   }
@@ -169,6 +192,7 @@ export default function LeftSideBar(props) {
             )}
           </ListItem>
 
+
           <ListItemButton>
             <ListItemIcon></ListItemIcon>
             <ListItemText
@@ -181,14 +205,59 @@ export default function LeftSideBar(props) {
             />
           </ListItemButton>
 
+          <HtmlTooltip
+              placement="right"
+              title={
+                <React.Fragment>
+                  <Typography color="inherit">View All Tasks</Typography>
+                </React.Fragment>
+              }
+            >
+
+          <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={(event) => {
+                handleListItemClick(event, 1);
+                window.location.assign("/ViewAllTasks");
+              }}>
+              <ListItemIcon>
+                <TaskIcon
+                  sx={{ fontSize: "2.5rem", color: "primary.main" }}
+                />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      fontFamily: "Baskervville",
+                    }}>
+                    View All Tasks
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+
+            </HtmlTooltip>
+
+            <HtmlTooltip
+              placement="right"
+              title={
+                <React.Fragment>
+                  <Typography color="inherit">Announcement</Typography>
+                </React.Fragment>
+              }
+            >  
+
           <ListItemButton
             selected={selectedIndex === 1}
             onClick={(event) => {
               handleListItemClick(event, 1);
-              window.location.assign("/ViewAllTasks");
+              window.location.assign("/Announcement");
             }}>
             <ListItemIcon>
-              <AssignmentIcon
+              <NewspaperIcon
                 sx={{ fontSize: "2.5rem", color: "primary.main" }}
               />
             </ListItemIcon>
@@ -200,16 +269,25 @@ export default function LeftSideBar(props) {
                     fontWeight: "bold",
                     fontFamily: "Baskervville",
                   }}>
-                  View All Tasks
+                  Announcement
                 </Typography>
               }
             />
           </ListItemButton>
+          </HtmlTooltip>
               {checkLevel()}  
         
         </List>
               
         <List>
+        <HtmlTooltip
+      placement="right"
+      title={
+        <React.Fragment>
+          <Typography color="inherit">Settings</Typography>
+        </React.Fragment>
+      }
+    >
         <ListItemButton
             selected={selectedIndex === 3}
             onClick={(event) => {
@@ -232,8 +310,16 @@ export default function LeftSideBar(props) {
               }
             />
           </ListItemButton>
+          </HtmlTooltip>
 
-
+          <HtmlTooltip
+      placement="right"
+      title={
+        <React.Fragment>
+          <Typography color="inherit">Logout</Typography>
+        </React.Fragment>
+      }
+    >
           <ListItemButton onClick={Auth.logout}>
             <ListItemIcon>
               <Logout sx={{ fontSize: "2.5rem", color: "primary.main" }} />
@@ -251,6 +337,7 @@ export default function LeftSideBar(props) {
               }
             />
           </ListItemButton>
+          </HtmlTooltip>
         </List>
       </Drawer>
     </>
