@@ -1,36 +1,34 @@
-import './App.css';
+import "./App.css";
 
-import LoginPage from './pages/LoginPage';
-import Main from './pages/Main';
+import LoginPage from "./pages/LoginPage";
+import Main from "./pages/Main";
 
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
-import Auth from './utils/auth';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
+import Auth from "./utils/auth";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SnackbarProvider } from 'notistack';
-
-
+import { SnackbarProvider } from "notistack";
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 // Construct request middleware that will attach the JWT token to every request as an `authorization` header
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -41,12 +39,11 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#0D0039',
-      light:'#efefef'
+      main: "#0D0039",
+      light: "#efefef",
     },
     secondary: {
       main: "#D2AB67",
@@ -68,21 +65,16 @@ const theme = createTheme({
 
 function App() {
   return (
-
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <SnackbarProvider anchorOrigin={{vertical:'top', horizontal:'right'}} autoHideDuration={2000}>
-
-        {Auth.loggedIn() ? (
-          <Main/>
-        ):(
-          <LoginPage/>
-        )}
-        
+        <SnackbarProvider
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          autoHideDuration={2000}
+        >
+          {Auth.loggedIn() ? <Main /> : <LoginPage />}
         </SnackbarProvider>
       </ApolloProvider>
     </ThemeProvider>
-
   );
 }
 
