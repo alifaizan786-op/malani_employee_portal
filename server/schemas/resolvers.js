@@ -1,4 +1,4 @@
-const { Task, User, Review, Quotes, Bulletin} = require('../models');
+const { Task, User, Review, Quotes, Bulletin, Schedule} = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const resolvers = {
     Query : {
         users : async () => {
-            return await User.find({}).sort({ level: 1 });//find all user
+            return await User.find({}).sort({ employeeId: 1 });//find all user
         },
         userId : async (parent, args, context) =>{
             return await User.findOne({_id: context.user._id}); //user by id
@@ -19,8 +19,14 @@ const resolvers = {
             const today = new Date()
             const todayunix = Date.parse(today)
             const allTasks =  await Task.find({}).populate('user').sort({ status: 1 });
-            const recuurringTask = allTasks.filter((task)=> task.recurring === true)
+            // const recuurringTask = allTasks.filter((task) => task.recurring === true)
+
+            const rmInactive = allTasks.filter((task) => task.user.active === true)
+            const recuurringTask = rmInactive.filter((task) => task.recurring === true)
             const checkStatus = allTasks.filter((task) => task.status === 'pending')
+
+            
+            
 
             if (today.getDay() !== 1) {
                 for (let i = 0; i < checkStatus.length; i++){
@@ -33,8 +39,10 @@ const resolvers = {
 
                     const fDueDate= new Date(recuurringTask[i].dueDate)
                     const fDueDateUnix = Date.parse(fDueDate)
-            
                     if(fDueDateUnix < todayunix) {
+
+
+                        
                     
                         const dueInDays = 86400000 * recuurringTask[i].renewIn
                         const calcDueDate = dueInDays + todayunix
@@ -54,7 +62,7 @@ const resolvers = {
                 }
             }
 
-            return allTasks
+            return rmInactive
         },
         taskUId : async (parent, {taskUId}) => {
             return await Task.find( {user: taskUId } ).populate('user');
@@ -73,7 +81,10 @@ const resolvers = {
         },
         bulletins : async() => {
             return await Bulletin.find({}).populate('user').populate('acknowledge').sort({date:-1});
-        }
+        },
+        schedule : async() => {
+            return await Schedule.find({}).populate('employee')
+        } 
     },
 
     Mutation : {
@@ -154,16 +165,16 @@ const resolvers = {
         updatePassword: async(parent,{_id,oldPassword, newPassword})=>{
 
 
-            const user = await User.findOne({_id})
-            const correctPassword = await user.isCorrectPassword(oldPassword)
+            // const user = await User.findOne({_id})
+            // const correctPassword = await user.isCorrectPassword(oldPassword)
             
-            if(!correctPassword){
-                throw new AuthenticationError('Password is Incorrect')
-            }else{
+            // if(!correctPassword){
+            //     throw new AuthenticationError('Password is Incorrect')
+            // }else{
             const saltRound = 10
             const encryptPassword =  await bcrypt.hash(newPassword, saltRound)
             const changePass = await User.findOneAndUpdate({_id},{password:encryptPassword})
-            }
+            // }
         },
         upadateStatus: async(parent,{_id,status, subStatus})=>{
             const upadateStatus = await Task.findByIdAndUpdate({_id},{status, subStatus})
@@ -190,6 +201,22 @@ const resolvers = {
         deleteBulletin : async(parent, {_id}) => {
             const delBulletin = await Bulletin.findOneAndDelete({_id : _id})
             return delBulletin
+        },
+        createSchedule : async(parent, {_id}) => {
+            const createSchedule = await Schedule.create(
+                {employee : _id},
+            )
+
+            return createSchedule
+        },
+        addSchedule : async(parent, {_id, daysOnInput}) => {
+            const addedSchedule = await Schedule.findByIdAndUpdate(
+                {_id : _id},
+                {$push : {schedule : daysOnInput}},
+                {new : true}
+            )
+
+            return addedSchedule
         }
     }
 };

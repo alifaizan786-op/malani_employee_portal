@@ -46,10 +46,26 @@ const typeDefs = gql`
         date : String
         acknowledge : [User]
     }
+
+    type daysOn {
+        dayOfWeek : String
+        isPresent : Boolean
+    }
+
+    type Schedule {
+        _id : ID
+        employee : User
+        schedule : [daysOn]
+    }
     
     type Auth{
         token : ID
         user : User
+    }
+
+    input daysOnInput {
+        dayOfWeek : String
+        isPresent : Boolean
     }
     
     type Query{
@@ -63,6 +79,7 @@ const typeDefs = gql`
         userActive : [User]
         taskByEmp(emp:ID) : [Task]
         bulletins : [Bulletin]
+        schedule : Schedule
     }
 
     type Mutation{
@@ -151,6 +168,15 @@ const typeDefs = gql`
         deleteBulletin(
             _id : ID
         ) : Bulletin
+
+        createSchedule(
+            employee : ID
+        ) : Schedule
+
+        addSchedule(
+            _id : ID
+            daysOn : daysOnInput
+        ) : Schedule
         
 
 

@@ -19,6 +19,7 @@ const divStyle = {
   display: "flex",
   justifyContent: "space-between",
   margin: "5px 30px",
+  opacity: "0.8",
 };
 
 const dividerStyle = {
@@ -50,6 +51,72 @@ export default function EmployeeCard(props) {
     }
   }
 
+  function style(isActive) {
+    if (isActive == "true") {
+      console.log('employee is active');
+      let styles = {
+        divStyle : {
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "5px 30px",
+        },
+        avatarStyleBtn: {
+          width: 50,
+          height: 50,
+          marginLeft: "250px",
+          marginTop: "5px",
+          bgcolor: "#ffffff",
+          border: "3px solid #D2AB67",
+          color: "primary.main",
+        },
+        avatarStyleIni: {
+          width: 100,
+          height: 100,
+          fontSize: "45px",
+          bgcolor: "#ffffff",
+          border: "3px solid #D2AB67",
+          fontFamily: "Baskervville",
+          color: "primary.main",
+          margin: "auto",
+        }
+          
+      }; 
+      return styles;
+    } else {
+      console.log('employee is inactive');
+      let styles = {
+        divStyle : {
+          display: "flex",
+          justifyContent: "space-between",
+          margin: "5px 30px",
+          color:'#878787'
+        },
+        avatarStyleBtn: {
+          width: 50,
+          height: 50,
+          marginLeft: "250px",
+          marginTop: "5px",
+          bgcolor: "#ffffff",
+          border: "3px solid #878787",
+          color: "#878787",
+        },
+        avatarStyleIni: {
+          width: 100,
+          height: 100,
+          fontSize: "45px",
+          bgcolor: "#ffffff",
+          border: "3px solid #878787",
+          fontFamily: "Baskervville",
+          color: "#878787",
+          margin: "auto",
+        }
+      }; 
+      return styles;
+    }
+  }
+  console.log(style(props.active));
+  
+
 
 
   return (
@@ -64,52 +131,35 @@ export default function EmployeeCard(props) {
         }}>
         <Button onClick={handleViewModalOpen}>
           <Avatar
-            sx={{
-              width: 50,
-              height: 50,
-              marginLeft: "250px",
-              marginTop: "5px",
-              bgcolor: "#ffffff",
-              border: "3px solid #D2AB67",
-              color: "primary.main",
-            }}>
+            sx={style(props.active).avatarStyleBtn}>
             <RemoveRedEyeIcon sx={{ fontSize: "2rem" }} />
           </Avatar>
         </Button>
         <Avatar
-          sx={{
-            width: 100,
-            height: 100,
-            fontSize: "45px",
-            bgcolor: "#ffffff",
-            border: "3px solid #D2AB67",
-            fontFamily: "Baskervville",
-            color: "primary.main",
-            margin: "auto",
-          }}>
+          sx={style(props.active).avatarStyleIni}>
           {initial()}
         </Avatar>
-        <div style={divStyle}>
+        <div style={style(props.active).divStyle}>
           <Typography variant="p">Employee Id</Typography>
           <Typography variant="p">{props.employeeId}</Typography>
         </div>
         <Divider sx={dividerStyle} />
-        <div style={divStyle}>
+        <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Completed</Typography>
           <Typography variant="p">{submitted.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
-        <div style={divStyle}>
+        <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Pending</Typography>
           <Typography variant="p">{pending.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
-        <div style={divStyle}>
+        <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Overdue</Typography>
           <Typography variant="p">{overdue.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
-        <div style={divStyle}>
+        <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Completed YTD</Typography>
           <Typography variant="p">{tasks.length}</Typography>
         </div>

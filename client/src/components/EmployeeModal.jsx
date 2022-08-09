@@ -108,11 +108,19 @@ export default function EmployeeModal(props) {
       return  props.empId.split('-')[1].toUpperCase()
     }
   }
- 
 
+  
+  function empStatus (){
+    if (props.active === 'true') {
+      console.log('active');
+      return "Yes"
+    }else{
+      console.log('Inactive');
+      return "No"
+    }
+  }
 
-
-
+  
   return (
     <>
       <Modal open={props.state} onClose={props.close}>
@@ -253,7 +261,7 @@ export default function EmployeeModal(props) {
                     <MenuItem value={"false"}>No</MenuItem>
                   </Select>
                   ) : (
-                    <Typography variant="p">{props.active ? ('Yes'):("No")}</Typography>
+                    <Typography variant="p">{empStatus ()}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />

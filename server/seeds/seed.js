@@ -16,11 +16,11 @@ connection.once('open', async() => {
 
      console.log('=========Collections Emptied================');
 
-    // await User.create(userSeeds);
+    await User.create(userSeeds);
 
-    // console.table(userSeeds);
+    console.table(userSeeds);
 
-    // console.info('================Users Seeded================');
+    console.info('================Users Seeded================');
 
     //----------------------Seeding Tasks----------------------
     await Task.deleteMany({})

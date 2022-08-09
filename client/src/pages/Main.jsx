@@ -58,7 +58,8 @@ export default function Main() {
             firstName={firstName}
             lastName={lastName}
             level={level}
-            employeeId ={employeeId}
+            employeeId={employeeId}
+            objId = {_id}
           />
         </Grid>
       </Grid>

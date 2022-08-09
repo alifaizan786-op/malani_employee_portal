@@ -1,13 +1,12 @@
 //From React
 import React from "react";
-import Auth from '../utils/auth';
-
+import Auth from "../utils/auth";
 
 //From MUI
 import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import {
   List,
   ListItemButton,
@@ -16,12 +15,16 @@ import {
   ListItem,
   Avatar,
   Typography,
+  Badge,
 } from "@mui/material";
-import TaskIcon from '@mui/icons-material/Task';
+import TaskIcon from "@mui/icons-material/Task";
 import PeopleIcon from "@mui/icons-material/People";
 import { Logout } from "@mui/icons-material";
-import SettingsIcon from '@mui/icons-material/Settings';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import SettingsIcon from "@mui/icons-material/Settings";
+import NewspaperIcon from "@mui/icons-material/Newspaper";
+
+import { useQuery } from "@apollo/client";
+import { QUERY_TASKBYEMP } from "../utils/queries";
 
 const useStyles = makeStyles((theme) => ({
   sidebarPadding: {
@@ -40,11 +43,11 @@ const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
   [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: '#f5f5f9',
-    color: 'rgba(0, 0, 0, 0.87)',
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
     maxWidth: 220,
     fontSize: theme.typography.pxToRem(12),
-    border: '1px solid #dadde9',
+    border: "1px solid #dadde9",
   },
 }));
 
@@ -89,44 +92,59 @@ const closedMixin = (theme) => ({
   },
 });
 
-
-
-
 export default function LeftSideBar(props) {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const classes = useStyles();
-  
+
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
   };
 
+  const { loading, data } = useQuery(QUERY_TASKBYEMP, {
+    // pass URL parameter
+    variables: { emp: props.objId },
+    pollInterval: 500,
+  });
 
+  const tasks = data?.taskByEmp || [];
 
-  function initial(){
-    if(props.employeeId){
-      return  props.employeeId.split('-')[1].toUpperCase()
+  const bulletin = data?.bulletins || [];
+
+  console.log(bulletin);
+
+  let acknowledged = 0;
+
+  for (let i = 0; i < bulletin.length; i++) {
+    if (bulletin[i].acknowledge.filter((emp) => emp._id === props.objId).length > 0) {
+      acknowledged++;
     }
   }
 
+  function initial() {
+    if (props.employeeId) {
+      return props.employeeId.split("-")[1].toUpperCase();
+    }
+  }
 
-  function checkLevel(){
-    if(props.level === 2){
-     return(
-      <HtmlTooltip
-      placement="right"
-      title={
-        <React.Fragment>
-          <Typography color="inherit">View All Employees</Typography>
-        </React.Fragment>
-      }
-    >
-         <ListItemButton
+  function checkLevel() {
+    if (props.level === 2) {
+      return (
+        <HtmlTooltip
+          placement="right"
+          title={
+            <React.Fragment>
+              <Typography color="inherit">View All Employees</Typography>
+            </React.Fragment>
+          }
+        >
+          <ListItemButton
             selected={selectedIndex === 2}
             onClick={(event) => {
               handleListItemClick(event, 2);
               window.location.assign("/ViewAllEmps");
-            }}>
+            }}
+          >
             <ListItemIcon>
               <PeopleIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
             </ListItemIcon>
@@ -137,26 +155,26 @@ export default function LeftSideBar(props) {
                     fontSize: "18px",
                     fontWeight: "bold",
                     fontFamily: "Baskervville",
-                  }}>
+                  }}
+                >
                   View All Employees
-
                 </Typography>
               }
             />
           </ListItemButton>
-          </HtmlTooltip>
-     )
+        </HtmlTooltip>
+      );
     }
   }
 
   return (
     <>
       <Drawer
-      
         variant="permanent"
         sx={{ border: "none" }}
         open={props.current}
-        className={classes.root}>
+        className={classes.root}
+      >
         <List className={classes.sidebarPadding}>
           <ListItem>
             {props.current ? (
@@ -170,7 +188,8 @@ export default function LeftSideBar(props) {
                   border: "5px solid #D2AB67",
                   fontFamily: "Baskervville",
                   color: "primary.main",
-                }}>
+                }}
+              >
                 {initial()}
               </Avatar>
             ) : (
@@ -185,43 +204,128 @@ export default function LeftSideBar(props) {
                     border: "3px solid #D2AB67",
                     fontFamily: "Baskervville",
                     color: "primary.main",
-                  }}>
+                  }}
+                >
                   {initial()}
                 </Avatar>
               </ListItemIcon>
             )}
           </ListItem>
 
-
           <ListItemButton>
             <ListItemIcon></ListItemIcon>
             <ListItemText
               primary={
                 <Typography
-                  style={{ fontSize: "25px", fontFamily: "Baskervville" }}>
-                 {props.firstName} {props.lastName}
+                  style={{ fontSize: "25px", fontFamily: "Baskervville" }}
+                >
+                  {props.firstName} {props.lastName}
                 </Typography>
-              } 
+              }
             />
           </ListItemButton>
 
           <HtmlTooltip
-              placement="right"
-              title={
-                <React.Fragment>
-                  <Typography color="inherit">View All Tasks</Typography>
-                </React.Fragment>
-              }
-            >
-
-          <ListItemButton
+            placement="right"
+            title={
+              <React.Fragment>
+                <Typography color="inherit">View All Tasks</Typography>
+              </React.Fragment>
+            }
+          >
+            <ListItemButton
               selected={selectedIndex === 1}
               onClick={(event) => {
                 handleListItemClick(event, 1);
                 window.location.assign("/ViewAllTasks");
-              }}>
+              }}
+            >
               <ListItemIcon>
-                <TaskIcon
+                <Badge
+                  badgeContent={
+                    tasks.filter((task) => task.status !== "submitted").length
+                  }
+                  color="primary"
+                >
+                  <TaskIcon
+                    sx={{ fontSize: "2.5rem", color: "primary.main" }}
+                  />
+                </Badge>
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      fontFamily: "Baskervville",
+                    }}
+                  >
+                    View All Tasks
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+          </HtmlTooltip>
+
+          <HtmlTooltip
+            placement="right"
+            title={
+              <React.Fragment>
+                <Typography color="inherit">Announcement</Typography>
+              </React.Fragment>
+            }
+          >
+            <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={(event) => {
+                handleListItemClick(event, 1);
+                window.location.assign("/Announcement");
+              }}
+            >
+              <ListItemIcon>
+                <Badge badgeContent={bulletin.length - acknowledged} color="primary">
+                  <NewspaperIcon
+                    sx={{ fontSize: "2.5rem", color: "primary.main" }}
+                  />
+                </Badge>
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      fontFamily: "Baskervville",
+                    }}
+                  >
+                    Announcement
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+          </HtmlTooltip>
+          {checkLevel()}
+        </List>
+
+        <List>
+          <HtmlTooltip
+            placement="right"
+            title={
+              <React.Fragment>
+                <Typography color="inherit">Settings</Typography>
+              </React.Fragment>
+            }
+          >
+            <ListItemButton
+              selected={selectedIndex === 3}
+              onClick={(event) => {
+                handleListItemClick(event, 3);
+                window.location.assign("/Settings");
+              }}
+            >
+              <ListItemIcon>
+                <SettingsIcon
                   sx={{ fontSize: "2.5rem", color: "primary.main" }}
                 />
               </ListItemIcon>
@@ -232,111 +336,41 @@ export default function LeftSideBar(props) {
                       fontSize: "18px",
                       fontWeight: "bold",
                       fontFamily: "Baskervville",
-                    }}>
-                    View All Tasks
+                    }}
+                  >
+                    Settings
                   </Typography>
                 }
               />
             </ListItemButton>
-
-            </HtmlTooltip>
-
-            <HtmlTooltip
-              placement="right"
-              title={
-                <React.Fragment>
-                  <Typography color="inherit">Announcement</Typography>
-                </React.Fragment>
-              }
-            >  
-
-          <ListItemButton
-            selected={selectedIndex === 1}
-            onClick={(event) => {
-              handleListItemClick(event, 1);
-              window.location.assign("/Announcement");
-            }}>
-            <ListItemIcon>
-              <NewspaperIcon
-                sx={{ fontSize: "2.5rem", color: "primary.main" }}
-              />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    fontFamily: "Baskervville",
-                  }}>
-                  Announcement
-                </Typography>
-              }
-            />
-          </ListItemButton>
-          </HtmlTooltip>
-              {checkLevel()}  
-        
-        </List>
-              
-        <List>
-        <HtmlTooltip
-      placement="right"
-      title={
-        <React.Fragment>
-          <Typography color="inherit">Settings</Typography>
-        </React.Fragment>
-      }
-    >
-        <ListItemButton
-            selected={selectedIndex === 3}
-            onClick={(event) => {
-              handleListItemClick(event, 3);
-              window.location.assign("/Settings");
-            }}>
-            <ListItemIcon>
-              <SettingsIcon sx={{ fontSize: "2.5rem", color: "primary.main" }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    fontFamily: "Baskervville",
-                  }}>
-                  Settings
-                </Typography>
-              }
-            />
-          </ListItemButton>
           </HtmlTooltip>
 
           <HtmlTooltip
-      placement="right"
-      title={
-        <React.Fragment>
-          <Typography color="inherit">Logout</Typography>
-        </React.Fragment>
-      }
-    >
-          <ListItemButton onClick={Auth.logout}>
-            <ListItemIcon>
-              <Logout sx={{ fontSize: "2.5rem", color: "primary.main" }} />
-            </ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    fontFamily: "Baskervville",
-                  }}>
-                  Logout
-                </Typography>
-              }
-            />
-          </ListItemButton>
+            placement="right"
+            title={
+              <React.Fragment>
+                <Typography color="inherit">Logout</Typography>
+              </React.Fragment>
+            }
+          >
+            <ListItemButton onClick={Auth.logout}>
+              <ListItemIcon>
+                <Logout sx={{ fontSize: "2.5rem", color: "primary.main" }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      fontFamily: "Baskervville",
+                    }}
+                  >
+                    Logout
+                  </Typography>
+                }
+              />
+            </ListItemButton>
           </HtmlTooltip>
         </List>
       </Drawer>

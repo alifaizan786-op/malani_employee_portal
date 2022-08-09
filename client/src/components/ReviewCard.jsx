@@ -31,7 +31,7 @@ export default function ReviewCard(props) {
     pollInterval: 500,
   });
 
-  console.log(data);
+
 
 
   const reviews = data?.reviewUId || []

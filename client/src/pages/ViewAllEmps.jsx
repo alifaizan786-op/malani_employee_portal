@@ -49,6 +49,16 @@ export default function ViewAllEmps(props) {
     } 
   }
 
+  let dropdown = () => {
+    let arrOfEmps = []
+    for (let i = 0; i < user.length; i++){
+      arrOfEmps.push(user[i].employeeId)
+    }
+    arrOfEmps.sort()
+    return arrOfEmps
+  }
+  
+
 
   if(props.level === 2){
   return (
@@ -71,8 +81,8 @@ export default function ViewAllEmps(props) {
           value={employeeId}
           label="Status"
           onChange={handleChangeEmployeeId}>
-          {user.map((employee, index )=>(
-          <MenuItem key={employee._id} value ={`${employee.employeeId}`}>{employee.employeeId}</MenuItem>
+          {dropdown().map((employee, index )=>(
+          <MenuItem key={index} value ={`${employee}`}>{employee}</MenuItem>
           ))}
         </Select>
       </FormControl>
