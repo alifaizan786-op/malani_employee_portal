@@ -48,8 +48,11 @@ const typeDefs = gql`
     }
 
     type daysOn {
+        _id : ID
         dayOfWeek : String
         isPresent : Boolean
+        timeIn : String
+        timeOff : String
     }
 
     type Schedule {
@@ -66,6 +69,8 @@ const typeDefs = gql`
     input daysOnInput {
         dayOfWeek : String
         isPresent : Boolean
+        timeIn : String
+        timeOff : String
     }
     
     type Query{
@@ -79,7 +84,8 @@ const typeDefs = gql`
         userActive : [User]
         taskByEmp(emp:ID) : [Task]
         bulletins : [Bulletin]
-        schedule : Schedule
+        schedule : [Schedule]
+        scheduleByUid (employeeUId : ID) : Schedule
     }
 
     type Mutation{
@@ -130,10 +136,12 @@ const typeDefs = gql`
             manager: ID,
             employee: ID, 
             month: String,
-            review: String ) : Review
+            review: String 
+        ) : Review
 
         deleteReview (
-            _id:ID) : Review
+            _id:ID
+        ) : Review
 
         login( employeeId : String!, password: String!): Auth
 
@@ -174,12 +182,17 @@ const typeDefs = gql`
         ) : Schedule
 
         addSchedule(
-            _id : ID
+            employee : ID
             daysOn : daysOnInput
+        ) : Schedule
+
+        editSchedule(
+            employee : ID
+            newDaysOn : daysOnInput
         ) : Schedule
         
 
 
     }`
 
-module.exports = typeDefs;
+module.exports = typeDefs;  

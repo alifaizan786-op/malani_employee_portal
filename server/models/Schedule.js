@@ -10,7 +10,15 @@ const daySchema = new Schema({
     isPresent:{
         type:Boolean,
         require:true
-    }
+    },
+    timeIn:{
+        type:String,
+        require:true,
+    },
+    timeOff:{
+        type:String,
+        require:true,
+    },
 })
 
 const scheduleSchema = new Schema({
