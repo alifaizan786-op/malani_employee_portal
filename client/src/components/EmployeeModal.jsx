@@ -10,16 +10,37 @@ import {
   Select,
   MenuItem,
   TextField,
+  Checkbox,
+  FormLabel,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
 } from "@mui/material";
+
+import { styled } from "@mui/material/styles";
+
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 import ReviewCard from "./ReviewCard";
 
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 
-import {UPDATE_USER} from '../utils/mutation';
+import { UPDATE_USER } from "../utils/mutation";
 
-import {useMutation} from '@apollo/client';
+import { useMutation } from "@apollo/client";
+
+const HtmlTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    fontSize: theme.typography.pxToRem(12),
+    border: "1px solid #dadde9",
+  },
+}));
 
 const style = {
   position: "absolute",
@@ -48,9 +69,28 @@ const dividerStyle = {
 };
 
 export default function EmployeeModal(props) {
+  const schedule = props?.schedule || []
 
+  const sorter = {
+    // "sunday": 0, // << if sunday is first day of week
+    "monday": 1,
+    "tuesday": 2,
+    "wednesday": 3,
+    "thursday": 4,
+    "friday": 5,
+    "saturday": 6,
+    "sunday": 7
+  }
 
-  const[updateUser,{error,data}] = useMutation(UPDATE_USER)
+  React.useEffect(()=>{
+    schedule.sort(function sortByDay(a, b) {
+      let day1 = a.dayOfWeek.toLowerCase();
+      let day2 = b.dayOfWeek.toLowerCase();
+      return sorter[day1] - sorter[day2];
+    });
+  }, props)
+
+  const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
   const [formState, setFormState] = React.useState({
     _id: props._id,
@@ -59,68 +99,58 @@ export default function EmployeeModal(props) {
     employeeId: props.empId,
     department: props.dept,
     level: props.level,
-    active: props.active
-  })
+    active: props.active,
+  });
 
-
-  const handleChange = (event) =>{
-    const{name,value} = event.target
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormState({
-       ...formState,
-       [name]:value ,
+      ...formState,
+      [name]: value,
     });
   };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    try{
+    try {
       const { data } = await updateUser({
-        variables: {...formState},
+        variables: { ...formState },
       });
-
-    }catch(e){
+    } catch (e) {
       console.error(e);
     }
     setFormState({
       _id: props._id,
-      firstName: '',
-      lastName: '',
-      employeeId: '',
-      department: '',
-      level: '',
-      active: ''
-    })
+      firstName: "",
+      lastName: "",
+      employeeId: "",
+      department: "",
+      level: "",
+      active: "",
+    });
     setEdit(false);
-    window.location.assign('/ViewAllEmps');
-  }
+    window.location.assign("/ViewAllEmps");
+  };
   const [edit, setEdit] = React.useState(false);
 
   const setEditTrue = () => {
     setEdit(true);
   };
 
-  // const setEditFalse = () => {
-  //   setEdit(false);
-  // };
-
-  function initial(){
-    if(props.empId){
-      return  props.empId.split('-')[1].toUpperCase()
+  function initial() {
+    if (props.empId) {
+      return props.empId.split("-")[1].toUpperCase();
     }
   }
 
-  
-  function empStatus (){
-    if (props.active === 'true') {
-      console.log('active');
-      return "Yes"
-    }else{
-      console.log('Inactive');
-      return "No"
+  function empStatus() {
+    if (props.active === "true") {
+      return "Yes";
+    } else {
+      return "No";
     }
   }
 
-  
   return (
     <>
       <Modal open={props.state} onClose={props.close}>
@@ -130,7 +160,8 @@ export default function EmployeeModal(props) {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "flex-start",
-            }}>
+            }}
+          >
             <Box sx={{ width: "25%", display: "flex", alignItems: "center" }}>
               <Avatar
                 sx={{
@@ -141,7 +172,8 @@ export default function EmployeeModal(props) {
                   border: "3px solid #D2AB67",
                   fontFamily: "Baskervville",
                   color: "primary.main",
-                }}>
+                }}
+              >
                 {initial()}
               </Avatar>
 
@@ -151,16 +183,18 @@ export default function EmployeeModal(props) {
                   fontFamily: "Baskervville",
                   textAlign: "center",
                   marginX: "10px",
-                }}>
+                }}
+              >
                 {props.fName} {props.lName}
               </Typography>
             </Box>
             <Box
               sx={{
-                width: "50%",
+                width: "55%",
                 display: "flex",
                 justifyContent: "space-between",
-              }}>
+              }}
+            >
               <Box sx={{ width: "45%" }}>
                 <Box sx={divStyle}>
                   <Typography variant="p">Employee Id</Typography>
@@ -250,18 +284,19 @@ export default function EmployeeModal(props) {
                   <Typography variant="p">Active</Typography>
                   {edit ? (
                     <Select
-                    sx={{}}
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    onChange={handleChange}
-                    defaultValue={props.active}
-                    name="active"
-                    label="Status">
-                    <MenuItem value={"true"}>Yes</MenuItem>
-                    <MenuItem value={"false"}>No</MenuItem>
-                  </Select>
+                      sx={{}}
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      onChange={handleChange}
+                      defaultValue={props.active}
+                      name="active"
+                      label="Status"
+                    >
+                      <MenuItem value={"true"}>Yes</MenuItem>
+                      <MenuItem value={"false"}>No</MenuItem>
+                    </Select>
                   ) : (
-                    <Typography variant="p">{empStatus ()}</Typography>
+                    <Typography variant="p">{empStatus()}</Typography>
                   )}
                 </Box>
                 <Divider sx={dividerStyle} />
@@ -275,7 +310,8 @@ export default function EmployeeModal(props) {
                       onChange={handleChange}
                       name="level"
                       defaultValue={props.level}
-                      label="Status">
+                      label="Status"
+                    >
                       <MenuItem value={"1"}>1</MenuItem>
                       <MenuItem value={"2"}>2</MenuItem>
                     </Select>
@@ -285,7 +321,7 @@ export default function EmployeeModal(props) {
                 </Box>
                 <Divider sx={dividerStyle} />
               </Box>
-              <Box sx={{ width: "45%" }}>
+              <Box sx={{ width: "50%" }}>
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Overdue</Typography>
                   <Typography variant="p">{props.overdue}</Typography>
@@ -306,6 +342,45 @@ export default function EmployeeModal(props) {
                   <Typography variant="p">{props.pending}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Schedule</FormLabel>
+                  <FormGroup aria-label="position" row>
+                    {
+                      schedule.map((aSchedule)=>(
+
+                        <HtmlTooltip
+                        key={aSchedule._id}
+                      placement="bottom"
+                      title={
+                        <React.Fragment>
+                          <Typography variant="caption" color="inherit">
+                            <strong>
+                              Time In{" "}:{" "}
+                            </strong>
+                            {aSchedule.timeIn}
+                            <br/>
+                            <strong>
+                              Time Out{" "}:{" "}
+                            </strong>
+                            {aSchedule.timeOff}
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    >
+                      <FormControlLabel
+                        value="top"
+                        control={<Checkbox disabled checked={aSchedule.isPresent} />}
+                        label={aSchedule.dayOfWeek[0].toUpperCase() + aSchedule.dayOfWeek[1] + aSchedule.dayOfWeek[2]}
+                        labelPlacement="top"
+                      />
+                    </HtmlTooltip>
+
+                      ))
+                    }
+                    
+
+                  </FormGroup>
+                </FormControl>
               </Box>
             </Box>
             <Box
@@ -314,11 +389,10 @@ export default function EmployeeModal(props) {
                 display: "flex",
                 justifyContent: "end",
                 alignItems: "flex-start",
-              }}>
+              }}
+            >
               {edit ? (
-                <Button 
-                onClick={handleFormSubmit}
-                  sx={{ display: "contents" }}>
+                <Button onClick={handleFormSubmit} sx={{ display: "contents" }}>
                   <Avatar
                     sx={{
                       width: 50,
@@ -326,7 +400,8 @@ export default function EmployeeModal(props) {
                       bgcolor: "#ffffff",
                       border: "3px solid #D2AB67",
                       color: "primary.main",
-                    }}>
+                    }}
+                  >
                     <SaveIcon sx={{ fontSize: "2rem" }} />
                   </Avatar>
                 </Button>
@@ -339,7 +414,8 @@ export default function EmployeeModal(props) {
                       bgcolor: "#ffffff",
                       border: "3px solid #D2AB67",
                       color: "primary.main",
-                    }}>
+                    }}
+                  >
                     <EditIcon sx={{ fontSize: "2rem" }} />
                   </Avatar>
                 </Button>
@@ -347,7 +423,7 @@ export default function EmployeeModal(props) {
             </Box>
           </Box>
           {/* Reviews */}
-          <ReviewCard  empObjId={props._id} managerId={props.managerId}/>
+          <ReviewCard empObjId={props._id} managerId={props.managerId} />
         </Box>
       </Modal>
     </>

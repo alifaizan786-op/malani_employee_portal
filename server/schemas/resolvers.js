@@ -1,4 +1,4 @@
-const { Task, User, Review, Quotes, Bulletin, Schedule} = require('../models');
+const { Task, User, Review, Quotes, Bulletin, Schedule, TimeOffReq} = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');

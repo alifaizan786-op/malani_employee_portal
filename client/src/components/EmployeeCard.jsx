@@ -40,6 +40,8 @@ export default function EmployeeCard(props) {
   });
 
   const tasks = data?.taskByEmp || []
+  const schedule = data?.scheduleByUid || []
+
 
   const pending = tasks.filter((task)=> task.status === 'pending')
   const submitted = tasks.filter((task)=> task.status === 'submitted')
@@ -53,7 +55,6 @@ export default function EmployeeCard(props) {
 
   function style(isActive) {
     if (isActive == "true") {
-      console.log('employee is active');
       let styles = {
         divStyle : {
           display: "flex",
@@ -83,7 +84,6 @@ export default function EmployeeCard(props) {
       }; 
       return styles;
     } else {
-      console.log('employee is inactive');
       let styles = {
         divStyle : {
           display: "flex",
@@ -114,7 +114,6 @@ export default function EmployeeCard(props) {
       return styles;
     }
   }
-  console.log(style(props.active));
   
 
 
@@ -161,7 +160,7 @@ export default function EmployeeCard(props) {
         <Divider sx={dividerStyle} />
         <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Completed YTD</Typography>
-          <Typography variant="p">{tasks.length}</Typography>
+          <Typography variant="p">{submitted.length + overdue.length + pending.length}</Typography>
         </div>
         <Divider sx={dividerStyle} />
       </Card>
@@ -181,6 +180,7 @@ export default function EmployeeCard(props) {
         _id={props._id}
         level={props.level}
         managerId={props.managerId}
+        schedule={schedule.schedule}
 
       />
     </>

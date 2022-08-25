@@ -111,15 +111,13 @@ export default function LeftSideBar(props) {
 
   const bulletin = data?.bulletins || [];
 
-  console.log(bulletin);
-
   let acknowledged = 0;
 
-  for (let i = 0; i < bulletin.length; i++) {
-    if (bulletin[i].acknowledge.filter((emp) => emp._id === props.objId).length > 0) {
-      acknowledged++;
-    }
-  }
+  // for (let i = 0; i < bulletin.length; i++) {
+  //   if (bulletin[i].acknowledge.filter((emp) => emp._id === props.objId).length > 0) {
+  //     acknowledged++;
+  //   }
+  // }
 
   function initial() {
     if (props.employeeId) {

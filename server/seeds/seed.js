@@ -1,32 +1,31 @@
-const connection = require('../config/connection')
-const { Task, User, Review, Quotes } = require('../models')
-const userSeeds =  require('./userSeeds.json')
-const taskSeeds = require('./taskSeeds.json')
+const connection = require("../config/connection");
+const { Task, User, Review, Quotes, Schedule } = require("../models");
+const userSeeds = require("./userSeeds.json");
+const taskSeeds = require("./taskSeeds.json");
 // const reviewSeeds = require('./reviewSeeds.json')
-const quotesSeeds = require('./quotesSeeds.json')
+const quotesSeeds = require("./quotesSeeds.json");
 
-connection.on('error', (err) => err);
+connection.on("error", (err) => err);
 
-connection.once('open', async() => {
-    console.log('connected');
-    try{
-
+connection.once("open", async () => {
+  console.log("connected");
+  try {
     //----------------------Seeding Users----------------------
-    await User.deleteMany({})
+    // await User.deleteMany({})
 
-     console.log('=========Collections Emptied================');
+    //  console.log('=========Collections Emptied================');
 
-    await User.create(userSeeds);
+    // await User.create(userSeeds);
 
-    console.table(userSeeds);
+    // console.table(userSeeds);
 
-    console.info('================Users Seeded================');
+    // console.info('================Users Seeded================');
 
     //----------------------Seeding Tasks----------------------
-    await Task.deleteMany({})
+    // await Task.deleteMany({})
 
-    console.log('=========Collections Emptied================');
-   
+    // console.log('=========Collections Emptied================');
+
     // for (let i = 0;i <taskSeeds.length; i++){
     //   ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
     //   const UserId = this._User;
@@ -35,8 +34,6 @@ connection.once('open', async() => {
     //   const todayunix = Date.parse(today)
     //   const dueInDays = 86400000 * taskSeeds[i].renewIn
     //   const calcDueDate = dueInDays + todayunix
-
-
 
     //   const task = {
     //     description: taskSeeds[i].description,
@@ -52,9 +49,9 @@ connection.once('open', async() => {
     // console.info('================Task Seeded================');
 
     //----------------------Seeding Reviews----------------------
-    await Review.deleteMany({})
+    // await Review.deleteMany({})
 
-    console.log('=========Collections Emptied================');
+    // console.log('=========Collections Emptied================');
 
     // for(let i = 0;i <reviewSeeds.length; i++){
     //   ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
@@ -75,7 +72,7 @@ connection.once('open', async() => {
     //   let reviewCreation = await Review.create(review);
     // }
     // console.info('================Review Seeded================');
-    
+
     //----------------------Seeding Quotes----------------------
     // await Quotes.deleteMany({});
 
@@ -87,10 +84,46 @@ connection.once('open', async() => {
 
     // console.info('================Quotes Seeded================');
 
- }  catch (err) {
+    let allUser = await User.find({});
+
+    await Schedule.deleteMany({});
+
+    let allUserId = [];
+
+    for (let i = 0; i < allUser.length; i++) {
+      let curUserId = allUser[i]._id;
+      const createSchedule = await Schedule.create({ employee: curUserId });
+    }
+
+    let daysOfWeek = [
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+      "sunday",
+    ];
+
+    for (let i = 0; i < allUser.length; i++) {
+      let curUserId = allUser[i]._id;
+      for (let j = 0; j < daysOfWeek.length; j++) {
+        let exampleSchedule = {
+          dayOfWeek: daysOfWeek[j],
+          isPresent: true,
+          timeIn: "10:00 AM",
+          timeOff: "07:30 PM",
+        };
+
+        const addedSchedule = await Schedule.findOneAndUpdate(
+          { employee: curUserId },
+          { $push: { schedule: exampleSchedule } }
+        );
+      }
+    }
+  } catch (err) {
     console.error(err);
     process.exit(1);
   }
 
-    process.exit(0);
-})
+  process.exit(0);
+});

@@ -64,6 +64,16 @@ export const QUERY_ALLEMPS = gql`
 
 export const QUERY_TASKBYEMP = gql`
   query taskbyuser($emp: ID) {
+    scheduleByUid(employeeUId: $emp) {
+      _id
+      schedule {
+        _id
+        dayOfWeek
+        isPresent
+        timeIn
+        timeOff
+      }
+    }
     taskByEmp(emp: $emp) {
       _id
       status
