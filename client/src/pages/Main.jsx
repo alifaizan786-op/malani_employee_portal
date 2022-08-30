@@ -9,6 +9,7 @@ import ViewAllTasks from "./ViewAllTasks";
 import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
 import Bulletin from "./Bulletin";
+import SchedulePage from "./Schedule";
 
 
 import { useQuery } from '@apollo/client';
@@ -83,6 +84,9 @@ export default function Main() {
         level={level}
         _id={_id}
         />
+      </Route>
+      <Route exact path={"/Schedule"}>
+        <SchedulePage _id={_id}/>
       </Route>
       <Route exact path={"/Settings"}>
         <SettingsPage _id={_id}/>

@@ -95,7 +95,7 @@ export default function LoginPage() {
               textAlign: "center",
               fontSize: "13px",
             }}>
-            Iruna Digital Inc 2022 - V1.0
+            Iruna Digital Inc 2022 - V2.0
           </Typography>
         </Grid>
 

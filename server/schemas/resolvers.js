@@ -176,7 +176,7 @@ const resolvers = {
     deleteTask: async (parent, { _id }) => {
       await Task.findOneAndDelete({ _id });
     },
-    /* The below code is creating a new user in the database. */
+    
     addUser: async (
       parent,
       { firstName, lastName, employeeId, department, level, password }
@@ -202,7 +202,7 @@ const resolvers = {
       ];
 
       let curUserId = getUser[0]._id;
-      
+
       const createSchedule = await Schedule.create({ employee: curUserId });
 
       for (let j = 0; j < daysOfWeek.length; j++) {

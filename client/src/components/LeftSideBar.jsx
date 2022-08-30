@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core";
 import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import {
   List,
   ListItemButton,
@@ -303,6 +304,52 @@ export default function LeftSideBar(props) {
               />
             </ListItemButton>
           </HtmlTooltip>
+
+          {
+            props.level === 1 ? 
+            (
+              <HtmlTooltip
+            placement="right"
+            title={
+              <React.Fragment>
+                <Typography color="inherit">Schedule</Typography>
+              </React.Fragment>
+            }
+          >
+            <ListItemButton
+              selected={selectedIndex === 1}
+              onClick={(event) => {
+                handleListItemClick(event, 1);
+                window.location.assign("/Schedule");
+              }}
+            >
+              <ListItemIcon>
+
+                  <ScheduleIcon
+                    sx={{ fontSize: "2.5rem", color: "primary.main" }}
+                  />
+                
+              </ListItemIcon>
+              <ListItemText
+                primary={
+                  <Typography
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      fontFamily: "Baskervville",
+                    }}
+                  >
+                    Schedule
+                  </Typography>
+                }
+              />
+            </ListItemButton>
+          </HtmlTooltip>
+
+            ) : (
+              <div></div>
+            )
+          }
           {checkLevel()}
         </List>
 

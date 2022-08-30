@@ -137,3 +137,18 @@ export const QUERY_ALL_BULLETIN = gql`
     }
   }
 `;
+
+export const QUERY_SCHED_BY_UID = gql`
+query scheduleByUid($emp: ID) {
+  scheduleByUid(employeeUId: $emp) {
+    _id
+    schedule {
+      _id
+      dayOfWeek
+      isPresent
+      timeIn
+      timeOff
+    }
+  }
+}
+`;

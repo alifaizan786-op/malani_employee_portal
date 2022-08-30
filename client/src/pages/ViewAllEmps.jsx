@@ -156,7 +156,7 @@ export default function ViewAllEmps(props) {
           bottom: '5px',
           width: '80%'
         }}>
-        Iruna Digital Inc 2022 - V1.0
+        Iruna Digital Inc 2022 - V2.0
       </Typography>
     </Grid>
   )}else{
@@ -193,7 +193,7 @@ export default function ViewAllEmps(props) {
             bottom: '5px',
             width: '80%'
           }}>
-          Iruna Digital Inc 2022 - V1.0
+          Iruna Digital Inc 2022 - V2.0
         </Typography>
       </Grid>
     )
