@@ -75,6 +75,8 @@ export default function Schedule(props) {
 
   console.log(props._id);
 
+  const [updateSchedule, { error, data }] = useMutation(UPDATE_SCHEDULE);
+
   // const sorter = {
   //     // "sunday": 0, // << if sunday is first day of week
   //     "monday": 1,
@@ -97,8 +99,52 @@ export default function Schedule(props) {
     setFormState([...schedule]);
   }, schedule);
 
+  // console.log(props.handleScheduleSubmit);
+
+  const handleFormSubmit = async () => {
+    for (let i = 0; i < formState.length; i++) {
+      let variables =  {
+        employee: props._id,
+        newDaysOn: {
+          dayOfWeek: formState[i].dayOfWeek,
+          isPresent: formState[i].isPresent,
+          timeIn: formState[i].timeIn,
+          timeOff: formState[i].timeOff,
+        },
+      }
+
+      console.log(variables);
+      try {
+        const { data } = await updateSchedule({
+          variables: {
+            employee: props._id,
+            newDaysOn: {
+              dayOfWeek: formState[i].dayOfWeek,
+              isPresent: formState[i].isPresent,
+              timeIn: formState[i].timeIn,
+              timeOff: formState[i].timeOff,
+            },
+          },
+        });
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    props.setHandleScheduleSubmit(false);
+  };
+
+  React.useEffect(() => {
+    if (props.handleScheduleSubmit) {
+      console.log("handling submit");
+      handleFormSubmit();
+    }
+  }, [props.handleScheduleSubmit]);
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    let name = event.target.name;
+    let value = event.target.value === "on" ? false : true;
+
+    console.log(name, value);
 
     let tempArr = [...formState];
 
@@ -175,6 +221,7 @@ export default function Schedule(props) {
                     <Checkbox
                       checked={aSchedule.isPresent}
                       name={`isPresent-${aSchedule.dayOfWeek}`}
+                      onChange={handleChange}
                       sx={{
                         marginX: "10px",
                         minWidth: "10%",

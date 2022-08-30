@@ -100,7 +100,6 @@ const resolvers = {
 
       for (let i = 0; i < dups.length; i++) {
         let curId = dups[i]._id
-        console.log(curId);
         await Task.deleteOne({_id : curId})
       }
 
@@ -143,7 +142,6 @@ const resolvers = {
     },
     /* A query that is used to find a schedule by the employee's unique id. */
     scheduleByUid: async (parent, { employeeUId }) => {
-      console.log(employeeUId);
       return await Schedule.findOne({ employee: employeeUId });
     },
   },
@@ -191,6 +189,43 @@ const resolvers = {
         level,
         password,
       });
+
+      const getUser = await User.find({employeeId : employeeId})
+
+      let daysOfWeek = [
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+      ];
+
+      let curUserId = getUser[0]._id;
+      
+      const createSchedule = await Schedule.create({ employee: curUserId });
+
+      for (let j = 0; j < daysOfWeek.length; j++) {
+        let exampleSchedule = {
+          dayOfWeek: daysOfWeek[j],
+          isPresent: true,
+          timeIn: "10:00 AM",
+          timeOff: "07:30 PM",
+        };
+
+        console.log(exampleSchedule);
+
+        try {
+          const addedSchedule = await Schedule.findOneAndUpdate(
+            { employee: curUserId },
+            { $push: { schedule: exampleSchedule } }
+          );
+        } catch(e){
+          console.error(e)
+        }
+        
+      }
+
       return newUser;
     },
     updateUser: async (
@@ -218,7 +253,6 @@ const resolvers = {
     /* This is a mutation that is used to create a review. It takes in the employee, manager,
         month, and review and creates a new review with that information. */
     addReview: async (parent, { employee, manager, month, review }) => {
-      console.log(month);
       const newReview = await Review.create({
         manager,
         employee,
@@ -329,8 +363,6 @@ const resolvers = {
     },
     /* This is a mutation that is used to add a dayOn to the schedule of an employee. */
     addSchedule: async (parent, { employee, daysOn }) => {
-      console.log(employee);
-      console.log(daysOn);
 
       const addedSchedule = await Schedule.findOneAndUpdate(
         { employee: employee },
@@ -343,18 +375,17 @@ const resolvers = {
     /* This is a mutation that is used to edit the schedule of an employee. It first removes the
         old dayOn and then adds the new dayOn. */
     editSchedule: async (parent, { employee, newDaysOn }) => {
-      console.log(employee);
 
-      const rmOldDayOn = Schedule.findOneAndUpdate(
+      const rmOldDayOn = await Schedule.findOneAndUpdate(
         { employee: employee },
         { $pull: { schedule: { dayOfWeek: newDaysOn.dayOfWeek } } },
         { new: true }
       );
 
       const addNewDayOn = await Schedule.findOneAndUpdate(
-        { employee: employee },
-        { $push: { schedule: newDaysOn } },
-        { new: true }
+        { employee : employee },
+        { $push : { schedule: newDaysOn } },
+        { new : true }
       );
 
       return addNewDayOn;

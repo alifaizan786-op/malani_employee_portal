@@ -73,6 +73,8 @@ const dividerStyle = {
 export default function EmployeeModal(props) {
   const schedule = props?.schedule || [];
 
+  const [handleScheduleSubmit, setHandleScheduleSubmit] = React.useState(false)
+
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
   const [formState, setFormState] = React.useState({
@@ -99,6 +101,7 @@ export default function EmployeeModal(props) {
       const { data } = await updateUser({
         variables: { ...formState },
       });
+      setHandleScheduleSubmit(true)
     } catch (e) {
       console.error(e);
     }
@@ -325,7 +328,7 @@ export default function EmployeeModal(props) {
                   <Typography variant="p">{props.pending}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
-                <Schedule schedule={schedule} edit={edit} _id={props._id}/>
+                <Schedule schedule={schedule} edit={edit} _id={props._id} handleScheduleSubmit={handleScheduleSubmit} setHandleScheduleSubmit={setHandleScheduleSubmit}/>
               </Box>
             </Box>
             <Box
