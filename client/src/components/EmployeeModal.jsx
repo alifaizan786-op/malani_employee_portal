@@ -30,6 +30,8 @@ import { UPDATE_USER } from "../utils/mutation";
 
 import { useMutation } from "@apollo/client";
 
+import Schedule from "./Schedule";
+
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -69,26 +71,7 @@ const dividerStyle = {
 };
 
 export default function EmployeeModal(props) {
-  const schedule = props?.schedule || []
-
-  const sorter = {
-    // "sunday": 0, // << if sunday is first day of week
-    "monday": 1,
-    "tuesday": 2,
-    "wednesday": 3,
-    "thursday": 4,
-    "friday": 5,
-    "saturday": 6,
-    "sunday": 7
-  }
-
-  React.useEffect(()=>{
-    schedule.sort(function sortByDay(a, b) {
-      let day1 = a.dayOfWeek.toLowerCase();
-      let day2 = b.dayOfWeek.toLowerCase();
-      return sorter[day1] - sorter[day2];
-    });
-  }, props)
+  const schedule = props?.schedule || [];
 
   const [updateUser, { error, data }] = useMutation(UPDATE_USER);
 
@@ -190,7 +173,7 @@ export default function EmployeeModal(props) {
             </Box>
             <Box
               sx={{
-                width: "55%",
+                width: "65%",
                 display: "flex",
                 justifyContent: "space-between",
               }}
@@ -342,50 +325,12 @@ export default function EmployeeModal(props) {
                   <Typography variant="p">{props.pending}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
-                <FormControl component="fieldset">
-                  <FormLabel component="legend">Schedule</FormLabel>
-                  <FormGroup aria-label="position" row>
-                    {
-                      schedule.map((aSchedule)=>(
-
-                        <HtmlTooltip
-                        key={aSchedule._id}
-                      placement="bottom"
-                      title={
-                        <React.Fragment>
-                          <Typography variant="caption" color="inherit">
-                            <strong>
-                              Time In{" "}:{" "}
-                            </strong>
-                            {aSchedule.timeIn}
-                            <br/>
-                            <strong>
-                              Time Out{" "}:{" "}
-                            </strong>
-                            {aSchedule.timeOff}
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    >
-                      <FormControlLabel
-                        value="top"
-                        control={<Checkbox disabled checked={aSchedule.isPresent} />}
-                        label={aSchedule.dayOfWeek[0].toUpperCase() + aSchedule.dayOfWeek[1] + aSchedule.dayOfWeek[2]}
-                        labelPlacement="top"
-                      />
-                    </HtmlTooltip>
-
-                      ))
-                    }
-                    
-
-                  </FormGroup>
-                </FormControl>
+                <Schedule schedule={schedule} edit={edit} _id={props._id}/>
               </Box>
             </Box>
             <Box
               sx={{
-                width: "15%",
+                width: "5%",
                 display: "flex",
                 justifyContent: "end",
                 alignItems: "flex-start",

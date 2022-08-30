@@ -104,7 +104,7 @@ export default function ReviewCard(props) {
                 display: "grid",
               }}>
               {filter(month).map((reviewChild, index) => (
-                <Typography variant="p" sx={{ paddingTop: "10px" }}>
+                <Typography key={index} variant="p" sx={{ paddingTop: "10px" }}>
                   {`${reviewChild.createDate}  ${reviewChild.manager.employeeId.toUpperCase()} : "${reviewChild.review}"`}
                 </Typography>
               ))}

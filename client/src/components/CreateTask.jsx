@@ -133,7 +133,11 @@ export default function CreateTask(props) {
   let dropdown = () => {
     let arrOfEmps = []
     for (let i = 0; i < props.user.length; i++){
-      arrOfEmps.push(props.user[i].employeeId)
+      let tempObj = {
+        _id : props.user[i]._id,
+        employeeId : props.user[i].employeeId
+      }
+      arrOfEmps.push(tempObj)
     }
     arrOfEmps.sort()
     return arrOfEmps
@@ -164,9 +168,9 @@ export default function CreateTask(props) {
             value={formState.user}
             onChange={handleChange}
           >
-            {dropdown().map((employee, index) => (
-              <MenuItem key={index} value={employee}>
-                {employee}
+            {dropdown().map((employee) => (
+              <MenuItem key={employee._id} value={employee._id}>
+                {employee.employeeId}
               </MenuItem>
             ))}
           </Select>

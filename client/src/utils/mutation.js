@@ -230,3 +230,23 @@ mutation delBulletin($_id:ID){
     body
   }
 }`
+
+export const UPDATE_SCHEDULE = gql`
+mutation Mutation($employee: ID, $newDaysOn: daysOnInput) {
+  editSchedule(employee: $employee, newDaysOn: $newDaysOn) {
+    _id
+    employee {
+      _id
+      firstName
+      lastName
+      employeeId
+    }
+  }
+}`
+
+// "newDaysOn": {
+//   "dayOfWeek": null,
+//   "isPresent": null,
+//   "timeIn": null,
+//   "timeOff": null
+// }
