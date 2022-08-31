@@ -5,35 +5,14 @@ import * as React from "react";
 import { Grid, Typography, Divider, Avatar } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
 
+import { useQuery } from "@apollo/client";
+import { QUERY_QUOTE } from "../utils/queries";
+
 //From Assets
 import logo from "../assets/logo.png";
 
 //From Components
 import LoginForm from "../components/LoginForm";
-
-const useStyles = makeStyles((theme) => ({
-  parent: {
-    backgroundColor: "#0D0039",
-    height: "100vh",
-  },
-  childrenLeft: {
-    textAlign: "center",
-    color: "white",
-    width: "40%",
-    display: "block",
-    margin: "auto",
-  },
-  childrenCenter: {
-    height: "100vh",
-  },
-  childrenRight: {
-    textAlign: "center",
-    color: "white",
-    width: "40%",
-    display: "block",
-    margin: "auto",
-  },
-}));
 
 const style = {
   height: "85%",
@@ -43,7 +22,47 @@ const style = {
   margin: "6% 49%",
 };
 
-export default function LoginPage() {
+export default function LoginPage(props) {
+
+
+  const { data, refetch } = useQuery(QUERY_QUOTE);
+
+  const quote = data?.quotes || [];
+
+  const CurColor = localStorage.getItem("color")
+
+  React.useEffect(() => {
+    if (quote.length) {
+      localStorage.setItem("color", quote[0].color);
+      props.setThemeColor(quote[0].color);
+    }
+  }, [quote]);
+
+  const useStyles = makeStyles((theme) => ({
+    parent: {
+      backgroundColor: CurColor,
+      height: "100vh",
+    },
+    childrenLeft: {
+      textAlign: "center",
+      color: "white",
+      width: "40%",
+      display: "block",
+      margin: "auto",
+    },
+    childrenCenter: {
+      height: "100vh",
+    },
+    childrenRight: {
+      textAlign: "center",
+      color: "white",
+      width: "40%",
+      display: "block",
+      margin: "auto",
+    },
+  }));
+
+
   const [open, setOpen] = React.useState(false);
   const classes = useStyles({ open });
 
@@ -53,13 +72,15 @@ export default function LoginPage() {
         container
         direction="row"
         justifyContent="space-between"
-        alignItems="stretch">
+        alignItems="stretch"
+      >
         {/* Left */}
         <Grid
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenLeft}>
+          className={classes.childrenLeft}
+        >
           <Typography variant="h1" component="div">
             Malani Jewelers Inc
           </Typography>
@@ -73,7 +94,8 @@ export default function LoginPage() {
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenCenter}>
+          className={classes.childrenCenter}
+        >
           <Divider
             orientation="vertical"
             variant="middle"
@@ -94,7 +116,8 @@ export default function LoginPage() {
               color: "primary.light",
               textAlign: "center",
               fontSize: "13px",
-            }}>
+            }}
+          >
             Iruna Digital Inc 2022 - V2.0
           </Typography>
         </Grid>
@@ -104,7 +127,8 @@ export default function LoginPage() {
           item
           xs="auto"
           sx={{ margin: "auto" }}
-          className={classes.childrenLeft}>
+          className={classes.childrenLeft}
+        >
           <Typography variant="h2" component="div">
             Welcome Back !
           </Typography>

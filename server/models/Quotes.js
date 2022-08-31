@@ -4,6 +4,10 @@ const quotesSchema = new Schema({
     quotes:{
         type:String,
         require:true,
+    },
+    color:{
+        type:String,
+        require:true
     }
 })
 

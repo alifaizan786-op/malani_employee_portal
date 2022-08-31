@@ -1,4 +1,6 @@
 import "./App.css";
+//From React
+import * as React from "react";
 
 import LoginPage from "./pages/LoginPage";
 import Main from "./pages/Main";
@@ -39,31 +41,40 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#0D0039",
-      light: "#efefef",
-    },
-    secondary: {
-      main: "#D2AB67",
-    },
-  },
-  breakpoints: {
-    values: {
-      sm: 640,
-      md: 1325,
-      lg: 1280,
-      xl: 1536,
-    },
-  },
-  drawer: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-});
-
 function App() {
+  const localStorageColor = localStorage.getItem("color") || '#0D0039'
+
+  const [themeColor, setThemeColor] = React.useState(localStorageColor)
+
+  console.log(themeColor);
+
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: themeColor,
+        light: "#efefef",
+      },
+      secondary: {
+        main: "#D2AB67",
+      },
+    },
+    breakpoints: {
+      values: {
+        sm: 640,
+        md: 1325,
+        lg: 1280,
+        xl: 1536,
+      },
+    },
+    drawer: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  });
+
+
+
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
@@ -71,7 +82,7 @@ function App() {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           autoHideDuration={2000}
         >
-          {Auth.loggedIn() ? <Main /> : <LoginPage />}
+          {Auth.loggedIn() ? <Main /> : <LoginPage themeColor={themeColor} setThemeColor={setThemeColor}/>}
         </SnackbarProvider>
       </ApolloProvider>
     </ThemeProvider>

@@ -20,6 +20,7 @@ export const QUERY_QUOTE = gql`
     quotes {
       _id
       quotes
+      color
     }
   }
 `;

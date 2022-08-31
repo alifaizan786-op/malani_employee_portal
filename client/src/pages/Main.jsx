@@ -89,7 +89,7 @@ export default function Main() {
         <SchedulePage _id={_id}/>
       </Route>
       <Route exact path={"/Settings"}>
-        <SettingsPage _id={_id}/>
+        <SettingsPage _id={_id} level={level}/>
       </Route>
       <Route exact path={"/Announcement"}>
         <Bulletin _id={_id} level={level}/>

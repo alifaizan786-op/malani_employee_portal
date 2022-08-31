@@ -15,6 +15,8 @@ export default function Quote(props) {
 
  const quote = data?.quotes || [] 
 
+ console.log(quote);
+
   function getQuoteId(){
     if(quote[0]){
       return quote[0]._id
@@ -90,7 +92,7 @@ export default function Quote(props) {
       
        {checkLevel()}
 
-        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId} refetch={refetch}/>
+        <ChangeQuote modalState={edit} modalClose={setEditFalse} quoteid={quoteId} refetch={refetch} quote={qouteText()}/>
      
     </div>
   );

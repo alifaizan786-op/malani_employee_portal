@@ -246,8 +246,8 @@ const resolvers = {
     },
     /* This is a mutation that is used to update the quotes. It takes in the id of the quotes and
         the new quotes. It then finds the quotes and updates the quotes. */
-    updateQuotes: async (parent, { _id, quotes }) => {
-      const editQuotes = await Quotes.findOneAndUpdate({ _id }, { quotes });
+    updateQuotes: async (parent, { _id, quotes, color }) => {
+      const editQuotes = await Quotes.findOneAndUpdate({ _id }, { quotes, color });
       return editQuotes;
     },
     /* This is a mutation that is used to create a review. It takes in the employee, manager,

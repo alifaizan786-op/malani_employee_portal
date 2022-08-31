@@ -27,6 +27,7 @@ const typeDefs = gql`
     type Quotes {
         _id : ID
         quotes : String
+        color : String
     }
 
     type Review {
@@ -130,7 +131,9 @@ const typeDefs = gql`
 
         updateQuotes (
             _id:ID,
-            quotes:String): Quotes
+            quotes:String
+            color:String
+            ): Quotes
 
         addReview(
             manager: ID,

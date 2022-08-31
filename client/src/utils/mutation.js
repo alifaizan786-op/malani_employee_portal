@@ -43,11 +43,13 @@ mutation createTask(
 export const CHANGE_QUOTE = gql`
 mutation changeQuote(
   $_id:ID, 
-  $quotes:String)
+  $quotes:String,
+  $color:String)
   {
   updateQuotes(
     _id:$_id, 
-    quotes:$quotes){
+    quotes:$quotes,
+    color:$color){
     quotes
   }
 }`
