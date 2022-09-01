@@ -115,7 +115,6 @@ export default function EmployeeModal(props) {
       active: "",
     });
     setEdit(false);
-    window.location.assign("/ViewAllEmps");
   };
   const [edit, setEdit] = React.useState(false);
 
@@ -311,11 +310,6 @@ export default function EmployeeModal(props) {
                 <Box style={divStyle}>
                   <Typography variant="p">Tasks Overdue</Typography>
                   <Typography variant="p">{props.overdue}</Typography>
-                </Box>
-                <Divider sx={dividerStyle} />
-                <Box style={divStyle}>
-                  <Typography variant="p">Tasks Completed YTD</Typography>
-                  <Typography variant="p">{props.yTD}</Typography>
                 </Box>
                 <Divider sx={dividerStyle} />
                 <Box style={divStyle}>

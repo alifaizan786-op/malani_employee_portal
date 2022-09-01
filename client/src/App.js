@@ -41,13 +41,27 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+//create your forceUpdate hook
+function useForceUpdate(){
+  const [value, setValue] = React.useState(0); // integer state
+  return () => setValue(value => value + 1); // update state to force render
+  // An function that increment 👆🏻 the previous state like here 
+  // is better than directly setting `value + 1`
+}
+
 function App() {
-  const localStorageColor = localStorage.getItem("color") || '#0D0039'
+  const localStorageColor = localStorage.getItem("color") !== null ? localStorage.getItem("color") : '#0D0039'
+
+  console.log(localStorage.getItem("color") !== null ? localStorage.getItem("color") : '#0D0039');
 
   const [themeColor, setThemeColor] = React.useState(localStorageColor)
 
-  console.log(themeColor);
+  const forceUpdate = useForceUpdate()
 
+  React.useState(()=>{
+    console.log(themeColor);
+    forceUpdate()
+  }, themeColor)
 
   const theme = createTheme({
     palette: {

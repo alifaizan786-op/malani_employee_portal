@@ -43,9 +43,9 @@ export default function EmployeeCard(props) {
   const schedule = data?.scheduleByUid || []
 
 
-  const pending = tasks.filter((task)=> task.status === 'pending')
-  const submitted = tasks.filter((task)=> task.status === 'submitted')
-  const overdue = tasks.filter((task)=> task.status === 'overdue')  
+  // const pending = tasks.filter((task)=> task.status === 'pending')
+  // const submitted = tasks.filter((task)=> task.status === 'submitted')
+  // const overdue = tasks.filter((task)=> task.status === 'overdue')  
 
   function initial(){
     if(props.employeeId){
@@ -145,22 +145,17 @@ export default function EmployeeCard(props) {
         <Divider sx={dividerStyle} />
         <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Completed</Typography>
-          <Typography variant="p">{submitted.length}</Typography>
+          <Typography variant="p">{props.taskStats.submitted}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Pending</Typography>
-          <Typography variant="p">{pending.length}</Typography>
+          <Typography variant="p">{props.taskStats.pending}</Typography>
         </div>
         <Divider sx={dividerStyle} />
         <div style={style(props.active).divStyle}>
           <Typography variant="p">Tasks Overdue</Typography>
-          <Typography variant="p">{overdue.length}</Typography>
-        </div>
-        <Divider sx={dividerStyle} />
-        <div style={style(props.active).divStyle}>
-          <Typography variant="p">Tasks Completed YTD</Typography>
-          <Typography variant="p">{submitted.length + overdue.length + pending.length}</Typography>
+          <Typography variant="p">{props.taskStats.overdue}</Typography>
         </div>
         <Divider sx={dividerStyle} />
       </Card>
@@ -171,12 +166,11 @@ export default function EmployeeCard(props) {
         fName={props.firstName}
         lName={props.lastName}
         empId={props.employeeId}
-        pending={pending.length}
-        overdue={overdue.length}
-        submitted={submitted.length}
+        pending={props.taskStats.pending}
+        overdue={props.taskStats.overdue}
+        submitted={props.taskStats.submitted}
         dept={props.department}
         active={props.active}
-        yTD={tasks.length}
         _id={props._id}
         level={props.level}
         managerId={props.managerId}

@@ -126,11 +126,13 @@ export default function Schedule(props) {
             },
           },
         });
+        console.log(data);
       } catch (e) {
         console.error(e);
       }
     }
     props.setHandleScheduleSubmit(false);
+    window.location.assign("/ViewAllEmps");
   };
 
   React.useEffect(() => {
@@ -142,7 +144,13 @@ export default function Schedule(props) {
 
   const handleChange = (event) => {
     let name = event.target.name;
-    let value = event.target.value === "on" ? false : true;
+    let value;
+
+    if(name.split("-")[0] === "isPresent"){
+      value = event.target.checked
+    } else {
+      value = event.target.value
+    }
 
     console.log(name, value);
 

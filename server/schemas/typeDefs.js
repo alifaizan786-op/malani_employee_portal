@@ -1,201 +1,169 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-    type User {
-        _id : ID
-        firstName : String
-        lastName : String
-        employeeId : String
-        department : String
-        level : Int
-        password : String 
-        active : String
-    }
-    
-    type Task {
-        _id : ID
-        status : String
-        subStatus : String
-        description : String
-        user : User
-        dueDate : String  
-        createDate : String
-        recurring : Boolean
-        renewIn : Int
-    } 
+	type User {
+		_id: ID
+		firstName: String
+		lastName: String
+		employeeId: String
+		department: String
+		level: Int
+		password: String
+		active: String
+		taskStats:TaskStats
+	}
 
-    type Quotes {
-        _id : ID
-        quotes : String
-        color : String
-    }
+	type TaskStats{
+		submitted : Int
+		pending : Int
+		overdue : Int
+	}
 
-    type Review {
-        _id : ID
-        manager : User
-        employee : User
-        month : String
-        review : String
-        createDate : String
-    }
+	type Task {
+		_id: ID
+		status: String
+		subStatus: String
+		description: String
+		user: User
+		dueDate: String
+		createDate: String
+		recurring: Boolean
+		renewIn: Int
+	}
 
-    type Bulletin {
-        _id : ID
-        user : User
-        title : String
-        body : String
-        date : String
-        acknowledge : [User]
-    }
+	type Quotes {
+		_id: ID
+		quotes: String
+		color: String
+	}
 
-    type daysOn {
-        _id : ID
-        dayOfWeek : String
-        isPresent : Boolean
-        timeIn : String
-        timeOff : String
-    }
+	type Review {
+		_id: ID
+		manager: User
+		employee: User
+		month: String
+		review: String
+		createDate: String
+	}
 
-    type Schedule {
-        _id : ID
-        employee : User
-        schedule : [daysOn]
-    }
-    
-    type Auth{
-        token : ID
-        user : User
-    }
+	type Bulletin {
+		_id: ID
+		user: User
+		title: String
+		body: String
+		date: String
+		acknowledge: [User]
+	}
 
-    input daysOnInput {
-        dayOfWeek : String
-        isPresent : Boolean
-        timeIn : String
-        timeOff : String
-    }
-    
-    type Query{
-        users : [User]
-        tasks : [Task]
-        quotes : [Quotes]
-        reviews : [Review]
-        userId(userId: ID) : User
-        taskUId(taskUId: ID) : Task  
-        reviewUId(employeeUId : ID) : [Review]
-        userActive : [User]
-        taskByEmp(emp:ID) : [Task]
-        bulletins : [Bulletin]
-        schedule : [Schedule]
-        scheduleByUid (employeeUId : ID) : Schedule
-    }
+	type daysOn {
+		_id: ID
+		dayOfWeek: String
+		isPresent: Boolean
+		timeIn: String
+		timeOff: String
+	}
 
-    type Mutation{
-        addTask(
-            description :String!, 
-            user :ID!, 
-            dueDate :String!, 
-            recurring : Boolean!,
-            renewIn : Int  ) : Task
+	type Schedule {
+		_id: ID
+		employee: User
+		schedule: [daysOn]
+	}
 
-        updateTask( 
-            status :String,
-            subStatus :String,  
-            description :String, 
-            _id :ID, 
-            dueDate :String, 
-            recurring :Boolean,
-            renewIn: Int ) : Task
+	type Auth {
+		token: ID
+		user: User
+	}
 
-        deleteTask(
-            _id : ID ) : Task
+	input daysOnInput {
+		dayOfWeek: String
+		isPresent: Boolean
+		timeIn: String
+		timeOff: String
+	}
 
-        addUser (
-            firstName:String,
-            lastName:String,
-            employeeId:String,
-            department:String,
-            level :  Int,
-            password:String) : User 
+	type Query {
+		users: [User]
+		tasks: [Task]
+		quotes: [Quotes]
+		reviews: [Review]
+		userId(userId: ID): User
+		taskUId(taskUId: ID): Task
+		reviewUId(employeeUId: ID): [Review]
+		userActive: [User]
+		taskByEmp(emp: ID): [Task]
+		bulletins: [Bulletin]
+		schedule: [Schedule]
+		scheduleByUid(employeeUId: ID): Schedule
+	}
 
-        updateUser (
-            _id:ID, 
-            firstName:String ,
-            lastName:String ,
-            employeeId:String ,
-            department:String ,
-            level :Int,
-            active : String ) : User
+	type Mutation {
+		addTask(
+			description: String!
+			user: ID!
+			dueDate: String!
+			recurring: Boolean!
+			renewIn: Int
+		): Task
 
-        deleteUser (
-            _id:ID) : User
+		updateTask(
+			status: String
+			subStatus: String
+			description: String
+			_id: ID
+			dueDate: String
+			recurring: Boolean
+			renewIn: Int
+		): Task
 
-        updateQuotes (
-            _id:ID,
-            quotes:String
-            color:String
-            ): Quotes
+		deleteTask(_id: ID): Task
 
-        addReview(
-            manager: ID,
-            employee: ID, 
-            month: String,
-            review: String 
-        ) : Review
+		addUser(
+			firstName: String
+			lastName: String
+			employeeId: String
+			department: String
+			level: Int
+			password: String
+		): User
 
-        deleteReview (
-            _id:ID
-        ) : Review
+		updateUser(
+			_id: ID
+			firstName: String
+			lastName: String
+			employeeId: String
+			department: String
+			level: Int
+			active: String
+		): User
 
-        login( employeeId : String!, password: String!): Auth
+		deleteUser(_id: ID): User
 
-        updatePassword(
-             _id:ID,
-             oldPassword:String
-             newPassword:String) : User
-        
-        upadateStatus(
-            _id:ID,
-            status:String
-            subStatus:String
-        )  : Task
+		updateQuotes(_id: ID, quotes: String, color: String): Quotes
 
-        addBulletin(
-            user : ID
-            title : String
-            body : String
-        ) : Bulletin
+		addReview(manager: ID, employee: ID, month: String, review: String): Review
 
-        acknowledgeBulletin(
-            _id : ID
-            acknowledge:ID
-        ) : Bulletin
+		deleteReview(_id: ID): Review
 
-        updateBulletin(
-            _id : ID
-            title : String
-            body : String
-        ) : Bulletin
+		login(employeeId: String!, password: String!): Auth
 
-        deleteBulletin(
-            _id : ID
-        ) : Bulletin
+		updatePassword(_id: ID, oldPassword: String, newPassword: String): User
 
-        createSchedule(
-            employee : ID
-        ) : Schedule
+		upadateStatus(_id: ID, status: String, subStatus: String): Task
 
-        addSchedule(
-            employee : ID
-            daysOn : daysOnInput
-        ) : Schedule
+		addBulletin(user: ID, title: String, body: String): Bulletin
 
-        editSchedule(
-            employee : ID
-            newDaysOn : daysOnInput
-        ) : Schedule
-        
+		acknowledgeBulletin(_id: ID, acknowledge: ID): Bulletin
 
+		updateBulletin(_id: ID, title: String, body: String): Bulletin
 
-    }`
+		deleteBulletin(_id: ID): Bulletin
 
-module.exports = typeDefs;  
+		createSchedule(employee: ID): Schedule
+
+		addSchedule(employee: ID, daysOn: daysOnInput): Schedule
+
+		editSchedule(employee: ID, newDaysOn: daysOnInput): Schedule
+	}
+`;
+
+module.exports = typeDefs;

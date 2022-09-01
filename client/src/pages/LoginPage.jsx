@@ -29,7 +29,9 @@ export default function LoginPage(props) {
 
   const quote = data?.quotes || [];
 
-  const CurColor = localStorage.getItem("color")
+  console.log(data);
+
+  const CurColor = localStorage.getItem("color") !== null ? localStorage.getItem("color") : '#0D0039'
 
   React.useEffect(() => {
     if (quote.length) {

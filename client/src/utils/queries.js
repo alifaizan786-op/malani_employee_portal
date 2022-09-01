@@ -59,6 +59,11 @@ export const QUERY_ALLEMPS = gql`
       department
       level
       active
+      taskStats {
+      submitted
+      pending
+      overdue
+    }
     }
   }
 `;

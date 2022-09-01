@@ -118,6 +118,7 @@ export default function ViewAllEmps(props) {
           active={userobj.active}
           level={userobj.level}
           managerId={props._id}
+          taskStats={userobj.taskStats}
           />
       ))}
       
