@@ -138,7 +138,11 @@ const resolvers = {
     },
     /* A function that is returning a promise. */
     schedule: async () => {
-      return await Schedule.find({}).populate("employee");
+      let allSchedule = await Schedule.find({}).populate("employee");
+
+      let allActiveSched = allSchedule.filter((sched) => sched.employee.active === true )
+
+      return allActiveSched
     },
     /* A query that is used to find a schedule by the employee's unique id. */
     scheduleByUid: async (parent, { employeeUId }) => {

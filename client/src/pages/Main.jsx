@@ -86,7 +86,7 @@ export default function Main() {
         />
       </Route>
       <Route exact path={"/Schedule"}>
-        <SchedulePage _id={_id}/>
+        <SchedulePage _id={_id} level={level}/>
       </Route>
       <Route exact path={"/Settings"}>
         <SettingsPage _id={_id} level={level}/>
