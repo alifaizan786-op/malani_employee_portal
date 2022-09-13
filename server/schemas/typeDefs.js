@@ -10,13 +10,13 @@ const typeDefs = gql`
 		level: Int
 		password: String
 		active: String
-		taskStats:TaskStats
+		taskStats: TaskStats
 	}
 
-	type TaskStats{
-		submitted : Int
-		pending : Int
-		overdue : Int
+	type TaskStats {
+		submitted: Int
+		pending: Int
+		overdue: Int
 	}
 
 	type Task {
@@ -74,6 +74,16 @@ const typeDefs = gql`
 		user: User
 	}
 
+	type TimeOffReq {
+		_id : ID
+		employee: User
+		startingDate: String
+		endDate: String
+		reason: String
+		approver: User
+		status: String
+	}
+
 	input daysOnInput {
 		dayOfWeek: String
 		isPresent: Boolean
@@ -94,6 +104,8 @@ const typeDefs = gql`
 		bulletins: [Bulletin]
 		schedule: [Schedule]
 		scheduleByUid(employeeUId: ID): Schedule
+		timeOffReq: [TimeOffReq]
+		timeOffReqByUid(employeeUId: ID): TimeOffReq
 	}
 
 	type Mutation {
@@ -163,6 +175,25 @@ const typeDefs = gql`
 		addSchedule(employee: ID, daysOn: daysOnInput): Schedule
 
 		editSchedule(employee: ID, newDaysOn: daysOnInput): Schedule
+
+		addTimeOffReq(
+			employee: ID
+			startingDate: String
+			endDate: String
+			reason: String
+			approver: ID
+			status: String
+		): TimeOffReq
+
+		updateTimeOffReq(
+			_id : ID
+			employee: ID
+			startingDate: String
+			endDate: String
+			reason: String
+			approver: ID
+			status: String
+		): TimeOffReq
 	}
 `;
 
