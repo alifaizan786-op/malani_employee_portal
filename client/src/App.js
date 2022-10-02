@@ -52,14 +52,11 @@ function useForceUpdate(){
 function App() {
   const localStorageColor = localStorage.getItem("color") !== null ? localStorage.getItem("color") : '#0D0039'
 
-  console.log(localStorage.getItem("color") !== null ? localStorage.getItem("color") : '#0D0039');
-
   const [themeColor, setThemeColor] = React.useState(localStorageColor)
 
   const forceUpdate = useForceUpdate()
 
   React.useState(()=>{
-    console.log(themeColor);
     forceUpdate()
   }, themeColor)
 
@@ -96,7 +93,7 @@ function App() {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
           autoHideDuration={2000}
         >
-          {Auth.loggedIn() ? <Main /> : <LoginPage themeColor={themeColor} setThemeColor={setThemeColor}/>}
+          {Auth.loggedIn() ? <Main themeColor={themeColor}/> : <LoginPage themeColor={themeColor} setThemeColor={setThemeColor}/>}
         </SnackbarProvider>
       </ApolloProvider>
     </ThemeProvider>

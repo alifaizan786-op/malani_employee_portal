@@ -10,6 +10,7 @@ import ViewAllEmps from "./ViewAllEmps";
 import SettingsPage from "./SettingsPage";
 import Bulletin from "./Bulletin";
 import SchedulePage from "./Schedule";
+import TimeOffRequest from "./TimeOffRequest";
 
 
 import { useQuery } from '@apollo/client';
@@ -18,7 +19,7 @@ import { QUERY_MAIN } from '../utils/queries';
 //From Material UI
 import { Grid } from "@mui/material";
 
-export default function Main() {
+export default function Main(props) {
   const [draweropen, setDrawerOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -93,6 +94,9 @@ export default function Main() {
       </Route>
       <Route exact path={"/Announcement"}>
         <Bulletin _id={_id} level={level}/>
+      </Route>
+      <Route exact path={"/TimeOffRequest"}>
+        <TimeOffRequest _id={_id} level={level} themeColor={props.themeColor}/>
       </Route>
     </Router>
   );

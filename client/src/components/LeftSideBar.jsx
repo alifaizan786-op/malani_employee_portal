@@ -23,6 +23,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import { Logout } from '@mui/icons-material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_TASKBYEMP } from '../utils/queries';
@@ -143,7 +144,7 @@ export default function LeftSideBar(props) {
 							window.location.assign('/ViewAllEmps');
 						}}>
 						<ListItemIcon>
-							<PeopleIcon sx={{ fontSize: '2.5rem', color: 'primary.main' }} />
+							<PeopleIcon sx={{ fontSize: '2.0rem', color: 'primary.main' }} />
 						</ListItemIcon>
 						<ListItemText
 							primary={
@@ -237,7 +238,7 @@ export default function LeftSideBar(props) {
 									}
 									color='primary'>
 									<TaskIcon
-										sx={{ fontSize: '2.5rem', color: 'primary.main' }}
+										sx={{ fontSize: '2.0rem', color: 'primary.main' }}
 									/>
 								</Badge>
 							</ListItemIcon>
@@ -274,7 +275,7 @@ export default function LeftSideBar(props) {
 									badgeContent={bulletin.length - acknowledged}
 									color='primary'>
 									<NewspaperIcon
-										sx={{ fontSize: '2.5rem', color: 'primary.main' }}
+										sx={{ fontSize: '2.0rem', color: 'primary.main' }}
 									/>
 								</Badge>
 							</ListItemIcon>
@@ -297,6 +298,39 @@ export default function LeftSideBar(props) {
 						placement='right'
 						title={
 							<React.Fragment>
+								<Typography color='inherit'>Time Off Request</Typography>
+							</React.Fragment>
+						}>
+						<ListItemButton
+							selected={selectedIndex === 1}
+							onClick={(event) => {
+								handleListItemClick(event, 1);
+								window.location.assign('/TimeOffRequest');
+							}}>
+							<ListItemIcon>
+								<DateRangeIcon
+									sx={{ fontSize: '2.0rem', color: 'primary.main' }}
+								/>
+							</ListItemIcon>
+							<ListItemText
+								primary={
+									<Typography
+										style={{
+											fontSize: '18px',
+											fontWeight: 'bold',
+											fontFamily: 'Baskervville',
+										}}>
+										Time Off Request
+									</Typography>
+								}
+							/>
+						</ListItemButton>
+					</HtmlTooltip>
+
+					<HtmlTooltip
+						placement='right'
+						title={
+							<React.Fragment>
 								<Typography color='inherit'>Schedule</Typography>
 							</React.Fragment>
 						}>
@@ -308,7 +342,7 @@ export default function LeftSideBar(props) {
 							}}>
 							<ListItemIcon>
 								<ScheduleIcon
-									sx={{ fontSize: '2.5rem', color: 'primary.main' }}
+									sx={{ fontSize: '2.0rem', color: 'primary.main' }}
 								/>
 							</ListItemIcon>
 							<ListItemText
@@ -345,7 +379,7 @@ export default function LeftSideBar(props) {
 							}}>
 							<ListItemIcon>
 								<SettingsIcon
-									sx={{ fontSize: '2.5rem', color: 'primary.main' }}
+									sx={{ fontSize: '2.0rem', color: 'primary.main' }}
 								/>
 							</ListItemIcon>
 							<ListItemText
@@ -372,7 +406,7 @@ export default function LeftSideBar(props) {
 						}>
 						<ListItemButton onClick={Auth.logout}>
 							<ListItemIcon>
-								<Logout sx={{ fontSize: '2.5rem', color: 'primary.main' }} />
+								<Logout sx={{ fontSize: '2.0rem', color: 'primary.main' }} />
 							</ListItemIcon>
 							<ListItemText
 								primary={

@@ -158,7 +158,7 @@ const resolvers = {
 				.populate('approver');
 		},
 		timeOffReqByUid: async (parent, { employeeUId }) => {
-			return await TimeOffReq.findOne({ employee: employeeUId })
+			return await TimeOffReq.find({ employee: employeeUId })
 				.populate('employee')
 				.populate('approver');
 		},

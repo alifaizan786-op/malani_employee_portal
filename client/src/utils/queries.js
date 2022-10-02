@@ -176,3 +176,23 @@ export const QUERY_ALL_ACTIVE_SCHED = gql`
 		}
 	}
 `;
+
+export const QUERY_TIME_OFF_REQ_BY_UID = gql`
+	query TimeOffReqByUid($employeeUId: ID) {
+		timeOffReqByUid(employeeUId: $employeeUId) {
+			_id
+			employee {
+				_id
+				employeeId
+			}
+			startingDate
+			endDate
+			reason
+			approver {
+				_id
+				employeeId
+			}
+			status
+		}
+	}
+`;

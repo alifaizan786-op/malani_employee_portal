@@ -39,6 +39,7 @@ export default function ViewScheduleEmp(props) {
           <TableBody>
             {schedule.map((day) => (
               <TableRow
+              hover={true}
                 key={day._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >

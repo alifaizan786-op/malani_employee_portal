@@ -105,7 +105,7 @@ const typeDefs = gql`
 		schedule: [Schedule]
 		scheduleByUid(employeeUId: ID): Schedule
 		timeOffReq: [TimeOffReq]
-		timeOffReqByUid(employeeUId: ID): TimeOffReq
+		timeOffReqByUid(employeeUId: ID): [TimeOffReq]
 	}
 
 	type Mutation {
