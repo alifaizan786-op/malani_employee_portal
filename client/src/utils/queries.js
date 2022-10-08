@@ -196,3 +196,21 @@ export const QUERY_TIME_OFF_REQ_BY_UID = gql`
 		}
 	}
 `;
+
+export const QUERY_ALL_TIME_OFF_REQS = gql`
+query Query {
+  timeOffReq {
+    _id
+    employee {
+      _id
+      employeeId
+    }
+    startingDate
+    endDate
+    reason
+    approver {
+      employeeId
+    }
+    status
+  }
+}`
