@@ -15,8 +15,6 @@ export default function Quote(props) {
 
  const quote = data?.quotes || [] 
 
- console.log(quote);
-
   function getQuoteId(){
     if(quote[0]){
       return quote[0]._id

@@ -427,11 +427,10 @@ const resolvers = {
 			parent,
 			{ _id, employee, startingDate, endDate, reason, approver, status }
 		) => {
-      console.log(_id, employee, startingDate, endDate, reason, approver, status );
 			const updateTimeOffReq = TimeOffReq.findByIdAndUpdate(
 				{ _id: _id },
 				{ employee, startingDate, endDate, reason, approver, status },
-        {new : true}
+				{ new: true }
 			);
 
 			return updateTimeOffReq;

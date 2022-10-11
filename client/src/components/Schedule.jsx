@@ -113,7 +113,6 @@ export default function Schedule(props) {
         },
       }
 
-      console.log(variables);
       try {
         const { data } = await updateSchedule({
           variables: {

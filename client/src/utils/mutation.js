@@ -271,6 +271,46 @@ export const NEW_TIME_OFF_REQUEST = gql`
 	}
 `;
 
+export const UPDATE_TIME_OFF_REQ = gql`
+	mutation Mutation(
+		$id: ID
+		$employee: ID
+		$startingDate: String
+		$endDate: String
+		$reason: String
+		$approver: ID
+		$status: String
+	) {
+		updateTimeOffReq(
+			_id: $id
+			employee: $employee
+			startingDate: $startingDate
+			endDate: $endDate
+			reason: $reason
+			approver: $approver
+			status: $status
+		) {
+			_id
+			employee {
+				firstName
+				lastName
+				employeeId
+				_id
+			}
+			startingDate
+			endDate
+			reason
+			approver {
+				_id
+				firstName
+				lastName
+				employeeId
+			}
+			status
+		}
+	}
+`;
+
 // "newDaysOn": {
 //   "dayOfWeek": null,
 //   "isPresent": null,

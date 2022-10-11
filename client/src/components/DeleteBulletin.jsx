@@ -14,8 +14,6 @@ import {useMutation} from '@apollo/client';
 
 export default function DeleteBulletin(props){
 
-    // console.log('userId ' + props.curUserId);
-    // console.log('bulletInId ' + props.bulletInId);
 
     const [formState, setFormState] = React.useState({
         _id : props.bulletInId,

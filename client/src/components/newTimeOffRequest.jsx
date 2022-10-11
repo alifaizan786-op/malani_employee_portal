@@ -98,32 +98,38 @@ export default function NewTimeOffRequest(props) {
 					preventSnapRefocus={true}
 					moveRangeOnFirstSelection={true}
 				/>
-				<FormControl>
-					<TextField
-						id='outlined-multiline-flexible'
-						label='Reason'
-						name='reason'
-						required
-						multiline
-						minRows={4}
-						value={formState.reason}
-						onChange={handleFormChange}
-					/>
-				</FormControl>
-				<Button
-					type='submit'
-					fullWidth
-					variant='contained'
-					onClick={handleFormSubmit}
-					sx={{
-						fontSize: '20px',
-						bgcolor: 'primary.main',
-						color: 'primary.light',
-						borderRadius: '10px',
-						marginTop: '20px',
-					}}>
-					Submit
-				</Button>
+				{props.level === 1 ? (
+					<>
+						<FormControl>
+							<TextField
+								id='outlined-multiline-flexible'
+								label='Reason'
+								name='reason'
+								required
+								multiline
+								minRows={4}
+								value={formState.reason}
+								onChange={handleFormChange}
+							/>
+						</FormControl>
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							onClick={handleFormSubmit}
+							sx={{
+								fontSize: '20px',
+								bgcolor: 'primary.main',
+								color: 'primary.light',
+								borderRadius: '10px',
+								marginTop: '20px',
+							}}>
+							Submit
+						</Button>
+					</>
+				) : (
+					<div></div>
+				)}
 			</Box>
 		</>
 	);

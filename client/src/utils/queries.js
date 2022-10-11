@@ -204,12 +204,16 @@ query Query {
     employee {
       _id
       employeeId
+	  firstName
+	  lastName
     }
     startingDate
     endDate
     reason
     approver {
       employeeId
+	  firstName
+	  lastName
     }
     status
   }

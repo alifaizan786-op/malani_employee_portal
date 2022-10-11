@@ -32,7 +32,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { QUERY_TIME_OFF_REQ_BY_UID, QUERY_ALL_TIME_OFF_REQS } from '../utils/queries';
+import {
+	QUERY_TIME_OFF_REQ_BY_UID,
+	QUERY_ALL_TIME_OFF_REQS,
+} from '../utils/queries';
 
 import { DateRange } from 'react-date-range';
 import { addDays, format, isWeekend } from 'date-fns';
@@ -46,79 +49,55 @@ export default function TimeOffRequest(props) {
 	});
 
 	const timeOffReqs = data?.timeOffReqByUid || [];
+
+	function gridStyling() {
+		//grid Styling
+		if (props.current) {
+			let style = (theme) => ({
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.easeOut,
+					duration: theme.transitions.duration.enteringScreen,
+				}),
+				marginTop: '140px',
+				marginLeft: '240px',
+				display: 'flex',
+				flexFlow: 'wrap',
+			});
+			return style;
+		} else {
+			let style = (theme) => ({
+				transition: theme.transitions.create('margin', {
+					easing: theme.transitions.easing.sharp,
+					duration: theme.transitions.duration.leavingScreen,
+				}),
+				marginTop: '140px',
+				marginLeft: '175px',
+				display: 'flex',
+				flexFlow: 'wrap',
+			});
+			return style;
+		}
+	}
 	return (
-		<Grid
-			item
-			sm={10}
-			xs={10}
-			margin={'100px 150px 200px 200px'}
-			sx={{ width: '100%', height: '100%' }}>
-			<Typography
+		<Grid item sm={10} xs={10} sx={gridStyling()}>
+			{/* <Typography
 				variant='h3'
 				color={'primary.main'}
 				textAlign={'center'}
-				sx={{ fontFamily: 'Baskervville', marginBottom: '15px' }}>
+				sx={{ fontFamily: 'Baskervville', marginBottom: '30px', marginLeft: "32vw" }}>
 				Time Off Request
-			</Typography>
+			</Typography> */}
 			<Box
 				sx={{
 					display: 'flex',
-					flexDirection: 'row',
+					flexDirection: 'column-reverse',
 					width: '85vw',
 					height: '80vh',
 					justifyContent: 'space-evenly',
 					alignItems: 'center',
 				}}>
-				<Box sx={{ width: '45%' }}>
-					<TableContainer>
-						<Table aria-label='simple table'>
-							<TableHead>
-								<TableRow>
-								{props.level === 2 ? (
-									<TableCell align='center'>Employee</TableCell>
-								):(
-									<div></div>
-								)}
-									<TableCell align='center'>Start Date</TableCell>
-									<TableCell align='center'>End Date</TableCell>
-									<TableCell align='center'>Reason</TableCell>
-									<TableCell align='center'>Status</TableCell>
-									{props.level === 2 ? (
-									<TableCell align='center'>Approver</TableCell>
-								):(
-									<div></div>
-								)}
-								</TableRow>
-							</TableHead>
-							{props.level === 2 ? (
-								<AllTimeOffReqs/>
-							) : (
-								<TableBody>
-									{timeOffReqs.map((req) => (
-										<TableRow
-											// onClick={(event) => {
-											// 	console.log(event.target.parentNode.dataset.id);
-											// }}
-											hover={true}
-											data-id={req._id}
-											key={req._id}
-											sx={{
-												'&:last-child td, &:last-child th': { border: 0 },
-											}}>
-											<TableCell align='center'>
-												{dateFormat(parseInt(req.startingDate)).split('at')[0]}
-											</TableCell>
-											<TableCell align='center'>
-												{dateFormat(parseInt(req.endDate)).split('at')[0]}
-											</TableCell>
-											<TableCell align='center'>{req.reason}</TableCell>
-											<TableCell align='center'>{req.status}</TableCell>
-										</TableRow>
-									))}
-								</TableBody>
-							)}
-						</Table>
-					</TableContainer>
+				<Box>
+					<AllTimeOffReqs current={props.current} level={props.level} />
 				</Box>
 				<NewTimeOffRequest
 					_id={props._id}
@@ -127,6 +106,19 @@ export default function TimeOffRequest(props) {
 					refetch={refetch}
 				/>
 			</Box>
+			<Typography
+				variant='p'
+				component='div'
+				sx={{
+					color: 'primary',
+					textAlign: 'center',
+					fontSize: '13px',
+					position: 'fixed',
+					bottom: '5px',
+					width: '80%',
+				}}>
+				Iruna Digital Inc 2022 - V2.0
+			</Typography>
 		</Grid>
 	);
 }

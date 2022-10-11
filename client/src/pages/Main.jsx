@@ -96,7 +96,7 @@ export default function Main(props) {
         <Bulletin _id={_id} level={level}/>
       </Route>
       <Route exact path={"/TimeOffRequest"}>
-        <TimeOffRequest _id={_id} level={level} themeColor={props.themeColor}/>
+        <TimeOffRequest _id={_id} level={level} themeColor={props.themeColor} current={draweropen}/>
       </Route>
     </Router>
   );

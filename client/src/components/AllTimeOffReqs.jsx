@@ -1,79 +1,248 @@
 import React from 'react';
 
-import { Grid } from '@mui/material';
-
 import { useQuery } from '@apollo/client';
-import { QUERY_SCHED_BY_UID } from '../utils/queries';
-import { NEW_TIME_OFF_REQUEST } from '../utils/mutation';
-import { useMutation } from '@apollo/client';
-import dateFormat from '../utils/dateFormat';
+import { QUERY_ALLTASKS } from '../utils/queries';
 import {
-	Box,
 	Typography,
 	Button,
-	Avatar,
-	Divider,
-	Modal,
+	FormControl,
+	InputLabel,
 	Select,
 	MenuItem,
 	TextField,
-	Checkbox,
-	FormLabel,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
+	Grid,
+	Snackbar,
+	Alert,
 } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import 'react-date-range/dist/styles.css'; // main css file
-import 'react-date-range/dist/theme/default.css'; // theme css file
+
+import AddIcon from '@mui/icons-material/Add';
+import CreateTask from '../components/CreateTask';
+import CircleIcon from '@mui/icons-material/Circle';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import EditIcon from '@mui/icons-material/Edit';
+import LinearProgress from '@mui/material/LinearProgress';
+import EditTaskModal from '../components/EditTaskModal';
+import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
+
+import UpdateTimeOffReq from './updateTimeOffReq';
+
+import {
+	DataGrid,
+	GridToolbarContainer,
+	GridToolbarColumnsButton,
+	GridToolbarExport,
+	GridToolbarDensitySelector,
+} from '@mui/x-data-grid';
+
 import {
 	QUERY_TIME_OFF_REQ_BY_UID,
 	QUERY_ALL_TIME_OFF_REQS,
 } from '../utils/queries';
 
-import { DateRange } from 'react-date-range';
-import { addDays, format, isWeekend } from 'date-fns';
-import NewTimeOffRequest from '../components/newTimeOffRequest';
+import SubmitTask from '../components/SubmitTask';
+import DeleteTask from '../components/DeleteTask';
+import AbsentTask from '../components/AbsentTask';
 
-export default function AllTimeOffReqs() {
-	const { loading, data, refetch } = useQuery(QUERY_ALL_TIME_OFF_REQS);
+import ClearIcon from '@mui/icons-material/Clear';
 
-	const timeOffReqs = data?.timeOffReq || [];
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 
-    console.log(timeOffReqs);
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
+import Auth from "../utils/auth"
+
+const dateFormat = require('../utils/dateFormat')
+
+export default function AllTimeOffReqs(props) {
+	const { loading, data } = useQuery(QUERY_ALL_TIME_OFF_REQS, {
+		pollInterval: 500,
+	});
+
+	const timeOffReq = data?.timeOffReq || [];
+
+	const columns = checkLevelColumn();
+
+
+	const rows = [...timeOffReq];
+
+	function checkLevelColumn() {
+		// check and show task according to manager & employee
+		if (props.level === 2 ){
+			let columns = [
+				{
+					field: 'Employee',
+					tpe: 'singleSelect',
+					headerName: 'Employee',
+					width: 130,
+					valueGetter: (params) => `${params.row.employee.firstName} ${params.row.employee.lastName}`,
+				},
+				{
+					field: 'startingDate',
+					tpe: 'singleSelect',
+					headerName: 'From',
+					width: 150,
+					valueGetter: (params) =>
+						`${dateFormat(parseInt(params.row.startingDate)).split('at')[0]}`,
+				},
+				{
+					field: 'endDate',
+					tpe: 'singleSelect',
+					headerName: 'To',
+					width: 150,
+					valueGetter: (params) =>
+						`${dateFormat(parseInt(params.row.endDate)).split('at')[0]}`,
+				},
+				{
+					field: 'reason',
+					tpe: 'singleSelect',
+					headerName: 'Reason',
+					width: 350,
+				},
+				{
+					field: 'status',
+					type: 'singleSelect',
+					headerName: 'Status',
+					width: 350,
+					valueGetter: (params) =>
+					`${params.row.status.split("_").join(" ")}`,
+				},
+				{
+					field: 'Approver',
+					tpe: 'singleSelect',
+					headerName: 'Approver',
+					width: 130,
+					valueGetter: (params) => params.row.approver === null ? `` : `${params.row.approver.firstName} ${params.row.approver.lastName}`,
+				},
+				{
+					field : "Update Time Off Request",
+					width: 400,
+					renderCell : (params) => {
+						return(
+							<UpdateTimeOffReq
+							_id={ params.row._id}
+							employee={ params.row.employee._id}
+							startingDate={ params.row.startingDate}
+							endDate={ params.row.endDate}
+							reason={ params.row.reason}
+							approver={ Auth.getProfile().data._id }
+							status={ params.row.status}
+							/>
+						)
+					}
+				}
+			];
+			return columns;
+		} else {
+			let columns = [
+				{
+					field: 'Employee',
+					tpe: 'singleSelect',
+					headerName: 'Employee',
+					width: 130,
+					valueGetter: (params) => `${params.row.employee.firstName} ${params.row.employee.lastName}`,
+				},
+				{
+					field: 'startingDate',
+					tpe: 'singleSelect',
+					headerName: 'From',
+					width: 150,
+					valueGetter: (params) =>
+						`${dateFormat(parseInt(params.row.startingDate)).split('at')[0]}`,
+				},
+				{
+					field: 'endDate',
+					tpe: 'singleSelect',
+					headerName: 'To',
+					width: 150,
+					valueGetter: (params) =>
+						`${dateFormat(parseInt(params.row.endDate)).split('at')[0]}`,
+				},
+				{
+					field: 'reason',
+					tpe: 'singleSelect',
+					headerName: 'Reason',
+					width: 350,
+				},
+				{
+					field: 'status',
+					type: 'singleSelect',
+					headerName: 'Status',
+					width: 350,
+					valueGetter: (params) =>
+					`${params.row.status.split("_").join(" ")}`,
+				},
+				{
+					field: 'Approver',
+					tpe: 'singleSelect',
+					headerName: 'Approver',
+					width: 130,
+					valueGetter: (params) => params.row.approver === null ? `` : `${params.row.approver.firstName} ${params.row.approver.lastName}`,
+				},
+			];
+			return columns;
+		}
+	}
+
+	function dataGridStyling() {
+		//data grid of task
+		if (props.level === 2) {
+			if (props.current) {
+				let style = (theme) => ({
+					transition: theme.transitions.create('minWidth', {
+						easing: theme.transitions.easing.easeOut,
+						duration: theme.transitions.duration.enteringScreen,
+					}),
+					height: '55vh',
+					minWidth: '82vw',
+				});
+				return style;
+			} else {
+				let style = (theme) => ({
+					transition: theme.transitions.create('margin', {
+						easing: theme.transitions.easing.sharp,
+						duration: theme.transitions.duration.leavingScreen,
+					}),
+					height: '55vh',
+					minWidth: '90.5vw',
+				});
+				return style;
+			}
+		} else {
+			if (props.current) {
+				let style = (theme) => ({
+					transition: theme.transitions.create('minWidth', {
+						easing: theme.transitions.easing.easeOut,
+						duration: theme.transitions.duration.enteringScreen,
+					}),
+					height: '40vh',
+					minWidth: '82vw',
+				});
+				return style;
+			} else {
+				let style = (theme) => ({
+					transition: theme.transitions.create('margin', {
+						easing: theme.transitions.easing.sharp,
+						duration: theme.transitions.duration.leavingScreen,
+					}),
+					height: '40vh',
+					minWidth: '90.5vw',
+				});
+				return style;
+			}
+		}
+	}
 
 	return (
-		<TableBody>
-			{timeOffReqs.map((req) => (
-				<TableRow
-					onClick={(event) => {
-						console.log(event.target.parentNode.dataset.id);
-					}}
-					hover={true}
-					data-id={req._id}
-					key={req._id}
-					sx={{
-						'&:last-child td, &:last-child th': { border: 0 },
-					}}>
-                        <TableCell align='center'>{req.employee.employeeId}</TableCell>
-                    
-					<TableCell align='center'>
-						{dateFormat(parseInt(req.startingDate)).split('at')[0]}
-					</TableCell>
-					<TableCell align='center'>
-						{dateFormat(parseInt(req.endDate)).split('at')[0]}
-					</TableCell>
-					<TableCell align='center'>{req.reason}</TableCell>
-					<TableCell align='center'>{req.status}</TableCell>
-                    <TableCell align='center'>{req.approver?.employeeId ? req.approver.employeeId : "Null"}</TableCell>
-				</TableRow>
-			))}
-		</TableBody>
+		<DataGrid
+			rows={rows}
+			columns={columns}
+			sx={dataGridStyling()}
+			components={{
+				LoadingOverlay: LinearProgress,
+			}}
+			loading={loading}
+			disableColumnMenu
+			getRowId={(row) => row._id}
+		/>
 	);
 }

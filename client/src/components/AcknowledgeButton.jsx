@@ -27,9 +27,6 @@ const HtmlTooltip = styled(({ className, ...props }) => (
 
 export default function AcknowledgeBtn(props){
 
-    // console.log('userId ' + props.curUserId);
-    // console.log('bulletInId ' + props.bulletInId);
-
     const [formState, setFormState] = React.useState({
         _id : props.bulletInId,
         acknowledge : props.curUserId
