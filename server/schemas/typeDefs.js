@@ -11,6 +11,7 @@ const typeDefs = gql`
 		password: String
 		active: String
 		taskStats: TaskStats
+		isPresentTomo : Boolean
 	}
 
 	type TaskStats {

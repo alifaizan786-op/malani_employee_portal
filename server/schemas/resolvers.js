@@ -35,10 +35,17 @@ const resolvers = {
 			const allTasks = await Task.find({}).populate('user').sort({ status: 1 });
 			// const recuurringTask = allTasks.filter((task) => task.recurring === true)
 
+
+
+			/* Filtering out all the tasks that have an active user. */
 			const rmInactive = allTasks.filter((task) => task.user.active === true);
+
+			/* The above code is filtering the array of objects called rmInactive and returning only the objects
+			that have a recurring property of true. */
 			const recuurringTask = rmInactive.filter(
 				(task) => task.recurring === true
 			);
+
 			const checkStatus = allTasks.filter((task) => task.status === 'pending');
 
 			if (today.getDay() !== 1) {

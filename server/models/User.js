@@ -1,6 +1,9 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const Task = require('./Task')
+const Task = require('./Task');
+const Schedule = require('./Schedule');
+
+const dateFns = require('date-fns');
 
 const userSchema = new Schema(
 	{
@@ -57,17 +60,27 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 userSchema.virtual('taskStats').get(async function () {
-  let allTask = await Task.find({ user: this._id });
-  let submittedTask = allTask.filter((task) => task.status === "submitted")
-  let pendingTask = allTask.filter((task) => task.status === "pending")
-  let overDueTask = allTask.filter((task) => task.status === "overdue")
-  return {
-    submitted : submittedTask.length,
-    pending : pendingTask.length,
-    overdue : overDueTask.length
-  }
+	let allTask = await Task.find({ user: this._id });
+	let submittedTask = allTask.filter((task) => task.status === 'submitted');
+	let pendingTask = allTask.filter((task) => task.status === 'pending');
+	let overDueTask = allTask.filter((task) => task.status === 'overdue');
+	return {
+		submitted: submittedTask.length,
+		pending: pendingTask.length,
+		overdue: overDueTask.length,
+	};
+});
 
-
+userSchema.virtual('isPresentTomo').get(async function () {
+	let userSchedule = await Schedule.find({ employee: this._id });
+	let tomorrow = dateFns.addDays(new Date(), 1);
+	let dayOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
+	if(userSchedule){
+		console.log(userSchedule[0].schedule.filter((shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()])[0].isPresent);
+		return userSchedule[0].schedule.filter((shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()])[0].isPresent
+	} else {
+		return null
+	}
 });
 
 const User = model('User', userSchema);
