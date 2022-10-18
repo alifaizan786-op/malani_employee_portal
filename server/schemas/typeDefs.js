@@ -11,7 +11,8 @@ const typeDefs = gql`
 		password: String
 		active: String
 		taskStats: TaskStats
-		isPresentTomo : Boolean
+		isPresentTomo: Boolean
+		ttlDayOff : Int
 	}
 
 	type TaskStats {
@@ -35,6 +36,7 @@ const typeDefs = gql`
 	type Quotes {
 		_id: ID
 		quotes: String
+		random: String
 		color: String
 	}
 
@@ -76,7 +78,7 @@ const typeDefs = gql`
 	}
 
 	type TimeOffReq {
-		_id : ID
+		_id: ID
 		employee: User
 		startingDate: String
 		endDate: String
@@ -151,7 +153,7 @@ const typeDefs = gql`
 
 		deleteUser(_id: ID): User
 
-		updateQuotes(_id: ID, quotes: String, color: String): Quotes
+		updateQuotes(_id: ID, quotes: String, color: String, random: String): Quotes
 
 		addReview(manager: ID, employee: ID, month: String, review: String): Review
 
@@ -187,7 +189,7 @@ const typeDefs = gql`
 		): TimeOffReq
 
 		updateTimeOffReq(
-			_id : ID
+			_id: ID
 			employee: ID
 			startingDate: String
 			endDate: String

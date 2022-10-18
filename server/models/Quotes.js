@@ -6,6 +6,10 @@ const quotesSchema = new Schema({
 		type: String,
 		require: true,
 	},
+	random: {
+		type: String,
+		require: true,
+	},
 	color: {
 		type: String,
 		require: true,

@@ -21,6 +21,7 @@ export const QUERY_QUOTE = gql`
 			_id
 			quotes
 			color
+			random
 		}
 	}
 `;
@@ -64,6 +65,7 @@ export const QUERY_ALLEMPS = gql`
 				pending
 				overdue
 			}
+			ttlDayOff
 		}
 	}
 `;

@@ -2,6 +2,7 @@ const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 const Task = require('./Task');
 const Schedule = require('./Schedule');
+const TimeOffReq = require('./TimeOffReq');
 
 const dateFns = require('date-fns');
 
@@ -74,12 +75,45 @@ userSchema.virtual('taskStats').get(async function () {
 userSchema.virtual('isPresentTomo').get(async function () {
 	let userSchedule = await Schedule.find({ employee: this._id });
 	let tomorrow = dateFns.addDays(new Date(), 1);
-	let dayOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]
-	if(userSchedule){
-		console.log(userSchedule[0].schedule.filter((shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()])[0].isPresent);
-		return userSchedule[0].schedule.filter((shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()])[0].isPresent
+	let dayOfWeek = [
+		'sunday',
+		'monday',
+		'tuesday',
+		'wednesday',
+		'thursday',
+		'friday',
+		'saturday',
+	];
+	if (userSchedule) {
+		console.log(
+			userSchedule[0].schedule.filter(
+				(shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()]
+			)[0].isPresent
+		);
+		return userSchedule[0].schedule.filter(
+			(shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()]
+		)[0].isPresent;
 	} else {
-		return null
+		return null;
+	}
+});
+
+userSchema.virtual('ttlDayOff').get(async function () {
+	let allUserTimeOffReq = await TimeOffReq.find({ employee: this._id });
+	if (allUserTimeOffReq) {
+		let approvedTimeOffReqs = allUserTimeOffReq.filter(
+			(req) => req.status === 'approved'
+		);
+
+		let ttlDay = 0;
+
+		for (let i = 0; i < approvedTimeOffReqs.length; i++) {
+			ttlDay += dateFns.differenceInCalendarDays(
+				approvedTimeOffReqs[i].endDate,
+				approvedTimeOffReqs[i].startingDate
+			);
+		}
+		return ttlDay;
 	}
 });
 

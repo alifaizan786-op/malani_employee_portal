@@ -270,10 +270,10 @@ const resolvers = {
 		},
 		/* This is a mutation that is used to update the quotes. It takes in the id of the quotes and
         the new quotes. It then finds the quotes and updates the quotes. */
-		updateQuotes: async (parent, { _id, quotes, color }) => {
+		updateQuotes: async (parent, { _id, quotes, color, random }) => {
 			const editQuotes = await Quotes.findOneAndUpdate(
 				{ _id },
-				{ quotes, color }
+				{ quotes, color, random }
 			);
 			return editQuotes;
 		},

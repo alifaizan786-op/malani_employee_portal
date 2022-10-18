@@ -38,8 +38,8 @@ export const CREATE_TASK = gql`
 `;
 
 export const CHANGE_QUOTE = gql`
-	mutation changeQuote($_id: ID, $quotes: String, $color: String) {
-		updateQuotes(_id: $_id, quotes: $quotes, color: $color) {
+	mutation changeQuote($_id: ID, $quotes: String, $color: String, $random: String) {
+		updateQuotes(_id: $_id, quotes: $quotes, color: $color, random :$random) {
 			quotes
 		}
 	}

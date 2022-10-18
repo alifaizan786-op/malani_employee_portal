@@ -40,6 +40,10 @@ export default function NewTimeOffRequest(props) {
 		},
 	]);
 
+	React.useEffect(()=>{
+		handleDateChange();
+	}, dateRange)
+
 	const [formState, setFormState] = React.useState({
 		employee: props._id,
 		startingDate: '',
@@ -86,7 +90,6 @@ export default function NewTimeOffRequest(props) {
 					onChange={(item) => {
 						console.log(item);
 						setDateRange([item.selection]);
-						handleDateChange();
 					}}
 					ranges={dateRange}
 					rangeColors={[props.themeColor]}
@@ -95,8 +98,8 @@ export default function NewTimeOffRequest(props) {
 					months={2}
 					direction='horizontal'
 					scroll={{ enabled: false }}
-					preventSnapRefocus={true}
-					moveRangeOnFirstSelection={true}
+					// preventSnapRefocus={true}
+					// moveRangeOnFirstSelection={true}
 				/>
 				{props.level === 1 ? (
 					<>
