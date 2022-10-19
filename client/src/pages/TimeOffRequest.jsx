@@ -43,10 +43,13 @@ import NewTimeOffRequest from '../components/newTimeOffRequest';
 
 import AllTimeOffReqs from '../components/AllTimeOffReqs';
 
+import EmpTimeOffReq from '../components/EmpTimeOffReq';
+
 export default function TimeOffRequest(props) {
 	const { loading, data, refetch } = useQuery(QUERY_TIME_OFF_REQ_BY_UID, {
 		variables: { employeeUId: props._id },
 	});
+
 
 	const timeOffReqs = data?.timeOffReqByUid || [];
 
@@ -97,7 +100,12 @@ export default function TimeOffRequest(props) {
 					alignItems: 'center',
 				}}>
 				<Box>
-					<AllTimeOffReqs current={props.current} level={props.level} />
+					{props.level === 2 ? (
+						<AllTimeOffReqs current={props.current} level={props.level} />
+					):(
+						<EmpTimeOffReq  current={props.current} level={props.level}/>
+					)}
+					
 				</Box>
 				<NewTimeOffRequest
 					_id={props._id}

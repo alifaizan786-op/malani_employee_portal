@@ -16,12 +16,12 @@ import {
 } from '@mui/material';
 
 import AddIcon from '@mui/icons-material/Add';
-import CreateTask from '../components/CreateTask';
+import CreateTask from './CreateTask';
 import CircleIcon from '@mui/icons-material/Circle';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import EditIcon from '@mui/icons-material/Edit';
 import LinearProgress from '@mui/material/LinearProgress';
-import EditTaskModal from '../components/EditTaskModal';
+import EditTaskModal from './EditTaskModal';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 
 import UpdateTimeOffReq from './updateTimeOffReq';
@@ -39,13 +39,11 @@ import {
 	QUERY_ALL_TIME_OFF_REQS,
 } from '../utils/queries';
 
-import SubmitTask from '../components/SubmitTask';
-import DeleteTask from '../components/DeleteTask';
-import AbsentTask from '../components/AbsentTask';
+import SubmitTask from './SubmitTask';
+import DeleteTask from './DeleteTask';
+import AbsentTask from './AbsentTask';
 
 import ClearIcon from '@mui/icons-material/Clear';
-
-import EmpTimeOffReq from './EmpTimeOffReq';
 
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 
@@ -55,13 +53,13 @@ import Auth from "../utils/auth"
 
 const dateFormat = require('../utils/dateFormat')
 
-export default function AllTimeOffReqs(props) {
-	const { loading, data } = useQuery(QUERY_ALL_TIME_OFF_REQS, {
-		pollInterval: 500,
+export default function EmpTimeOffReq(props) {
+	const { loading, data, refetch } = useQuery(QUERY_TIME_OFF_REQ_BY_UID, {
+		variables: { employeeUId: props._id },
 	});
 
 
-	const timeOffReq = data?.timeOffReq || [];
+	const timeOffReq = data?.timeOffReqByUid || [];
 
 	const columns = checkLevelColumn();
 
