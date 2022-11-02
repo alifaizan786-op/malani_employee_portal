@@ -197,6 +197,8 @@ const typeDefs = gql`
 			approver: ID
 			status: String
 		): TimeOffReq
+
+		deleteTimeOffRequest(_id:ID): TimeOffReq
 	}
 `;
 

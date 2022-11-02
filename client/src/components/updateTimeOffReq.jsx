@@ -65,8 +65,6 @@ export default function UpdateTimeOffReq(props) {
 		}
 	};
 
-    console.log(formState);
-
 	return (
 		<>
 			<FormControl variant='standard' sx={{ m: 1, minWidth: '250px' }}>

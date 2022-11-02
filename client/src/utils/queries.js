@@ -186,6 +186,8 @@ export const QUERY_TIME_OFF_REQ_BY_UID = gql`
 			employee {
 				_id
 				employeeId
+				firstName
+				lastName
 			}
 			startingDate
 			endDate
@@ -193,6 +195,8 @@ export const QUERY_TIME_OFF_REQ_BY_UID = gql`
 			approver {
 				_id
 				employeeId
+				firstName
+				lastName
 			}
 			status
 		}

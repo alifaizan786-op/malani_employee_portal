@@ -35,8 +35,6 @@ const resolvers = {
 			const allTasks = await Task.find({}).populate('user').sort({ status: 1 });
 			// const recuurringTask = allTasks.filter((task) => task.recurring === true)
 
-
-
 			/* Filtering out all the tasks that have an active user. */
 			const rmInactive = allTasks.filter((task) => task.user.active === true);
 
@@ -439,6 +437,12 @@ const resolvers = {
 				{ employee, startingDate, endDate, reason, approver, status },
 				{ new: true }
 			);
+
+			return updateTimeOffReq;
+		},
+		deleteTimeOffRequest: async (parent, { _id }) => {
+			const updateTimeOffReq = TimeOffReq.findByIdAndDelete({ _id: _id });
+
 
 			return updateTimeOffReq;
 		},

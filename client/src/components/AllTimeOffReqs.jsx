@@ -26,6 +26,8 @@ import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 
 import UpdateTimeOffReq from './updateTimeOffReq';
 
+import DeleteTimeOffRequest from './DeleteTimeOffRequest';
+
 import {
 	DataGrid,
 	GridToolbarContainer,
@@ -56,7 +58,7 @@ import Auth from "../utils/auth"
 const dateFormat = require('../utils/dateFormat')
 
 export default function AllTimeOffReqs(props) {
-	const { loading, data } = useQuery(QUERY_ALL_TIME_OFF_REQS, {
+	const { loading, data, refetch } = useQuery(QUERY_ALL_TIME_OFF_REQS, {
 		pollInterval: 500,
 	});
 
@@ -129,6 +131,18 @@ export default function AllTimeOffReqs(props) {
 							reason={ params.row.reason}
 							approver={ Auth.getProfile().data._id }
 							status={ params.row.status}
+							/>
+						)
+					}
+				},
+				{
+					field : "Delete Time Off Request",
+					width: 400,
+					renderCell : (params) => {
+						return(
+							<DeleteTimeOffRequest
+							_id={ params.row._id}
+							refetch={refetch}
 							/>
 						)
 					}

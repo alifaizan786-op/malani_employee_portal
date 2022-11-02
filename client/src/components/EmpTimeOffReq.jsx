@@ -59,12 +59,14 @@ export default function EmpTimeOffReq(props) {
 	});
 
 
+
 	const timeOffReq = data?.timeOffReqByUid || [];
 
 	const columns = checkLevelColumn();
 
 
 	const rows = [...timeOffReq];
+
 
 	function checkLevelColumn() {
 		// check and show task according to manager & employee

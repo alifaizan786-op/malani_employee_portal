@@ -103,7 +103,7 @@ export default function TimeOffRequest(props) {
 					{props.level === 2 ? (
 						<AllTimeOffReqs current={props.current} level={props.level} />
 					):(
-						<EmpTimeOffReq  current={props.current} level={props.level}/>
+						<EmpTimeOffReq _id={props._id} current={props.current} level={props.level}/>
 					)}
 					
 				</Box>

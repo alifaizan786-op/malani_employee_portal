@@ -38,8 +38,13 @@ export const CREATE_TASK = gql`
 `;
 
 export const CHANGE_QUOTE = gql`
-	mutation changeQuote($_id: ID, $quotes: String, $color: String, $random: String) {
-		updateQuotes(_id: $_id, quotes: $quotes, color: $color, random :$random) {
+	mutation changeQuote(
+		$_id: ID
+		$quotes: String
+		$color: String
+		$random: String
+	) {
+		updateQuotes(_id: $_id, quotes: $quotes, color: $color, random: $random) {
 			quotes
 		}
 	}
@@ -307,6 +312,14 @@ export const UPDATE_TIME_OFF_REQ = gql`
 				employeeId
 			}
 			status
+		}
+	}
+`;
+
+export const DELETE_TIME_OFF_REQ = gql`
+	mutation Mutation($id: ID) {
+		deleteTimeOffRequest(_id: $id) {
+			_id
 		}
 	}
 `;

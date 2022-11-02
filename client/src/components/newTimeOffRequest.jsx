@@ -75,13 +75,15 @@ export default function NewTimeOffRequest(props) {
 			const { data } = await newTimeOffRequest({
 				variables: { ...formState },
 			});
+
 		} catch (e) {
 			console.log(e);
 		}
 		props.refetch();
 	};
 
-	console.log(formState);
+
+	
 	return (
 		<>
 			<Box sx={{ display: 'flex', flexDirection: 'column', width: '40%' }}>
