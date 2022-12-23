@@ -1,13 +1,12 @@
 import React from "react";
 
 import {
-  Button,
+    Button
 } from "@mui/material";
 
+import { useMutation } from '@apollo/client';
 import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
-import {UPDATE_STATUS} from '../utils/mutation';
-import {useMutation} from '@apollo/client';
-import { useSnackbar } from 'notistack';
+import { UPDATE_STATUS } from '../utils/mutation';
 
 
 export default function AbsentTask(props) { 

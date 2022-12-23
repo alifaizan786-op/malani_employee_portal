@@ -10,45 +10,47 @@ connection.on('error', (err) => err);
 connection.once('open', async () => {
 	console.log('connected');
 	try {
-		//----------------------Seeding Users----------------------
-		// await User.deleteMany({})
+		// ----------------------Seeding Users----------------------
+		await User.deleteMany({});
 
-		//  console.log('=========Collections Emptied================');
+		console.log('=========Collections Emptied================');
 
-		// await User.create(userSeeds);
+		await User.create(userSeeds);
 
-		// console.table(userSeeds);
+		console.table(userSeeds);
 
-		// console.info('================Users Seeded================');
+		console.info('================Users Seeded================');
 
-		//----------------------Seeding Tasks----------------------
-		// await Task.deleteMany({})
+		// ----------------------Seeding Tasks----------------------
+		await Task.deleteMany({});
 
-		// console.log('=========Collections Emptied================');
+		console.log('=========Collections Emptied================');
 
-		// for (let i = 0;i <taskSeeds.length; i++){
-		//   ({_id : this._User} =  await User.findOne({employeeId: taskSeeds[i].user}));
-		//   const UserId = this._User;
+		for (let i = 0; i < taskSeeds.length; i++) {
+			({ _id: this._User } = await User.findOne({
+				employeeId: taskSeeds[i].user,
+			}));
+			const UserId = this._User;
 
-		//   const today = new Date()
-		//   const todayunix = Date.parse(today)
-		//   const dueInDays = 86400000 * taskSeeds[i].renewIn
-		//   const calcDueDate = dueInDays + todayunix
+			const today = new Date();
+			const todayunix = Date.parse(today);
+			const dueInDays = 86400000 * taskSeeds[i].renewIn;
+			const calcDueDate = dueInDays + todayunix;
 
-		//   const task = {
-		//     description: taskSeeds[i].description,
-		//     user: UserId,
-		//     dueDate: new Date(calcDueDate),
-		//     recurring: taskSeeds[i].recurring,
-		//     renewIn:taskSeeds[i].renewIn
-		//   };
-		//   console.log(task);
+			const task = {
+				description: taskSeeds[i].description,
+				user: UserId,
+				dueDate: new Date(calcDueDate),
+				recurring: taskSeeds[i].recurring,
+				renewIn: taskSeeds[i].renewIn,
+			};
+			console.log(task);
 
-		//  let taskCreation = await Task.create(task);
-		// }
-		// console.info('================Task Seeded================');
+			let taskCreation = await Task.create(task);
+		}
+		console.info('================Task Seeded================');
 
-		//----------------------Seeding Reviews----------------------
+		// ----------------------Seeding Reviews----------------------
 		// await Review.deleteMany({})
 
 		// console.log('=========Collections Emptied================');
@@ -73,7 +75,7 @@ connection.once('open', async () => {
 		// }
 		// console.info('================Review Seeded================');
 
-		//----------------------Seeding Quotes----------------------
+		// ----------------------Seeding Quotes----------------------
 		// await Quotes.deleteMany({});
 
 		// console.log('=========Collections Emptied================');
@@ -135,6 +137,10 @@ connection.once('open', async () => {
 				}
 			}
 		}
+
+		let tasks = await Task.find({}).populate('user').sort({ status: 1 });
+
+		console.log(tasks);
 	} catch (err) {
 		console.error(err);
 		process.exit(1);

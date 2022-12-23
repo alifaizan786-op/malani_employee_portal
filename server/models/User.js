@@ -85,11 +85,6 @@ userSchema.virtual('isPresentTomo').get(async function () {
 		'saturday',
 	];
 	if (userSchedule) {
-		console.log(
-			userSchedule[0].schedule.filter(
-				(shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()]
-			)[0].isPresent
-		);
 		return userSchedule[0].schedule.filter(
 			(shed) => shed.dayOfWeek === dayOfWeek[tomorrow.getDay()]
 		)[0].isPresent;

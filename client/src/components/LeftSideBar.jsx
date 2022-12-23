@@ -4,26 +4,26 @@ import Auth from '../utils/auth';
 
 //From MUI
 import { makeStyles } from '@material-ui/core';
-import { styled } from '@mui/material/styles';
-import MuiDrawer from '@mui/material/Drawer';
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { Logout } from '@mui/icons-material';
+import DateRangeIcon from '@mui/icons-material/DateRange';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
+import PeopleIcon from '@mui/icons-material/People';
 import ScheduleIcon from '@mui/icons-material/Schedule';
+import SettingsIcon from '@mui/icons-material/Settings';
+import TaskIcon from '@mui/icons-material/Task';
 import {
+	Avatar,
+	Badge,
 	List,
+	ListItem,
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
-	ListItem,
-	Avatar,
 	Typography,
-	Badge,
 } from '@mui/material';
-import TaskIcon from '@mui/icons-material/Task';
-import PeopleIcon from '@mui/icons-material/People';
-import { Logout } from '@mui/icons-material';
-import SettingsIcon from '@mui/icons-material/Settings';
-import NewspaperIcon from '@mui/icons-material/Newspaper';
-import DateRangeIcon from '@mui/icons-material/DateRange';
+import MuiDrawer from '@mui/material/Drawer';
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_TASKBYEMP } from '../utils/queries';

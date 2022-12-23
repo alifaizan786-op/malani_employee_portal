@@ -203,3 +203,12 @@ const typeDefs = gql`
 `;
 
 module.exports = typeDefs;
+
+
+
+//       __v: 0,
+
+
+// 		taskStats: TaskStats
+// 		isPresentTomo: Boolean
+// 		ttlDayOff : Int

@@ -1,6 +1,6 @@
 const {
-	Task,
 	User,
+	Task,
 	Review,
 	Quotes,
 	Bulletin,
@@ -32,7 +32,11 @@ const resolvers = {
 		tasks: async () => {
 			const today = new Date();
 			const todayunix = Date.parse(today);
-			const allTasks = await Task.find({}).populate('user').sort({ status: 1 });
+			const allTasks = await Task.find({
+				$or: [{ status: 'pending' }, { status: 'overdue' }],
+			})
+				.populate('user')
+				.sort({ status: 1 });
 			// const recuurringTask = allTasks.filter((task) => task.recurring === true)
 
 			/* Filtering out all the tasks that have an active user. */
@@ -40,10 +44,13 @@ const resolvers = {
 
 			/* The above code is filtering the array of objects called rmInactive and returning only the objects
 			that have a recurring property of true. */
-			const recuurringTask = rmInactive.filter(
-				(task) => task.recurring === true
-			);
-
+			const recuurringTask = rmInactive.filter(async (task) => {
+				let presentTomo = await task.user.isPresentTomo;
+				if (task.recurring === true && presentTomo === true) {
+	
+					return task;
+				}
+			});
 			const checkStatus = allTasks.filter((task) => task.status === 'pending');
 
 			if (today.getDay() !== 1) {
@@ -235,8 +242,6 @@ const resolvers = {
 					timeIn: '10:00 AM',
 					timeOff: '07:30 PM',
 				};
-
-				console.log(exampleSchedule);
 
 				try {
 					const addedSchedule = await Schedule.findOneAndUpdate(
@@ -442,7 +447,6 @@ const resolvers = {
 		},
 		deleteTimeOffRequest: async (parent, { _id }) => {
 			const updateTimeOffReq = TimeOffReq.findByIdAndDelete({ _id: _id });
-
 
 			return updateTimeOffReq;
 		},

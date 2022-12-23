@@ -1,40 +1,36 @@
 import React from 'react';
 
 import { useQuery } from '@apollo/client';
-import { QUERY_ALLTASKS } from '../utils/queries';
 import {
-	Typography,
 	Button,
 	FormControl,
-	InputLabel,
-	Select,
-	MenuItem,
-	TextField,
 	Grid,
-	Snackbar,
-	Alert,
+	InputLabel,
+	MenuItem,
+	Select,
+	TextField,
+	Typography
 } from '@mui/material';
+import { QUERY_ALLTASKS } from '../utils/queries';
 
 import AddIcon from '@mui/icons-material/Add';
-import CreateTask from '../components/CreateTask';
 import CircleIcon from '@mui/icons-material/Circle';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import LinearProgress from '@mui/material/LinearProgress';
-import EditTaskModal from '../components/EditTaskModal';
-import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
-
 import {
 	DataGrid,
-	GridToolbarContainer,
 	GridToolbarColumnsButton,
-	GridToolbarExport,
+	GridToolbarContainer,
 	GridToolbarDensitySelector,
+	GridToolbarExport
 } from '@mui/x-data-grid';
+import BulkDeleteTask from '../components/BulkDeleteTask';
+import CreateTask from '../components/CreateTask';
+import EditTaskModal from '../components/EditTaskModal';
 
-import SubmitTask from '../components/SubmitTask';
 import DeleteTask from '../components/DeleteTask';
-import AbsentTask from '../components/AbsentTask';
+import SubmitTask from '../components/SubmitTask';
 
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -45,7 +41,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 const dateFormat = require('../utils/dateFormat');
 
 export default function ViewAllTasks(props) {
-	const { loading, data } = useQuery(QUERY_ALLTASKS, { pollInterval: 500 });
+	const { loading, data, refetch } = useQuery(QUERY_ALLTASKS);
 
 	const tasks = data?.tasks || [];
 
@@ -55,9 +51,15 @@ export default function ViewAllTasks(props) {
 
 	const [createModal, setCreateModal] = React.useState(false);
 
+	const [createBulkDelete, setCreateBulkDelete] = React.useState(false);
+
 	const handleCreateModalOpen = () => setCreateModal(true);
 
 	const handleCreateModalClose = () => setCreateModal(false);
+
+	const handlecreateBulkDeleteOpen = () => setCreateBulkDelete(true);
+
+	const handlecreateBulkDeleteClose = () => setCreateBulkDelete(false);
 
 	function dotColor(status) {
 		//color or statusbar
@@ -172,7 +174,7 @@ export default function ViewAllTasks(props) {
 						Clear Filters
 					</Button>
 					<GridToolbarColumnsButton />
-					<GridToolbarDensitySelector />
+					{/* <GridToolbarDensitySelector /> */}
 					<GridToolbarExport />
 					<Button
 						type='submit'
@@ -185,6 +187,19 @@ export default function ViewAllTasks(props) {
 							color: 'primary.main',
 						}}>
 						Create Task
+					</Button>
+
+					<Button
+						type='submit'
+						onClick={handlecreateBulkDeleteOpen}
+						variant='text'
+						startIcon={<DeleteIcon />}
+						sx={{
+							fontSize: '0.8125rem',
+							bgcolor: '#ffffff',
+							color: 'primary.main',
+						}}>
+						Bulk Delete Task
 					</Button>
 				</GridToolbarContainer>
 			);
@@ -371,7 +386,7 @@ export default function ViewAllTasks(props) {
 						) {
 							return <></>;
 						} else {
-							return <SubmitTask _id={params.row._id} />;
+							return <SubmitTask _id={params.row._id} refetch={refetch} />;
 						}
 					},
 					width: 350,
@@ -436,7 +451,7 @@ export default function ViewAllTasks(props) {
 				{
 					field: 'Delete',
 					renderCell: (params) => {
-						return <DeleteTask _id={params.row._id} />;
+						return <DeleteTask _id={params.row._id} refetch={refetch} />;
 					},
 					width: 150,
 				},
@@ -532,6 +547,7 @@ export default function ViewAllTasks(props) {
 				modalState={createModal}
 				closeModal={handleCreateModalClose}
 				user={user}
+				refetch={refetch}
 			/>
 
 			<EditTaskModal
@@ -539,6 +555,16 @@ export default function ViewAllTasks(props) {
 				open={handleEditModalOpen}
 				close={handleEditModalClose}
 				defData={editData}
+				refetch={refetch}
+			/>
+
+			<BulkDeleteTask
+				current={createBulkDelete}
+				open={handlecreateBulkDeleteOpen}
+				close={handlecreateBulkDeleteClose}
+				themeColor={props.themeColor}
+				allUser={user}
+				refetch={refetch}
 			/>
 
 			<Typography

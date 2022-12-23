@@ -1,30 +1,21 @@
 import React from 'react';
 
 import {
-	Box,
-	Typography,
 	Button,
-	Modal,
 	FormControl,
 	InputLabel,
-	FormHelperText,
-	Select,
 	MenuItem,
-	TextField,
-	Switch,
+	Select,
 } from '@mui/material';
 
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { UPDATE_TIME_OFF_REQ } from '../utils/mutation';
 import { useMutation } from '@apollo/client';
-import { useSnackbar } from 'notistack';
 import SaveIcon from '@mui/icons-material/Save';
-import { printIntrospectionSchema } from 'graphql';
+import { useSnackbar } from 'notistack';
+import { UPDATE_TIME_OFF_REQ } from '../utils/mutation';
 
 export default function UpdateTimeOffReq(props) {
 	const [updateTimeOffReq, { error, data }] = useMutation(UPDATE_TIME_OFF_REQ);
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
 
 	const [formState, setFormState] = React.useState({
 		id: props._id,
@@ -80,7 +71,9 @@ export default function UpdateTimeOffReq(props) {
 					onChange={handleChange}>
 					<MenuItem value={'approved'}>Approved</MenuItem>
 					<MenuItem value={'denied'}>Denied</MenuItem>
-					<MenuItem value={'Please_Come_See_Manager'}>Please Come See Manager</MenuItem>
+					<MenuItem value={'Please_Come_See_Manager'}>
+						Please Come See Manager
+					</MenuItem>
 				</Select>
 			</FormControl>
 			<Button

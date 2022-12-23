@@ -1,20 +1,16 @@
-import React from 'react';
 import { useMutation } from '@apollo/client';
-import { CHANGE_QUOTE } from '../utils/mutation';
 import { useSnackbar } from 'notistack';
+import React from 'react';
+import { CHANGE_QUOTE } from '../utils/mutation';
 
 import {
 	Box,
-	Typography,
 	Button,
-	Modal,
 	FormControl,
-	InputLabel,
-	FormHelperText,
-	Select,
-	MenuItem,
-	TextField,
+	Modal,
 	Switch,
+	TextField,
+	Typography,
 } from '@mui/material';
 
 import { ChromePicker } from 'react-color';
@@ -50,7 +46,7 @@ export default function ChangeQuote(props) {
 	});
 
 	React.useEffect(() => {
-		let color = localStorage.getItem("color")
+		let color = localStorage.getItem('color');
 		setFormState({
 			_id: props.quoteid,
 			quotes: props.quote,
@@ -79,7 +75,7 @@ export default function ChangeQuote(props) {
 		});
 	};
 
-	console.log(formState);
+
 
 	function getAndSetRandomQuote() {
 		fetch('https://api.quotable.io/random?tags=motivational')
@@ -119,13 +115,13 @@ export default function ChangeQuote(props) {
 		setChecked(event.target.checked);
 		setFormState({
 			...formState,
-			random : event.target.checked === true ? "true" : "false"
+			random: event.target.checked === true ? 'true' : 'false',
 		});
 	};
 
-	function showTextArea(){
-		if(formState.random === "false"){
-			return(
+	function showTextArea() {
+		if (formState.random === 'false') {
+			return (
 				<FormControl sx={{ marginTop: '10px', width: '100%', margin: '20px' }}>
 					<TextField
 						id='outlined-multiline-flexible'
@@ -138,7 +134,7 @@ export default function ChangeQuote(props) {
 						minRows={4}
 					/>
 				</FormControl>
-			)
+			);
 		}
 	}
 

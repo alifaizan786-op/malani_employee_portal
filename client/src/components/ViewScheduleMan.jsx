@@ -1,23 +1,23 @@
 import React from 'react';
 
-import { Box, Divider, Grid, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_ACTIVE_SCHED } from '../utils/queries';
 
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
-import dayjs, { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
+import { Dayjs } from 'dayjs';
 
 export default function ViewScheduleMan(props) {
 	const { loading, data } = useQuery(QUERY_ALL_ACTIVE_SCHED);
@@ -48,8 +48,7 @@ export default function ViewScheduleMan(props) {
 		}
 	}
 
-	console.log(dayOfWeek);
-	console.log(schedule);
+
 
 	function tableObj(day) {
 		let tempArr = [];
@@ -69,17 +68,15 @@ export default function ViewScheduleMan(props) {
 		return tempArr;
 	}
 
-	console.log(tableObj(dayOfWeek));
+
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
 	return (
-		<Box sx={{display:"flex", minHeight: "80vh"}}>
-
-
-			<Box sx={{ width: '50%', margin:"auto" }}>
+		<Box sx={{ display: 'flex', minHeight: '80vh' }}>
+			<Box sx={{ width: '50%', margin: 'auto' }}>
 				<LocalizationProvider dateAdapter={AdapterDayjs}>
 					<StaticDatePicker
 						orientation='portrait'
@@ -94,8 +91,7 @@ export default function ViewScheduleMan(props) {
 				</LocalizationProvider>
 			</Box>
 
-
-			<Box sx={{ width: '50%', margin:"auto"  }}>
+			<Box sx={{ width: '50%', margin: 'auto' }}>
 				<TableContainer component={Paper}>
 					<Table aria-label='simple table' size='small'>
 						<TableHead>
@@ -121,8 +117,6 @@ export default function ViewScheduleMan(props) {
 					</Table>
 				</TableContainer>
 			</Box>
-
-
 		</Box>
 	);
 }

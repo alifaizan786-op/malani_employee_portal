@@ -1,16 +1,13 @@
 import React from "react";
 
-import {Card, CardHeader, CardContent, CardActions, Avatar, IconButton, Button, Typography, Divider} from "@mui/material";
-import {  Reply, Forward, Delete } from "@mui/icons-material";
 import CheckIcon from '@mui/icons-material/Check';
-import EditIcon from '@mui/icons-material/Edit';
-import { teal, grey } from "@mui/material/colors";
-import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { Button, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
 
+import { useMutation } from '@apollo/client';
 import { useSnackbar } from 'notistack';
-import {AKNOWLEDGE_BULLETIN} from '../utils/mutation'
-import {useMutation} from '@apollo/client';
+import { AKNOWLEDGE_BULLETIN } from '../utils/mutation';
 
 const HtmlTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} classes={{ popper: className }} />
@@ -46,7 +43,6 @@ export default function AcknowledgeBtn(props){
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formState);
         if(props.acknowledgeArr.filter(e => e._id == props.curUserId).length > 0){
           enqueueSnackbar('You Have Already Acknowledged',{variant:'Error'});
         }else{

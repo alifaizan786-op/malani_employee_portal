@@ -1,32 +1,13 @@
 import React from 'react';
 
-import { Grid } from '@mui/material';
-
-import { useQuery } from '@apollo/client';
-import { QUERY_SCHED_BY_UID } from '../utils/queries';
-import { NEW_TIME_OFF_REQUEST } from '../utils/mutation';
 import { useMutation } from '@apollo/client';
-import {
-	Box,
-	Typography,
-	Button,
-	Avatar,
-	Divider,
-	Modal,
-	Select,
-	MenuItem,
-	TextField,
-	Checkbox,
-	FormLabel,
-	FormControl,
-	FormControlLabel,
-	FormGroup,
-} from '@mui/material';
+import { Box, Button, FormControl, TextField } from '@mui/material';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { NEW_TIME_OFF_REQUEST } from '../utils/mutation';
 
+import { addDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
-import { addDays, format, isWeekend } from 'date-fns';
 
 export default function NewTimeOffRequest(props) {
 	const [newTimeOffRequest, { event, data }] =
@@ -40,9 +21,9 @@ export default function NewTimeOffRequest(props) {
 		},
 	]);
 
-	React.useEffect(()=>{
+	React.useEffect(() => {
 		handleDateChange();
-	}, dateRange)
+	}, dateRange);
 
 	const [formState, setFormState] = React.useState({
 		employee: props._id,
@@ -75,22 +56,18 @@ export default function NewTimeOffRequest(props) {
 			const { data } = await newTimeOffRequest({
 				variables: { ...formState },
 			});
-
 		} catch (e) {
 			console.log(e);
 		}
 		props.refetch();
 	};
 
-
-	
 	return (
 		<>
 			<Box sx={{ display: 'flex', flexDirection: 'column', width: '40%' }}>
 				<DateRange
 					editableDateInputs={true}
 					onChange={(item) => {
-						console.log(item);
 						setDateRange([item.selection]);
 					}}
 					ranges={dateRange}

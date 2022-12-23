@@ -1,9 +1,9 @@
-import React from 'react';
 import { useQuery } from '@apollo/client';
+import React from 'react';
 import { QUERY_QUOTE } from '../utils/queries';
 import ChangeQuote from './changeQuote';
 
-import { Typography, Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 
 export default function Quote(props) {
 	const { data, refetch } = useQuery(QUERY_QUOTE);
@@ -12,7 +12,6 @@ export default function Quote(props) {
 
 	const [quoteText, setQuoteText] = React.useState('Loading');
 
-	console.log(quote);
 
 	function getQuoteId() {
 		if (quote[0]) {

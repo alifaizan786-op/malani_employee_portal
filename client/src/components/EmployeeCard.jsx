@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Typography, Button, Avatar, Divider, Card } from '@mui/material';
+import { Avatar, Button, Card, Divider, Typography } from '@mui/material';
 
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
