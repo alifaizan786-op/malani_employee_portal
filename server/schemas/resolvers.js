@@ -47,7 +47,6 @@ const resolvers = {
 			const recuurringTask = rmInactive.filter(async (task) => {
 				let presentTomo = await task.user.isPresentTomo;
 				if (task.recurring === true && presentTomo === true) {
-	
 					return task;
 				}
 			});
@@ -64,26 +63,28 @@ const resolvers = {
 				}
 
 				for (let i = 0; i < recuurringTask.length; i++) {
-					const fDueDate = new Date(recuurringTask[i].dueDate);
-					const fDueDateUnix = Date.parse(fDueDate);
-					if (fDueDateUnix < todayunix) {
-						const dueInDays = 86400000 * recuurringTask[i].renewIn;
-						const calcDueDate = dueInDays + todayunix;
+					if (await recuurringTask[0].user.isPresentTomo) {
+						const fDueDate = new Date(recuurringTask[i].dueDate);
+						const fDueDateUnix = Date.parse(fDueDate);
+						if (fDueDateUnix < todayunix) {
+							const dueInDays = 86400000 * recuurringTask[i].renewIn;
+							const calcDueDate = dueInDays + todayunix;
 
-						const task = {
-							description: recuurringTask[i].description,
-							user: recuurringTask[i].user,
-							dueDate: new Date(calcDueDate),
-							recurring: recuurringTask[i].recurring,
-							renewIn: recuurringTask[i].renewIn,
-						};
+							const task = {
+								description: recuurringTask[i].description,
+								user: recuurringTask[i].user,
+								dueDate: new Date(calcDueDate),
+								recurring: recuurringTask[i].recurring,
+								renewIn: recuurringTask[i].renewIn,
+							};
 
-						const createTask = await Task.create(task);
+							const createTask = await Task.create(task);
 
-						const setRecurringFalse = await Task.findOneAndUpdate(
-							{ _id: recuurringTask[i]._id },
-							{ recurring: false }
-						);
+							const setRecurringFalse = await Task.findOneAndUpdate(
+								{ _id: recuurringTask[i]._id },
+								{ recurring: false }
+							);
+						}
 					}
 				}
 			}
@@ -119,6 +120,9 @@ const resolvers = {
 
 			return rmInactive;
 		},
+
+		// rewrite the "tasks" resolver, but make sure that a task is not renewed if the user is not scheduled or if the user has a active time of request
+
 		/* A resolver function that is used to query the database for a specific task. */
 		taskUId: async (parent, { taskUId }) => {
 			return await Task.find({ user: taskUId }).populate('user');
