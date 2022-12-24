@@ -111,6 +111,25 @@ export default function NewTimeOffRequest(props) {
 			const { data } = await newTimeOffRequest({
 				variables: { ...formState },
 			});
+
+			if (Auth.getProfile().data.level === 1) {
+				setFormState({
+					employee: Auth.getProfile().data._id,
+					startingDate: dateRange[0].startDate.toISOString(),
+					endDate: dateRange[0].endDate.toISOString(),
+					reason: '',
+					status: 'pending',
+				});
+			} else {
+				setFormState({
+					employee: '',
+					startingDate: dateRange[0].startDate.toISOString(),
+					endDate: dateRange[0].endDate.toISOString(),
+					reason: '',
+					status: 'approved',
+					approver: Auth.getProfile().data._id,
+				});
+			}
 		} catch (e) {
 			console.log(e);
 		}

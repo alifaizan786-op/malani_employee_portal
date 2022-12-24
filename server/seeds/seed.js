@@ -10,137 +10,142 @@ connection.on('error', (err) => err);
 connection.once('open', async () => {
 	console.log('connected');
 	try {
-		// ----------------------Seeding Users----------------------
-		await User.deleteMany({});
-
-		console.log('=========Collections Emptied================');
-
-		await User.create(userSeeds);
-
-		console.table(userSeeds);
-
-		console.info('================Users Seeded================');
-
-		// ----------------------Seeding Tasks----------------------
-		await Task.deleteMany({});
-
-		console.log('=========Collections Emptied================');
-
-		for (let i = 0; i < taskSeeds.length; i++) {
-			({ _id: this._User } = await User.findOne({
-				employeeId: taskSeeds[i].user,
-			}));
-			const UserId = this._User;
-
-			const today = new Date();
-			const todayunix = Date.parse(today);
-			const dueInDays = 86400000 * taskSeeds[i].renewIn;
-			const calcDueDate = dueInDays + todayunix;
-
-			const task = {
-				description: taskSeeds[i].description,
-				user: UserId,
-				dueDate: new Date(calcDueDate),
-				recurring: taskSeeds[i].recurring,
-				renewIn: taskSeeds[i].renewIn,
-			};
-			console.log(task);
-
-			let taskCreation = await Task.create(task);
-		}
-		console.info('================Task Seeded================');
-
-		// ----------------------Seeding Reviews----------------------
-		// await Review.deleteMany({})
+		// // ----------------------Seeding Users----------------------
+		// await User.deleteMany({});
 
 		// console.log('=========Collections Emptied================');
 
-		// for(let i = 0;i <reviewSeeds.length; i++){
-		//   ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
-		//   const manager = this._Review;
+		// await User.create(userSeeds);
 
-		//    ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[i].employee}));
-		//   const employee = this._ReviewE;
+		// console.table(userSeeds);
 
-		//   const review ={
-		//     manager : manager,
-		//     employee : employee,
-		//     month : reviewSeeds[i].month,
-		//     review : reviewSeeds[i].review,
+		// console.info('================Users Seeded================');
 
-		//   };
-		//   console.log(review);
+		// // ----------------------Seeding Tasks----------------------
+		// await Task.deleteMany({});
 
-		//   let reviewCreation = await Review.create(review);
+		// console.log('=========Collections Emptied================');
+
+		// for (let i = 0; i < taskSeeds.length; i++) {
+		// 	({ _id: this._User } = await User.findOne({
+		// 		employeeId: taskSeeds[i].user,
+		// 	}));
+		// 	const UserId = this._User;
+
+		// 	const today = new Date();
+		// 	const todayunix = Date.parse(today);
+		// 	const dueInDays = 86400000 * taskSeeds[i].renewIn;
+		// 	const calcDueDate = dueInDays + todayunix;
+
+		// 	const task = {
+		// 		description: taskSeeds[i].description,
+		// 		user: UserId,
+		// 		dueDate: new Date(calcDueDate),
+		// 		recurring: taskSeeds[i].recurring,
+		// 		renewIn: taskSeeds[i].renewIn,
+		// 	};
+		// 	console.log(task);
+
+		// 	let taskCreation = await Task.create(task);
 		// }
-		// console.info('================Review Seeded================');
+		// console.info('================Task Seeded================');
 
-		// ----------------------Seeding Quotes----------------------
-		// await Quotes.deleteMany({});
+		// // ----------------------Seeding Reviews----------------------
+		// // await Review.deleteMany({})
 
-		// console.log('=========Collections Emptied================');
+		// // console.log('=========Collections Emptied================');
 
-		// await Quotes.create(quotesSeeds);
+		// // for(let i = 0;i <reviewSeeds.length; i++){
+		// //   ({_id : this._Review} = await User.findOne({employeeId:reviewSeeds[i].manager}));
+		// //   const manager = this._Review;
 
-		// console.table(quotesSeeds);
+		// //    ({_id : this._ReviewE} = await User.findOne({employeeId:reviewSeeds[i].employee}));
+		// //   const employee = this._ReviewE;
 
-		// console.info('================Quotes Seeded================');
+		// //   const review ={
+		// //     manager : manager,
+		// //     employee : employee,
+		// //     month : reviewSeeds[i].month,
+		// //     review : reviewSeeds[i].review,
 
-		let allUser = await User.find({});
+		// //   };
+		// //   console.log(review);
 
-		await Schedule.deleteMany({});
+		// //   let reviewCreation = await Review.create(review);
+		// // }
+		// // console.info('================Review Seeded================');
 
-		let allUserId = [];
+		// // ----------------------Seeding Quotes----------------------
+		// // await Quotes.deleteMany({});
 
-		for (let i = 0; i < allUser.length; i++) {
-			let curUserId = allUser[i]._id;
-			const createSchedule = await Schedule.create({ employee: curUserId });
-		}
+		// // console.log('=========Collections Emptied================');
 
-		let daysOfWeek = [
-			'monday',
-			'tuesday',
-			'wednesday',
-			'thursday',
-			'friday',
-			'saturday',
-			'sunday',
-		];
+		// // await Quotes.create(quotesSeeds);
 
-		for (let i = 0; i < allUser.length; i++) {
-			let curUserId = allUser[i]._id;
-			for (let j = 0; j < daysOfWeek.length; j++) {
-				if (daysOfWeek[j] === 'monday') {
-					let exampleSchedule = {
-						dayOfWeek: daysOfWeek[j],
-						isPresent: false,
-						timeIn: 'Off',
-						timeOff: 'Off',
-					};
+		// // console.table(quotesSeeds);
 
-					const addedSchedule = await Schedule.findOneAndUpdate(
-						{ employee: curUserId },
-						{ $push: { schedule: exampleSchedule } }
-					);
-				} else {
-					let exampleSchedule = {
-						dayOfWeek: daysOfWeek[j],
-						isPresent: true,
-						timeIn: '10:00 AM',
-						timeOff: '07:30 PM',
-					};
+		// // console.info('================Quotes Seeded================');
 
-					const addedSchedule = await Schedule.findOneAndUpdate(
-						{ employee: curUserId },
-						{ $push: { schedule: exampleSchedule } }
-					);
-				}
-			}
-		}
+		// let allUser = await User.find({});
 
-		let tasks = await Task.find({}).populate('user').sort({ status: 1 });
+		// await Schedule.deleteMany({});
 
-		console.log(tasks);
+		// let allUserId = [];
+
+		// for (let i = 0; i < allUser.length; i++) {
+		// 	let curUserId = allUser[i]._id;
+		// 	const createSchedule = await Schedule.create({ employee: curUserId });
+		// }
+
+		// let daysOfWeek = [
+		// 	'monday',
+		// 	'tuesday',
+		// 	'wednesday',
+		// 	'thursday',
+		// 	'friday',
+		// 	'saturday',
+		// 	'sunday',
+		// ];
+
+		// for (let i = 0; i < allUser.length; i++) {
+		// 	let curUserId = allUser[i]._id;
+		// 	for (let j = 0; j < daysOfWeek.length; j++) {
+		// 		if (daysOfWeek[j] === 'monday') {
+		// 			let exampleSchedule = {
+		// 				dayOfWeek: daysOfWeek[j],
+		// 				isPresent: false,
+		// 				timeIn: 'Off',
+		// 				timeOff: 'Off',
+		// 			};
+
+		// 			const addedSchedule = await Schedule.findOneAndUpdate(
+		// 				{ employee: curUserId },
+		// 				{ $push: { schedule: exampleSchedule } }
+		// 			);
+		// 		} else {
+		// 			let exampleSchedule = {
+		// 				dayOfWeek: daysOfWeek[j],
+		// 				isPresent: true,
+		// 				timeIn: '10:00 AM',
+		// 				timeOff: '07:30 PM',
+		// 			};
+
+		// 			const addedSchedule = await Schedule.findOneAndUpdate(
+		// 				{ employee: curUserId },
+		// 				{ $push: { schedule: exampleSchedule } }
+		// 			);
+		// 		}
+		// 	}
+		// }
+
+		console.time("time")
+
+		let tasks = await  Task.find({
+			$or: [{ status: 'pending' }, { status: 'overdue' }],
+		}).populate('user').sort({ status: 1 });
+
+		console.timeEnd("time")
+		console.log(tasks[0]);
 	} catch (err) {
 		console.error(err);
 		process.exit(1);
