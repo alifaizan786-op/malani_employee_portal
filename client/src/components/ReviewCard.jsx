@@ -14,7 +14,6 @@ export default function ReviewCard(props) {
 	const { loading, data } = useQuery(QUERY_REVIEWBYUID, {
 		// pass URL parameter
 		variables: { employeeUId: props.empObjId },
-		pollInterval: 500,
 	});
 
 	const reviews = data?.reviewUId || [];

@@ -106,7 +106,6 @@ export default function LeftSideBar(props) {
 	const { loading, data } = useQuery(QUERY_TASKBYEMP, {
 		// pass URL parameter
 		variables: { emp: props.objId },
-		pollInterval: 500,
 	});
 
 	const tasks = data?.taskByEmp || [];

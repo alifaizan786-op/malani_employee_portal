@@ -11,7 +11,6 @@ import { QUERY_ALL_BULLETIN } from '../utils/queries';
 
 export default function Bulletin(props) {
 	const { data, loading, refetch } = useQuery(QUERY_ALL_BULLETIN, {
-		pollInterval: 500,
 	});
 
 	const bulletin = data?.bulletins || [];

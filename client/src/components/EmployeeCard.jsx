@@ -27,10 +27,9 @@ export default function EmployeeCard(props) {
 
 	const handleViewModalClose = () => setViewModal(false);
 
-	const { loading, data } = useQuery(QUERY_TASKBYEMP, {
+	const { loading, data, refetch } = useQuery(QUERY_TASKBYEMP, {
 		// pass URL parameter
 		variables: { emp: props._id },
-		pollInterval: 500,
 	});
 
 	const tasks = data?.taskByEmp || [];

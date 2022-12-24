@@ -16,8 +16,7 @@ const dateFormat = require('../utils/dateFormat');
 
 export default function EmpTimeOffReq(props) {
 	const { loading, data, refetch } = useQuery(QUERY_TIME_OFF_REQ_BY_UID, {
-		variables: { employeeUId: props._id },
-		pollInterval: 500,
+		variables: { employeeUId: props._id }
 	});
 
 	const timeOffReq = data?.timeOffReqByUid || [];
