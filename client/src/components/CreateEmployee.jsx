@@ -6,6 +6,9 @@ import { useMutation } from '@apollo/client';
 
 import { useSnackbar } from 'notistack';
 
+import { QUERY_ALLEMPS } from '../utils/queries';
+
+
 import {
 	Box,
 	Button,
@@ -16,7 +19,7 @@ import {
 	Modal,
 	Select,
 	TextField,
-	Typography,
+	Typography
 } from '@mui/material';
 
 const style = {
@@ -37,7 +40,19 @@ const style = {
 };
 
 export default function CreateEmployee(props) {
-	const [createUser, { event, data }] = useMutation(CREATE_USER);
+	const [createUser, { event, data }] = useMutation(CREATE_USER, {
+		update(cache, { data: { createUser } }) {
+			try {
+				const { users } = cache.readQuery({ query: QUERY_ALLEMPS });
+				cache.writeQuery({
+					query: QUERY_ALLEMPS,
+					data: { users: [createUser, ...users] },
+				});
+			} catch (e) {
+				console.error(e);
+			}
+		},
+	});
 
 	const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 

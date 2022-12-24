@@ -57,20 +57,12 @@ export default function BulkDeleteTask(props) {
 
 	const [employeeId, setEmployeeId] = React.useState('');
 
-	console.log(employeeId);
-
-	console.log(Date.parse(new Date(dateRange[0].endDate)));
-
-	console.log(tasks);
-
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		let taskByEmployee = tasks.filter(
 			(task) => task.user.employeeId === employeeId
 		);
-
-		console.log(taskByEmployee);
 
 		let taskByDate = taskByEmployee.filter(
 			(task) =>
@@ -79,7 +71,6 @@ export default function BulkDeleteTask(props) {
 				parseInt(task.dueDate) <= Date.parse(new Date(dateRange[0].endDate))
 		);
 
-		console.log(taskByDate);
 		try {
 			for (let i = 0; i < taskByDate.length; i++) {
 				const element = taskByDate[i];

@@ -29,7 +29,7 @@ export default function Main(props) {
 		setDrawerOpen(false);
 	};
 
-	const { data } = useQuery(QUERY_MAIN, { pollInterval: 500 });
+	const { data, refetch } = useQuery(QUERY_MAIN);
 
 	const user = data?.userId || [];
 	const firstName = user.firstName || '';

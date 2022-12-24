@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client';
 import { Box, Typography } from '@mui/material';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { QUERY_TIME_OFF_REQ_BY_UID } from '../utils/queries';
+import { QUERY_ALLEMPS } from '../utils/queries';
 
 import NewTimeOffRequest from '../components/newTimeOffRequest';
 
@@ -15,11 +15,9 @@ import AllTimeOffReqs from '../components/AllTimeOffReqs';
 import EmpTimeOffReq from '../components/EmpTimeOffReq';
 
 export default function TimeOffRequest(props) {
-	const { loading, data, refetch } = useQuery(QUERY_TIME_OFF_REQ_BY_UID, {
-		variables: { employeeUId: props._id },
-	});
+	const { data, loading } = useQuery(QUERY_ALLEMPS);
 
-	const timeOffReqs = data?.timeOffReqByUid || [];
+	const users = data?.users || [];
 
 	function gridStyling() {
 		//grid Styling
@@ -82,7 +80,8 @@ export default function TimeOffRequest(props) {
 					_id={props._id}
 					level={props.level}
 					themeColor={props.themeColor}
-					refetch={refetch}
+					allusers={users}
+					// refetch={refetch}
 				/>
 			</Box>
 			<Typography

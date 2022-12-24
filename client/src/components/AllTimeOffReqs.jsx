@@ -17,9 +17,7 @@ import Auth from '../utils/auth';
 const dateFormat = require('../utils/dateFormat');
 
 export default function AllTimeOffReqs(props) {
-	const { loading, data, refetch } = useQuery(QUERY_ALL_TIME_OFF_REQS, {
-		pollInterval: 500,
-	});
+	const { loading, data, refetch } = useQuery(QUERY_ALL_TIME_OFF_REQS);
 
 	const timeOffReq = data?.timeOffReq || [];
 

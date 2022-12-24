@@ -10,7 +10,7 @@ import {
 	InputLabel,
 	MenuItem,
 	Select,
-	Typography,
+	Typography
 } from '@mui/material';
 
 import { useQuery } from '@apollo/client';
@@ -25,7 +25,7 @@ export default function ViewAllEmps(props) {
 
 	const handlecreateEmpClose = () => setCreateEmp(false);
 
-	const { data, loading } = useQuery(QUERY_ALLEMPS, { pollInterval: 500 });
+	const { data, loading } = useQuery(QUERY_ALLEMPS);
 
 	const user = data?.users || [];
 
