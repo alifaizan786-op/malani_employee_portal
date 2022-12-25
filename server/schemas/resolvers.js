@@ -95,28 +95,28 @@ const resolvers = {
 
 			//NOT WORKING FOR SOMEREASON
 
-			// let dups = [];
+			let dups = [];
 
-			// for (let i = 0; i < allPendAndOver.length; i++) {
-			//   let tempObj = allPendAndOver[i];
-			//   for (let j = 0; j < allPendAndOver.length; j++) {
-			//     if (i !== j) {
-			//       if (
-			//         new Date(tempObj.dueDate).getDate() ===
-			//           new Date(allPendAndOver[j].dueDate).getDate() &&
-			//         tempObj.description === allPendAndOver[j].description &&
-			//         tempObj.user._id === allPendAndOver[j].user._id
-			//       ) {
-			//         dups.push(tempObj);
-			//       }
-			//     }
-			//   }
-			// }
+			for (let i = 0; i < allPendAndOver.length; i++) {
+			  let tempObj = allPendAndOver[i];
+			  for (let j = 0; j < allPendAndOver.length; j++) {
+			    if (i !== j) {
+			      if (
+			        new Date(tempObj.dueDate).getDate() ===
+			          new Date(allPendAndOver[j].dueDate).getDate() &&
+			        tempObj.description === allPendAndOver[j].description &&
+			        tempObj.user._id === allPendAndOver[j].user._id
+			      ) {
+			        dups.push(tempObj);
+			      }
+			    }
+			  }
+			}
 
-			// for (let i = 0; i < dups.length; i++) {
-			//   let curId = dups[i]._id
-			//   await Task.deleteOne({_id : curId})
-			// }
+			for (let i = 0; i < dups.length; i++) {
+			  let curId = dups[i]._id
+			  await Task.deleteOne({_id : curId})
+			}
 
 			return rmInactive;
 		},
@@ -125,6 +125,7 @@ const resolvers = {
 
 		/* A resolver function that is used to query the database for a specific task. */
 		taskUId: async (parent, { taskUId }) => {
+			console.log(taskUId);
 			return await Task.find({ user: taskUId }).populate('user');
 		},
 		/* Returning all the quotes from the database. */
@@ -145,7 +146,8 @@ const resolvers = {
 		},
 		/* The below code is a resolver function that is used to query the database. */
 		taskByEmp: async (parent, { emp }) => {
-			return await Task.find({ user: emp });
+			return await Task.find({$and : [{ user: emp}, {$or: [{ status: 'pending' }, { status: 'overdue' }]}]})
+
 		},
 		/* A function that returns a list of all the bulletins in the database. */
 		bulletins: async () => {

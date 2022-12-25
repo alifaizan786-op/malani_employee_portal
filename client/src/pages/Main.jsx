@@ -71,6 +71,7 @@ export default function Main(props) {
 			<Route exact path={'/ViewAllTasks'}>
 				<ViewAllTasks
 					level={level}
+					_id={_id}
 					employeeId={employeeId}
 					current={draweropen}
 					themeColor={props.themeColor}

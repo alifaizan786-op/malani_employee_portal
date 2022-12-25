@@ -85,9 +85,15 @@ export const QUERY_TASKBYEMP = gql`
 		taskByEmp(emp: $emp) {
 			_id
 			status
+			subStatus
 			description
+			user {
+				_id
+				firstName
+				lastName
+				employeeId
+			}
 			dueDate
-			createDate
 			recurring
 			renewIn
 		}
