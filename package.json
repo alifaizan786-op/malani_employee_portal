@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "start": "node server/index.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
@@ -20,7 +20,6 @@
     "url": "https://github.com/alifaizan786-op/malani_employee_portal/issues"
   },
   "dependencies": {
-    "concurrently": "^7.0.0",
-    "pm2": "^5.2.2"
+    "concurrently": "^7.0.0"
   }
 }
