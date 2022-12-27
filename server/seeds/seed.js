@@ -138,14 +138,19 @@ connection.once('open', async () => {
 		// 	}
 		// }
 
-		console.time("time")
+		// console.time("time")
 
-		let tasks = await  Task.find({
-			$or: [{ status: 'pending' }, { status: 'overdue' }],
-		}).populate('user').sort({ status: 1 });
+		// let tasks = await  Task.find({
+		// 	$or: [{ status: 'pending' }, { status: 'overdue' }],
+		// }).populate('user').sort({ status: 1 });
 
-		console.timeEnd("time")
-		console.log(tasks[0]);
+		// console.timeEnd("time")
+		// console.log(tasks[0]);
+
+		const today = new Date();
+
+		console.log(today.getDay());
+		console.log(today.getDate());
 	} catch (err) {
 		console.error(err);
 		process.exit(1);

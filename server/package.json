@@ -1,24 +1,28 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "seed": "node seeds/seed.js",
-    "watch": "nodemon server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "apollo-server-express": "^3.6.1",
-    "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.1",
-    "graphql": "^16.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "mangodb": "^1.0.0",
-    "mongoose": "^6.7.0",
-    "nodemon": "^2.0.15"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "pm2 start server.js && pm2 logs",
+		"restart": "pm2 restart server.js && pm2 logs",
+		"stop": "pm2 stop server.js",
+		"seed": "node seeds/seed.js",
+		"watch": "nodemon server.js",
+		"logs": "pm2 logs"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"apollo-server-express": "^3.6.1",
+		"bcrypt": "^5.0.1",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.1",
+		"graphql": "^16.2.0",
+		"jsonwebtoken": "^8.5.1",
+		"mangodb": "^1.0.0",
+		"mongoose": "^6.7.0",
+		"nodemon": "^2.0.15",
+		"pm2": "^5.2.2"
+	}
 }

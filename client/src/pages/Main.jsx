@@ -10,7 +10,8 @@ import SchedulePage from './Schedule';
 import SettingsPage from './SettingsPage';
 import TimeOffRequest from './TimeOffRequest';
 import ViewAllEmps from './ViewAllEmps';
-import ViewAllTasks from './ViewAllTasks';
+import ViewAllTasksMan from './ViewAllTasksMan';
+import ViewAllTasksEmp from './ViewAllTasksEmp';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_MAIN } from '../utils/queries';
@@ -69,13 +70,30 @@ export default function Main(props) {
 				/>
 			</Route>
 			<Route exact path={'/ViewAllTasks'}>
-				<ViewAllTasks
+				{level === 2 ? (
+					<ViewAllTasksMan
+						level={level}
+						_id={_id}
+						employeeId={employeeId}
+						current={draweropen}
+						themeColor={props.themeColor}
+					/>
+				) : (
+					<ViewAllTasksEmp
+						level={level}
+						_id={_id}
+						employeeId={employeeId}
+						current={draweropen}
+						themeColor={props.themeColor}
+					/>
+				)}
+				{/* <ViewAllTasks
 					level={level}
 					_id={_id}
 					employeeId={employeeId}
 					current={draweropen}
 					themeColor={props.themeColor}
-				/>
+				/> */}
 			</Route>
 			<Route exact path={'/ViewAllEmps'}>
 				<ViewAllEmps level={level} _id={_id} />

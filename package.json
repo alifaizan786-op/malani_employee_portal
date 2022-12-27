@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "install": "cd server && npm i && cd ../client && npm i",
+    "install": "cd server && npm i",
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
   },
@@ -20,6 +20,7 @@
     "url": "https://github.com/alifaizan786-op/malani_employee_portal/issues"
   },
   "dependencies": {
-    "concurrently": "^7.0.0"
+    "concurrently": "^7.0.0",
+    "pm2": "^5.2.2"
   }
 }

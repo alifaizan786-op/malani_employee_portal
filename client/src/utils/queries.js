@@ -87,15 +87,13 @@ export const QUERY_TASKBYEMP = gql`
 			status
 			subStatus
 			description
-			user {
-				_id
-				firstName
-				lastName
-				employeeId
-			}
+			# user {
+			# 	_id
+			# 	firstName
+			# 	lastName
+			# 	employeeId
+			# }
 			dueDate
-			recurring
-			renewIn
 		}
 		bulletins {
 			_id

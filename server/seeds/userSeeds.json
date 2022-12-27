@@ -1,191 +1,191 @@
 [
-    {
-        "firstName":"Alisha",
-        "lastName":"Parbatani",
-        "employeeId":"alisha-ap",
-        "department":"Sales",
-        "level":"1",
-        "password":"alisha-ap",
-        "active":true       
-    },
-      {
-        "firstName":"Janki",
-        "lastName":"Patel",
-        "employeeId":"janki-jp",
-        "department":"Sales",
-        "level":"1",
-        "password":"janki-jp",
-        "active":true             
-    },
-      {
-        "firstName":"Mina",
-        "lastName":"Chauhan",
-        "employeeId":"mina-mc",
-        "department":"Sales",
-        "level":"1",
-        "password":"mina-mc",
-        "active":true              
-    },
-      {
-        "firstName":"Neelima",
-        "lastName":"Kheraj",
-        "employeeId":"neelima-nk",
-        "department":"Sales",
-        "level":"1",
-        "password":"neelima-nk",
-        "active":true              
-    },
-    {
-        "firstName":"Heena",
-        "lastName":"Darji",
-        "employeeId":"heena-hd",
-        "department":"Sales",
-        "level":"1",
-        "password":"heena-hd",
-        "active":true              
-    },
-    {
-        "firstName":"Sushma",
-        "lastName":"Patel",
-        "employeeId":"sushma-sp",
-        "department":"Sales",
-        "level":"1",
-        "password":"sushma-sp",
-        "active":true              
-    },
-    {
-        "firstName":"Shamsha",
-        "lastName":"Charania",
-        "employeeId":"shamsha-sc",
-        "department":"Sales",
-        "level":"1",
-        "password":"shamsha-sc",
-        "active":true              
-    },
-    {
-        "firstName":"Brandon",
-        "lastName":"Perry",
-        "employeeId":"brandon-bp",
-        "department":"Internet",
-        "level":"1",
-        "password":"brandon-bp",
-        "active":true              
-    },
-    {
-        "firstName":"Amreen",
-        "lastName":"Meghani",
-        "employeeId":"amreen-am",
-        "department":"Tagging",
-        "level":"1",
-        "password":"amreen-am",
-        "active":true              
-    },
-    {
-        "firstName":"Sara",
-        "lastName":"Aziz",
-        "employeeId":"sara-sa",
-        "department":"Tagging",
-        "level":"1",
-        "password":"sara-sa",
-        "active":true              
-    },
-    {
-        "firstName":"Kinjal",
-        "lastName":"Baghadiya",
-        "employeeId":"kinjal-kb",
-        "department":"Tagging",
-        "level":"1",
-        "password":"kinjal-kb",
-        "active":true              
-    },
-     {
-        "firstName":"Suresh",
-        "lastName":"Pansuriya",
-        "employeeId":"suresh-su",
-        "department":"Tagging",
-        "level":"1",
-        "password":"suresh-su",
-        "active":true              
-    },
-     {
-        "firstName":"Shahmeer",
-        "lastName":"Delawalla",
-        "employeeId":"shahmeer-sd",
-        "department":"Internet",
-        "level":"1",
-        "password":"shahmeer-sd",
-        "active":true              
-    },
-     {
-        "firstName":"Faizan",
-        "lastName":"Ali",
-        "employeeId":"faizan-fa",
-        "department":"Internet",
-        "level":"1",
-        "password":"faizan-fa",
-        "active":true              
-    },
-     {
-        "firstName":"Lubna",
-        "lastName":"Shaikh",
-        "employeeId":"lubna-lu",
-        "department":"Internet",
-        "level":"1",
-        "password":"lubna-lu",
-        "active":true              
-    }, 
-     {
-        "firstName":"Aliammar",
-        "lastName":"Malani",
-        "employeeId":"aliammar-ar",
-        "department":"Executive",
-        "level":"2",
-        "password":"aliammar-ar",
-        "active":true              
-    }, 
-     {
-        "firstName":"Uzair",
-        "lastName":"Malani",
-        "employeeId":"uzair-um",
-        "department":"Executive",
-        "level":"2",
-        "password":"uzair-um",
-        "active":true              
-    }, 
-     {
-        "firstName":"Iqbal",
-        "lastName":"Malani",
-        "employeeId":"iqbal-ik",
-        "department":"Executive",
-        "level":"2",
-        "password":"iqbal-ik",
-        "active":true              
-    }, 
-     {
-        "firstName":"Zanir",
-        "lastName":"Malani",
-        "employeeId":"zanir-zm",
-        "department":"Executive",
-        "level":"2",
-        "password":"zanir-zm",
-        "active":true             
-    }, 
-     {
-        "firstName":"Shermyn",
-        "lastName":"Malani",
-        "employeeId":"shermyn-sm",
-        "department":"Executive",
-        "level":"2",
-        "password":"shermyn-sm",
-        "active":true              
-    }, 
-     {
-        "firstName":"Hiren",
-        "lastName":"Shah",
-        "employeeId":"hiren-hs",
-        "department":"Executive",
-        "level":"2",
-        "password":"hiren-hs",
-        "active":true              
-    }   
+	{
+		"firstName": "Alisha",
+		"lastName": "Parbatani",
+		"employeeId": "alisha-ap",
+		"department": "Sales",
+		"level": "1",
+		"password": "alisha-ap",
+		"active": true
+	},
+	{
+		"firstName": "Janki",
+		"lastName": "Patel",
+		"employeeId": "janki-jp",
+		"department": "Sales",
+		"level": "1",
+		"password": "janki-jp",
+		"active": true
+	},
+	{
+		"firstName": "Mina",
+		"lastName": "Chauhan",
+		"employeeId": "mina-mc",
+		"department": "Sales",
+		"level": "1",
+		"password": "mina-mc",
+		"active": true
+	},
+	{
+		"firstName": "Neelima",
+		"lastName": "Kheraj",
+		"employeeId": "neelima-nk",
+		"department": "Sales",
+		"level": "1",
+		"password": "neelima-nk",
+		"active": true
+	},
+	{
+		"firstName": "Heena",
+		"lastName": "Darji",
+		"employeeId": "heena-hd",
+		"department": "Sales",
+		"level": "1",
+		"password": "heena-hd",
+		"active": true
+	},
+	{
+		"firstName": "Sushma",
+		"lastName": "Patel",
+		"employeeId": "sushma-sp",
+		"department": "Sales",
+		"level": "1",
+		"password": "sushma-sp",
+		"active": true
+	},
+	{
+		"firstName": "Shamsha",
+		"lastName": "Charania",
+		"employeeId": "shamsha-sc",
+		"department": "Sales",
+		"level": "1",
+		"password": "shamsha-sc",
+		"active": true
+	},
+	{
+		"firstName": "Brandon",
+		"lastName": "Perry",
+		"employeeId": "brandon-bp",
+		"department": "Internet",
+		"level": "1",
+		"password": "brandon-bp",
+		"active": true
+	},
+	{
+		"firstName": "Amreen",
+		"lastName": "Meghani",
+		"employeeId": "amreen-am",
+		"department": "Tagging",
+		"level": "1",
+		"password": "amreen-am",
+		"active": true
+	},
+	{
+		"firstName": "Sara",
+		"lastName": "Aziz",
+		"employeeId": "sara-sa",
+		"department": "Tagging",
+		"level": "1",
+		"password": "sara-sa",
+		"active": true
+	},
+	{
+		"firstName": "Kinjal",
+		"lastName": "Baghadiya",
+		"employeeId": "kinjal-kb",
+		"department": "Tagging",
+		"level": "1",
+		"password": "kinjal-kb",
+		"active": true
+	},
+	{
+		"firstName": "Suresh",
+		"lastName": "Pansuriya",
+		"employeeId": "suresh-su",
+		"department": "Tagging",
+		"level": "1",
+		"password": "suresh-su",
+		"active": true
+	},
+	{
+		"firstName": "Shahmeer",
+		"lastName": "Delawalla",
+		"employeeId": "shahmeer-sd",
+		"department": "Internet",
+		"level": "1",
+		"password": "shahmeer-sd",
+		"active": true
+	},
+	{
+		"firstName": "Faizan",
+		"lastName": "Ali",
+		"employeeId": "faizan-fa",
+		"department": "Internet",
+		"level": "1",
+		"password": "faizan-fa",
+		"active": true
+	},
+	{
+		"firstName": "Lubna",
+		"lastName": "Shaikh",
+		"employeeId": "lubna-lu",
+		"department": "Internet",
+		"level": "1",
+		"password": "lubna-lu",
+		"active": true
+	},
+	{
+		"firstName": "Aliammar",
+		"lastName": "Malani",
+		"employeeId": "aliammar-ar",
+		"department": "Executive",
+		"level": "2",
+		"password": "aliammar-ar",
+		"active": true
+	},
+	{
+		"firstName": "Uzair",
+		"lastName": "Malani",
+		"employeeId": "uzair-um",
+		"department": "Executive",
+		"level": "2",
+		"password": "uzair-um",
+		"active": true
+	},
+	{
+		"firstName": "Iqbal",
+		"lastName": "Malani",
+		"employeeId": "iqbal-ik",
+		"department": "Executive",
+		"level": "2",
+		"password": "iqbal-ik",
+		"active": true
+	},
+	{
+		"firstName": "Zanir",
+		"lastName": "Malani",
+		"employeeId": "zanir-zm",
+		"department": "Executive",
+		"level": "2",
+		"password": "zanir-zm",
+		"active": true
+	},
+	{
+		"firstName": "Shermyn",
+		"lastName": "Malani",
+		"employeeId": "shermyn-sm",
+		"department": "Executive",
+		"level": "2",
+		"password": "shermyn-sm",
+		"active": true
+	},
+	{
+		"firstName": "Hiren",
+		"lastName": "Shah",
+		"employeeId": "hiren-hs",
+		"department": "Executive",
+		"level": "2",
+		"password": "hiren-hs",
+		"active": true
+	}
 ]

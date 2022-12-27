@@ -4,6 +4,7 @@ const path = require('path');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
+const renewTasks = require('./utils/renewTasks');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
@@ -28,6 +29,15 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/'));
 })
+
+setInterval(()=>{
+  if (today.getDay() !== 1){
+    renewTasks();
+  }
+}, 3600000);
+
+
+
 
 
 // Create a new instance of an Apollo server with the GraphQL schema

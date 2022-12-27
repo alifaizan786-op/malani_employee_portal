@@ -10,6 +10,7 @@ const {
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const renewTasks = require('../utils/renewTasks');
 
 const resolvers = {
 	Query: {
@@ -44,79 +45,79 @@ const resolvers = {
 
 			/* The above code is filtering the array of objects called rmInactive and returning only the objects
 			that have a recurring property of true. */
-			const recuurringTask = rmInactive.filter(async (task) => {
-				let presentTomo = await task.user.isPresentTomo;
-				if (task.recurring === true && presentTomo === true) {
-					return task;
-				}
-			});
-			const checkStatus = allTasks.filter((task) => task.status === 'pending');
+			// const recuurringTask = rmInactive.filter(async (task) => {
+			// 	let presentTomo = await task.user.isPresentTomo;
+			// 	if (task.recurring === true && presentTomo === true) {
+			// 		return task;
+			// 	}
+			// });
+			// const checkStatus = allTasks.filter((task) => task.status === 'pending');
 
-			if (today.getDay() !== 1) {
-				for (let i = 0; i < checkStatus.length; i++) {
-					if (checkStatus[i].dueDate < todayunix) {
-						const overdue = await Task.findByIdAndUpdate(
-							{ _id: checkStatus[i]._id },
-							{ status: 'overdue' }
-						);
-					}
-				}
+			// if (today.getDay() !== 1) {
+			// 	for (let i = 0; i < checkStatus.length; i++) {
+			// 		if (checkStatus[i].dueDate < todayunix) {
+			// 			const overdue = await Task.findByIdAndUpdate(
+			// 				{ _id: checkStatus[i]._id },
+			// 				{ status: 'overdue' }
+			// 			);
+			// 		}
+			// 	}
 
-				for (let i = 0; i < recuurringTask.length; i++) {
-					if (await recuurringTask[0].user.isPresentTomo) {
-						const fDueDate = new Date(recuurringTask[i].dueDate);
-						const fDueDateUnix = Date.parse(fDueDate);
-						if (fDueDateUnix < todayunix) {
-							const dueInDays = 86400000 * recuurringTask[i].renewIn;
-							const calcDueDate = dueInDays + todayunix;
+			// 	for (let i = 0; i < recuurringTask.length; i++) {
+			// 		if (await recuurringTask[0].user.isPresentTomo) {
+			// 			const fDueDate = new Date(recuurringTask[i].dueDate);
+			// 			const fDueDateUnix = Date.parse(fDueDate);
+			// 			if (fDueDateUnix < todayunix) {
+			// 				const dueInDays = 86400000 * recuurringTask[i].renewIn;
+			// 				const calcDueDate = dueInDays + todayunix;
 
-							const task = {
-								description: recuurringTask[i].description,
-								user: recuurringTask[i].user,
-								dueDate: new Date(calcDueDate),
-								recurring: recuurringTask[i].recurring,
-								renewIn: recuurringTask[i].renewIn,
-							};
+			// 				const task = {
+			// 					description: recuurringTask[i].description,
+			// 					user: recuurringTask[i].user,
+			// 					dueDate: new Date(calcDueDate),
+			// 					recurring: recuurringTask[i].recurring,
+			// 					renewIn: recuurringTask[i].renewIn,
+			// 				};
 
-							const createTask = await Task.create(task);
+			// 				const createTask = await Task.create(task);
 
-							const setRecurringFalse = await Task.findOneAndUpdate(
-								{ _id: recuurringTask[i]._id },
-								{ recurring: false }
-							);
-						}
-					}
-				}
-			}
+			// 				const setRecurringFalse = await Task.findOneAndUpdate(
+			// 					{ _id: recuurringTask[i]._id },
+			// 					{ recurring: false }
+			// 				);
+			// 			}
+			// 		}
+			// 	}
+			// }
 
-			const allPendAndOver = rmInactive.filter(
-				(task) => task.status === 'pending' || task.status === 'overdue'
-			);
+			// const allPendAndOver = rmInactive.filter(
+			// 	(task) => task.status === 'pending' || task.status === 'overdue'
+			// );
 
 			//NOT WORKING FOR SOMEREASON
 
-			let dups = [];
+			// let dups = [];
 
-			for (let i = 0; i < allPendAndOver.length; i++) {
-			  let tempObj = allPendAndOver[i];
-			  for (let j = 0; j < allPendAndOver.length; j++) {
-			    if (i !== j) {
-			      if (
-			        new Date(tempObj.dueDate).getDate() ===
-			          new Date(allPendAndOver[j].dueDate).getDate() &&
-			        tempObj.description === allPendAndOver[j].description &&
-			        tempObj.user._id === allPendAndOver[j].user._id
-			      ) {
-			        dups.push(tempObj);
-			      }
-			    }
-			  }
-			}
+			// for (let i = 0; i < allPendAndOver.length; i++) {
+			//   let tempObj = allPendAndOver[i];
+			//   for (let j = 0; j < allPendAndOver.length; j++) {
+			//     if (i !== j) {
+			//       if (
+			//         new Date(tempObj.dueDate).getDate() ===
+			//           new Date(allPendAndOver[j].dueDate).getDate() &&
+			//         tempObj.description === allPendAndOver[j].description &&
+			//         tempObj.user._id === allPendAndOver[j].user._id
+			//       ) {
+			//         dups.push(tempObj);
+			//       }
+			//     }
+			//   }
+			// }
 
-			for (let i = 0; i < dups.length; i++) {
-			  let curId = dups[i]._id
-			  await Task.deleteOne({_id : curId})
-			}
+			// for (let i = 0; i < dups.length; i++) {
+			//   let curId = dups[i]._id
+			//   await Task.deleteOne({_id : curId})
+			// }
 
 			return rmInactive;
 		},
