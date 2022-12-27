@@ -47,6 +47,7 @@ export default function Bulletin(props) {
 					bulletInId={oneBulletin._id}
 					_id={props._id}
 					curUserLevel={props.level}
+					refetch={refetch}
 				/>
 			))}
 		</Grid>

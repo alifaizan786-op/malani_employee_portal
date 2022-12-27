@@ -22,6 +22,7 @@ export default function DeleteBulletin(props) {
 			const { data } = await deleteBulletin({
 				variables: { ...formState },
 			});
+			props.refetch();
 			enqueueSnackbar('Bulletin Deleted Successfully', { variant: 'success' });
 		} catch (e) {
 			console.error(e);

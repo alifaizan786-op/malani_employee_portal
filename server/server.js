@@ -23,18 +23,18 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(express.static(path.join(__dirname, './images')));
 
 // // For Heroku
-// if (process.env.NODE_ENV === 'production') {
-// 	app.use(express.static(path.join(__dirname, '../client/build')));
-// }
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static(path.join(__dirname, '../client/build')));
+}
 
-// app.get('/', (req, res) => {
-// 	res.sendFile(path.join(__dirname, '../client/'));
-// });
-
-// For Local
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../Client/build/index.html"));
+app.get('/', (req, res) => {
+	res.sendFile(path.join(__dirname, '../client/'));
 });
+
+// // For Local
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../Client/build/index.html"));
+// });
 
 setInterval(() => {
 	const today = new Date();
@@ -43,9 +43,13 @@ setInterval(() => {
 	}
 }, 3600000);
 
+
+
+// renewTasks();
+
 // setup load balancing and concurrency using throng
 throng({
-	workers: process.env.WEB_CONCURRENCY || 4,
+	workers: process.env.WEB_CONCURRENCY || 1,
 	lifetime: Infinity,
 	start: start,
 });

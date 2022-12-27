@@ -34,9 +34,11 @@ import SubmitTask from '../components/SubmitTask';
 
 import ClearIcon from '@mui/icons-material/Clear';
 
-import { DatePicker, LocalizationProvider } from '@mui/lab';
 
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const dateFormat = require('../utils/dateFormat');
 

@@ -33,9 +33,7 @@ const resolvers = {
 		tasks: async () => {
 			const today = new Date();
 			const todayunix = Date.parse(today);
-			const allTasks = await Task.find({
-				$or: [{ status: 'pending' }, { status: 'overdue' }],
-			})
+			const allTasks = await Task.find({})
 				.populate('user')
 				.sort({ status: 1 });
 			// const recuurringTask = allTasks.filter((task) => task.recurring === true)

@@ -21,7 +21,7 @@ export default function BulletinCard(props) {
 
 	function CheckLevel() {
 		if (props.curUserLevel == 2) {
-			return <DeleteBulletin bulletInId={props.bulletInId} />;
+			return <DeleteBulletin bulletInId={props.bulletInId} refetch={props.refetch} />;
 		}
 	}
 

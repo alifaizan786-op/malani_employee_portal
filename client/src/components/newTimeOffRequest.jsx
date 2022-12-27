@@ -111,6 +111,7 @@ export default function NewTimeOffRequest(props) {
 			const { data } = await newTimeOffRequest({
 				variables: { ...formState },
 			});
+			window.location.reload();
 
 			if (Auth.getProfile().data.level === 1) {
 				setFormState({
