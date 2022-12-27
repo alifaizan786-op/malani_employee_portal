@@ -39,7 +39,7 @@ setInterval(() => {
 
 // setup load balancing and concurrency using throng
 throng({
-	workers: process.env.WEB_CONCURRENCY || 4,
+	workers: process.env.WEB_CONCURRENCY || 1,
 	lifetime: Infinity,
 	start: start,
 });
