@@ -36,10 +36,6 @@ setInterval(()=>{
   }
 }, 3600000);
 
-
-
-
-
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
