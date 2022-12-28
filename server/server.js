@@ -5,7 +5,7 @@ const throng = require('throng');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
-const renewTasks = require('./utils/renewTasks');
+// const renewTasks = require('./utils/renewTasks');
 const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
@@ -36,12 +36,12 @@ app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, "../Client/build/index.html"));
 // });
 
-setInterval(() => {
-	const today = new Date();
-	if (today.getDay() !== 1) {
-		renewTasks();
-	}
-}, 3600000);
+// setInterval(() => {
+// 	const today = new Date();
+// 	if (today.getDay() !== 1) {
+// 		renewTasks();
+// 	}
+// }, 3600000);
 
 
 

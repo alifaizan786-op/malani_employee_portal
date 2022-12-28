@@ -145,7 +145,9 @@ const resolvers = {
 		},
 		/* The below code is a resolver function that is used to query the database. */
 		taskByEmp: async (parent, { emp }) => {
-			return await Task.find({$and : [{ user: emp}, {$or: [{ status: 'pending' }, { status: 'overdue' }]}]})
+			const tasks = await Task.find({$and : [{ user: emp}, {$or: [{ status: 'pending' }, { status: 'overdue' }]}]})
+			renewTasks();
+			return tasks;
 
 		},
 		/* A function that returns a list of all the bulletins in the database. */
