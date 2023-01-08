@@ -33,9 +33,7 @@ const resolvers = {
 		tasks: async () => {
 			const today = new Date();
 			const todayunix = Date.parse(today);
-			const allTasks = await Task.find({})
-				.populate('user')
-				.sort({ status: 1 });
+			const allTasks = await Task.find({}).populate('user').sort({ status: 1 });
 			// const recuurringTask = allTasks.filter((task) => task.recurring === true)
 
 			/* Filtering out all the tasks that have an active user. */
@@ -145,10 +143,53 @@ const resolvers = {
 		},
 		/* The below code is a resolver function that is used to query the database. */
 		taskByEmp: async (parent, { emp }) => {
-			const tasks = await Task.find({$and : [{ user: emp}, {$or: [{ status: 'pending' }, { status: 'overdue' }]}]})
-			renewTasks();
-			return tasks;
+			const allTasks = await Task.find({
+				$and: [
+					{ user: emp },
+					{ $or: [{ status: 'pending' }, { status: 'overdue' }] },
+				],
+			});
+			// renewTasks();
 
+			for (let i = 0; i < allTasks.length; i++) {
+				const task = allTasks[i];
+				const today = new Date();
+				const todayunix = Date.parse(today);
+				const dueDate = Date.parse(task.dueDate);
+				if (dueDate < todayunix) {
+					task.status = 'overdue';
+					await task.save();
+					//   taskSetToOverdue++;
+				}
+			}
+
+			const recurringTasks = allTasks.filter(task => task.recurring === true)
+
+			for (let i = 0; i < recurringTasks.length; i++) {
+				const task = recurringTasks[i];
+				const today = new Date();
+				const todayunix = Date.parse(today);
+				const dueDate = Date.parse(task.dueDate);
+				if (await task.user.isPresentTomo) {
+				  if (dueDate < todayunix) {
+					const newTask = {
+					  description: task.description,
+					  user: task.user,
+					  recurring: task.recurring,
+					  renewIn: task.renewIn,
+					};
+					const dueInDays = 86400000 * task.renewIn;
+					const calcDueDate = dueInDays + todayunix;
+					newTask.dueDate = new Date(calcDueDate);
+					await Task.create(newTask);
+					task.recurring = false;
+					await task.save();
+					// tasksCreated++;
+				  }
+				}
+			  }
+
+			return allTasks;
 		},
 		/* A function that returns a list of all the bulletins in the database. */
 		bulletins: async () => {
