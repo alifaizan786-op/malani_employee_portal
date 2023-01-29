@@ -7,6 +7,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 // const renewTasks = require('./utils/renewTasks');
 const db = require('./config/connection');
+const { renewTasks, overdue } = require('./utils/renew');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -43,8 +44,6 @@ app.get('/', (req, res) => {
 // 	}
 // }, 3600000);
 
-
-
 // renewTasks();
 
 // setup load balancing and concurrency using throng
@@ -58,6 +57,8 @@ function start() {
 	// Create a new instance of an Apollo server with the GraphQL schema
 	const startApolloServer = async (typeDefs, resolvers) => {
 		await server.start();
+		await renewTasks.start();
+		await overdue.start();
 		server.applyMiddleware({ app });
 
 		db.once('open', () => {

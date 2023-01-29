@@ -1,10 +1,12 @@
 const cron = require('cron');
-const Task = require('../models/');
-const Schedule = require('../models/');
-const TimeOffReq = require('../models/');
+const {Task} = require('../models/');
+const {Schedule} = require('../models/');
+const {TimeOffReq} = require('../models/');
+
+console.log('renew.js loaded');
 
 const renewTasks = new cron.CronJob(
-	'*	0	*	*	*',
+	'*	*	*	*	*',
 	async () => {
 		console.log('renewing tasks');
 		// Find all recurring tasks
@@ -61,10 +63,10 @@ const renewTasks = new cron.CronJob(
 	'America/Los_Angeles'
 );
 
-renewTasks.start();
+// renewTasks.start();
 
 const overdue = new cron.CronJob(
-	'*	0	*	*	*',
+	'*	*	*	*	*',
 	async () => {
 		console.log('checking for overdue tasks');
 		// Find all pending tasks that have a due date in the past
@@ -84,4 +86,6 @@ const overdue = new cron.CronJob(
 	'America/Los_Angeles'
 );
 
-overdue.start();
+// overdue.start();
+
+module .exports = { renewTasks, overdue };
