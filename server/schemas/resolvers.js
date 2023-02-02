@@ -158,13 +158,13 @@ const resolvers = {
 			const thisUser = await User.findById(emp);
 
 			const lastRenewedOn = new Date(thisUser.tasksRenewedOn).getDate();
-			// const todayDate = new Date().getDate();
-			const todayDate = 31;
+			const todayDate = new Date().getDate();
+			// const todayDate = 31;
 
 			console.log(lastRenewedOn, todayDate);
 
 			if (lastRenewedOn !== todayDate) {
-				console.log('task renewed');
+				console.log('task renewed for user', thisUser.employeeId);
 
 				console.log('task over due');
 				for (let i = 0; i < allTasks.length; i++) {
@@ -202,7 +202,7 @@ const resolvers = {
 							const dueInDays = 86400000 * task.renewIn;
 							const calcDueDate = dueInDays + todayunix;
 							newTask.dueDate = new Date(calcDueDate).setHours(10, 0, 0);
-							console.log(newTask);
+							// console.log(newTask);
 							await Task.create(newTask);
 							task.recurring = false;
 							await task.save();

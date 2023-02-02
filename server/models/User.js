@@ -42,6 +42,10 @@ const userSchema = new Schema(
 			type: Date,
 			default: new Date("2023-01-01"),
 		},
+		purgeSubmitted: {
+			type: Number,
+			require: false,
+		},
 	},
 	// set this to use virtual below
 	{
