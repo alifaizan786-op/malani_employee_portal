@@ -63,7 +63,7 @@ const renewTasks = new cron.CronJob(
 	'America/Los_Angeles'
 );
 
-// renewTasks.start();
+renewTasks.start();
 
 const overdue = new cron.CronJob(
 	'*	0,12	*	*	*',
@@ -86,6 +86,6 @@ const overdue = new cron.CronJob(
 	'America/Los_Angeles'
 );
 
-// overdue.start();
+overdue.start();
 
-module.exports = { renewTasks, overdue };
+// module.exports = { renewTasks, overdue };

@@ -38,6 +38,10 @@ const userSchema = new Schema(
 			default: true,
 			require: true,
 		},
+		tasksRenewedOn: {
+			type: Date,
+			default: new Date("2023-01-01"),
+		},
 	},
 	// set this to use virtual below
 	{

@@ -10,7 +10,8 @@ const {
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
-const renewTasks = require('../utils/renewTasks');
+
+// const renewTasks = require('../utils/renewTasks');
 
 const resolvers = {
 	Query: {
@@ -146,51 +147,75 @@ const resolvers = {
 		},
 		/* The below code is a resolver function that is used to query the database. */
 		taskByEmp: async (parent, { emp }) => {
+			console.log(emp);
 			const allTasks = await Task.find({
 				$and: [
 					{ user: emp },
 					{ $or: [{ status: 'pending' }, { status: 'overdue' }] },
 				],
-			});
+			}).populate('user');
+
+			const thisUser = await User.findById(emp);
+
+			const lastRenewedOn = new Date(thisUser.tasksRenewedOn).getDate();
+			// const todayDate = new Date().getDate();
+			const todayDate = 31;
+
+			console.log(lastRenewedOn, todayDate);
+
+			if (lastRenewedOn !== todayDate) {
+				console.log('task renewed');
+
+				console.log('task over due');
+				for (let i = 0; i < allTasks.length; i++) {
+					const task = allTasks[i];
+					const today = new Date();
+					const todayunix = Date.parse(today);
+					const dueDate = Date.parse(task.dueDate);
+					if (dueDate < todayunix) {
+						task.status = 'overdue';
+						await task.save();
+						//   taskSetToOverdue++;
+					}
+				}
+
+				// console.log(allTasks[0]);
+
+				const recurringTasks = allTasks.filter(
+					(task) => task.recurring === true
+				);
+				// console.log(recurringTasks);
+				console.log('task renewed');
+				for (let i = 0; i < recurringTasks.length; i++) {
+					const task = recurringTasks[i];
+					const today = new Date();
+					const todayunix = Date.parse(today);
+					const dueDate = Date.parse(task.dueDate);
+					if (await task.user.isPresentTomo) {
+						if (dueDate < todayunix) {
+							const newTask = {
+								description: task.description,
+								user: task.user,
+								recurring: task.recurring,
+								renewIn: task.renewIn,
+							};
+							const dueInDays = 86400000 * task.renewIn;
+							const calcDueDate = dueInDays + todayunix;
+							newTask.dueDate = new Date(calcDueDate).setHours(10, 0, 0);
+							console.log(newTask);
+							await Task.create(newTask);
+							task.recurring = false;
+							await task.save();
+							// tasksCreated++;
+						}
+					}
+				}
+
+				thisUser.tasksRenewedOn = new Date();
+				await thisUser.save();
+			}
+
 			// renewTasks();
-
-			// for (let i = 0; i < allTasks.length; i++) {
-			// 	const task = allTasks[i];
-			// 	const today = new Date();
-			// 	const todayunix = Date.parse(today);
-			// 	const dueDate = Date.parse(task.dueDate);
-			// 	if (dueDate < todayunix) {
-			// 		task.status = 'overdue';
-			// 		await task.save();
-			// 		//   taskSetToOverdue++;
-			// 	}
-			// }
-
-			// const recurringTasks = allTasks.filter((task) => task.recurring === true);
-
-			// for (let i = 0; i < recurringTasks.length; i++) {
-			// 	const task = recurringTasks[i];
-			// 	const today = new Date();
-			// 	const todayunix = Date.parse(today);
-			// 	const dueDate = Date.parse(task.dueDate);
-			// 	if (await task.user.isPresentTomo) {
-			// 		if (dueDate < todayunix) {
-			// 			const newTask = {
-			// 				description: task.description,
-			// 				user: task.user,
-			// 				recurring: task.recurring,
-			// 				renewIn: task.renewIn,
-			// 			};
-			// 			const dueInDays = 86400000 * task.renewIn;
-			// 			const calcDueDate = dueInDays + todayunix;
-			// 			newTask.dueDate = new Date(calcDueDate);
-			// 			await Task.create(newTask);
-			// 			task.recurring = false;
-			// 			await task.save();
-			// 			// tasksCreated++;
-			// 		}
-			// 	}
-			// }
 
 			return allTasks;
 		},

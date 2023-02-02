@@ -1,0 +1,215 @@
+// const {
+// 	User,
+// 	Task,
+// 	Review,
+// 	Quotes,
+// 	Bulletin,
+// 	Schedule,
+// 	TimeOffReq,
+// } = require('../models');
+
+// const connection = require('../config/connection');
+
+// async function renewTasks() {
+
+// 	connection.on('error', (err) => err);
+
+// 	connection.once('open', async () => {
+// 		console.log('connected');
+// 		try {
+// 			console.log('renewing tasks');
+// 			// Find all recurring tasks
+// 			const tasks = await Task.find({ recurring: true }).populate('user');
+
+// 			const activeTasks = tasks.filter((task) => task.user.active === 'active');
+
+// 			// Iterate through tasks
+// 			for (let task of activeTasks) {
+// 				// Find the user associated with the task
+// 				const user = task.user;
+
+// 				// Find the user's schedule for the current day
+// 				const schedule = await Schedule.findOne({
+// 					employee: user,
+// 					schedule: {
+// 						$elemMatch: {
+// 							dayOfWeek: new Date().toLocaleString('en-us', {
+// 								weekday: 'long',
+// 							}),
+// 						},
+// 					},
+// 				});
+
+// 				// Find if the user has a time off request for the current day
+// 				const timeOffReq = await TimeOffReq.findOne({
+// 					employee: user,
+// 					startingDate: { $lte: new Date() },
+// 					endDate: { $gte: new Date() },
+// 				});
+
+// 				// Check if the user is scheduled for the current day and not on a time off request
+// 				if (schedule && !timeOffReq) {
+// 					const today = new Date();
+// 					today.setHours(10, 0, 0);
+// 					const todayunix = Date.parse(today);
+// 					const dueInDays = 86400000 * task.renewIn;
+// 					const calcDueDate = dueInDays + todayunix;
+// 					// Create a new task with the same properties as the original task, but with the due date set to the next occurrence
+// 					const newTask = new Task({
+// 						...task.toObject(),
+// 						dueDate: new Date(calcDueDate), // code to calculate the next occurrence of the task
+// 					});
+
+// 					// Save the new task
+// 					await newTask.save();
+
+// 					task.recurring = false;
+
+// 					await task.save();
+// 				}
+// 			}
+
+// 			console.log('checking for overdue tasks');
+// 			// Find all pending tasks that have a due date in the past
+// 			const overdueTasks = await Task.find({
+// 				status: 'pending',
+// 				dueDate: { $lt: new Date() },
+// 			});
+
+// 			// Update the status of each overdue task to 'overdue'
+// 			for (let task of overdueTasks) {
+// 				task.status = 'overdue';
+// 				await task.save();
+// 			}
+
+// 			//
+// 		} catch (err) {
+// 			console.error(err);
+// 			process.exit(1);
+// 		}
+
+// 		process.exit(0);
+// 	});
+// }
+
+// renewTasks();
+
+// ======================================================================================================
+// // module.exports = renewTasks;
+
+// // renewTasks();
+// //   const pendingTasks = tasks.filter((task) => task.status === 'pending');
+
+// //   for (let i = 0; i < pendingTasks.length; i++) {
+// //     const task = pendingTasks[i];
+// //     const today = new Date();
+// //     const todayunix = Date.parse(today);
+// //     const dueDate = Date.parse(task.dueDate);
+// //     console.log('dueDate', dueDate);
+// //     console.log('todayunix', todayunix);
+// //     if (dueDate < todayunix) {
+// //       task.status = 'overdue';
+// //       await task.save();
+// //       taskSetToOverdue++;
+// //     }
+// //   }
+
+// //   const recurringTasks = tasks.filter((task) => task.recurring === true);
+
+// //   for (let i = 0; i < recurringTasks.length; i++) {
+// //     const task = recurringTasks[i];
+
+// //     const today = new Date();
+// //     const todayunix = Date.parse(today);
+// //     const dueDate = Date.parse(task.dueDate);
+// //     if (await task.user.isPresentTomo) {
+// //       if (dueDate < todayunix) {
+// //         const newTask = {
+// //           description: task.description,
+// //           user: task.user,
+// //           recurring: task.recurring,
+// //           renewIn: task.renewIn,
+// //         };
+// //         const dueInDays = 86400000 * task.renewIn;
+// //         const calcDueDate = dueInDays + todayunix;
+// //         newTask.dueDate = new Date(calcDueDate);
+// //         await Task.create(newTask);
+// //         task.recurring = false;
+// //         await task.save();
+// //         tasksCreated++;
+// //       }
+
+// //   }
+// // }
+
+// // Find all tasks that are recurring
+// // const allTasks = await Task.find({
+// //   $or: [{ status: 'pending' }, { status: 'overdue' }],
+// // });
+
+// // // Loop through each task
+// // // Check if the task is past due
+// // // if task is past due, set the status to overdue
+// // // if task is not past due, do nothing
+// // for (let i = 0; i < allTasks.length; i++) {
+// //   const task = allTasks[i];
+// //   const today = new Date();
+// //   const todayunix = Date.parse(today);
+// //   const dueDate = Date.parse(task.dueDate);
+// //   if (dueDate < todayunix) {
+// //     task.status = 'overdue';
+// //     await task.save();
+// //     taskSetToOverdue++;
+// //   }
+// // }
+
+// // console.log('tasks set to overdue', taskSetToOverdue);
+
+// // // Find all tasks that are recurring
+// // const recurringTasks = await Task.find({
+// //   recurring: true,
+// // }).populate('user');
+
+// // console.log('recurring tasks', recurringTasks.length);
+
+// // // filter out tasks that have inactive users
+// // const activeTasks = recurringTasks.filter((task) => {
+// //   return task.user.active === true;
+// // });
+
+// // // console.log('recurring tasks with active users', activeTasks.length);
+// // // Loop through each task
+// // // Check if the task is past due
+// // // if task is past due, create a new task
+// // // new task should have the same description, user, and recurring
+// // // new task dueDate should be the current date + renewIn
+// // // set old task recurring to false
+
+// // for (let i = 0; i < activeTasks.length; i++) {
+// //   const task = activeTasks[i];
+// //   const today = new Date();
+// //   const todayunix = Date.parse(today);
+// //   const dueDate = Date.parse(task.dueDate);
+// //   if (await task.user.isPresentTomo) {
+// //     if (dueDate < todayunix) {
+// //       const newTask = {
+// //         description: task.description,
+// //         user: task.user,
+// //         recurring: task.recurring,
+// //         renewIn: task.renewIn,
+// //       };
+// //       const dueInDays = 86400000 * task.renewIn;
+// //       const calcDueDate = dueInDays + todayunix;
+// //       newTask.dueDate = new Date(calcDueDate);
+// //       await Task.create(newTask);
+// //       task.recurring = false;
+// //       await task.save();
+// //       tasksCreated++;
+// //     }
+// //   }
+// // }
+
+// // console.log('tasks created', tasksCreated);
+
+// // tasksCreated = 0;
+// // taskSetToOverdue = 0;
