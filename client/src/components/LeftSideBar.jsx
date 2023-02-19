@@ -19,7 +19,7 @@ import {
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
-	Typography,
+	Typography
 } from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import { styled } from '@mui/material/styles';

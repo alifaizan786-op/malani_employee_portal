@@ -10,8 +10,8 @@ import SchedulePage from './Schedule';
 import SettingsPage from './SettingsPage';
 import TimeOffRequest from './TimeOffRequest';
 import ViewAllEmps from './ViewAllEmps';
-import ViewAllTasksMan from './ViewAllTasksMan';
 import ViewAllTasksEmp from './ViewAllTasksEmp';
+import ViewAllTasksMan from './ViewAllTasksMan';
 
 import { useQuery } from '@apollo/client';
 import { QUERY_MAIN } from '../utils/queries';

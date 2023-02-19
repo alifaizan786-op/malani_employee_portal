@@ -201,6 +201,7 @@ const resolvers = {
 							};
 							const dueInDays = 86400000 * task.renewIn;
 							const calcDueDate = dueInDays + todayunix;
+							
 							newTask.dueDate = new Date(calcDueDate).setHours(10, 0, 0);
 							// console.log(newTask);
 							await Task.create(newTask);
